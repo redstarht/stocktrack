@@ -13,6 +13,8 @@ with app.app_context():
 
 
 
+
+
 ### 仮想環境のディレクトリ表示
 ```bash
 python -c "import sys; print(sys.executable)"

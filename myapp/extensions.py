@@ -1,10 +1,10 @@
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migratepip 
 from sqlalchemy import event
 import sqlite3
 from sqlalchemy.engine import Engine
+from flask_migrate import Migrate
 
-@evenvt.listens_for(Engine, "connect")
+@event.listens_for(Engine, "connect")
 def set_sqlite_pragma(dbapi_connection, connection_record):
     if isinstance(dbapi_connection, sqlite3.Connection):
         cursor = dbapi_connection.cursor()
