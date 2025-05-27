@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>品番管理</title>
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../static/css/pn_ctrl.css" />
+
+
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- スクロールボックス -->
+        <header class="header">
+            <h1>品番管理</h1>
+        </header>
+        <div class="pn-input">
+            <div id="input-container" class="scroll-box">
+                <div class="input-row">
+                    <input type="text" name="pn-input">
+                    <button class="delete-button">
+                        <i class="bi bi-file-x"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="add-button">
+                <!-- 新規追加ボタン -->
+                <button id="add-button">＋</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../static/js/pn_ctrl.js"></script>
+
+</html>
