@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
     newInput.name = "pn-input";
 
     const deleteBtn = document.createElement("button");
-    deleteBtn.innerHTML = '<i class="bi bi-file-x"></i>';
+    deleteBtn.innerHTML = '<i class="bi bi-x-circle"></i>';
     deleteBtn.className = "delete-button";
     deleteBtn.addEventListener("click", function() {
       container.removeChild(newRow);
