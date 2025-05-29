@@ -23,6 +23,15 @@ html body {
     -ms-overflow-style: none;
     /* Firefox 対応 */
     /* scrollbar-width: none; */
+<<<<<<< HEAD
+=======
+}
+
+/* Chrome, Safari 対応 */
+.pn-list::-webkit-scrollbar-thumb {
+    background-color: #3760d0;
+    border-radius: 8px;
+>>>>>>> 04e251b1aa499c66a8198dd9dc2a31c93229c041
 }
 
 /* Chrome, Safari 対応 */
@@ -85,6 +94,7 @@ button {
     gap: 3rem;
 }
 
+<<<<<<< HEAD
 /* 親：横並び＋折り返し対応 */
 .shelf-grid {
   display: flex;
@@ -111,4 +121,9 @@ button {
   text-align: center;
   padding: 0.5rem;
   border: 1px solid #aaa;
+=======
+.shelf-1 {
+    display: grid;
+    grid-template-columns: 5rem 5rem 5rem;
+>>>>>>> 04e251b1aa499c66a8198dd9dc2a31c93229c041
 }
