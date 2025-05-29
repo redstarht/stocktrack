@@ -23,12 +23,12 @@ html body {
     -ms-overflow-style: none;
     /* Firefox 対応 */
     /* scrollbar-width: none; */
-} 
+}
 
 /* Chrome, Safari 対応 */
 .pn-list::-webkit-scrollbar-thumb {
-  background-color: #3760d0;
-  border-radius: 8px;
+    background-color: #3760d0;
+    border-radius: 8px;
 }
 
 .pn-sidebar {
@@ -70,4 +70,9 @@ button {
     flex-direction: row;
     margin-top: 3rem;
     gap: 3rem;
-} 
+}
+
+.shelf-1 {
+    display: grid;
+    grid-template-columns: 5rem 5rem 5rem;
+}
