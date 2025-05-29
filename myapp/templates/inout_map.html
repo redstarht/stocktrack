@@ -6,20 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>入出庫マップ</title>
     <!-- <link rel="stylesheet" href="../static/css/style.css" /> -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/bootstrap-icons-1.13.1/bootstrap-icons.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/map.css" />
 </head>
 
 <body>
     <div class="wrapper">
         <div class="row">
+            <div class="col-sm-1 zone-sidebar">
+                <p class="zone-title">ゾーン</p>
+                <div class="zone-select">
+                    <ul class="zone-list">
+                        <button class="zone-item btn btn-outline-secondary">A</button>
+                        <button class="zone-item btn btn-outline-secondary">B</button>
+                        <button class="zone-item btn btn-outline-secondary">C</button>
+                        <button class="zone-item btn btn-outline-secondary">D</button>
+                        <button class="zone-item btn btn-outline-secondary">E</button>
+                        <button class="zone-item btn btn-outline-secondary">F</button>
+                        <button class="zone-item btn btn-outline-secondary">G</button>
+                        <button class="zone-item btn btn-outline-secondary">H</button>
+                        <button class="zone-item btn btn-outline-secondary">I</button>
+                        <button class="zone-item btn btn-outline-secondary">J</button>
+                        <button class="zone-item btn btn-outline-secondary">K</button>
+                        <button class="zone-item btn btn-outline-secondary">L</button>
+                        <button class="zone-item btn btn-outline-secondary">M</button>
+                    </ul>
+                </div>
+            </div>
             <div class="col-sm-2 pn-sidebar">
-                <p class="pn-title">品番エリア</p>
+                <p class="pn-title">品番</p>
                 <div class="pn-select">
                     <ul class="pn-list">
-                        <button class="pn-item btn btn-outline-secondary text-white">品番1</button>
+                        <button class="pn-item btn btn-outline-secondary">品番1</button>
                         <button class="pn-item btn btn-outline-secondary">品番2</button>
                         <button class="pn-item btn btn-outline-secondary">品番3</button>
                         <button class="pn-item btn btn-outline-secondary">品番4</button>
@@ -35,17 +54,52 @@
                         <button class="pn-item btn btn-outline-secondary">品番</button>
                         <button class="pn-item btn btn-outline-secondary">品番</button>
                         <button class="pn-item btn btn-outline-secondary">品番</button>
+                        <button class="pn-item btn btn-outline-secondary">品番</button>
+                        <button class="pn-item btn btn-outline-secondary">品番</button>
+                        <button class="pn-item btn btn-outline-secondary">品番</button>
+                        <button class="pn-item btn btn-outline-secondary">品番</button>
+                        <button class="pn-item btn btn-outline-secondary">品番</button>
+                        <button class="pn-item btn btn-outline-secondary">品番</button>
+                        <button class="pn-item btn btn-outline-secondary">品番</button>
                     </ul>
 
                 </div>
             </div>
-            <div class="col-sm-10 main-section">
-                メインコンテンツエリア
-                <div class="col-sm-4">
-                    メインコンテンツエリア
-                </div>
-                <div class="col-sm-4">
-                    メインコンテンツエリア
+            <div class="col-sm-9 main-section">
+                <div class="shelf-grid">
+                    <div class="shelf">
+                        <div class="cell">1</div>
+                        <div class="cell">2</div>
+                        <div class="cell">3</div>
+                        <div class="cell">4</div>
+                        <div class="cell">5</div>
+                        <div class="cell">6</div>
+                    </div>
+                    <div class="shelf">
+                        <div class="cell">A</div>
+                        <div class="cell">B</div>
+                        <div class="cell">C</div>
+                        <div class="cell">D</div>
+                        <div class="cell">E</div>
+                        <div class="cell">F</div>
+                    </div>
+                    <div class="shelf">
+                        <div class="cell">A</div>
+                        <div class="cell">B</div>
+                        <div class="cell">C</div>
+                        <div class="cell">D</div>
+                        <div class="cell">E</div>
+                        <div class="cell">F</div>
+                    </div>
+                    <div class="shelf">
+                        <div class="cell">A</div>
+                        <div class="cell">B</div>
+                        <div class="cell">C</div>
+                        <div class="cell">D</div>
+                        <div class="cell">E</div>
+                        <div class="cell">F</div>
+                    </div>
+                    <!-- ユニットはどんどん増えてOK -->
                 </div>
             </div>
         </div>
