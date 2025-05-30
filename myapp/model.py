@@ -55,6 +55,19 @@ class AllowStorage(db.Model):
         'product_no', backref="allow_storage", lazy=True)
 
 
+class cell_stock_statuc(db.Model):
+    __tablename__ = 'cell_stock_statuc'
+    cell_id = db.Column(db.Integer, db.ForeignKey(
+        'cell.id'), primary_key=True, nullable=False)
+    pn_id = db.Column(db.Integer, db.ForeignKey(
+        'product_no.id'), primary_key=True, nullable=False)
+    stock_qty = db.Column(db.Integer, default=0, nullable=False)
+    cell = db.relationship('Cell', backref="cell_stock_statuc",
+                           lazy=True)  # cell.cell_stock_statuc
+    product_no = db.relationship(
+        'product_no', backref="cell_stock_statuc", lazy=True)  # product_no.cell_stock_statuc
+
+
 class InoutLog(db.Model):
     __tablename__ = 'inout_log'
     id = db.Column(db.Integer, primary_key=True)
