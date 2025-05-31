@@ -27,3 +27,18 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 });
+
+const openBtn = document.getElementById('open-popup-btn');
+const closeBtn = document.getElementById('close-popup-btn');
+const popup = document.getElementById('popup');
+const overlay = document.getElementById('overlay');
+
+openBtn.addEventListener('click', () => {
+  overlay.style.display = 'block';
+  popup.style.display = 'block';
+});
+
+closeBtn.addEventListener('click', () => {
+  overlay.style.display = 'none';
+  popup.style.display = 'none';
+});

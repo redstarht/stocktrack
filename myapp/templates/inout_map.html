@@ -12,6 +12,8 @@
 </head>
 
 <body>
+    <!-- オーバーレイ部分 -->
+    <div id="overlay" style="display: none;"></div>
     <div class="wrapper">
         <div class="row">
             <div class="zone-sidebar">
@@ -101,6 +103,12 @@
                     </div>
                     <!-- ユニットはどんどん増えてOK -->
                 </div>
+            </div>
+            <button id="open-popup-btn">ポップアップを開く</button>
+
+            <div id="popup" style="display: none;">
+                <p>ここはポップアップの中身です。</p>
+                <button id="close-popup-btn">閉じる</button>
             </div>
         </div>
 </body>
