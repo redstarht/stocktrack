@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../static/css/popup.css">
     <link rel="stylesheet" href="../static/css/stock_ctrl.css">
     <link rel="stylesheet" href="../static/css/shelf.css">
+    <link rel="stylesheet" href="../static/css/highlight.css">
 
 </head>
 
@@ -44,7 +45,7 @@
                 <p class="pn-title">品番</p>
                 <div class="pn-select">
                     <div class="pn-list">
-                        <button class="pn-item btn btn-outline-secondary">品番1</button>
+                        <button class="pn-item btn btn-outline-secondary" data-pn="AAAAA-AAAAA">AAAAA-AAAAA</button>
                         <button class="pn-item btn btn-outline-secondary">品番2</button>
                         <button class="pn-item btn btn-outline-secondary">品番3</button>
                         <button class="pn-item btn btn-outline-secondary">品番4</button>
@@ -74,9 +75,11 @@
             <div class="main-section">
                 <div class="shelf-grid">
                     <div class="shelf">
-                        <div class="cell">1
-                            <p class="pn-name">品番名</p>
-                            <button class="stock-btn" id="stock-btn">在庫</button>
+                        <div class="cell" data-pn="AAAAA-AAAAA">
+                            <p class="pn-name">AAAAA-AAAAA</p>
+                            <button class="stock-btn" id="stock-btn">
+                                <i class="bi bi-box-seam"></i>
+                            </button>
                         </div>
                         <div class="cell">2</div>
                         <div class="cell">3</div>
@@ -113,9 +116,14 @@
             </div>
             <button id="open-popup-btn">ポップアップを開く</button>
 
-            <div id="popup" style="display: none;">
+            <div id="popup" class="popup-container" style="display: none;">
+                <div class="pop-label-container">
+                    <div class="pop-pn-title">品番名</div>
+                    <div class="pop-stock-title">5</div>
+
+                </div>
                 <div class="stock-container">
-                    <button id="minus-btn" class="stock-btn">-</button>
+                    <button id="minus-btn" class="stock-btn"><i class="bi bi-dash-lg"></i></button>
                     <div class="gauge-container">
                         <div class="gauge-block"></div>
                         <div class="gauge-block"></div>
@@ -124,11 +132,15 @@
                         <div class="gauge-block"></div>
                         <div class="gauge-block"></div>
                     </div>
-                    <button id="plus-btn" class="stock-btn">+</button>
+                    <button id="plus-btn" class="stock-btn"><i class="bi bi-plus-lg"></i></button>
                 </div>
                 <div class="close-container">
-                    <button id="close-popup-btn" class="close-popup-btn">SAVE</button>
-                    <button class="close-popup-btn">Cancel</button>
+                    <div>
+                        <button id="close-popup-btn" class="close-popup-btn">SAVE</button>
+                    </div>
+                    <div>
+                        <button class="close-popup-btn">Cancel</button>
+                    </div>
 
                 </div>
 
@@ -138,5 +150,6 @@
 <script src="../static/js/pn_ctrl.js"></script>
 <script src="../static/js/popup.js"></script>
 <script src="../static/js/stock_ctrl.js"></script>
+<script src="../static/js/pn_highlight.js"></script>
 
 </html>

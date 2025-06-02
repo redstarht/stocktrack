@@ -143,3 +143,8 @@ button:active {
     transform: scale(1.1);
     transition: transform 0.1s;
 }
+
+.highlight {
+    border: 3px solid red;
+    background-color: rgba(255, 0, 0, 0.2);
+}
