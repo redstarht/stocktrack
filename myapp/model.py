@@ -16,12 +16,14 @@ class Shelf(db.Model):
     shelf_sort = db.Column(db.Integer, nullable=False , default=999)
     zone = db.relationship('Zone', backref="product_numbers",
                            lazy=True)  # zone.product_numbers
+    # ※lazy=True means that the related objects are loaded only when accessed
 
 
 class ProductNumber(db.Model):
     __tablename__ = 'product_number'
     id = db.Column(db.Integer, primary_key=True)
     product_no = db.Column(db.String(50), unique=True, nullable=False)
+    name = db.Column(db.String(100), nullable=False, default="")
     is_deleted = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(
         timezone(timedelta(hours=9))))

@@ -9,6 +9,10 @@ html body {
     height: 100vh;
 }
 
+.row {
+    --bs-gutter-x: 0rem;
+}
+
 .wrapper {
     width: 100%;
     height: 100%;
@@ -30,19 +34,6 @@ html body {
 }
 
 
-.pn-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
-    height: 90%;
-    overflow-y: scroll;
-}
-
-/* Chrome, Safari 対応 */
-.pn-list::-webkit-scrollbar-thumb {
-    background-color: #3760d0;
-    border-radius: 8px;
-}
 
 /* Chrome, Safari 対応 */
 .zone-list::-webkit-scrollbar-thumb {
@@ -91,6 +82,22 @@ html body {
 
 }
 
+.pn-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    height: 90%;
+    width: 90%;
+
+}
+
+/* Chrome, Safari 対応 */
+.pn-list::-webkit-scrollbar-thumb {
+    background-color: #3760d0;
+    border-radius: 8px;
+}
+
+
 .pn-title {
     font-size: 1.5rem;
     font-weight: bold;
@@ -101,7 +108,12 @@ html body {
 .pn-select {
     overflow-y: auto;
     width: 100%;
-    height: 100%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    /* justify-content: center; */
+    overflow-y: scroll;
 
 }
 
@@ -124,45 +136,6 @@ html body {
     height: 100%;
 }
 
-.main-section {
-    display: flex;
-    flex-direction: row;
-    margin-top: 3rem;
-    gap: 3rem;
-    width: 70%;
-    height: 100%;
-}
-
-/* 親：横並び＋折り返し対応 */
-.shelf-grid {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    height: 45%;
-}
-
-/* 各棚ユニット：2行3列 */
-.shelf {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    /* 3列 */
-    grid-template-rows: repeat(2, auto);
-    /* 2行 */
-    gap: 8px;
-    width: calc(100% / 3);
-    /* 親3列のうち1列分の幅 */
-    box-sizing: border-box;
-    padding: 10px;
-    border: 1px solid #ccc;
-}
-
-/* セルスタイル */
-.cell {
-    background-color: #ddd;
-    text-align: center;
-    padding: 0.5rem;
-    border: 1px solid #aaa;
-}
 
 
 /* ボタン押下時の拡大アニメーション */
