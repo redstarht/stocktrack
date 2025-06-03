@@ -1,8 +1,9 @@
 .main-section {
     display: flex;
-    flex-direction: row;
+    /* flex-direction: row; */
     gap: 3rem;
     flex: 1;
+    width: 100%;
     height: auto;
     margin-top: 0.5rem;
     margin-left: 1rem;
@@ -66,6 +67,10 @@
     border-bottom: 0.5rem solid #000000;
     width: 100%;
     /* border: 1px solid #ff0000; */
+    /* aspect-ratio: 1 / 1.1; */
+    /* 固定比率で縦横比 */
+    overflow: hidden;
+    /* はみ出し制御 */
 }
 
 .cell-label {
@@ -75,10 +80,12 @@
     flex-direction: column;
     padding-bottom: 4%;
     gap: 0.5rem;
+    width: 100%;
 }
 
 .pn-name {
-    font-size: 2.5vh;
+    font-size: 1vw;
+    min-width: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -86,6 +93,16 @@
 
 .cell-stock-btn {
     border-radius: 50%;
-    width: 4rem;
-    aspect-ratio: 1 / 1;
+    width: 2vh;
+    height: 2vh;
+    /* aspect-ratio: 1 / 1; */
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cell-stock-btn i {
+    font-size: 1vh;
+    text-align: center;
 }
