@@ -15,7 +15,7 @@ html body {
 
 .wrapper {
     width: 100%;
-    height: 100%;
+    height: auto;
     display: flex;
     flex-direction: column;
 }
@@ -23,7 +23,7 @@ html body {
 .zone-list {
     width: 100%;
     overflow-y: auto;
-    height: 100%;
+    height: auto;
     display: flex;
     flex-direction: column;
     gap: 0.1rem;
@@ -73,7 +73,7 @@ html body {
     padding: 1rem 0.4rem 1rem 0.4rem;
     background-color: #bbbbbb;
     border-radius: 0.5rem;
-    height: 100%;
+    height: auto;
     width: 100%;
     display: flex;
     align-items: center;
@@ -145,6 +145,6 @@ button:active {
 }
 
 .highlight {
-    border: 3px solid red;
-    background-color: rgba(255, 0, 0, 0.2);
+    background-color: rgba(12, 223, 12, 0.2);
+    box-shadow: #7fff00 0px 0px 0.3em;
 }

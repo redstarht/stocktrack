@@ -1,0 +1,91 @@
+.main-section {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    flex: 1;
+    height: auto;
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+}
+
+/* 親：横並び＋折り返し対応 */
+.shelf-grid {
+    /* display: flex;
+    flex-wrap: wrap; */
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3列 */
+    /* grid-template-rows: repeat(auto, auto); */
+    width: auto;
+    height: auto;
+}
+
+/* 各棚ユニット：2行3列 */
+.cell-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(auto, auto);
+    width: auto;
+    aspect-ratio: 1 / 1.1;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    /* スッキリした薄いグレー */
+    border-radius: 10px;
+    /* 角を丸める */
+    background-color: #b9b9b9;
+    /* 背景色を薄く */
+    gap: 0.5rem;
+    grid-auto-rows: minmax(32%, auto);
+    /* 行の高さを自動調整 */
+    grid-auto-columns: auto;
+}
+
+
+.shelf {
+    width: 100%;
+    height: auto;
+    padding: 0.5rem;
+    background-color: rgb(176, 180, 184, 0.5);
+    border-radius: 5%;
+    border: 1px solid aqua;
+}
+
+/* セルスタイル */
+.cell {
+    /* background-color: #0a0909; */
+    /* position: absolute; */
+    text-align: center;
+    /* padding: 0.5rem; */
+    border-radius: 5%;
+    border-top-left-radius: 0rem;
+    border-top-right-radius: 0rem;
+    border-left: 0.5rem solid #000000;
+    border-right: 0.5rem solid #000000;
+    border-bottom: 0.5rem solid #000000;
+    width: 100%;
+    /* border: 1px solid #ff0000; */
+}
+
+.cell-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-bottom: 4%;
+    gap: 0.5rem;
+}
+
+.pn-name {
+    font-size: 2.5vh;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cell-stock-btn {
+    border-radius: 50%;
+    width: 4rem;
+    aspect-ratio: 1 / 1;
+}

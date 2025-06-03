@@ -11,17 +11,20 @@
     <link rel="stylesheet" href="../static/css/map.css" />
     <link rel="stylesheet" href="../static/css/popup.css">
     <link rel="stylesheet" href="../static/css/stock_ctrl.css">
-    <link rel="stylesheet" href="../static/css/shelf.css">
+    <link rel="stylesheet" href="../static/css/main_section.css">
     <link rel="stylesheet" href="../static/css/highlight.css">
-
-</head>
-
-<body>
-    <!-- オーバーレイ部分 -->
+    
     <div id="overlay" style="display: none;"></div>
     <div class="wrapper">
         <div class="row">
+            <!-- ゾーンサイドバー -->
             <div class="zone-sidebar">
+                <div class="back-btn-container">
+                    <button class="back-btn btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left-short"></i>
+                    </button>
+                    <button id="open-popup-btn">ポップアップを開く</button>
+                </div>
                 <p class="zone-title">ゾーン</p>
                 <div class="zone-select">
                     <div class="zone-list">
@@ -41,6 +44,7 @@
                     </div>
                 </div>
             </div>
+            <!-- 品番サイドバー -->
             <div class="pn-sidebar">
                 <p class="pn-title">品番</p>
                 <div class="pn-select">
@@ -72,80 +76,372 @@
 
                 </div>
             </div>
+            <!-- メインセクション -->
             <div class="main-section">
+                <!-- 3列の折り返し要素 -->
                 <div class="shelf-grid">
+                    <!-- 各棚 -->
                     <div class="shelf">
-                        <div class="cell" data-pn="AAAAA-AAAAA">
-                            <p class="pn-name">AAAAA-AAAAA</p>
-                            <button class="stock-btn" id="stock-btn">
-                                <i class="bi bi-box-seam"></i>
-                            </button>
+                        <div class="zone-title">A</div>
+                        <div class="cell-grid">
+                            <div class="cell" data-pn="AAAAA-AAAAA">
+                                <div class="cell-label">
+                                    <div class="pn-name">AAAAA-AAAAA</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="BBBBB-BBBBB">
+                                <div class="cell-label">
+                                    <div class="pn-name">BBBBB-BBBBB</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="CCCCC-CCCCC">
+                                <div class="cell-label">
+                                    <div class="pn-name">CCCCC-CCCCC</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="DDDDD-DDDDD">
+                                <div class="cell-label">
+                                    <div class="pn-name">DDDDD-DDDDD</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="EEEEE-EEEEE">
+                                <div class="cell-label">
+                                    <div class="pn-name">EEEEE-EEEEE</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="FFFFF-FFFFF">
+                                <div class="cell-label">
+                                    <div class="pn-name">FFFFF-FFFFF</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="cell">2</div>
-                        <div class="cell">3</div>
-                        <div class="cell">4</div>
-                        <div class="cell">5</div>
-                        <div class="cell">6</div>
                     </div>
                     <div class="shelf">
-                        <div class="cell">A</div>
-                        <div class="cell">B</div>
-                        <div class="cell">C</div>
-                        <div class="cell">D</div>
-                        <div class="cell">E</div>
-                        <div class="cell">F</div>
+                        <div class="zone-title">B</div>
+                        <div class="cell-grid">
+                            <div class="cell" data-pn="AAAAA-AAAAB">
+                                <div class="cell-label">
+                                    <div class="pn-name">AAAAA-AAAAA</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="BBBBB-BBBBB">
+                                <div class="cell-label">
+                                    <div class="pn-name">BBBBB-BBBBB</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="CCCCC-CCCCC">
+                                <div class="cell-label">
+                                    <div class="pn-name">CCCCC-CCCCC</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="DDDDD-DDDDD">
+                                <div class="cell-label">
+                                    <div class="pn-name">DDDDD-DDDDD</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="EEEEE-EEEEE">
+                                <div class="cell-label">
+                                    <div class="pn-name">EEEEE-EEEEE</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="FFFFF-FFFFF">
+                                <div class="cell-label">
+                                    <div class="pn-name">FFFFF-FFFFF</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="shelf">
-                        <div class="cell">A</div>
-                        <div class="cell">B</div>
-                        <div class="cell">C</div>
-                        <div class="cell">D</div>
-                        <div class="cell">E</div>
-                        <div class="cell">F</div>
+                        <div class="zone-title">C</div>
+                        <div class="cell-grid">
+                            <div class="cell" data-pn="AAAAA-AAAAC">
+                                <div class="cell-label">
+                                    <div class="pn-name">AAAAA-AAAAC</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="BBBBB-BBBBB">
+                                <div class="cell-label">
+                                    <div class="pn-name">BBBBB-BBBBB</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="CCCCC-CCCCC">
+                                <div class="cell-label">
+                                    <div class="pn-name">CCCCC-CCCCC</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="DDDDD-DDDDD">
+                                <div class="cell-label">
+                                    <div class="pn-name">DDDDD-DDDDD</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="EEEEE-EEEEE">
+                                <div class="cell-label">
+                                    <div class="pn-name">EEEEE-EEEEE</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="FFFFF-FFFFF">
+                                <div class="cell-label">
+                                    <div class="pn-name">FFFFF-FFFFF</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="shelf">
-                        <div class="cell">A</div>
-                        <div class="cell">B</div>
-                        <div class="cell">C</div>
-                        <div class="cell">D</div>
-                        <div class="cell">E</div>
-                        <div class="cell">F</div>
+                        <div class="zone-title">D</div>
+                        <div class="cell-grid">
+                            <div class="cell" data-pn="AAAAA-AAAAD">
+                                <div class="cell-label">
+                                    <div class="pn-name">AAAAA-AAAAD</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="BBBBB-BBBBB">
+                                <div class="cell-label">
+                                    <div class="pn-name">BBBBB-BBBBB</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="CCCCC-CCCCC">
+                                <div class="cell-label">
+                                    <div class="pn-name">CCCCC-CCCCC</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="DDDDD-DDDDD">
+                                <div class="cell-label">
+                                    <div class="pn-name">DDDDD-DDDDD</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="EEEEE-EEEEE">
+                                <div class="cell-label">
+                                    <div class="pn-name">EEEEE-EEEEE</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="FFFFF-FFFFF">
+                                <div class="cell-label">
+                                    <div class="pn-name">FFFFF-FFFFF</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <div class="shelf">
+                        <div class="zone-title">E</div>
+                        <div class="cell-grid">
+                            <div class="cell" data-pn="AAAAA-AAAAE">
+                                <div class="cell-label">
+                                    <div class="pn-name">AAAAA-AAAAE</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="BBBBB-BBBBB">
+                                <div class="cell-label">
+                                    <div class="pn-name">BBBBB-BBBBB</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="CCCCC-CCCCC">
+                                <div class="cell-label">
+                                    <div class="pn-name">CCCCC-CCCCC</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="DDDDD-DDDDD">
+                                <div class="cell-label">
+                                    <div class="pn-name">DDDDD-DDDDD</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="EEEEE-EEEEE">
+                                <div class="cell-label">
+                                    <div class="pn-name">EEEEE-EEEEE</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="FFFFF-FFFFF">
+                                <div class="cell-label">
+                                    <div class="pn-name">FFFFF-FFFFF</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shelf">
+                        <div class="zone-title">F</div>
+                        <div class="cell-grid">
+                            <div class="cell" data-pn="AAAAA-AAAAF">
+                                <div class="cell-label">
+                                    <div class="pn-name">AAAAA-AAAAF</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="BBBBB-BBBBB">
+                                <div class="cell-label">
+                                    <div class="pn-name">BBBBB-BBBBB</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="CCCCC-CCCCC">
+                                <div class="cell-label">
+                                    <div class="pn-name">CCCCC-CCCCC</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="DDDDD-DDDDD">
+                                <div class="cell-label">
+                                    <div class="pn-name">DDDDD-DDDDD</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="EEEEE-EEEEE">
+                                <div class="cell-label">
+                                    <div class="pn-name">EEEEE-EEEEE</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="cell" data-pn="FFFFF-FFFFF">
+                                <div class="cell-label">
+                                    <div class="pn-name">FFFFF-FFFFF</div>
+                                    <button class="cell-stock-btn">
+                                        <i class="bi bi-box-seam"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+
                     <!-- ユニットはどんどん増えてOK -->
                 </div>
             </div>
-            <button id="open-popup-btn">ポップアップを開く</button>
+        </div>
+        
 
-            <div id="popup" class="popup-container" style="display: none;">
-                <div class="pop-label-container">
-                    <div class="pop-pn-title">品番名</div>
-                    <div class="pop-stock-title">5</div>
-
+        <!-- ポップアップセクション -->
+        <div id="popup" class="popup-container" style="display: none;">
+            <div class="pop-label-container">
+                <div class="pop-pn-title">品番名</div>
+                <div class="pop-stock-title">
+                    <div class="pop-stock-label">5</div>
+                    /
+                    <div id="pop-stock-max"></div>
                 </div>
-                <div class="stock-container">
-                    <button id="minus-btn" class="stock-btn"><i class="bi bi-dash-lg"></i></button>
-                    <div class="gauge-container">
-                        <div class="gauge-block"></div>
-                        <div class="gauge-block"></div>
-                        <div class="gauge-block"></div>
-                        <div class="gauge-block"></div>
-                        <div class="gauge-block"></div>
-                        <div class="gauge-block"></div>
-                    </div>
-                    <button id="plus-btn" class="stock-btn"><i class="bi bi-plus-lg"></i></button>
+                
+            </div>
+            <div class="stock-container">
+                <button id="minus-btn" class="stock-btn"><i class="bi bi-dash-lg"></i></button>
+                <div class="gauge-container">
+                    <div class="gauge-block"></div>
+                    <div class="gauge-block"></div>
+                    <div class="gauge-block"></div>
+                    <div class="gauge-block"></div>
+                    <div class="gauge-block"></div>
+                    <div class="gauge-block"></div>
                 </div>
-                <div class="close-container">
-                    <div>
-                        <button id="close-popup-btn" class="close-popup-btn">SAVE</button>
-                    </div>
-                    <div>
-                        <button class="close-popup-btn">Cancel</button>
-                    </div>
-
+                <button id="plus-btn" class="stock-btn"><i class="bi bi-plus-lg"></i></button>
+            </div>
+            <div class="close-container">
+                <div>
+                    <button id="close-popup-btn" class="close-popup-btn">SAVE</button>
+                </div>
+                <div>
+                    <button class="close-popup-btn">Cancel</button>
                 </div>
 
             </div>
+
         </div>
+    </div>
 </body>
 <script src="../static/js/pn_ctrl.js"></script>
 <script src="../static/js/popup.js"></script>

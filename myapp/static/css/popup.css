@@ -19,11 +19,16 @@
     transform: translate(-50%, -50%);
     /*中央寄せ*/
     padding: 1rem;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    border: 0.7rem solid #000000;
+    border-radius: 3%;
+    box-shadow: 0 0 0.7rem rgba(0, 255, 0, 0.795);
     z-index: 1000;
     font-family: sans-serif;
     background-color: #f0f0f0;
     text-align: center;
     /* margin: 50px; */
+}
+
+.pop-stock-title{
+    display: flex;
 }
