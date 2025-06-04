@@ -19,7 +19,7 @@
     /* 3列 */
     /* grid-template-rows: repeat(auto, auto); */
     width: auto;
-    height: auto;
+    height: 50%;
 }
 
 /* 各棚ユニット：2行3列 */
