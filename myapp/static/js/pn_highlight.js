@@ -14,20 +14,19 @@ document.addEventListener("DOMContentLoaded", function () {
             // 2. 品番属性を取得
             const selectedPn = button.getAttribute("data-pn");
             // すべてのセルのhighlightをリセット
-
+            cells.forEach(cell => {
+                if (cell.classList.contains("highlight")) {
+                    cell.classList.remove("highlight");
+                }
+            });
             // 3. モック的な対応ロジック
             //    ここでは、単純に「品番名と同じ属性のセルを強調」
             cells.forEach(cell => {
                 if (cell.getAttribute("data-pn") === selectedPn) {
-                    cells.forEach(cell => {
-                        cell.classList.remove("highlight");
-                    });
-                    if (cell.classList.contains("highlight")) {
-                        cell.classList.remove("highlight");
-                    } else {
-                        cell.classList.add("highlight");
-                    }
-
+                    cell.classList.add("highlight");
+                    ;
+                } else {
+                    cell.classList.remove("highlight");
                 }
             });
         });

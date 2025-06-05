@@ -28,19 +28,15 @@
                 <p class="zone-title">ゾーン</p>
                 <div class="zone-select">
                     <div class="zone-list">
-                        <button class="zone-item btn btn-outline-secondary">A</button>
-                        <button class="zone-item btn btn-outline-secondary">B</button>
-                        <button class="zone-item btn btn-outline-secondary">C</button>
-                        <button class="zone-item btn btn-outline-secondary">D</button>
-                        <button class="zone-item btn btn-outline-secondary">E</button>
-                        <button class="zone-item btn btn-outline-secondary">F</button>
-                        <button class="zone-item btn btn-outline-secondary">G</button>
-                        <button class="zone-item btn btn-outline-secondary">H</button>
-                        <button class="zone-item btn btn-outline-secondary">I</button>
-                        <button class="zone-item btn btn-outline-secondary">J</button>
-                        <button class="zone-item btn btn-outline-secondary">K</button>
-                        <button class="zone-item btn btn-outline-secondary">L</button>
-                        <button class="zone-item btn btn-outline-secondary">M</button>
+                        <button class="zone-item btn btn-outline-secondary" data-zone="A">A</button>
+                        <button class="zone-item btn btn-outline-secondary" data-zone="B">B</button>
+                        <button class="zone-item btn btn-outline-secondary" data-zone="C">C</button>
+                        <button class="zone-item btn btn-outline-secondary" data-zone="D">D</button>
+                        <button class="zone-item btn btn-outline-secondary" data-zone="E">E</button> 
+                        <button class="zone-item btn btn-outline-secondary" data-zone="F">F</button>
+                        <button class="zone-item btn btn-outline-secondary" data-zone="G">G</button>
+                        <button class="zone-item btn btn-outline-secondary" data-zone="H">H</button>
+                        <button class="zone-item btn btn-outline-secondary" data-zone="I">I</button>
                     </div>
                 </div>
             </div>
@@ -49,15 +45,15 @@
                 <p class="pn-title">品番</p>
                 <div class="pn-select">
                     <div class="pn-list">
-                        <button class="pn-item btn btn-outline-secondary" data-pn="AAAAA-AAAAA">AAAAA-AAAAA</button>
-                        <button class="pn-item btn btn-outline-secondary">品番2</button>
-                        <button class="pn-item btn btn-outline-secondary">品番3</button>
-                        <button class="pn-item btn btn-outline-secondary">品番4</button>
-                        <button class="pn-item btn btn-outline-secondary">品番5</button>
-                        <button class="pn-item btn btn-outline-secondary">品番6</button>
-                        <button class="pn-item btn btn-outline-secondary">品番7</button>
-                        <button class="pn-item btn btn-outline-secondary">品番8</button>
-                        <button class="pn-item btn btn-outline-secondary">品番</button>
+                        <button class="pn-item btn btn-outline-secondary" data-zone="A" data-pn="AAAAA-AAAAA">AAAAA-AAAAA</button>
+                        <button class="pn-item btn btn-outline-secondary" data-zone="A">品番2</button>
+                        <button class="pn-item btn btn-outline-secondary" data-zone="A">品番3</button>
+                        <button class="pn-item btn btn-outline-secondary" data-zone="B">品番4</button>
+                        <button class="pn-item btn btn-outline-secondary" data-zone="B">品番5</button>
+                        <button class="pn-item btn btn-outline-secondary" data-zone="B">品番6</button>
+                        <button class="pn-item btn btn-outline-secondary" data-zone="C">品番7</button>
+                        <button class="pn-item btn btn-outline-secondary" data-zone="C">品番8</button>
+                        <button class="pn-item btn btn-outline-secondary" data-zone="C">品番</button>
                         <button class="pn-item btn btn-outline-secondary">品番</button>
                         <button class="pn-item btn btn-outline-secondary">品番</button>
                         <button class="pn-item btn btn-outline-secondary">品番</button>
@@ -81,8 +77,8 @@
                 <!-- 3列の折り返し要素 -->
                 <div class="shelf-grid">
                     <!-- 各棚 -->
-                    <div class="shelf">
-                        <div class="zone-title">A</div>
+                    <div class="shelf" data-zone="A">
+                        <div class="zone-title" >A</div>
                         <div class="cell-grid">
                             <div class="cell" data-pn="AAAAA-AAAAA">
                                 <div class="cell-label">
@@ -134,10 +130,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="shelf">
+                    <div class="shelf" data-zone="B">
                         <div class="zone-title">B</div>
                         <div class="cell-grid">
-                            <div class="cell" data-pn="AAAAA-AAAAB">
+                            <div class="cell" data-pn="AAAAA-AAAAA">
                                 <div class="cell-label">
                                     <div class="pn-name">AAAAA-AAAAA</div>
                                     <button class="cell-stock-btn">
@@ -187,7 +183,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="shelf">
+                    <div class="shelf" data-zone="C">
                         <div class="zone-title">C</div>
                         <div class="cell-grid">
                             <div class="cell" data-pn="AAAAA-AAAAC">
@@ -240,8 +236,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="shelf">
-                        <div class="zone-title">D</div>
+                    <div class="shelf" data-zone="D">
+                        <div class="zone-title" >D</div>
                         <div class="cell-grid">
                             <div class="cell" data-pn="AAAAA-AAAAD">
                                 <div class="cell-label">
@@ -293,7 +289,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="shelf">
+                    <div class="shelf" data-zone="E">
                         <div class="zone-title">E</div>
                         <div class="cell-grid">
                             <div class="cell" data-pn="AAAAA-AAAAE">
@@ -346,7 +342,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="shelf">
+                    <div class="shelf" data-zone="F">
                         <div class="zone-title">F</div>
                         <div class="cell-grid">
                             <div class="cell" data-pn="AAAAA-AAAAF">
@@ -447,5 +443,8 @@
 <script src="../static/js/popup.js"></script>
 <script src="../static/js/stock_ctrl.js"></script>
 <script src="../static/js/pn_highlight.js"></script>
+<script src="../static/js/zone_sort.js"></script>
+
+
 
 </html>
