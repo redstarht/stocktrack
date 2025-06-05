@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../static/css/stock_ctrl.css">
     <link rel="stylesheet" href="../static/css/main_section.css">
     <link rel="stylesheet" href="../static/css/highlight.css">
-    
+
     <div id="overlay" style="display: none;"></div>
     <div class="wrapper">
         <div class="row">
@@ -26,13 +26,14 @@
                     <button id="open-popup-btn">ポップアップを開く</button>
                 </div>
                 <p class="zone-title">ゾーン</p>
+                <button class="allzone btn btn-outline-secondary" data-zone="all">全て</button>
                 <div class="zone-select">
                     <div class="zone-list">
                         <button class="zone-item btn btn-outline-secondary" data-zone="A">A</button>
                         <button class="zone-item btn btn-outline-secondary" data-zone="B">B</button>
                         <button class="zone-item btn btn-outline-secondary" data-zone="C">C</button>
                         <button class="zone-item btn btn-outline-secondary" data-zone="D">D</button>
-                        <button class="zone-item btn btn-outline-secondary" data-zone="E">E</button> 
+                        <button class="zone-item btn btn-outline-secondary" data-zone="E">E</button>
                         <button class="zone-item btn btn-outline-secondary" data-zone="F">F</button>
                         <button class="zone-item btn btn-outline-secondary" data-zone="G">G</button>
                         <button class="zone-item btn btn-outline-secondary" data-zone="H">H</button>
@@ -45,7 +46,8 @@
                 <p class="pn-title">品番</p>
                 <div class="pn-select">
                     <div class="pn-list">
-                        <button class="pn-item btn btn-outline-secondary" data-zone="A" data-pn="AAAAA-AAAAA">AAAAA-AAAAA</button>
+                        <button class="pn-item btn btn-outline-secondary" data-zone="A"
+                            data-pn="AAAAA-AAAAA">AAAAA-AAAAA</button>
                         <button class="pn-item btn btn-outline-secondary" data-zone="A">品番2</button>
                         <button class="pn-item btn btn-outline-secondary" data-zone="A">品番3</button>
                         <button class="pn-item btn btn-outline-secondary" data-zone="B">品番4</button>
@@ -78,13 +80,13 @@
                 <div class="shelf-grid">
                     <!-- 各棚 -->
                     <div class="shelf" data-zone="A">
-                        <div class="zone-title" >A</div>
+                        <div class="zone-title">A</div>
                         <div class="cell-grid">
                             <div class="cell" data-pn="AAAAA-AAAAA">
                                 <div class="cell-label">
                                     <div class="pn-name">AAAAA-AAAAA</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -92,7 +94,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">BBBBB-BBBBB</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -100,7 +102,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">CCCCC-CCCCC</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -108,7 +110,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">DDDDD-DDDDD</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -116,7 +118,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">EEEEE-EEEEE</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -124,7 +126,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">FFFFF-FFFFF</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -137,7 +139,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">AAAAA-AAAAA</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -145,7 +147,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">BBBBB-BBBBB</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -153,7 +155,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">CCCCC-CCCCC</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -161,7 +163,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">DDDDD-DDDDD</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -169,7 +171,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">EEEEE-EEEEE</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -177,7 +179,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">FFFFF-FFFFF</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -190,7 +192,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">AAAAA-AAAAC</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -198,7 +200,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">BBBBB-BBBBB</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -206,7 +208,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">CCCCC-CCCCC</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -214,7 +216,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">DDDDD-DDDDD</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -222,7 +224,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">EEEEE-EEEEE</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -230,20 +232,20 @@
                                 <div class="cell-label">
                                     <div class="pn-name">FFFFF-FFFFF</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="shelf" data-zone="D">
-                        <div class="zone-title" >D</div>
+                        <div class="zone-title">D</div>
                         <div class="cell-grid">
                             <div class="cell" data-pn="AAAAA-AAAAD">
                                 <div class="cell-label">
                                     <div class="pn-name">AAAAA-AAAAD</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -251,7 +253,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">BBBBB-BBBBB</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -259,7 +261,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">CCCCC-CCCCC</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -267,7 +269,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">DDDDD-DDDDD</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -275,7 +277,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">EEEEE-EEEEE</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -283,20 +285,20 @@
                                 <div class="cell-label">
                                     <div class="pn-name">FFFFF-FFFFF</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="shelf" data-zone="E">
+                    <div class="shelf" data-zone="A">
                         <div class="zone-title">E</div>
                         <div class="cell-grid">
                             <div class="cell" data-pn="AAAAA-AAAAE">
                                 <div class="cell-label">
                                     <div class="pn-name">AAAAA-AAAAE</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -304,7 +306,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">BBBBB-BBBBB</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -312,7 +314,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">CCCCC-CCCCC</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -320,7 +322,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">DDDDD-DDDDD</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -328,7 +330,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">EEEEE-EEEEE</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -336,20 +338,20 @@
                                 <div class="cell-label">
                                     <div class="pn-name">FFFFF-FFFFF</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="shelf" data-zone="F">
+                    <div class="shelf" data-zone="A">
                         <div class="zone-title">F</div>
                         <div class="cell-grid">
                             <div class="cell" data-pn="AAAAA-AAAAF">
                                 <div class="cell-label">
                                     <div class="pn-name">AAAAA-AAAAF</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -357,7 +359,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">BBBBB-BBBBB</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -365,7 +367,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">CCCCC-CCCCC</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -373,7 +375,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">DDDDD-DDDDD</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -381,7 +383,7 @@
                                 <div class="cell-label">
                                     <div class="pn-name">EEEEE-EEEEE</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
@@ -389,19 +391,19 @@
                                 <div class="cell-label">
                                     <div class="pn-name">FFFFF-FFFFF</div>
                                     <button class="cell-stock-btn">
-                                        <i class="bi bi-box-seam"></i>
+                                        <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
 
                     <!-- ユニットはどんどん増えてOK -->
                 </div>
             </div>
         </div>
-        
+
 
         <!-- ポップアップセクション -->
         <div id="popup" class="popup-container" style="display: none;">
@@ -412,7 +414,7 @@
                     /
                     <div id="pop-stock-max"></div>
                 </div>
-                
+
             </div>
             <div class="stock-container">
                 <button id="minus-btn" class="stock-btn"><i class="bi bi-dash-lg"></i></button>
@@ -438,12 +440,12 @@
 
         </div>
     </div>
-</body>
-<script src="../static/js/pn_ctrl.js"></script>
-<script src="../static/js/popup.js"></script>
-<script src="../static/js/stock_ctrl.js"></script>
-<script src="../static/js/pn_highlight.js"></script>
-<script src="../static/js/zone_sort.js"></script>
+    </body>
+    <script src="../static/js/pn_ctrl.js"></script>
+    <script src="../static/js/popup.js"></script>
+    <script src="../static/js/stock_ctrl.js"></script>
+    <script src="../static/js/pn_highlight.js"></script>
+    <script src="../static/js/zone_sort.js"></script>
 
 
 

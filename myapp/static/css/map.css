@@ -65,8 +65,14 @@ html body {
 .zone-title {
     font-size: 1.5rem;
     font-weight: bold;
+    margin-top: 0.5rem;
     margin-bottom: 1rem;
     text-align: center;
+}
+
+.allzone{
+    width: 100%;
+    margin-bottom: 0.5rem;
 }
 
 .zone-select {
