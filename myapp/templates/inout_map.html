@@ -19,8 +19,9 @@
         <div class="row">
             <!-- ゾーンサイドバー -->
             <div class="zone-sidebar">
+                <!-- 戻るボタン -->
                 <div class="back-btn-container">
-                    <button class="back-btn btn btn-outline-secondary">
+                    <button onclick="window.history.back()" class="back-btn btn btn-outline-secondary">
                         <i class="bi bi-arrow-left-short"></i>
                     </button>
                     <button id="open-popup-btn">ポップアップを開く</button>
@@ -29,15 +30,15 @@
                 <button class="allzone btn btn-outline-secondary" data-zone="all">全て</button>
                 <div class="zone-select">
                     <div class="zone-list">
-                        <button class="zone-item btn btn-outline-secondary" data-zone="A">A</button>
-                        <button class="zone-item btn btn-outline-secondary" data-zone="B">B</button>
-                        <button class="zone-item btn btn-outline-secondary" data-zone="C">C</button>
-                        <button class="zone-item btn btn-outline-secondary" data-zone="D">D</button>
-                        <button class="zone-item btn btn-outline-secondary" data-zone="E">E</button>
-                        <button class="zone-item btn btn-outline-secondary" data-zone="F">F</button>
-                        <button class="zone-item btn btn-outline-secondary" data-zone="G">G</button>
-                        <button class="zone-item btn btn-outline-secondary" data-zone="H">H</button>
-                        <button class="zone-item btn btn-outline-secondary" data-zone="I">I</button>
+                        <button class="zone-item btn btn-outline-secondary" data-zone="1">1</button>
+                        <button class="zone-item btn btn-outline-secondary" data-zone="2">2</button>
+                        <button class="zone-item btn btn-outline-secondary" data-zone="3">3</button>
+                        <button class="zone-item btn btn-outline-secondary" data-zone="4">4</button>
+                        <button class="zone-item btn btn-outline-secondary" data-zone="5">5</button>
+                        <button class="zone-item btn btn-outline-secondary" data-zone="6">6</button>
+                        <button class="zone-item btn btn-outline-secondary" data-zone="7">7</button>
+                        <button class="zone-item btn btn-outline-secondary" data-zone="8">8</button>
+                        <button class="zone-item btn btn-outline-secondary" data-zone="9">9</button>
                     </div>
                 </div>
             </div>
@@ -46,27 +47,16 @@
                 <p class="pn-title">品番</p>
                 <div class="pn-select">
                     <div class="pn-list">
-                        <button class="pn-item btn btn-outline-secondary" data-zone="A"
+                        <button class="pn-item btn btn-outline-secondary" data-zone="1"
                             data-pn="AAAAA-AAAAA">AAAAA-AAAAA</button>
-                        <button class="pn-item btn btn-outline-secondary" data-zone="A">品番2</button>
-                        <button class="pn-item btn btn-outline-secondary" data-zone="A">品番3</button>
-                        <button class="pn-item btn btn-outline-secondary" data-zone="B">品番4</button>
-                        <button class="pn-item btn btn-outline-secondary" data-zone="B">品番5</button>
-                        <button class="pn-item btn btn-outline-secondary" data-zone="B">品番6</button>
-                        <button class="pn-item btn btn-outline-secondary" data-zone="C">品番7</button>
-                        <button class="pn-item btn btn-outline-secondary" data-zone="C">品番8</button>
-                        <button class="pn-item btn btn-outline-secondary" data-zone="C">品番</button>
-                        <button class="pn-item btn btn-outline-secondary">品番</button>
-                        <button class="pn-item btn btn-outline-secondary">品番</button>
-                        <button class="pn-item btn btn-outline-secondary">品番</button>
-                        <button class="pn-item btn btn-outline-secondary">品番</button>
-                        <button class="pn-item btn btn-outline-secondary">品番</button>
-                        <button class="pn-item btn btn-outline-secondary">品番</button>
-                        <button class="pn-item btn btn-outline-secondary">品番</button>
-                        <button class="pn-item btn btn-outline-secondary">品番</button>
-                        <button class="pn-item btn btn-outline-secondary">品番</button>
-                        <button class="pn-item btn btn-outline-secondary">品番</button>
-                        <button class="pn-item btn btn-outline-secondary">品番</button>
+                        <button class="pn-item btn btn-outline-secondary" data-zone="1">品番2</button>
+                        <button class="pn-item btn btn-outline-secondary" data-zone="1">品番3</button>
+                        <button class="pn-item btn btn-outline-secondary" data-zone="2">品番4</button>
+                        <button class="pn-item btn btn-outline-secondary" data-zone="2">品番5</button>
+                        <button class="pn-item btn btn-outline-secondary" data-zone="2">品番6</button>
+                        <button class="pn-item btn btn-outline-secondary" data-zone="3">品番7</button>
+                        <button class="pn-item btn btn-outline-secondary" data-zone="3">品番8</button>
+                        <button class="pn-item btn btn-outline-secondary" data-zone="4">品番</button>
                         <button class="pn-item btn btn-outline-secondary">品番</button>
                         <button class="pn-item btn btn-outline-secondary">品番</button>
                         <button class="pn-item btn btn-outline-secondary">品番</button>
@@ -79,8 +69,12 @@
                 <!-- 3列の折り返し要素 -->
                 <div class="shelf-grid">
                     <!-- 各棚 -->
-                    <div class="shelf" data-zone="A">
-                        <div class="zone-title">A</div>
+                    <div class="shelf" data-zone="1" data-shelf="A">
+                        <div class="shelf-label">
+                            <div class="shelf-title">A</div>
+                            <div class="zone-title">1</div>
+
+                        </div>
                         <div class="cell-grid">
                             <div class="cell" data-pn="AAAAA-AAAAA">
                                 <div class="cell-label">
@@ -132,8 +126,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="shelf" data-zone="B">
-                        <div class="zone-title">B</div>
+                    <div class="shelf" data-zone="2" data-shelf="B">
+                        <div class="shelf-label">
+                            <div class="shelf-title">A</div>
+                            <div class="zone-title">1</div>
+
+                        </div>
                         <div class="cell-grid">
                             <div class="cell" data-pn="AAAAA-AAAAA">
                                 <div class="cell-label">
@@ -185,12 +183,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="shelf" data-zone="C">
-                        <div class="zone-title">C</div>
+                    <div class="shelf" data-zone="3" data-shelf="C">
+                        <div class="shelf-label">
+                            <div class="shelf-title">A</div>
+                            <div class="zone-title">1</div>
+
+                        </div>
                         <div class="cell-grid">
-                            <div class="cell" data-pn="AAAAA-AAAAC">
+                            <div class="cell" data-pn="AAAAA-AAAAA">
                                 <div class="cell-label">
-                                    <div class="pn-name">AAAAA-AAAAC</div>
+                                    <div class="pn-name">AAAAA-AAAAA</div>
                                     <button class="cell-stock-btn">
                                         <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
@@ -238,12 +240,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="shelf" data-zone="D">
-                        <div class="zone-title">D</div>
+                    <div class="shelf" data-zone="4" data-shelf="D">
+                        <div class="shelf-label">
+                            <div class="shelf-title">A</div>
+                            <div class="zone-title">1</div>
+
+                        </div>
                         <div class="cell-grid">
-                            <div class="cell" data-pn="AAAAA-AAAAD">
+                            <div class="cell" data-pn="AAAAA-AAAAA">
                                 <div class="cell-label">
-                                    <div class="pn-name">AAAAA-AAAAD</div>
+                                    <div class="pn-name">AAAAA-AAAAA</div>
                                     <button class="cell-stock-btn">
                                         <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
@@ -291,12 +297,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="shelf" data-zone="A">
-                        <div class="zone-title">E</div>
+                    <div class="shelf" data-zone="1" data-shelf="E">
+                        <div class="shelf-label">
+                            <div class="shelf-title">A</div>
+                            <div class="zone-title">1</div>
+
+                        </div>
                         <div class="cell-grid">
-                            <div class="cell" data-pn="AAAAA-AAAAE">
+                            <div class="cell" data-pn="AAAAA-AAAAA">
                                 <div class="cell-label">
-                                    <div class="pn-name">AAAAA-AAAAE</div>
+                                    <div class="pn-name">AAAAA-AAAAA</div>
                                     <button class="cell-stock-btn">
                                         <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
@@ -344,12 +354,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="shelf" data-zone="A">
-                        <div class="zone-title">F</div>
+                    <div class="shelf" data-zone="1" data-shelf="F">
+                        <div class="shelf-label">
+                            <div class="shelf-title">A</div>
+                            <div class="zone-title">1</div>
+
+                        </div>
                         <div class="cell-grid">
-                            <div class="cell" data-pn="AAAAA-AAAAF">
+                            <div class="cell" data-pn="AAAAA-AAAAA">
                                 <div class="cell-label">
-                                    <div class="pn-name">AAAAA-AAAAF</div>
+                                    <div class="pn-name">AAAAA-AAAAA</div>
                                     <button class="cell-stock-btn">
                                         <i class="bi bi-box-arrow-in-down"></i>
                                     </button>
@@ -397,6 +411,7 @@
                             </div>
                         </div>
                     </div>
+
 
 
                     <!-- ユニットはどんどん増えてOK -->

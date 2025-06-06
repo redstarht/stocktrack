@@ -2,19 +2,33 @@ from .extensions import db
 from datetime import datetime, timezone, timedelta
 
 
-class ZoneGroup(db.Model):
-    __tablename__ = 'zone_group'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), unique=True, nullable=False)
-    zone_sort = db.Column(db.Integer, nullable=False , default=999)
-    zones = db.relationship('Zone', backref="zone_group", lazy=True)  # zone_group.zones
+# class ZoneGroup(db.Model):
+#     __tablename__ = 'zone_group'
+#     id = db.Column(db.Integer, primary_key=True)
+#     name = db.Column(db.String(50), unique=True, nullable=False)
+#     zone_sort = db.Column(db.Integer, nullable=False , default=999)
+#     zones = db.relationship('Zone', backref="zone_group", lazy=True)  # zone_group.zones
+
+#     def to_dict(self):
+#         return {
+#             'id': self.id,
+#             'name': self.name,
+#             'zone_sort': self.zone_sort
+#         }
 
 class Zone(db.Model):
     __tablename__ = 'zone'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True, nullable=False)
-    group_id = db.Column(db.Integer, db.ForeignKey('zone_group.id'), nullable=False)
-    group = db.relationship('ZoneGroup', backref="zones", lazy=True)
+    # group_id = db.Column(db.Integer, db.ForeignKey('zone_group.id'), nullable=False)
+    # group = db.relationship('ZoneGroup', backref="zones", lazy=True)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            # 'group_id': self.group_id
+        }
 
 class Shelf(db.Model):
     __tablename__ = 'shelf'
@@ -26,6 +40,14 @@ class Shelf(db.Model):
                            lazy=True)  # zone.product_numbers
     # ※lazy=True means that the related objects are loaded only when accessed
 
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'zone_id': self.zone_id,
+            'shelf_sort': self.shelf_sort
+        }
 
 class ProductNumber(db.Model):
     __tablename__ = 'product_number'
@@ -39,6 +61,16 @@ class ProductNumber(db.Model):
         db.DateTime, default=lambda: datetime.now(
             timezone(timedelta(hours=9))),
         onupdate=lambda: datetime.now(timezone(timedelta(hours=9))))
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'product_no': self.product_no,
+            'name': self.name,
+            'is_deleted': self.is_deleted,
+            'created_at': self.created_at.isoformat(),
+            'updated_at': self.updated_at.isoformat()
+        }
 
 
 class Cell(db.Model):
@@ -50,6 +82,15 @@ class Cell(db.Model):
     is_all_pn_allowed = db.Column(db.Boolean, default=False)
     # cell.shelf.name \ shelf.cells
     shelf = db.relationship('Shelf', backref="cells", lazy=True)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'shelf_id': self.shelf_id,
+            'max_qty': self.max_qty,
+            'is_all_pn_allowed': self.is_all_pn_allowed
+        }
     
 
 
@@ -65,6 +106,12 @@ class AllowStorage(db.Model):
     product_no = db.relationship(
         'product_number', backref="allow_storage", lazy=True)
     
+    def to_dict(self):
+        return {
+            'cell_id': self.cell_id,
+            'pn_id': self.pn_id
+        }
+    
 
 
 class CellStockStatus(db.Model):
@@ -79,6 +126,12 @@ class CellStockStatus(db.Model):
     product_no = db.relationship(
         'product_number', backref="cell_stock_status", lazy=True)  # product_no.cell_stock_status
 
+    def to_dict(self):
+        return {
+            'cell_id': self.cell_id,
+            'pn_id': self.pn_id,
+            'stock_qty': self.stock_qty
+        }
 
 class InoutLog(db.Model):
     __tablename__ = 'inout_log'
@@ -95,3 +148,12 @@ class InoutLog(db.Model):
                            lazy=True)  # cell.inout_log
     product_no = db.relationship(
         'product_number', backref="inout_log", lazy=True)  # product_no.inout_log
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'cell_id': self.cell_id,
+            'pn_id': self.pn_id,
+            'inout_type': self.inout_type,
+            'processed_at': self.processed_at.isoformat()
+        }
