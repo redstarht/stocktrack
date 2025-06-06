@@ -2,11 +2,19 @@ from .extensions import db
 from datetime import datetime, timezone, timedelta
 
 
+class ZoneGroup(db.Model):
+    __tablename__ = 'zone_group'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), unique=True, nullable=False)
+    zone_sort = db.Column(db.Integer, nullable=False , default=999)
+    zones = db.relationship('Zone', backref="zone_group", lazy=True)  # zone_group.zones
+
 class Zone(db.Model):
     __tablename__ = 'zone'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True, nullable=False)
-
+    group_id = db.Column(db.Integer, db.ForeignKey('zone_group.id'), nullable=False)
+    group = db.relationship('ZoneGroup', backref="zones", lazy=True)
 
 class Shelf(db.Model):
     __tablename__ = 'shelf'

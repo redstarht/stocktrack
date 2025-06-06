@@ -6,3 +6,7 @@ def index():
     return render_template('index.html')
 
     
+@main.route('/inout_map')
+def inout_map():
+    return render_template('inout_map.html')
+
