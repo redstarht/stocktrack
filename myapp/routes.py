@@ -12,3 +12,9 @@ def index():
 def inout_map():
     return render_template('inout_map.html')
 
+
+@main.route('/pn_ctrl', methods=['GET'])
+def pn_ctrl():
+    product_numbers = ProductNumber.query.all()
+    return render_template('pn_ctrl.html', product_numbers=product_numbers)
+

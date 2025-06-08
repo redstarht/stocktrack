@@ -104,7 +104,7 @@ class AllowStorage(db.Model):
                            lazy=True)  # cell.allow_storage
     # product_no.allow_storage
     product_no = db.relationship(
-        'product_number', backref="allow_storage", lazy=True)
+        'ProductNumber', backref="allow_storage", lazy=True)
     
     def to_dict(self):
         return {
@@ -124,7 +124,7 @@ class CellStockStatus(db.Model):
     cell = db.relationship('Cell', backref="cell_stock_status",
                            lazy=True)  # cell.cell_stock_status
     product_no = db.relationship(
-        'product_number', backref="cell_stock_status", lazy=True)  # product_no.cell_stock_status
+        'ProductNumber', backref="cell_stock_status", lazy=True)  # product_no.cell_stock_status
 
     def to_dict(self):
         return {
@@ -147,7 +147,7 @@ class InoutLog(db.Model):
     cell = db.relationship('Cell', backref="inout_log",
                            lazy=True)  # cell.inout_log
     product_no = db.relationship(
-        'product_number', backref="inout_log", lazy=True)  # product_no.inout_log
+        'ProductNumber', backref="inout_log", lazy=True)  # product_no.inout_log
     
     def to_dict(self):
         return {
