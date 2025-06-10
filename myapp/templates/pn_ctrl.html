@@ -23,12 +23,14 @@
         </header>
         <div class="pn-input">
             <div id="input-container" class="scroll-box">
-                <div class="input-row">
+
+                <!-- ここにJSモジュールで品番INPUTを出力 -->
+                <!-- <div class="input-row">
                     <input type="text" name="pn-input">
                     <button class="delete-button">
                         <i class="bi bi-x-circle"></i>
                     </button>
-                </div>
+                </div> -->
             </div>
             <div class="add-button">
                 <!-- 新規追加ボタン -->
@@ -38,7 +40,7 @@
             </div>
         </div>
         <div class="admin-buttons">
-            <button class="index-button btn btn-primary lign-items-center gap-9 px-9 py-9 fs-9 admin-button">
+            <button id ="save-button" class="index-button btn btn-primary lign-items-center gap-9 px-9 py-9 fs-9 admin-button">
                 <i class="bi bi-floppy"></i>
                 SAVE
             </button>
@@ -50,6 +52,13 @@
     </div>
     </div>
 </body>
+<script>
+    const pn_list= {{ product_numbers|tojson }};
+    console.log(pn_list);
+    // pn_listの内容をコンソールに出力
+
+</script>
+
 <script src="../static/js/pn_ctrl.js"></script>
 
 </html>

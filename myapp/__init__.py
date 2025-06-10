@@ -14,5 +14,9 @@ def create_app():
     
     # blueprintを登録
     from myapp.routes import main
+    from myapp.services import services
+    from myapp.api import api
+    app.register_blueprint(services)
     app.register_blueprint(main)
+    app.register_blueprint(api)
     return app
