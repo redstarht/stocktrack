@@ -28,12 +28,12 @@ def save_product_number():
                     add_pn.is_deleted = is_deleted
                     
         else:#新規レコード
-            if product_no:
+            if product_no and id is None :
                 new_pn = ProductNumber(
                     product_no = product_no,
                     is_deleted = False
                 ) 
-            db.session.add(new_pn)
+                db.session.add(new_pn)
             
     db.session.commit()
     return jsonify({"status":"保存完了！"})
