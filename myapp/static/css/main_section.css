@@ -107,7 +107,7 @@
 }
 
 .pn-name {
-    font-size: 50%;
+    font-size: 40%;
     min-width: 0;
     white-space: nowrap;
     overflow: hidden;
@@ -130,7 +130,7 @@
 }
 
 .cell-stock-btn i {
-    font-size: 100%;
+    /* font-size: 100%; */
     text-align: center;
 }
 
