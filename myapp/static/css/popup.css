@@ -14,8 +14,9 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    width: 45%;
-    aspect-ratio: 1;
+    width: 45vh;
+    aspect-ratio: 1/1;
+    /* aspect-ratio: 1; */
     transform: translate(-50%, -50%);
     /*中央寄せ*/
     padding: 1rem;
