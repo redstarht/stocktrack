@@ -33,11 +33,14 @@ class Zone(db.Model):
 class Shelf(db.Model):
     __tablename__ = 'shelf'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), unique=True, nullable=False)
+    name = db.Column(db.String(50), unique=True, nullable=False,default="")
     zone_id = db.Column(db.Integer, db.ForeignKey('zone.id'), nullable=False)
     shelf_sort = db.Column(db.Integer, nullable=False , default=999)
     zone = db.relationship('Zone', backref="product_numbers",
-                           lazy=True)  # zone.product_numbers
+                           lazy=True)
+    column = db.Column(db.Integer,nullable=False,default=2)
+    row = db.Column(db.Integer,nullable=False,default=4)
+    # zone.product_numbers
     # ※lazy=True means that the related objects are loaded only when accessed
 
 
@@ -46,7 +49,9 @@ class Shelf(db.Model):
             'id': self.id,
             'name': self.name,
             'zone_id': self.zone_id,
-            'shelf_sort': self.shelf_sort
+            'shelf_sort': self.shelf_sort,
+            'column':self.column,
+            'row':self.row
         }
 
 class ProductNumber(db.Model):

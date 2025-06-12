@@ -18,6 +18,10 @@ body  {
     gap: 4vh;
 }
 
+header{
+    width: 40vw;
+}
+
 .pn-input{
     width: 80%;
     display: flex;

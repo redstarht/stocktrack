@@ -21,4 +21,16 @@ def pn_ctrl():
     return render_template('pn_ctrl.html', product_numbers=product_numbers)
 
 
+@main.route('/test_inout_map')
+def test_inout_map():
+    obj_zones=Zone.query.all()
+    zones=[zone.to_dict() for zone in obj_zones]
+    
+    obj_shelfs =Shelf.query.all()
+    shelfs=[shelf.to_dict() for shelf in obj_shelfs]
+    obj_product_numbers = ProductNumber.query.filter_by(is_deleted=False).all()
+    product_numbers = [pn.to_dict() for pn in obj_product_numbers]
+    return render_template('test_inout_map.html',zones=zones,shelfs=shelfs,product_numbers=product_numbers)
+
+
 
