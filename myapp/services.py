@@ -1,13 +1,14 @@
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, session
 from .model import Zone, Shelf, ProductNumber ,Cell , CellStockStatus ,AllowStorage , InoutLog
 from myapp import db
-from myapp import create_app
+
 
 
 services = Blueprint('services', __name__)
 
 class ProductNumberAPI:
     def __init__(self):
+        from myapp import create_app
         self.app = create_app()
 
     # 品番取得(削除フラッグは取得しない)
@@ -58,3 +59,19 @@ class ProductNumberAPI:
             product_number.is_deleted = True
             db.session.commit()
             return jsonify({'message': 'Product number created delete_flag = 1 successfully'}), 200
+        
+def shelfs_with_class(shelfs):
+
+    status_to_class = {
+        "1": "cell-grid-column1",
+        "4": "cell-grid",
+    }
+
+
+
+    shelfs_with_class = [
+        {**shelf,"css_class":status_to_class.get(shelf["column"],"cell-grid")}
+        for shelf in shelfs
+         ]
+    
+    return shelfs_with_class
