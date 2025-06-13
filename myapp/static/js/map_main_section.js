@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
             cellLabel.className = "cell-label";
 
             pnName.className ="pn-name";
-            pnName.textContent ="000000-00000";
+            pnName.textContent ="00000-00000";
             
             cellBtn.className ="cell-stock-btn";
 

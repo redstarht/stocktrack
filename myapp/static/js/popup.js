@@ -1,5 +1,5 @@
 
-const openBtn = document.getElementsByClassName('cell-stock-btn');
+const openBtns = document.querySelectorAll('.cell-stock-btn');
 const closeBtn = document.getElementById('close-popup-btn');
 // ※要検討 OK と Cancel どっちもポップアップクローズさせる処理が必要
 const closeBtns = document.querySelectorAll('.close-popup-btn');
@@ -7,7 +7,8 @@ const closeBtns = document.querySelectorAll('.close-popup-btn');
 const popup = document.getElementById('popup');
 const overlay = document.getElementById('overlay');
 
-Array.from(openBtn).forEach(button => {
+
+openBtns.forEach(button => {
     button.addEventListener('click', () => {
         overlay.style.display = 'block';
         popup.style.display = 'block';
