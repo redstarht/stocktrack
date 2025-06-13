@@ -20,9 +20,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     zoneBtns.forEach(zoneBtn => {
         zoneBtn.addEventListener("click", () => {
-            const zoneId = zoneBtn.dataset.zone;
+            const zoneId = zoneBtn.dataset.zone_id;
             shelves.forEach(shelf => {
-                if(shelf.dataset.zone === zoneId) {
+                if(shelf.dataset.zone_id === zoneId) {
                     shelf.style.display = "block"; // 表示
                 } else {
                     shelf.style.display = "none"; // 非表示
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
             // ゾーンに存在する品番リストの表示
             pnBtns.forEach(pnBtn => {
-                const pnZone = pnBtn.dataset.zone;
+                const pnZone = pnBtn.dataset.zone_id;
                 if (pnZone === zoneId) {
                     pnBtn.style.display = "block"; // 表示
                 } else {

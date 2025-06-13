@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
     zone_list.forEach(zoneItem =>{
         const zoneBtn = document.createElement("button");
         zoneBtn.className = "zone-item btn btn-outline-secondary";
-        zoneBtn.dataset.zone = zoneItem.id;
+        zoneBtn.dataset.zone_id = zoneItem.id;
         zoneBtn.textContent = zoneItem.name;
         zoneListElm.appendChild(zoneBtn);
     })

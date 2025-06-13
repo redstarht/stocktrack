@@ -63,8 +63,8 @@ class ProductNumberAPI:
 def shelfs_with_class(shelfs):
 
     status_to_class = {
-        "1": "cell-grid-column1",
-        "4": "cell-grid",
+        1: "cell-grid-column1",
+        4: "cell-grid",
     }
 
 
