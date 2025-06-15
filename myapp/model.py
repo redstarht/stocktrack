@@ -83,7 +83,7 @@ class Cell(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True, nullable=False)
     shelf_id = db.Column(db.Integer, db.ForeignKey('shelf.id'), nullable=False)
-    max_qty =db.Column(db.Integer ,default=6,nullable=False)
+    max_qty =db.Column(db.Integer ,default=3,nullable=False)
     is_all_pn_allowed = db.Column(db.Boolean, default=False)
     # cell.shelf.name \ shelf.cells
     shelf = db.relationship('Shelf', backref="cells", lazy=True)

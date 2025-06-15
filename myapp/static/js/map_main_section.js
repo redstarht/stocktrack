@@ -17,13 +17,21 @@ document.addEventListener("DOMContentLoaded", function () {
         shelfLabel.appendChild(shelfTitle);
         shelfContainer.appendChild(shelfLabel);
         
-        
+
+        const shelf_cells = cell_list.filter(cell => cell.shelf_id === shelfItem.id);
 
         
         const cellGridElm = document.createElement("div");
         cellGridElm.className = shelfItem.css_class;
 
-        for (let i =1 ;i<=(shelfItem.row * shelfItem.column) ; i++){
+        for (let i =0 ;i<shelf_cells.length ; i++){
+
+            const cell = shelf_cells[i];
+
+            // cell_stock_statusからcell.idでフィルターして
+            // 該当のcellに所属している品番が存在しないかを見るロジック必要
+            // 
+        
             const cellElm =document.createElement("div");
             const cellLabel = document.createElement("div");
             const pnName = document.createElement("div");
@@ -39,6 +47,10 @@ document.addEventListener("DOMContentLoaded", function () {
             pnName.textContent ="00000-00000";
             
             cellBtn.className ="cell-stock-btn";
+            // セルボタンにデータ属性（セルID）をもたせる
+            cellBtn.dataset.cell_id = cell.id;
+            
+
 
             btnIcon.className="bi bi-box-arrow-in-down";
 
