@@ -42,12 +42,22 @@ def allow_storage_map():
 @main.route('/cell_permission')
 def cell_permission():
     cell_id = request.args.get('cell_id')
-    # ProductNumberモデルから削除フラグが立っていない品番を取得
+    obj_cell = Cell.query.filter_by(id=cell_id).all()
+    cell = [ elm_cell.to_dict() for elm_cell in obj_cell]
     obj_allow_storage = AllowStorage.query.filter_by(cell_id=cell_id).all()
     allow_storage = [allow_pn.to_dict() for allow_pn in obj_allow_storage]
-    obj_product_numbers = ProductNumber.query.filter_by(is_deleted=False).all()
+
+    excluded_pn_ids = [allow.pn_id for allow in obj_allow_storage]
+
+
+
+    # ProductNumberモデルから「削除フラグが立っていない」かつ「AllowStorageで取得した品番」以外の品番を取得
+    obj_product_numbers = ProductNumber.query.filter(
+        ProductNumber.is_deleted == False,
+        ~ProductNumber.id.in_(excluded_pn_ids)
+        ).all()
     product_numbers = [pn.to_dict() for pn in obj_product_numbers]
-    return render_template('cell_permission.html', product_numbers=product_numbers,allow_storage=allow_storage)
+    return render_template('cell_permission.html', cell=cell,product_numbers=product_numbers,allow_storage=allow_storage)
 
 
 @main.route('/test_inout_map')
