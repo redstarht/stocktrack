@@ -16,48 +16,53 @@ document.addEventListener("DOMContentLoaded", function () {
 
         shelfLabel.appendChild(shelfTitle);
         shelfContainer.appendChild(shelfLabel);
-        
+
 
         const shelf_cells = cell_list.filter(cell => cell.shelf_id === shelfItem.id);
 
-        
+
         const cellGridElm = document.createElement("div");
         cellGridElm.className = shelfItem.css_class;
 
-        
+
         // 対象の棚にあるセルを描画
-        for (let i =0 ;i<shelf_cells.length ; i++){
+        for (let i = 0; i < shelf_cells.length; i++) {
 
             const cell = shelf_cells[i];
 
             // cell_stock_statusからcell.idでフィルターして
             // 該当のcellに所属している品番が存在しないかを見るロジック必要
             // 
-        
-            const cellElm =document.createElement("div");
+
+            const cellElm = document.createElement("div");
             const cellLabel = document.createElement("div");
-            const pnName = document.createElement("div");
+            // const pnName = document.createElement("div");
             const cellBtn = document.createElement("button");
             const btnIcon = document.createElement("i");
-            
-            cellElm.className ="cell";
-            cellElm.dataset.pn = "00000-00000";
+
+            cellElm.className = "cell";
+            cellElm.dataset.pn = shelf_cells[i].is_all_pn_allowed;
+
 
             cellLabel.className = "cell-label";
 
-            pnName.className ="pn-name";
-            pnName.textContent ="00000-00000";
-            
-            cellBtn.className ="cell-stock-btn";
+
+            cellBtn.className = "cell-stock-btn";
             // セルボタンにデータ属性（セルID）をもたせる
             cellBtn.dataset.cell_id = cell.id;
-            
+            cellBtn.addEventListener("click", function () {
+                const cell_id = cell.id;
+                window.location.href = `/cell_permission?cell_id=${cell_id}`;
+
+            })
 
 
-            btnIcon.className="bi bi-box-arrow-in-down";
+
+
+            btnIcon.className = "bi bi-list";
 
             cellBtn.appendChild(btnIcon);
-            cellLabel.appendChild(pnName);
+            // cellLabel.appendChild(pnName);
             cellLabel.appendChild(cellBtn);
             cellElm.appendChild(cellLabel);
             cellGridElm.appendChild(cellElm);
@@ -70,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-    
+
 
 
 });

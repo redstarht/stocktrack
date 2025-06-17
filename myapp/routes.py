@@ -21,6 +21,8 @@ def pn_ctrl():
     product_numbers = [pn.to_dict() for pn in obj_product_numbers]
     return render_template('pn_ctrl.html', product_numbers=product_numbers)
 
+
+
 @main.route('/allow_storage_map')
 def allow_storage_map():
     obj_zones=Zone.query.all()
@@ -37,7 +39,15 @@ def allow_storage_map():
     return render_template('allow_storage_map.html',zones=zones,shelfs=shelfs,cells=cells,product_numbers=product_numbers)
 
 
-
+@main.route('/cell_permission')
+def cell_permission():
+    cell_id = request.args.get('cell_id')
+    # ProductNumberモデルから削除フラグが立っていない品番を取得
+    obj_allow_storage = AllowStorage.query.filter_by(cell_id=cell_id).all()
+    allow_storage = [allow_pn.to_dict() for allow_pn in obj_allow_storage]
+    obj_product_numbers = ProductNumber.query.filter_by(is_deleted=False).all()
+    product_numbers = [pn.to_dict() for pn in obj_product_numbers]
+    return render_template('cell_permission.html', product_numbers=product_numbers,allow_storage=allow_storage)
 
 
 @main.route('/test_inout_map')
