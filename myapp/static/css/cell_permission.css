@@ -8,7 +8,7 @@ body {
 }
 
 .wrapper {
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -24,11 +24,16 @@ header {
 }
 
 .all-allow-container {
-    font-size: 2vw;
+    font-size: 3vh;
+    display: flex;
+    flex-direction: row;
+    height: 15vh;
+}
+
+.all-allow-container form {
     display: flex;
     flex-direction: row;
     gap: 2rem;
-    height: 15vh;
 }
 
 .all-allow-radio {
@@ -42,7 +47,7 @@ header {
     display: block;
 }
 
-.pn-input {
+.pn-list {
     width: 80%;
     display: flex;
     border: 2px solid #32fc17;
@@ -52,13 +57,13 @@ header {
     height: 75vh;
 }
 
-.pn-overlay{
+.pn-overlay {
     position: absolute;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255,255,255,0.6);
+    background-color: rgb(122, 122, 122);
     z-index: 10;
     display: none;
 
@@ -74,26 +79,36 @@ header {
     padding: 1rem;
 }
 
-.input-row {
+.pn-table {
+    /* border-collapse: collapse;
+    border: 2px solid rgb(140 140 140); */
+    width: 100%;
+}
+
+
+
+.pn-row {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
     margin: 0rem 1rem 1rem 1rem;
+    border-bottom: 0.1rem solid springgreen;
 
 }
 
-.input-row input {
-    flex: 1;
-    padding: 5px;
-    font-size: 1.5rem;
+.pn-cell {
+    flex: 0.7;
+    font-size: 1.2rem;
+    /* text-align: center; */
+    padding-left: 10%;
 }
 
-.delete-button {
-    margin-left: 1px;
-    background-color: red;
+.check-box {
     color: white;
     border: none;
-    padding: 5px 10px;
     cursor: pointer;
-    font-size: 1.5rem;
+    transform: scale(1.5);
+    text-align: center;
+
+
 }

@@ -67,8 +67,6 @@ def shelfs_with_class(shelfs):
         4: "cell-grid",
     }
 
-
-
     shelfs_with_class = [
         {**shelf,"css_class":status_to_class.get(shelf["column"],"cell-grid")}
         for shelf in shelfs
