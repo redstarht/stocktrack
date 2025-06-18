@@ -25,19 +25,20 @@
             <form>
                 <div class="all-allow-radio">
                     <label class="input-radio">
-                        <input type="radio" name="choice" value="true">
+                        <input id="all-allow" type="radio" name="choice" value="true">
                         全品番許可
                     </label>
                 </div>
                 <div class="all-allow-radio">
                     <label class="input-radio">
-                        <input type="radio" name="choice" value="false">
+                        <input id="pn-permission" type="radio" name="choice" value="false">
                        個別品番許可
                     </label>
             </form>
         </div>
     </div>
     <div class="pn-input">
+        <div id="pn-overlay" class="pn-overlay"></div>
         <div id="input-container" class="scroll-box">
 
             <!-- ここにJSモジュールで品番INPUTを出力 -->
@@ -65,12 +66,14 @@
     </div>
 </body>
 <script>
-    const pn_list = {{ product_numbers| tojson }};
+    const cell_list = {{ cell | tojson }};
+    const allow_storage_list = {{ allow_storage | tojson }};
+    const pn_list = {{ product_numbers | tojson }};
     console.log(pn_list);
     // pn_listの内容をコンソールに出力
 
 </script>
 
-<script src="../static/js/pn_ctrl.js"></script>
+<script src="../static/js/cell_permission.js"></script>
 
 </html>

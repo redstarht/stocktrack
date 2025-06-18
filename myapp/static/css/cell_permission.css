@@ -19,7 +19,8 @@ body {
 }
 
 header {
-    width: 40vw;
+    width: 30vw;
+    height: 10vh;
 }
 
 .all-allow-container {
@@ -27,6 +28,7 @@ header {
     display: flex;
     flex-direction: row;
     gap: 2rem;
+    height: 15vh;
 }
 
 .all-allow-radio {
@@ -46,10 +48,25 @@ header {
     border: 2px solid #32fc17;
     border-radius: 0.5rem;
     background-color: rgb(202, 202, 202, 0.5);
+    position: relative;
+    height: 75vh;
+}
+
+.pn-overlay{
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,0.6);
+    z-index: 10;
+    display: none;
+
+
 }
 
 .scroll-box {
-    width: 80%;
+    width: 100%;
     height: 65vh;
     /* border: 1px solid #ccc; */
     overflow-y: auto;
