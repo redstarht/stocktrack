@@ -23,6 +23,13 @@ document.addEventListener("DOMContentLoaded", function () {
     checkbox.type = "checkbox";
     checkbox.name = "allow_storage";
     checkbox.value = true;
+
+    const check_pn = allow_storage_list.filter(item => item.pn_id === pn.id);
+
+    if(check_pn.length>0){
+      checkbox.checked = true;
+    };
+    
     checkbox.addEventListener("change", function () {
       if (checkbox.checked) {
         newRow.dataset.allow_storage = true;

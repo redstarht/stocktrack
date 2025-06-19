@@ -52,12 +52,9 @@ def cell_permission():
 
 
     # ProductNumberモデルから「削除フラグが立っていない」かつ「AllowStorageで取得した品番」以外の品番を取得
-    obj_product_numbers = ProductNumber.query.filter(
-        ProductNumber.is_deleted == False,
-        ~ProductNumber.id.in_(excluded_pn_ids)
-        ).all()
+    obj_product_numbers = ProductNumber.query.all()
     product_numbers = [pn.to_dict() for pn in obj_product_numbers]
-    return render_template('cell_permission.html', cell=cell,product_numbers=product_numbers,allow_storage=allow_storage)
+    return render_template('cell_permission.html', cell=cell,product_numbers=product_numbers,allow_storage=allow_storage,excluded_pn_ids=excluded_pn_ids)
 
 
 @main.route('/inout_map')

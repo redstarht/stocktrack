@@ -8,8 +8,6 @@ function stock_ctrl(cell_id, product_number, max_qty, stock_qty) {
   const minusBtn = document.getElementById('minus-btn');
 
 
-  const popup = document.getElementById('popup');
-
   const poplabelContainer = document.createElement('div');
   poplabelContainer.className = "pop-label-container";
 
@@ -26,7 +24,8 @@ function stock_ctrl(cell_id, product_number, max_qty, stock_qty) {
 
   const popStockTitle = document.createElement('div');
   popStockTitle.className = "pop-stock-title";
-  
+  popStockTitle.textContent = "/";
+
 
   const popStockLabel = document.createElement('div');
   popStockLabel.className = "pop-stock-label";
@@ -37,15 +36,10 @@ function stock_ctrl(cell_id, product_number, max_qty, stock_qty) {
   popStockMax.textContent = maxBlocks;
 
 
-  popStockTitle.appendChild(popStockLabel);
-  popStockTitle.textContent = "/";
-  popPnTitle.appendChild(popStockMax);
-
-  poplabelContainer.appendChild(popPnTitle);
-  poplabelContainer.appendChild(popStockTitle);
-  popup.appendChild(poplabelContainer);
 
 
+  // 保管上限数をpopupに表示
+  document.getElementById('pop-stock-max').textContent = maxBlocks;
 
   plusBtn.addEventListener('click', () => {
     if (currentBlocks < maxBlocks) {

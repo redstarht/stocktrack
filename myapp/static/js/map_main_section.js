@@ -45,29 +45,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // ストック状態テーブルから該当のセルIDに品番があるか確認
             const stock_cell = cell_stock_list.find(stock => stock.cell_id == cell.id);
-            console.log("stock", i, stock_cell)
 
             // 品番テーブルから街灯品番を抽出
 
 
             // IFで中にわける必要あり
-            
 
 
+            let product_number = null;
             if (stock_cell) {
-                const product_number = pn_list.find(pnItem => pnItem.id == stock_cell.pn_id)
-                console.log("prod", i, product_number)
-
-                
-                stock_ctrl(max_qty, stock_cell.stock_qty);
+                product_number = pn_list.find(pnItem => pnItem.id == stock_cell.pn_id)
                 cellElm.dataset.pn = stock_cell.pn_id;
                 pnName.textContent = product_number.product_no;
                 btnIcon.textContent = stock_cell.stock_qty;
-                btnIcon.className ="btn-pn-stock"
+                btnIcon.className = "btn-pn-stock"
 
             } else {
+
                 btnIcon.className = "bi bi-box-arrow-in-down";
-                stock_ctrl(max_qty, 0);
             }
             cellLabel.className = "cell-label";
 
@@ -75,12 +70,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             cellBtn.className = "cell-stock-btn";
-            // セルボタンにデータ属性（セルID）をもたせる
-            cellBtn.dataset.cell_id = cell.id;
-
-
-
-
+            // セルボタンのデータまとめ用
+            const dataObj = {
+                cell_id: cell.id,
+                max_qty: max_qty ?? '',
+                pn_id: stock_cell?.pn_id ?? '',
+                product_no: product_number?.product_no ?? '',
+                stock_qty: stock_cell?.stock_qty ?? 0
+            }
+            cellBtn.dataset.item = JSON.stringify(dataObj);
 
             cellBtn.appendChild(btnIcon);
             cellLabel.appendChild(pnName);
@@ -93,10 +91,6 @@ document.addEventListener("DOMContentLoaded", function () {
         shelfGridElm.appendChild(shelfContainer);
 
     });
-
-
-
-
 
 
 });

@@ -67,7 +67,7 @@ def save_cell_permisson():
     if not is_all_pn_allowed:
         # 現在のDBにある許可品番の一覧を{}集合で取得
         existing_records = AllowStorage.query.filter_by(cell_id=cell_id).all()
-        existin_pn_ids = {rec.ids for rec in existing_records}
+        existin_pn_ids = {rec.pn_id for rec in existing_records}
 
         # 送信されたpn_idの一覧を取得
         posted_pn_ids = {
@@ -84,7 +84,7 @@ def save_cell_permisson():
         if deletepn_ids:
             AllowStorage.query.filter(
                 AllowStorage.cell_id == cell_id, AllowStorage.pn_id.in_(deletepn_ids)
-            ).delete(synchronize_session="fetch")
+            ).delete(synchronize_session=False)
 
             #  synchronize_session = false セッション内のオブジェクトは無視して同期処理を一切しない
 
