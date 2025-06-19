@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
       overlay.style.display = 'block';
       popup.style.display = 'block';
       const cellData = JSON.parse(button.dataset.item)
-      let stock_qty =cellData.stock_qty;
+      let stock_qty = cellData.stock_qty;
       const max_qty = cellData.max_qty;
 
       console.log(cellData);
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       popStockTitle.appendChild(popStockLabel);
       popStockTitle.appendChild(popStockMax);
-      popPnTitle.appendChild(popStockTitle);
+      // popPnTitle.appendChild(popStockTitle);
 
       poplabelContainer.appendChild(popPnTitle);
       poplabelContainer.appendChild(popStockTitle);
@@ -64,32 +64,62 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+      // 収容数操作部
+      const stockContainer = document.createElement('div');
+      stockContainer.className = "stock-container"
 
-      const tempDiv = document.createElement('div');  // 一時的な親要素
-      tempDiv.innerHTML = `
-    <div class="stock-container">
-        <button id="minus-btn" class="stock-btn"><i class="stock-btn-icon bi bi-dash-lg"></i></button>
-        <div class="gauge-container">
-            <div class="gauge-block"></div>
-            <div class="gauge-block"></div>
-            <div class="gauge-block"></div>
-        </div>
-        <button id="plus-btn" class="stock-btn"><i class="stock-btn-icon bi bi-plus-lg"></i></button>
-    </div>
-    <div class="close-container">
-        <div>
-            <button id="close-popup-btn" class="close-popup-btn">SAVE</button>
-        </div>
-        <div>
-            <button class="close-popup-btn">Cancel</button>
-        </div>
-    </div>
-`;
+      const minusBtn = document.createElement('div');
+      minusBtn.className = "stock-btn";
+      minusBtn.id = "stock-btn";
+      minusBtn.innerHTML = `<i class="stock-btn-icon bi bi-dash-lg"></i>`
 
-      Array.from(tempDiv.children).forEach(child => {
-        popup.appendChild(child);
-      });
+      const gaugeContainer = document.createElement('div');
+      gaugeContainer.className = "gauge-container";
 
+      for (let i = 0; i < 3; i++) {
+        const block = document.createElement("div");
+        block.className = "gauge-block";
+        gaugeContainer.appendChild(block);
+      }
+
+      const plusBtn = document.createElement('div');
+      plusBtn.className = "stock-btn";
+      plusBtn.id = "stock-btn";
+      plusBtn.innerHTML = `<i class="stock-btn-icon bi bi-plus-lg"></i>`
+
+
+      stockContainer.appendChild(minusBtn);
+      stockContainer.appendChild(gaugeContainer);
+      stockContainer.appendChild(plusBtn);
+
+      const closeContainer = document.createElement('div');
+      closeContainer.className = "close-container";
+
+      const saveContainer = document.createElement('div');
+      saveContainer.className = "save-container";
+
+      const saveBtn = document.createElement('button');
+      saveBtn.className = "close-popup-btn";
+      saveBtn.id = "close-popup-btn";
+      saveBtn.textContent = "SAVE";
+
+
+      saveContainer.appendChild(saveBtn);
+
+      const cancelContainer = document.createElement('div');
+      cancelContainer.className = "cancel-container";
+
+      const cancelBtn = document.createElement('button');
+      cancelBtn.className = "close-popup-btn";
+      cancelBtn.textContent = "Cancel"
+      cancelContainer.appendChild(cancelBtn);
+      
+      closeContainer.appendChild(saveContainer);
+      closeContainer.appendChild(cancelContainer);
+
+      stockContainer.appendChild(closeContainer);
+
+      popup.appendChild(stockContainer);
 
       const closeBtn = document.getElementById('close-popup-btn');
       // ※要検討 OK と Cancel どっちもポップアップクローズさせる処理が必要
@@ -97,22 +127,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
       const blocks = document.querySelectorAll('.gauge-block');
-      const plusBtn = document.getElementById('plus-btn');
-      const minusBtn = document.getElementById('minus-btn');
-      blocks[stock_qty-1].classList.add('active');
+      const qty = Number(stock_qty) || 0; // undefined や null の場合 0 にする
 
-      closeBtn.addEventListener('click', () => {
+      if (qty >= 1 && qty <= blocks.length) {
+        blocks[qty - 1].classList.add('active');
+      }
+
+      cancelBtn.addEventListener('click', () => {
+        overlay.style.display = 'none';
+        popup.style.display = 'none';
+      });
+      saveBtn.addEventListener('click', () => {
         overlay.style.display = 'none';
         popup.style.display = 'none';
       });
 
 
-      closeBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          overlay.style.display = 'none';
-          popup.style.display = 'none';
-        });
-      });
+      // closeBtns.forEach(btn => {
+      //   btn.addEventListener('click', () => {
+      //     overlay.style.display = 'none';
+      //     popup.style.display = 'none';
+      //   });
+      // });
 
       plusBtn.addEventListener('click', () => {
         if (stock_qty < max_qty) {
