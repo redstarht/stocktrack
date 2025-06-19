@@ -85,8 +85,8 @@ document.addEventListener("DOMContentLoaded", function () {
 // SAVEボタン押下時の送信データ準備処理
 // 送付データまとめ用変数の構造定義
 const dataToSend = {
-  cell:[],
-  allow_storage:[]
+  cell: [],
+  allow_storage: []
 };
 const saveButton = document.getElementById("save-button");
 saveButton.addEventListener("click", async function () {
@@ -99,11 +99,10 @@ saveButton.addEventListener("click", async function () {
   } else {
     is_all_pn_allowed = true;
   }
-  dataToSend.cell.push({
+  dataToSend.cell = {
     id: cell_list[0].id,
     is_all_pn_allowed: is_all_pn_allowed
-
-  })
+  };
 
 
   // allow_storage用データ取得
