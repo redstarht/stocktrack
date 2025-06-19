@@ -110,10 +110,11 @@
 }
 
 .pn-name {
-    font-size: 1.2vh;
-    min-height:  10%;
+    font-size: 1.7vh;
+    font-weight: bolder;
+    min-height:  20%;
     white-space: nowrap;
-    max-height: 20%;
+    max-height: 40%;
     /* 省略記号を表示 */
     text-overflow: ellipsis;
 
@@ -122,7 +123,7 @@
 .cell-stock-btn {
     /* border-radius: 50%; */
     width: 100%;
-    max-height: 80%;
+    max-height: 60%;
     /* aspect-ratio: 1 / 1; */
     text-align: center;
     display: flex;
@@ -138,6 +139,7 @@
     font-size: 100%;
     text-align: center;
 }
+
 
 .shelf-label {
     display: flex;

@@ -68,12 +68,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // SAVEボタン押下時の送信データ準備処理
-  //送付データまとめ用変数の定義 
-const dataToSend = [];
+
 const saveButton = document.getElementById("save-button");
 saveButton.addEventListener("click", async function () {
   const rows = document.querySelectorAll("#input-container .input-row");
-  const allow_storage =[];
+  const dataToSend = [];
   rows.forEach(row => {
     const input = row.querySelector("input[name='pn-input']");
     const id = input.dataset.id || null;
@@ -81,8 +80,9 @@ saveButton.addEventListener("click", async function () {
     const deleted = row.dataset.deleted === "true";
 
     dataToSend.push({
-      cell_id: id,
-      pn_id: product_no
+      id: id,
+      product_no: product_no,
+      is_deleted: deleted
     })
 
 

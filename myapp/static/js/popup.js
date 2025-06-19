@@ -1,4 +1,6 @@
 
+
+document.addEventListener("DOMContentLoaded",function(){
 const openBtns = document.querySelectorAll('.cell-stock-btn');
 const closeBtn = document.getElementById('close-popup-btn');
 // ※要検討 OK と Cancel どっちもポップアップクローズさせる処理が必要
@@ -16,7 +18,6 @@ openBtns.forEach(button => {
 });
 
 
-
 closeBtn.addEventListener('click', () => {
     overlay.style.display = 'none';
     popup.style.display = 'none';
@@ -28,4 +29,5 @@ closeBtns.forEach(btn => {
     overlay.style.display = 'none';
     popup.style.display = 'none';
   });
+});
 });

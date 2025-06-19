@@ -16,45 +16,71 @@ document.addEventListener("DOMContentLoaded", function () {
 
         shelfLabel.appendChild(shelfTitle);
         shelfContainer.appendChild(shelfLabel);
-        
+
 
         const shelf_cells = cell_list.filter(cell => cell.shelf_id === shelfItem.id);
 
-        
+
         const cellGridElm = document.createElement("div");
         cellGridElm.className = shelfItem.css_class;
 
-        
+
         // 対象の棚にあるセルを描画
-        for (let i =0 ;i<shelf_cells.length ; i++){
+        for (let i = 0; i < shelf_cells.length; i++) {
 
             const cell = shelf_cells[i];
+            const max_qty = cell.max_qty;
 
             // cell_stock_statusからcell.idでフィルターして
             // 該当のcellに所属している品番が存在しないかを見るロジック必要
             // 
-        
-            const cellElm =document.createElement("div");
+
+            const cellElm = document.createElement("div");
             const cellLabel = document.createElement("div");
             const pnName = document.createElement("div");
             const cellBtn = document.createElement("button");
             const btnIcon = document.createElement("i");
-            
-            cellElm.className ="cell";
-            cellElm.dataset.pn = "00000-00000";
 
+            cellElm.className = "cell";
+
+            // ストック状態テーブルから該当のセルIDに品番があるか確認
+            const stock_cell = cell_stock_list.find(stock => stock.cell_id == cell.id);
+            console.log("stock", i, stock_cell)
+
+            // 品番テーブルから街灯品番を抽出
+
+
+            // IFで中にわける必要あり
+            
+
+
+            if (stock_cell) {
+                const product_number = pn_list.find(pnItem => pnItem.id == stock_cell.pn_id)
+                console.log("prod", i, product_number)
+
+                
+                stock_ctrl(max_qty, stock_cell.stock_qty);
+                cellElm.dataset.pn = stock_cell.pn_id;
+                pnName.textContent = product_number.product_no;
+                btnIcon.textContent = stock_cell.stock_qty;
+                btnIcon.className ="btn-pn-stock"
+
+            } else {
+                btnIcon.className = "bi bi-box-arrow-in-down";
+                stock_ctrl(max_qty, 0);
+            }
             cellLabel.className = "cell-label";
 
-            pnName.className ="pn-name";
-            pnName.textContent ="00000-00000";
-            
-            cellBtn.className ="cell-stock-btn";
+            pnName.className = "pn-name";
+
+
+            cellBtn.className = "cell-stock-btn";
             // セルボタンにデータ属性（セルID）をもたせる
             cellBtn.dataset.cell_id = cell.id;
-            
 
 
-            btnIcon.className="bi bi-box-arrow-in-down";
+
+
 
             cellBtn.appendChild(btnIcon);
             cellLabel.appendChild(pnName);
@@ -70,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-    
+
 
 
 });

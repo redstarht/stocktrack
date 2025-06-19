@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
     pn_list.forEach(pnItem => {
         const pnBtn = document.createElement("button");
         pnBtn.className ="pn-item btn btn-outline-secondary";
-        pnBtn.dataset.pn = pnItem.product_no;
+        pnBtn.dataset.pn = pnItem.id;
         pnBtn.textContent = pnItem.product_no;
         pnListElem.appendChild(pnBtn);
     });

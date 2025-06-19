@@ -9,9 +9,9 @@ main = Blueprint('main', __name__)
 def index():
     return render_template('index.html')
 
-@main.route('/inout_map')
-def inout_map():
-    return render_template('inout_map.html')
+@main.route('/old_inout_map')
+def old_inout_map():
+    return render_template('old_inout_map.html')
 
 
 @main.route('/pn_ctrl')
@@ -60,8 +60,8 @@ def cell_permission():
     return render_template('cell_permission.html', cell=cell,product_numbers=product_numbers,allow_storage=allow_storage)
 
 
-@main.route('/test_inout_map')
-def test_inout_map():
+@main.route('/inout_map')
+def inout_map():
     obj_zones=Zone.query.all()
     zones=[zone.to_dict() for zone in obj_zones]
     
@@ -73,6 +73,10 @@ def test_inout_map():
 
     obj_cells = Cell.query.all()
     cells =[cell.to_dict() for cell in obj_cells]
-    return render_template('test_inout_map.html',zones=zones,shelfs=shelfs,cells=cells,product_numbers=product_numbers)
+
+    obj_cell_stock_status = CellStockStatus.query.all()
+    cell_stock_statuses = [cell_stock_status.to_dict() for cell_stock_status in obj_cell_stock_status]
+
+    return render_template('inout_map.html',zones=zones,shelfs=shelfs,cells=cells,product_numbers=product_numbers,cell_stock_statuses=cell_stock_statuses)
 
 
