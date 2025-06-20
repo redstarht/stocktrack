@@ -1,5 +1,4 @@
-
-.pop-label-container{
+.pop-label-container {
     font-size: 3vh;
     display: flex;
     flex-direction: column;
@@ -37,10 +36,14 @@
     box-shadow: 0 0 10px #4caf50;
 }
 
-.stock-btn{
+.stock-btn {
     border-radius: 50%;
     width: 4vh;
     height: 4vh;
+    background-color: #4caf50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .stock-btn-icon {
@@ -51,9 +54,10 @@
     justify-content: center;
 
 
+
 }
 
-.close-container{
+.close-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -62,6 +66,6 @@
     gap: 2rem;
 }
 
-.close-popup-btn{
+.close-popup-btn {
     font-size: 3vh;
 }

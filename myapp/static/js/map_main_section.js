@@ -73,6 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // セルボタンのデータまとめ用
             const dataObj = {
                 cell_id: cell.id,
+                is_all_pn_allowed:cell.is_all_pn_allowed,
                 max_qty: max_qty ?? '',
                 pn_id: stock_cell?.pn_id ?? '',
                 product_no: product_number?.product_no ?? '',
