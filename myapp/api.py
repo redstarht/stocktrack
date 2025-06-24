@@ -33,15 +33,15 @@ def save_product_number():
 
         # 既存レコード更新
         if id:
-            add_pn = ProductNumber.query.get(id)
-            if add_pn:
-                if product_no != add_pn.product_no:
-                    add_pn.product_no = product_no
+            update_pn = ProductNumber.query.get(id)
+            if update_pn:
+                if product_no != update_pn.product_no:
+                    update_pn.product_no = product_no
 
-                if is_deleted != add_pn.is_deleted:
-                    add_pn.is_deleted = is_deleted
+                if is_deleted != update_pn.is_deleted:
+                    update_pn.is_deleted = is_deleted
 
-        else:  # 新規レコード
+        else:  # 新規レコード(update_pn既存レコード判別に何もない場合)
             if product_no and id is None:
                 new_pn = ProductNumber(product_no=product_no, is_deleted=False)
                 db.session.add(new_pn)
