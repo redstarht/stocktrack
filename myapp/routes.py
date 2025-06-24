@@ -23,6 +23,13 @@ def pn_ctrl():
     product_numbers = [pn.to_dict() for pn in obj_product_numbers]
     return render_template('pn_ctrl.html', product_numbers=product_numbers)
 
+@main.route('/test_pn_ctrl')
+def test_pn_ctrl():
+    # ProductNumberモデルから削除フラグが立っていない品番を取得
+    obj_product_numbers = ProductNumber.query.filter_by(is_deleted=False).all()
+    product_numbers = [pn.to_dict() for pn in obj_product_numbers]
+    return render_template('test_pn_ctrl.html', product_numbers=product_numbers)
+
 
 @main.route('/allow_storage_map')
 def allow_storage_map():

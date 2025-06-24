@@ -1,1 +1,1 @@
-DROP TABLE shelf;
+DROP TABLE product_number_temp;

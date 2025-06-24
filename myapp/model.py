@@ -57,7 +57,7 @@ class Shelf(db.Model):
 class ProductNumber(db.Model):
     __tablename__ = 'product_number'
     id = db.Column(db.Integer, primary_key=True)
-    product_no = db.Column(db.String(50), unique=True, nullable=False)
+    product_no = db.Column(db.String(50), nullable=False,default="")
     name = db.Column(db.String(100), nullable=False, default="")
     serial_no = db.Column(db.String(20),default = "",nullable=False)
     material = db.Column(db.String(20),default="",nullable=False)
