@@ -29,14 +29,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
             // ゾーンに存在する品番リストの表示
-            pnBtns.forEach(pnBtn => {
-                const pnZone = pnBtn.dataset.zone_id;
-                if (pnZone === zoneId) {
-                    pnBtn.style.display = "block"; // 表示
-                } else {
-                    pnBtn.style.display = "none"; // 非表示
-                }
-            });
+
+            // pnBtns.forEach(pnBtn => {
+            //     const pnZone = pnBtn.dataset.zone_id;
+            //     if (pnZone === zoneId) {
+            //         pnBtn.style.display = "block"; // 表示
+            //     } else {
+            //         pnBtn.style.display = "none"; // 非表示
+            //     }
+            // });
 
 
         });
