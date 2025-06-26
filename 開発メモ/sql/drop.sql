@@ -1,1 +1,1 @@
-DROP TABLE product_number_temp;
+DROP TABLE alembic_version

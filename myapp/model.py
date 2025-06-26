@@ -61,8 +61,8 @@ class ProductNumber(db.Model):
     name = db.Column(db.String(100), nullable=False, default="")
     serial_no = db.Column(db.String(20),default = "",nullable=False)
     material = db.Column(db.String(20),default="",nullable=False)
-    material_thickness = db.Column(db.Float,default="",nullable=False)
-    cut_length = db.Column(db.Float,default="",nullable=False)
+    material_thickness = db.Column(db.Float,default=-1.0,nullable=False)
+    cut_length = db.Column(db.Float,default=-1.0,nullable=False)
     is_deleted = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(
         timezone(timedelta(hours=9))))
