@@ -1,82 +1,16 @@
+import {existPnListCreate} from "./existPnListCreate.js"
+import {serial_no_search} from "./serial_no_search.js"
+
+
 document.addEventListener("DOMContentLoaded", function () {
   const container = document.getElementById("input-container");
   const inputTable = document.getElementById("input-table");
 
-  // バックエンドで取得したデータをinput要素に設定
-  pn_list.forEach(pn => {
-    // テーブルにpn_listのレコードを反映
-    const existRow = document.createElement("tr");
-    existRow.className = "row-input";
-    // レコードのデータ属性にIDを設定
-    existRow.dataset.id = pn.id; // データセットにIDを設定
+  existPnListCreate(pn_list,inputTable);
+  console.log(pn_list);
 
-    // 値を各セルに反映
+  
 
-    // 背番号
-    const existSerialCell = document.createElement("td");
-    existSerialCell.className = "input-cell";
-    const exsitSerialInput = document.createElement("input");
-    exsitSerialInput.type = "text";
-    exsitSerialInput.name = "serial_no";
-    exsitSerialInput.value = pn.serial_no;
-    existSerialCell.appendChild(exsitSerialInput);
-    existRow.appendChild(existSerialCell);
-
-    // 品番
-    const exsitProdNoCell = document.createElement("td");
-    exsitProdNoCell.className = "input-cell";
-    const exsitProdNoInput = document.createElement("input");
-    exsitProdNoInput.type = "text";
-    exsitProdNoInput.name = "product_no";
-    exsitProdNoInput.value = pn.product_no;
-    exsitProdNoCell.appendChild(exsitProdNoInput);
-    existRow.appendChild(exsitProdNoCell);
-
-    // 材質
-    const exsitMaterialCell = document.createElement("td");
-    exsitMaterialCell.className = "input-cell";
-    const exsitMaterialInput = document.createElement("input");
-    exsitMaterialInput.type = "text";
-    exsitMaterialInput.name = "material";
-    exsitMaterialInput.value = pn.material;
-    exsitMaterialCell.appendChild(exsitMaterialInput);
-    existRow.appendChild(exsitMaterialCell);
-
-    // 板厚
-    const exsitMatThkCell = document.createElement("td");
-    exsitMatThkCell.className = "input-cell";
-    const exsitMatThkInput = document.createElement("input");
-    exsitMatThkInput.type = "text";
-    exsitMatThkInput.name = "material_thickness";
-    exsitMatThkInput.value = pn.material_thickness < 0 ? "" : pn.material_thickness; // 負の値は空文字にする
-    exsitMatThkCell.appendChild(exsitMatThkInput);
-    existRow.appendChild(exsitMatThkCell);
-
-    // 切断長さ
-    const exsitCutLengthCell = document.createElement("td");
-    exsitCutLengthCell.className = "input-cell";
-    const exsitCutLengthInput = document.createElement("input");
-    exsitCutLengthInput.type = "text";
-    exsitCutLengthInput.name = "cut_length";
-    exsitCutLengthInput.value = pn.cut_length < 0 ? "" : pn.cut_length; // 負の値は空文字にする
-    exsitCutLengthCell.appendChild(exsitCutLengthInput);
-    existRow.appendChild(exsitCutLengthCell);
-
-    // 削除ボタン
-    const deleteBtnCell = document.createElement("td");
-    deleteBtnCell.className = "input-cell";
-    const deleteBtn = document.createElement("button");
-    deleteBtn.innerHTML = '<i class="bi bi-x-circle"></i>';
-    deleteBtn.className = "delete-button";
-    deleteBtn.addEventListener("click", function () {
-      existRow.dataset.deleted = "true"; // 削除フラグを設定
-      existRow.style.display = "none"; // 行を非表示にする
-    });
-    deleteBtnCell.appendChild(deleteBtn);
-    existRow.appendChild(deleteBtnCell);
-
-    inputTable.appendChild(existRow);
-  });
 
 
 
@@ -157,7 +91,25 @@ document.addEventListener("DOMContentLoaded", function () {
       window.location.href = "/pn_ctrl"; // ページをリロード
     }
   });
+
+  // 検索ボタン処理
+  document.getElementById("search-button").addEventListener("click", function () {
+    const searchValue = document.getElementById("serial-search").value.trim();
+
+    // 空なら全件表示（必要に応じて）
+    if (!searchValue) {
+      return;
+    }
+    serial_no_search(searchValue, inputTable);
+  });
+
+
+
+
 });
+
+
+
 
 
 // SAVEボタン押下時の送信データ準備処理
@@ -219,7 +171,7 @@ saveButton.addEventListener("click", async function () {
 
     const result = await response.json();
     console.log("送信結果:", result);
-    alert(`保存完了しました！\n${alertNewData}\n上記の新規品番情報を保存しました。`);
+    alert(`保存完了しました！`);
 
   } catch (error) {
     console.error("送信エラー:", error);

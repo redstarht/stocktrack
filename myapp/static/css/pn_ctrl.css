@@ -1,5 +1,5 @@
-body  {
-    font-family: 'Segoe UI', Tahoma,Verdana, sans-serif;
+body {
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
     background-color: #000000 !important;
     margin: 0;
     padding: 0;
@@ -15,44 +15,39 @@ body  {
     /* justify-content: center; */
     /* ⇡をコメントアウトすると頂点揃えになる */
     align-items: center;
-    gap: 4vh;
+    gap: 1vh;
 }
 
-header{
+.header {
     width: 40vw;
+    font-size: 5vh;
+    color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
-.pn-input{
-    width: 80%;
+.pn-input {
+    width: 90%;
     display: flex;
     border: 2px solid #32fc17;
     border-radius: 0.5rem;
-    background-color: rgb(202, 202, 202,0.5);
+    background-color: rgb(202, 202, 202, 0.5);
 }
 
 .scroll-box {
-  width: 80%;        
-  height: 65vh;       
-  /* border: 1px solid #ccc; */
-  overflow-y: auto;     /* 縦スクロールを有効に */
-  padding: 1rem;
-}
-
-.input-row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    margin: 0rem 1rem 1rem 1rem;
-    
-}
-
-.input-row input {
-    flex: 1;
-    padding: 5px;
-    font-size: 1.5rem;
+    width: 100%;
+    height: 65vh;
+    /* border: 1px solid #ccc; */
+    overflow-y: auto;
+    /* 縦スクロールを有効に */
+    padding: 1rem;
 }
 
 .delete-button {
+    width: 99%;
+    height: 99%;
     margin-left: 1px;
     background-color: red;
     color: white;
@@ -62,24 +57,48 @@ header{
     font-size: 1.5rem;
 }
 
-.add-button {
-    /* margin-top: 1rem;
-    padding: 4rem 7rem;
-    font-size: 50rem; */
+.top-btn-container{
+    width: 100vw;
     display: flex;
-    align-items:flex-end
+    flex-direction: row;
+}
+
+.top-btn-container{
+    margin-left: 10vw;
+}
+
+.add-button-container{
+    margin-left: 40vw;
+    width: 20vw;
+    align-self: flex-end;
+    text-align: end;
+}
+
+#add-button {
+    width: 80%;
+    /* display: flex; */
+    font-size: auto;
+    border: #000000 3px solid;
+}
+
+#input-table {
+    border: #ffffff 0.1rem solid;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#input-table th {
+    background-color: #000000;
 
 }
 
+#input-table th,
+#input-table td {
+    border: #ffffff 0.1rem solid;
 
-#add-button {
-    /* background-color: rgba(50, 252, 23, 0.5);
-    color: white;
-    cursor: pointer; */
-    font-size: 5rem;
-    /* padding: 1rem 2rem;
-    border-radius: 5%; */
-    margin-left: 1rem;
-    margin-bottom: 1rem;
-    border: #000000 3px solid;
+}
+
+.row-input input{
+    width: 100%;
+    height: 100%;
 }

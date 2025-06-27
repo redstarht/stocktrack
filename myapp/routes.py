@@ -23,14 +23,6 @@ def pn_ctrl():
     product_numbers = [pn.to_dict() for pn in obj_product_numbers]
     return render_template('pn_ctrl.html', product_numbers=product_numbers)
 
-@main.route('/test_pn_ctrl')
-def test_pn_ctrl():
-    # ProductNumberモデルから削除フラグが立っていない品番を取得
-    obj_product_numbers = ProductNumber.query.filter_by(is_deleted=False).all()
-    product_numbers = [pn.to_dict() for pn in obj_product_numbers]
-    return render_template('test_pn_ctrl.html', product_numbers=product_numbers)
-
-
 @main.route('/allow_storage_map')
 def allow_storage_map():
     obj_zones = Zone.query.all()
@@ -85,3 +77,26 @@ def inout_map():
                            for cell_stock_status in obj_cell_stock_status]
 
     return render_template('inout_map.html', zones=zones, shelfs=shelfs, cells=cells, product_numbers=product_numbers,allow_storage=allow_storage, cell_stock_statuses=cell_stock_statuses)
+
+@main.route('/test_inout_map')
+def test_inout_map():
+    obj_zones = Zone.query.all()
+    zones = [zone.to_dict() for zone in obj_zones]
+
+    obj_shelfs = Shelf.query.all()
+    raw_shelfs = [shelf.to_dict() for shelf in obj_shelfs]
+    shelfs = shelfs_with_class(raw_shelfs)
+    obj_product_numbers = ProductNumber.query.filter_by(is_deleted=False).all()
+    product_numbers = [pn.to_dict() for pn in obj_product_numbers]
+
+    obj_cells = Cell.query.all()
+    cells = [cell.to_dict() for cell in obj_cells]
+
+    obj_allow_storage = AllowStorage.query.all()
+    allow_storage = [allow_pn.to_dict() for allow_pn in obj_allow_storage]
+
+    obj_cell_stock_status = CellStockStatus.query.all()
+    cell_stock_statuses = [cell_stock_status.to_dict()
+                           for cell_stock_status in obj_cell_stock_status]
+
+    return render_template('test_inout_map.html', zones=zones, shelfs=shelfs, cells=cells, product_numbers=product_numbers,allow_storage=allow_storage, cell_stock_statuses=cell_stock_statuses)

@@ -29,6 +29,10 @@ def save_product_number():
     for pn_item in product_numbers:
         id = pn_item.get("id")
         product_no = pn_item.get("product_no", "").strip()
+        serial_no = pn_item.get("serial_no", "").strip()
+        material = pn_item.get("material", "").strip()
+        material_thickness = pn_item.get("material_thickness", -1.0)
+        cut_length = pn_item.get("cut_length",-1.0)
         is_deleted = pn_item.get("is_deleted", False)
 
         # 既存レコード更新
@@ -38,12 +42,36 @@ def save_product_number():
                 if product_no != update_pn.product_no:
                     update_pn.product_no = product_no
 
+                if serial_no != update_pn.serial_no:
+                    update_pn.serial_no = serial_no
+
+                if material != update_pn.material:
+                    update_pn.material = material
+
+                if material_thickness != update_pn.material_thickness:
+                    try:
+                        update_pn.material_thickness = float(
+                            material_thickness)
+                    except ValueError:
+                        update_pn.material_thickness = -1.0
+
+                if cut_length != update_pn.cut_length:
+                    try:
+                        update_pn.cut_length = float(cut_length)
+                    except ValueError:
+                        update_pn.cut_length = -1.0
+
                 if is_deleted != update_pn.is_deleted:
                     update_pn.is_deleted = is_deleted
 
         else:  # 新規レコード(update_pn既存レコード判別に何もない場合)
             if product_no and id is None:
-                new_pn = ProductNumber(product_no=product_no, is_deleted=False)
+                new_pn = ProductNumber(product_no=product_no,
+                                       serial_no=serial_no,
+                                       material=material,
+                                       material_thickness=material_thickness,
+                                       cut_length=cut_length,
+                                       is_deleted=False)
                 db.session.add(new_pn)
 
     db.session.commit()
@@ -76,7 +104,6 @@ def save_cell_permisson():
 
         deletepn_ids = existin_pn_ids - posted_pn_ids
         new_pn_ids = posted_pn_ids - existin_pn_ids
-            
 
         with db.session.no_autoflush:
             for pn_id in new_pn_ids:
@@ -87,18 +114,15 @@ def save_cell_permisson():
                     AllowStorage.cell_id == cell_id,
                     AllowStorage.pn_id.in_(deletepn_ids)
                 ).delete(synchronize_session=False)
-                
-                
 
-            
         #  with db.session.no_autoflush:
         #     # 新規追加(postedにあってexist(DB)にないもの
-            
+
         #     for pn_id in new_pn_ids:
         #         db.session.add(AllowStorage(cell_id=cell_id, pn_id=pn_id))
 
         #     # 削除対象(許可対象品番でなくなった場合はレコードを削除)
-            
+
         #     if deletepn_ids:
         #         AllowStorage.query.filter(
         #         AllowStorage.cell_id == cell_id, AllowStorage.pn_id.in_(deletepn_ids)

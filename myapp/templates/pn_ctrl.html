@@ -18,12 +18,48 @@
 <body>
     <div class="wrapper">
         <!-- スクロールボックス -->
-        <header class="header">
-            <h1>品番管理</h1>
-        </header>
+        <div class="header">
+            <div>品番管理</div>
+        </div>
+        <div class="top-btn-container">
+            <div class="search-container">
+                <label for="serial-search">背番号検索：</label>
+                <input type="search" id="serial-search" name="serial-no" />
+                <button id="search-button">検索</button>
+            </div>
+            <div class="add-button-container">
+                <!-- 新規追加ボタン -->
+                <button class="btn btn-success" id="add-button">
+                    新規レコード追加
+                </button>
+            </div>
+
+        </div>
+
         <div class="pn-input">
             <div id="input-container" class="scroll-box">
-                
+                <table id="input-table">
+                    <tr class="row-header">
+                        <th class="col-header">
+                            背番号
+                        </th>
+                        <th class="col-header">
+                            品番
+                        </th>
+                        <th class="col-header">
+                            材質
+                        </th>
+                        <th class="col-header">
+                            板厚
+                        </th>
+                        <th class="col-header">
+                            切断長さ
+                        </th>
+                        <th class="col-header">
+                            削除
+                        </th>
+                    </tr>
+                </table>
 
                 <!-- ここにJSモジュールで品番INPUTを出力 -->
                 <!-- <div class="input-row">
@@ -33,19 +69,15 @@
                     </button>
                 </div> -->
             </div>
-            <div class="add-button">
-                <!-- 新規追加ボタン -->
-                <button class="btn btn-success" id="add-button">
-                    <i class="bi bi-plus-circle-fill"></i>
-                </button>
-            </div>
         </div>
         <div class="admin-buttons">
-            <button id ="save-button" class="index-button btn btn-primary lign-items-center gap-9 px-9 py-9 fs-9 admin-button">
+            <button id="save-button"
+                class="index-button btn btn-primary lign-items-center gap-9 px-9 py-9 fs-9 admin-button">
                 <i class="bi bi-floppy"></i>
                 SAVE
             </button>
-            <button id="cancel-button" class="index-button btn btn-primary lign-items-center gap-9 px-9 py-9 fs-9 admin-button">
+            <button id="cancel-button"
+                class="index-button btn btn-primary lign-items-center gap-9 px-9 py-9 fs-9 admin-button">
                 <i class="bi bi-x-octagon"></i>
                 CANCEL
             </button>
@@ -54,12 +86,13 @@
     </div>
 </body>
 <script>
-    const pn_list= {{ product_numbers|tojson }};
+    const pn_list = {{ product_numbers| tojson }};
     console.log(pn_list);
     // pn_listの内容をコンソールに出力
 
 </script>
 
-<script src="../static/js/pn_ctrl.js"></script>
+<script type="module" src="../static/js/pn_ctrl/pn_ctrl.js"></script>
+
 
 </html>
