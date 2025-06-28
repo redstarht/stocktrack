@@ -1,3 +1,5 @@
+import {createPopupPnlist} from "./common/pn_list.js";
+
 export function createPopup() {
 
   const cellBtns = document.querySelectorAll('.cell-stock-btn');
@@ -83,42 +85,46 @@ export function createPopup() {
         })
       }
 
-      input_pn.forEach(pn => {
-        const newRow = document.createElement("tr");
-        newRow.className = "pn-row";
-        newRow.dataset.id = pn.id;
+      createPopupPnlist(input_pn,table,inputContainer,popup);
 
-        const pnCell = document.createElement("td");
-        pnCell.className = "pn-cell"
-        pnCell.textContent = pn.product_no;
-        pnCell.dataset.id = pn.id; // データセットにIDを設定
+    //   input_pn.forEach(pn => {
+    //     const newRow = document.createElement("tr");
+    //     newRow.className = "pn-row";
+    //     newRow.dataset.id = pn.id;
 
-        const radioBtn = document.createElement("input");
-        radioBtn.className = "radio-btn";
-        radioBtn.type = "radio";
-        radioBtn.name = "choice";
-        radioBtn.value = true;
+    //     const pnCell = document.createElement("td");
+    //     pnCell.className = "pn-cell"
+    //     pnCell.textContent = pn.product_no;
+    //     pnCell.dataset.id = pn.id; // データセットにIDを設定
 
-        const check_pn = allow_storage_list.filter(item => item.pn_id === pn.id);
+    //     const radioBtn = document.createElement("input");
+    //     radioBtn.className = "radio-btn";
+    //     radioBtn.type = "radio";
+    //     radioBtn.name = "choice";
+    //     radioBtn.value = true;
 
-        if (check_pn.length > 0) {
-          radioBtn.checked = true;
-        };
+    //     const check_pn = allow_storage_list.filter(item => item.pn_id === pn.id);
 
-        radioBtn.addEventListener("change", function () {
-          if (radioBtn.checked) {
-            newRow.dataset.allow_storage = true;
-          } else {
-            delete newRow.dataset.allow_storage;
-          }
-        });
+    //     if (check_pn.length > 0) {
+    //       radioBtn.checked = true;
+    //     };
 
-        newRow.appendChild(pnCell);
-        newRow.appendChild(radioBtn);
-        table.appendChild(newRow);
-        inputContainer.appendChild(table);
-        popup.appendChild(inputContainer);
-      });
+    //     radioBtn.addEventListener("change", function () {
+    //       if (radioBtn.checked) {
+    //         newRow.dataset.allow_storage = true;
+    //       } else {
+    //         delete newRow.dataset.allow_storage;
+    //       }
+    //     });
+
+       
+
+    //     newRow.appendChild(pnCell);
+    //     newRow.appendChild(radioBtn);
+    //     table.appendChild(newRow);
+    //     inputContainer.appendChild(table);
+    //     popup.appendChild(inputContainer);
+    //   });
 
 
 
