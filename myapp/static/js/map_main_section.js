@@ -1,3 +1,5 @@
+import {createPopup} from "./popup.js";
+
 document.addEventListener("DOMContentLoaded", function () {
     const shelfGridElm = document.getElementById("shelfGrid");
 
@@ -93,5 +95,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-
+    createPopup();
 });

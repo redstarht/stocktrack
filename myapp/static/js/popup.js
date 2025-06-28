@@ -1,6 +1,5 @@
+export function createPopup() {
 
-
-document.addEventListener("DOMContentLoaded", function () {
   const cellBtns = document.querySelectorAll('.cell-stock-btn');
 
 
@@ -36,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       else {
-        popPnTitle.textContent = "格納する品番を選んでください";
+        popPnTitle.textContent = "格納する背番号を選んでください";
       }
 
 
@@ -73,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       let input_pn = [];
       // 全品番許可と個別品番許可の場合の処理
-      cellData.is_all_pn_allowed
+      // cellData.is_all_pn_allowed
 
       if (cellData.is_all_pn_allowed) {
         input_pn = pn_list
@@ -247,5 +246,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-});
+};
 
