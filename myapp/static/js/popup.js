@@ -1,4 +1,5 @@
-import {createPopupPnlist} from "./common/pn_list.js";
+import { createPopupPnlist } from "./common/pn_list.js";
+import { pop_serial_no_search } from "./common/serial_no_search.js";
 
 export function createPopup() {
 
@@ -38,10 +39,30 @@ export function createPopup() {
 
       else {
         popPnTitle.textContent = "格納する背番号を選んでください";
+
+        const searchContainer = document.createElement('div');
+        searchContainer.className = "pop-search-container";
+
+
+
+        const searchInput = document.createElement('input');
+        searchInput.type = "search";
+        searchInput.id = "pop-serial-search";
+        searchInput.placeholder = "背番号検索";
+        searchInput.name = "pop-serial_no";
+
+        const searchBtn = document.createElement('button');
+        searchBtn.textContent = "検索";
+        searchBtn.className = "pop-search-button";
+        searchBtn.id = "pop-serial-search-btn";
+
+        searchContainer.appendChild(searchInput);
+        searchContainer.appendChild(searchBtn);
+        poplabelContainer.appendChild(searchContainer);
       }
 
 
-
+      // 格納されている在庫数の表示（共通 何も格納されてなければ0）
       const popStockTitle = document.createElement('div');
       popStockTitle.className = "pop-stock-title";
 
@@ -64,7 +85,7 @@ export function createPopup() {
       popup.appendChild(poplabelContainer);
 
 
-      // 品番リストの表示
+      // 品番リストの表示（未格納セルのみ）
       const inputContainer = document.createElement("div");
       inputContainer.className = "scroll-box";
       inputContainer.id = "input-container";
@@ -79,59 +100,34 @@ export function createPopup() {
       if (cellData.is_all_pn_allowed) {
         input_pn = pn_list
       } else {
+        // 許可品番のみ抽出
         allow_pn = allow_storage_list.filter(item => item.cell_id === cellData.cell_id);
-        allow_pn.forEach(pn =>{
+        allow_pn.forEach(pn => {
           input_pn = pn_list.filter(item => item.id === pn.pn_id)
         })
       }
 
-      createPopupPnlist(input_pn,table,inputContainer,popup);
+      // 絞り込みボタンの処理
+      const searchBtn = document.getElementById('pop-serial-search-btn');
+      searchBtn.addEventListener('click', () => {
+        const searchInput = document.getElementById('pop-serial-search');
+        const searchValue = searchInput.value.trim();
+        if (!searchValue) {
+          return; // 入力が空の場合は何もしない
+        }
+        pop_serial_no_search(searchValue, table, inputContainer, popup);
+      });
 
-    //   input_pn.forEach(pn => {
-    //     const newRow = document.createElement("tr");
-    //     newRow.className = "pn-row";
-    //     newRow.dataset.id = pn.id;
 
-    //     const pnCell = document.createElement("td");
-    //     pnCell.className = "pn-cell"
-    //     pnCell.textContent = pn.product_no;
-    //     pnCell.dataset.id = pn.id; // データセットにIDを設定
+      createPopupPnlist(input_pn, table, inputContainer, popup);
 
-    //     const radioBtn = document.createElement("input");
-    //     radioBtn.className = "radio-btn";
-    //     radioBtn.type = "radio";
-    //     radioBtn.name = "choice";
-    //     radioBtn.value = true;
-
-    //     const check_pn = allow_storage_list.filter(item => item.pn_id === pn.id);
-
-    //     if (check_pn.length > 0) {
-    //       radioBtn.checked = true;
-    //     };
-
-    //     radioBtn.addEventListener("change", function () {
-    //       if (radioBtn.checked) {
-    //         newRow.dataset.allow_storage = true;
-    //       } else {
-    //         delete newRow.dataset.allow_storage;
-    //       }
-    //     });
-
-       
-
-    //     newRow.appendChild(pnCell);
-    //     newRow.appendChild(radioBtn);
-    //     table.appendChild(newRow);
-    //     inputContainer.appendChild(table);
-    //     popup.appendChild(inputContainer);
-    //   });
 
 
 
 
       // 収容数操作部
       const stockContainer = document.createElement('div');
-      stockContainer.className = "stock-container"
+      stockContainer.className = "pop-stock-container"
 
       const minusBtn = document.createElement('button');
       minusBtn.className = "stock-btn";
@@ -201,8 +197,8 @@ export function createPopup() {
       const qty = Number(stock_qty) || 0; // undefined や null の場合 0 にする
 
       if (qty >= 1 && qty <= blocks.length) {
-        for(let i =0; i<=qty;i++)
-        blocks[i].classList.add('active');
+        for (let i = 0; i <= qty; i++)
+          blocks[i].classList.add('active');
       }
 
       cancelBtn.addEventListener('click', () => {
