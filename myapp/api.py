@@ -20,6 +20,12 @@ from . import db
 
 api = Blueprint("api", __name__)
 
+@api.route("/api/inout_popup/save", methods=["POST"])
+def save_inout_popup():
+    data = request.get_json()
+    # ここでデータを処理して保存するロジックを追加
+    return jsonify({"status": "保存完了！"})
+
 
 @api.route("/api/pn_ctrl/save", methods=["POST"])
 def save_product_number():

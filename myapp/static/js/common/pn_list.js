@@ -18,7 +18,7 @@ export function createPnListElm(pn_list, pnListElm) {
 
 }
 
-export function createPopupPnlist(input_pn, table, inputContainer, popup) {
+export function createPopupPnlist(input_pn,table) {
     input_pn.forEach(pn => {
         const newRow = document.createElement("tr");
         newRow.className = "pn-row";
@@ -62,7 +62,7 @@ export function createPopupPnlist(input_pn, table, inputContainer, popup) {
         newRow.appendChild(pnCell);
         newRow.appendChild(radioBtn);
         table.appendChild(newRow);
-        inputContainer.appendChild(table);
-        popup.appendChild(inputContainer);
+        
     })
+    return table;
 }

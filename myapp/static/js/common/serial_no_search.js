@@ -7,7 +7,7 @@ export function serial_no_search(searchValue, pnListElm) {
     createPnListElm(filterList, pnListElm);
 }
 
-export function pop_serial_no_search(searchValue, table, inputContainer, popup) {
+export function pop_serial_no_search(searchValue, table) {
     const filterList = pn_list.filter(pn =>
         pn.serial_no && pn.serial_no.includes(searchValue));
 
@@ -15,5 +15,5 @@ export function pop_serial_no_search(searchValue, table, inputContainer, popup) 
     table.innerHTML = "";
 
     // ポップアップに新しいPNリストを作成
-    createPopupPnlist(filterList, table, inputContainer, popup);
+    createPopupPnlist(filterList, table);
 }

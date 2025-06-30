@@ -113,13 +113,16 @@ export function createPopup() {
         const searchInput = document.getElementById('pop-serial-search');
         const searchValue = searchInput.value.trim();
         if (!searchValue) {
-          return; // 入力が空の場合は何もしない
+          createPopupPnlist(input_pn,table);
         }
-        pop_serial_no_search(searchValue, table, inputContainer, popup);
+        pop_serial_no_search(searchValue, table);
       });
 
 
-      createPopupPnlist(input_pn, table, inputContainer, popup);
+      // ポップアップ初期表示
+      const newtable = createPopupPnlist(input_pn,table);
+      inputContainer.appendChild(newtable);
+      popup.appendChild(inputContainer);
 
 
 
