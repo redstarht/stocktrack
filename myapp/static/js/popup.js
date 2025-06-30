@@ -1,5 +1,6 @@
 import { createPopupPnlist } from "./common/pn_list.js";
 import { pop_serial_no_search } from "./common/serial_no_search.js";
+import { saveCheckedData} from "./popup/inout.js";
 
 export function createPopup() {
 
@@ -211,15 +212,11 @@ export function createPopup() {
       saveBtn.addEventListener('click', () => {
         overlay.style.display = 'none';
         popup.style.display = 'none';
+        // データ格納処理
+        saveCheckedData(saveBtn);
+
       });
 
-
-      // closeBtns.forEach(btn => {
-      //   btn.addEventListener('click', () => {
-      //     overlay.style.display = 'none';
-      //     popup.style.display = 'none';
-      //   });
-      // });
 
       plusBtn.addEventListener('click', () => {
         if (stock_qty < max_qty) {

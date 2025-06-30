@@ -122,6 +122,8 @@ saveButton.addEventListener("click", async function () {
     console.log("行データ:", row);
     const rowData = {};
     row.querySelectorAll("input").forEach(input => {
+      // .name属性をキーとして、値を取得
+      // 各input要素のnameをキーとして登録し、その値をオブジェクト形式で格納
       rowData[input.name] = input.value.trim();
     });
 
@@ -133,25 +135,6 @@ saveButton.addEventListener("click", async function () {
     }
   });
   console.log("送信データ:", dataToSend);
-
-
-  // const rows = document.querySelectorAll("#input-container .input-row");
-  // const dataToSend = [];
-  // rows.forEach(row => {
-  //   const input = row.querySelector("input[name='pn-input']");
-  //   const id = input.dataset.id || null;
-  //   const product_no = input.value.trim();
-  //   const deleted = row.dataset.deleted === "true";
-
-  //   dataToSend.push({
-  //     id: id,
-  //     product_no: product_no,
-  //     is_deleted: deleted
-  //   })
-
-
-  // })
-
 
 
 
