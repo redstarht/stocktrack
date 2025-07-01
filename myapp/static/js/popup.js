@@ -1,6 +1,6 @@
 import { createPopupPnlist } from "./common/pn_list.js";
 import { pop_serial_no_search } from "./common/serial_no_search.js";
-import { saveCheckedData} from "./popup/inout.js";
+import { saveCheckedData } from "./popup/save_inout.js";
 
 export function createPopup() {
 
@@ -23,7 +23,9 @@ export function createPopup() {
       popup.style.display = 'block';
       const cellData = JSON.parse(button.dataset.item)
       let stock_qty = cellData.stock_qty;
+      const stock_qty_prev = cellData.stock_qty;
       const max_qty = cellData.max_qty;
+      const cell_id = cellData.cell_id;
 
       console.log(cellData);
 
@@ -114,14 +116,15 @@ export function createPopup() {
         const searchInput = document.getElementById('pop-serial-search');
         const searchValue = searchInput.value.trim();
         if (!searchValue) {
-          createPopupPnlist(input_pn,table);
+          createPopupPnlist(input_pn, table);
         }
         pop_serial_no_search(searchValue, table);
       });
 
 
       // ポップアップ初期表示
-      const newtable = createPopupPnlist(input_pn,table);
+        // 品番リストの表示
+      const newtable = createPopupPnlist(input_pn, table);
       inputContainer.appendChild(newtable);
       popup.appendChild(inputContainer);
 
@@ -200,24 +203,15 @@ export function createPopup() {
       const blocks = document.querySelectorAll('.gauge-block');
       const qty = Number(stock_qty) || 0; // undefined や null の場合 0 にする
 
+
+      // 格納されている収容数のブロック描画
       if (qty >= 1 && qty <= blocks.length) {
         for (let i = 0; i <= qty; i++)
           blocks[i].classList.add('active');
       }
 
-      cancelBtn.addEventListener('click', () => {
-        overlay.style.display = 'none';
-        popup.style.display = 'none';
-      });
-      saveBtn.addEventListener('click', () => {
-        overlay.style.display = 'none';
-        popup.style.display = 'none';
-        // データ格納処理
-        saveCheckedData(saveBtn);
 
-      });
-
-
+      // プラスボタンの処理
       plusBtn.addEventListener('click', () => {
         if (stock_qty < max_qty) {
           blocks[stock_qty].classList.add('active');
@@ -226,6 +220,7 @@ export function createPopup() {
         }
       });
 
+      // マイナスボタンの処理
       minusBtn.addEventListener('click', () => {
         if (stock_qty > 0) {
           stock_qty--;
@@ -234,19 +229,22 @@ export function createPopup() {
         }
       });
 
+      // キャンセルボタンの処理
+      cancelBtn.addEventListener('click', () => {
+        overlay.style.display = 'none';
+        popup.style.display = 'none';
+      });
+
+      // SAVEボタンの処理
+      saveBtn.addEventListener('click', () => {
+        overlay.style.display = 'none';
+        popup.style.display = 'none';
+        // データ格納処理
+        saveCheckedData(cell_id,stock_qty);
+
+      });
 
     });
-
-
-
-
-
-
-
   });
-
-
-
-
 };
 
