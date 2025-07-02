@@ -36,6 +36,7 @@ export function createPopupPnlist(input_pn,table) {
 
         pnCell.textContent = unionvalue;
         pnCell.dataset.id = pn.id; // データセットにIDを設定
+        pnCell.dataset.serial_no =pn.serial_no;
 
         const radioBtn = document.createElement("input");
         radioBtn.className = "radio-btn";

@@ -23,9 +23,7 @@ export function createPopup() {
       popup.style.display = 'block';
       const cellData = JSON.parse(button.dataset.item)
       let stock_qty = cellData.stock_qty;
-      const stock_qty_prev = cellData.stock_qty;
       const max_qty = cellData.max_qty;
-      const cell_id = cellData.cell_id;
 
       console.log(cellData);
 
@@ -239,8 +237,8 @@ export function createPopup() {
       saveBtn.addEventListener('click', () => {
         overlay.style.display = 'none';
         popup.style.display = 'none';
-        // データ格納処理
-        saveCheckedData(cell_id,stock_qty);
+        // データ格納・保存処理
+        saveCheckedData(button,cellData,stock_qty);
 
       });
 

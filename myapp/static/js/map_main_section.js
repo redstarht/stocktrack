@@ -54,11 +54,12 @@ document.addEventListener("DOMContentLoaded", function () {
             // IFで中にわける必要あり
 
 
+            // 格納品番が存在した場合は該当セルに情報を描画
             let product_number = null;
             if (stock_cell) {
                 product_number = pn_list.find(pnItem => pnItem.id == stock_cell.pn_id)
                 cellElm.dataset.pn = stock_cell.pn_id;
-                pnName.textContent = product_number.product_no;
+                pnName.textContent = product_number.serial_no;
                 btnIcon.textContent = stock_cell.stock_qty;
                 btnIcon.className = "btn-pn-stock"
 
@@ -67,18 +68,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 btnIcon.className = "bi bi-box-arrow-in-down";
             }
             cellLabel.className = "cell-label";
-
             pnName.className = "pn-name";
-
-
             cellBtn.className = "cell-stock-btn";
-            // セルボタンのデータまとめ用
+            
+            // セルボタンのデータまとめ用（データがない場合は空文字)
             const dataObj = {
                 cell_id: cell.id,
                 is_all_pn_allowed:cell.is_all_pn_allowed,
                 max_qty: max_qty ?? '',
                 pn_id: stock_cell?.pn_id ?? '',
-                product_no: product_number?.product_no ?? '',
+                serial_no: product_number?.serial_no ?? '',
                 stock_qty: stock_cell?.stock_qty ?? 0
             }
             cellBtn.dataset.item = JSON.stringify(dataObj);
