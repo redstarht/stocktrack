@@ -23,6 +23,7 @@ export function createPopupPnlist(input_pn,table) {
         const newRow = document.createElement("tr");
         newRow.className = "pn-row";
         newRow.dataset.id = pn.id;
+        newRow.dataset.serial_no = pn.serial_no;
 
         const pnCell = document.createElement("td");
         pnCell.className = "pn-cell";

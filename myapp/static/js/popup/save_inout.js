@@ -8,6 +8,7 @@ export async function saveCheckedData(button, cellData, stock_qty) {
   const prev_stock_qty = cellData.stock_qty;
   const dataToSend = {};
   const pnNamediv = button.previousElementSibling;
+  let btnIcon = button.querySelector('i');
   // const btnIcon = button.querySelector(".i");
   console.log("PN要素",pnNamediv);
   // console.log("ICON",btnIcon);
@@ -29,11 +30,21 @@ export async function saveCheckedData(button, cellData, stock_qty) {
     dataToSend.inout_log.inout_type = new_stock_qty > prev_stock_qty ? "in" : "out";
 
     // HTMLの描画処理
-    pnNamediv.innerHTML='';
+    // pnNamediv.innerHTML='';
     pnNamediv.textContent = serial_no;
-    console.log(serial_no);
+    console.log(pn_id,serial_no);
     console.log(pnNamediv.textContent);
     // btnIcon.textContent = new_stock_qty;
+
+    // 取り出した時のマップ描画処理 (格納０個時にしたときの処理)
+    if(new_stock_qty==0){
+      btnIcon.className = "bi bi-box-arrow-in-down";
+      console.log(btnIcon.className)
+    }else{
+      btnIcon.className ="btn-pn-stock";
+      btnIcon.textContent =new_stock_qty;
+      console.log(btnIcon.className)
+    }
 
 
     // 送信処理(POST)
