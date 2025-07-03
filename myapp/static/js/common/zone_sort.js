@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+export function initZoneSort() {
     // すべてのゾーンを取得
     const zoneBtns = document.querySelectorAll(".zone-item");
     // すべての品番ボタンを取得
@@ -42,4 +42,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
         });
     });
-});
+};

@@ -1,5 +1,7 @@
 import { createPopup } from "./popup.js";
 import { stackGaugeCreate } from "./common/stack_gauge.js";
+import { initPnHighlight } from "./common/pn_highlight.js";
+import { initZoneSort } from "./common/zone_sort.js";
 
 document.addEventListener("DOMContentLoaded", function () {
     const shelfGridElm = document.getElementById("shelfGrid");
@@ -50,20 +52,13 @@ document.addEventListener("DOMContentLoaded", function () {
             const stock_cell = cell_stock_list.find(stock => stock.cell_id == cell.id);
 
             // 品番テーブルから街灯品番を抽出
-
-
-            // IFで中にわける必要あり
-
-
             // 格納品番が存在した場合は該当セルに情報を描画
             let product_number = null;
             if (stock_cell) {
                 product_number = pn_list.find(pnItem => pnItem.id == stock_cell.pn_id)
                 cellElm.dataset.pn = stock_cell.pn_id;
-                // stackの処理 jsファイル
-                
-                // stack.textContent = stock_cell.stock_qty;
 
+                // マップへのスタックゲージの表示
                 stackGaugeCreate(max_qty,stock_cell.stock_qty,stack);
 
                 btnIcon.textContent =product_number.serial_no;
@@ -101,4 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     createPopup();
+    initPnHighlight();
+    initZoneSort();
+
 });

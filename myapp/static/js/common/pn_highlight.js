@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+export function initPnHighlight() {
     // すべての品番ボタンを取得
     const pnButtons = document.querySelectorAll(".pn-item");
     // すべてのセルを取得
@@ -31,4 +31,4 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     });
-});
+};
