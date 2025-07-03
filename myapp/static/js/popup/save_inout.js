@@ -1,3 +1,4 @@
+import {stackGaugeCreate} from "../common/stack_gauge.js"
 
 export async function saveCheckedData(button, cellData, stock_qty) {
 
@@ -5,12 +6,13 @@ export async function saveCheckedData(button, cellData, stock_qty) {
   const pn_id = pnCellTrue.parentElement.dataset.id;
   const serial_no =pnCellTrue.parentElement.dataset.serial_no;
   const new_stock_qty = stock_qty;
+  const max_qty = cellData.max_qty;
   const prev_stock_qty = cellData.stock_qty;
   const dataToSend = {};
-  const pnNamediv = button.previousElementSibling;
+  const stack = button.previousElementSibling;
   let btnIcon = button.querySelector('i');
   // const btnIcon = button.querySelector(".i");
-  console.log("PN要素",pnNamediv);
+  console.log("PN要素",stack);
   // console.log("ICON",btnIcon);
 
   // データ格納処理
@@ -30,10 +32,10 @@ export async function saveCheckedData(button, cellData, stock_qty) {
     dataToSend.inout_log.inout_type = new_stock_qty > prev_stock_qty ? "in" : "out";
 
     // HTMLの描画処理
-    // pnNamediv.innerHTML='';
-    pnNamediv.textContent = serial_no;
+    // stack.innerHTML='';
+    stackGaugeCreate(max_qty,new_stock_qty,stack);
     console.log(pn_id,serial_no);
-    console.log(pnNamediv.textContent);
+    console.log(stack.textContent);
     // btnIcon.textContent = new_stock_qty;
 
     // 取り出した時のマップ描画処理 (格納０個時にしたときの処理)
@@ -42,7 +44,7 @@ export async function saveCheckedData(button, cellData, stock_qty) {
       console.log(btnIcon.className)
     }else{
       btnIcon.className ="btn-pn-stock";
-      btnIcon.textContent =new_stock_qty;
+      btnIcon.textContent =serial_no;
       console.log(btnIcon.className)
     }
 

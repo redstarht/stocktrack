@@ -1,4 +1,5 @@
-import {createPopup} from "./popup.js";
+import { createPopup } from "./popup.js";
+import { stackGaugeCreate } from "./common/stack_gauge.js";
 
 document.addEventListener("DOMContentLoaded", function () {
     const shelfGridElm = document.getElementById("shelfGrid");
@@ -39,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const cellElm = document.createElement("div");
             const cellLabel = document.createElement("div");
-            const pnName = document.createElement("div");
+            const stack = document.createElement("div");
             const cellBtn = document.createElement("button");
             const btnIcon = document.createElement("i");
 
@@ -59,8 +60,13 @@ document.addEventListener("DOMContentLoaded", function () {
             if (stock_cell) {
                 product_number = pn_list.find(pnItem => pnItem.id == stock_cell.pn_id)
                 cellElm.dataset.pn = stock_cell.pn_id;
-                pnName.textContent = product_number.serial_no;
-                btnIcon.textContent = stock_cell.stock_qty;
+                // stackの処理 jsファイル
+                
+                // stack.textContent = stock_cell.stock_qty;
+
+                stackGaugeCreate(max_qty,stock_cell.stock_qty,stack);
+
+                btnIcon.textContent =product_number.serial_no;
                 btnIcon.className = "btn-pn-stock"
 
             } else {
@@ -68,13 +74,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 btnIcon.className = "bi bi-box-arrow-in-down";
             }
             cellLabel.className = "cell-label";
-            pnName.className = "pn-name";
+            stack.className = "stack";
             cellBtn.className = "cell-stock-btn";
-            
+
             // セルボタンのデータまとめ用（データがない場合は空文字)
             const dataObj = {
                 cell_id: cell.id,
-                is_all_pn_allowed:cell.is_all_pn_allowed,
+                is_all_pn_allowed: cell.is_all_pn_allowed,
                 max_qty: max_qty ?? '',
                 pn_id: stock_cell?.pn_id ?? '',
                 serial_no: product_number?.serial_no ?? '',
@@ -83,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
             cellBtn.dataset.item = JSON.stringify(dataObj);
 
             cellBtn.appendChild(btnIcon);
-            cellLabel.appendChild(pnName);
+            cellLabel.appendChild(stack);
             cellLabel.appendChild(cellBtn);
             cellElm.appendChild(cellLabel);
             cellGridElm.appendChild(cellElm);
