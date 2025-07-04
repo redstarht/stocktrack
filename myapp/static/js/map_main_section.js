@@ -59,10 +59,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 cellElm.dataset.pn = stock_cell.pn_id;
 
                 // マップへのスタックゲージの表示
-                stackGaugeCreate(max_qty,stock_cell.stock_qty,stack);
+                stackGaugeCreate(max_qty, stock_cell.stock_qty, stack);
 
-                btnIcon.textContent =product_number.serial_no;
+                btnIcon.textContent = product_number.serial_no;
                 btnIcon.className = "btn-pn-stock"
+                // POPUPのディスプレイ名
+                const displayValue = (val) => (val === null || val === "" || val === -1.0 ? "***" : val);
+                const unionvalue = [
+                    displayValue(product_number.serial_no),
+                    displayValue(product_number.material),
+                    displayValue(product_number.material_thickness),
+                    displayValue(product_number.cut_length),
+                ].join(" / ");
+                cellBtn.dataset.displayname = unionvalue;
+
+
 
             } else {
 
@@ -82,6 +93,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 stock_qty: stock_cell?.stock_qty ?? 0
             }
             cellBtn.dataset.item = JSON.stringify(dataObj);
+
+
+
 
             cellBtn.appendChild(btnIcon);
             cellLabel.appendChild(stack);

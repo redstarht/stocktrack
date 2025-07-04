@@ -24,6 +24,7 @@ export function createPopup() {
       const cellData = JSON.parse(button.dataset.item)
       let stock_qty = cellData.stock_qty;
       const max_qty = cellData.max_qty;
+      const displayName = button.dataset.displayname;
 
       console.log(cellData);
 
@@ -34,7 +35,7 @@ export function createPopup() {
 
       const popPnTitle = document.createElement("div");
       if (cellData.pn_id) {
-        popPnTitle.textContent = cellData.product_no;
+        popPnTitle.textContent = displayName;
 
       }
 

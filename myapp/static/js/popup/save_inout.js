@@ -10,6 +10,7 @@ export async function saveCheckedData(button, cellData, stock_qty) {
   const prev_stock_qty = cellData.stock_qty;
   const dataToSend = {};
   const stack = button.previousElementSibling;
+  const cell = button.parentElement.parentElement;
   let btnIcon = button.querySelector('i');
   // const btnIcon = button.querySelector(".i");
   console.log("PN要素",stack);
@@ -32,11 +33,9 @@ export async function saveCheckedData(button, cellData, stock_qty) {
     dataToSend.inout_log.inout_type = new_stock_qty > prev_stock_qty ? "in" : "out";
 
     // HTMLの描画処理
-    // stack.innerHTML='';
     stackGaugeCreate(max_qty,new_stock_qty,stack);
-    console.log(pn_id,serial_no);
-    console.log(stack.textContent);
-    // btnIcon.textContent = new_stock_qty;
+    // ハイライト用にcellにdata-pnをセット
+    cell.dataset.pn = pn_id;
 
     // 取り出した時のマップ描画処理 (格納０個時にしたときの処理)
     if(new_stock_qty==0){
