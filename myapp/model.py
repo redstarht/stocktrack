@@ -155,12 +155,15 @@ class InoutLog(db.Model):
         'product_number.id'), nullable=False)
     inout_type = db.Column(db.String(10), default="In",
                            nullable=False)  # IN / OUT 
+    change_qty = db.Column(db.Integer, nullable=False)
+    stock_after = db.Column(db.Integer, nullable=False)
     processed_at = db.Column(db.DateTime, default=lambda: datetime.now(
         timezone(timedelta(hours=9))), nullable=False)
     cell = db.relationship('Cell', backref="inout_log",
                            lazy=True)  # cell.inout_log
     product_no = db.relationship(
         'ProductNumber', backref="inout_log", lazy=True)  # product_no.inout_log
+    
     
     def to_dict(self):
         return {

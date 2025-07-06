@@ -23,7 +23,29 @@ api = Blueprint("api", __name__)
 @api.route("/api/inout/save", methods=["POST"])
 def save_inout_popup():
     data = request.get_json()
+    if not data:
+        return jsonify({"error": "データが格納されていません"}), 400
+    cell_stock_status = data.get("cell_stock_status", {})
+    inout_log = data.get("inout_log", {})
+    print(cell_stock_status, inout_log)
+
+    # 新規登録時 / 更新時 どちらも登録
+    new_inout_log = InoutLog(
+        cell_id=inout_log.get("cell_id"),
+        pn_id=inout_log.get("pn_id"),
+        inout_type=inout_log.get("inout_type"),
+        change_qty=inout_log.get("change_qty"),
+        stock_after=inout_log.get("stock_after"))
+    db.session.add(new_inout_log)
+    db.session.commit()
+
+
+    
+
     print(data)
+
+    # データの検証
+
     return jsonify({"status": "保存完了！"})
 
 
@@ -31,6 +53,15 @@ def save_inout_popup():
 def save_product_number():
     product_numbers = request.get_json()
     # product_numbers = data.get('product_no', [])
+   
+    '''
+    データ構造 print(product_numbers)
+    [{'serial_no': '001', 'product_no': '12345-67890', 'material': 'XYZB10-100', 'material_thickness': '2', 'cut_length': '850', 'id': '1'},
+    {'serial_no': '002', 'product_no': '54321-09876', 'material': 'ABCZ20-200', 'material_thickness': '3', 'cut_length': '920.5', 'id': '2'},
+    {'serial_no': '003', 'product_no': '98765-43210', 'material': 'LMNQ15-150', 'material_thickness': '1.5', 'cut_length': '780.3', 'id': '3'}
+    '''
+
+
 
     for pn_item in product_numbers:
         id = pn_item.get("id")

@@ -141,7 +141,7 @@
 
 /* 在庫があるボックス */
 .stack-box.filled {
-  background-color: #ff0000; /* 緑 */
+  background-color: rgba(255, 146, 20, 0.5); /* 緑 */
 
 }
 

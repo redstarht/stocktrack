@@ -97,15 +97,17 @@ export function createPopup() {
 
       let input_pn = [];
       // 全品番許可と個別品番許可の場合の処理
-      // cellData.is_all_pn_allowed
-
       if (cellData.is_all_pn_allowed) {
         input_pn = pn_list
       } else {
         // 許可品番のみ抽出
-        allow_pn = allow_storage_list.filter(item => item.cell_id === cellData.cell_id);
+        console.log("許可品番リスト", allow_storage_list);
+
+        let allow_pn = allow_storage_list.filter(item => item.cell_id === cellData.cell_id);
+        console.log("許可品番", allow_pn);
         allow_pn.forEach(pn => {
-          input_pn = pn_list.filter(item => item.id === pn.pn_id)
+          input_pn.push(...pn_list.filter(item => item.id === pn.pn_id));
+          console.log("抽出された品番", input_pn);
         })
       }
 
@@ -123,6 +125,7 @@ export function createPopup() {
 
       // ポップアップ初期表示
         // 品番リストの表示
+        console.log("ポップアップ表示用品番リスト", input_pn);
       const newtable = createPopupPnlist(input_pn, table);
       inputContainer.appendChild(newtable);
       popup.appendChild(inputContainer);
