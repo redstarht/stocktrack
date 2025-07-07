@@ -131,8 +131,9 @@ export function createPopup() {
       poplabelContainer.appendChild(popPnTitle);
       poplabelContainer.appendChild(popStockTitle);
       popup.appendChild(poplabelContainer);
+      if( inputContainer !== null) {
       popup.appendChild(inputContainer);
-
+      };
 
 
 
@@ -154,7 +155,7 @@ export function createPopup() {
       const gaugeContainer = document.createElement('div');
       gaugeContainer.className = "gauge-container";
 
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < max_qty; i++) {
         const block = document.createElement("div");
         block.className = "gauge-block";
         gaugeContainer.appendChild(block);
@@ -208,13 +209,16 @@ export function createPopup() {
 
 
       const blocks = document.querySelectorAll('.gauge-block');
+      console.log("ブロック要素", blocks);
       const qty = Number(stock_qty) || 0; // undefined や null の場合 0 にする
 
 
       // 格納されている収容数のブロック描画
       if (qty >= 1 && qty <= blocks.length) {
-        for (let i = 0; i <= qty; i++)
+        for (let i = 0; i < qty; i++){
+          console.log("ブロックの数", blocks[i]);
           blocks[i].classList.add('active');
+        }
       }
 
 
