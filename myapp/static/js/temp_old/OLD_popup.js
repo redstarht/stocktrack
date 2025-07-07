@@ -10,8 +10,7 @@ export function createPopup() {
 
   const popup = document.getElementById('popup');
   const overlay = document.getElementById('overlay');
-  // 未格納セルは inputContainerはnullのまま
-  let inputContainer = null;
+
 
 
 
@@ -62,51 +61,6 @@ export function createPopup() {
         searchContainer.appendChild(searchInput);
         searchContainer.appendChild(searchBtn);
         poplabelContainer.appendChild(searchContainer);
-
-
-        // 品番リストの表示（未格納セルのみ）
-        inputContainer = document.createElement("div");
-        inputContainer.className = "scroll-box";
-        inputContainer.id = "input-container";
-
-        const table = document.createElement("table");
-        table.dataset.cell_id = cellData.cell_id;
-        table.className = "pn-table";
-
-        let input_pn = [];
-        // 全品番許可と個別品番許可の場合の処理
-        if (cellData.is_all_pn_allowed) {
-          input_pn = pn_list
-        } else {
-          // 許可品番のみ抽出
-          console.log("許可品番リスト", allow_storage_list);
-
-          let allow_pn = allow_storage_list.filter(item => item.cell_id === cellData.cell_id);
-          console.log("許可品番", allow_pn);
-          allow_pn.forEach(pn => {
-            input_pn.push(...pn_list.filter(item => item.id === pn.pn_id));
-            console.log("抽出された品番", input_pn);
-          })
-        }
-
-        // 絞り込みボタンの処理
-        // const searchBtn = document.getElementById('pop-serial-search-btn');
-        searchBtn.addEventListener('click', () => {
-          const searchInput = document.getElementById('pop-serial-search');
-          const searchValue = searchInput.value.trim();
-          if (!searchValue) {
-            createPopupPnlist(input_pn, table);
-          }
-          pop_serial_no_search(searchValue, table);
-        });
-
-
-        // ポップアップ初期表示
-        // 品番リストの表示
-        console.log("ポップアップ表示用品番リスト", input_pn);
-        const newtable = createPopupPnlist(input_pn, table);
-        inputContainer.appendChild(newtable);
-        
       }
 
 
@@ -131,9 +85,50 @@ export function createPopup() {
       poplabelContainer.appendChild(popPnTitle);
       poplabelContainer.appendChild(popStockTitle);
       popup.appendChild(poplabelContainer);
+
+
+      // 品番リストの表示（未格納セルのみ）
+      const inputContainer = document.createElement("div");
+      inputContainer.className = "scroll-box";
+      inputContainer.id = "input-container";
+
+      const table = document.createElement("table");
+      table.className = "pn-table";
+
+      let input_pn = [];
+      // 全品番許可と個別品番許可の場合の処理
+      if (cellData.is_all_pn_allowed) {
+        input_pn = pn_list
+      } else {
+        // 許可品番のみ抽出
+        console.log("許可品番リスト", allow_storage_list);
+
+        let allow_pn = allow_storage_list.filter(item => item.cell_id === cellData.cell_id);
+        console.log("許可品番", allow_pn);
+        allow_pn.forEach(pn => {
+          input_pn.push(...pn_list.filter(item => item.id === pn.pn_id));
+          console.log("抽出された品番", input_pn);
+        })
+      }
+
+      // 絞り込みボタンの処理
+      const searchBtn = document.getElementById('pop-serial-search-btn');
+      searchBtn.addEventListener('click', () => {
+        const searchInput = document.getElementById('pop-serial-search');
+        const searchValue = searchInput.value.trim();
+        if (!searchValue) {
+          createPopupPnlist(input_pn, table);
+        }
+        pop_serial_no_search(searchValue, table);
+      });
+
+
+      // ポップアップ初期表示
+        // 品番リストの表示
+        console.log("ポップアップ表示用品番リスト", input_pn);
+      const newtable = createPopupPnlist(input_pn, table);
+      inputContainer.appendChild(newtable);
       popup.appendChild(inputContainer);
-
-
 
 
 
@@ -247,7 +242,7 @@ export function createPopup() {
         overlay.style.display = 'none';
         popup.style.display = 'none';
         // データ格納・保存処理
-        saveCheckedData(button, cellData, stock_qty);
+        saveCheckedData(button,cellData,stock_qty);
 
       });
 

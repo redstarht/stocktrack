@@ -45,7 +45,7 @@ export function createPopupPnlist(input_pn,table) {
         radioBtn.name = "choice";
         radioBtn.value = true;
 
-        const check_pn = allow_storage_list.filter(item => item.pn_id === pn.id);
+        const check_pn =cell_stock_list.filter(item => item.pn_id === pn.id && item.cell_id === table.dataset.cell_id);
 
         if (check_pn.length > 0) {
             radioBtn.checked = true;

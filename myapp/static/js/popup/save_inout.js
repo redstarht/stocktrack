@@ -3,6 +3,7 @@ import {stackGaugeCreate} from "../common/stack_gauge.js"
 export async function saveCheckedData(button, cellData, stock_qty) {
 
   const pnCellTrue = document.querySelector('.radio-btn:checked');
+  const displayname = pnCellTrue.previousElementSibling.textContent;
   const pn_id = pnCellTrue.parentElement.dataset.id;
   const serial_no =pnCellTrue.parentElement.dataset.serial_no;
   const new_stock_qty = stock_qty;
@@ -22,6 +23,7 @@ export async function saveCheckedData(button, cellData, stock_qty) {
     cellData.stock_qty = stock_qty;
     cellData.pn_id = pn_id;
     button.dataset.item = JSON.stringify(cellData);
+    button.dataset.displayname=displayname;
     // 送信用データ整形
     dataToSend.cell_stock_status = {};
     dataToSend.cell_stock_status.cell_id = cellData.cell_id;
