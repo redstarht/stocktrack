@@ -71,13 +71,6 @@
     height: 12.5%;
 }
 
-.minus-btn{
-    margin-right: 10%;
-}
-
-.plus-btn{
-    margin-left: 10%;
-}
 
 .close-container {
     display: flex;

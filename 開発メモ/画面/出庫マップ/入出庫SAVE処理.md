@@ -33,6 +33,17 @@ https://chatgpt.com/share/686a1c85-5be8-8011-9bdd-962416742f56
         ・
     ・
 
-###メモ
+### メモ
+ const popup = document.getElementById('popup'); // 
 poplabelContainer.className = "pop-label-container";
-      stockContainer.className = "pop-stock-container"
+    stockContainer.className = "pop-stock-container"
+    closeContainer.className = "close-container";
+
+### プロンプト
+もともとこのようなクラス名 idが指定されており
+cssでビジュアルを変えています
+ある条件下の時だけこの要素のビジュアルを変えたいです
+どういう指定の仕方をするのが適切？
+おそらくjsでif分で、ある条件下の元にだけ特別なクラスを追加して
+そのクラスをcssで指定して!important指定して上書きするみたいなやり方を
+構想しているのですが正しいですか？？？

@@ -185,15 +185,6 @@ export function createPopup() {
       };
 
 
-
-
-
-
-
-
-
-
-
       const saveContainer = document.createElement('div');
       saveContainer.className = "save-container";
 
