@@ -6,17 +6,17 @@ export function createPopup() {
 
   const cellBtns = document.querySelectorAll('.cell-stock-btn');
 
-
-
-  const popup = document.getElementById('popup');
   const overlay = document.getElementById('overlay');
+  const popup = document.getElementById('popup');
+
+
+
+
   // 未格納セルは inputContainerはnullのまま
   let inputContainer = null;
 
-
-
-
-
+  // input_pnをモジュール内スコープ変数として宣言 (popup終了処理時に都度初期化)
+  let input_pn = [];
 
   cellBtns.forEach(button => {
     button.addEventListener('click', () => {
@@ -27,20 +27,70 @@ export function createPopup() {
       const max_qty = cellData.max_qty;
       const displayName = button.dataset.displayname;
 
-      console.log(cellData);
+      // 収容数操作部
+      const stockContainer = document.createElement('div');
+      stockContainer.className = "pop-stock-container"
+      const closeContainer = document.createElement('div');
+      closeContainer.className = "close-container";
 
+      // stockContainer構造定義
+      const minusBtn = document.createElement('button');
+      minusBtn.className = "stock-btn";
+      minusBtn.classList.add("minus-btn");
+      minusBtn.id = "stock-btn";
+      const minusIcon = document.createElement('i');
+      minusIcon.className = "stock-btn-icon bi bi-dash-lg";
+      minusBtn.appendChild(minusIcon);
+        // ゲージコンテナの定義
+      const gaugeContainer = document.createElement('div');
+      gaugeContainer.className = "gauge-container";
+
+      for (let i = 0; i < max_qty; i++) {
+        const block = document.createElement("div");
+        block.className = "gauge-block";
+        gaugeContainer.appendChild(block);
+      }
+
+      const plusBtn = document.createElement('button');
+      plusBtn.className = "stock-btn";
+      plusBtn.classList.add("plus-btn");
+      plusBtn.id = "stock-btn";
+      const plusIcon = document.createElement('i');
+      plusIcon.className = "stock-btn-icon bi bi-plus-lg";
+      plusBtn.appendChild(plusIcon);
+
+
+      stockContainer.appendChild(minusBtn);
+      stockContainer.appendChild(gaugeContainer);
+      stockContainer.appendChild(plusBtn);
+
+
+
+      // 前回クリック時のinnerHTMLの初期化
       popup.innerHTML = "";
 
       const poplabelContainer = document.createElement('div');
       poplabelContainer.className = "pop-label-container";
 
       const popPnTitle = document.createElement("div");
+
+      // 既存格納製品と新規格納製品かでHTML構造を変更
       if (cellData.pn_id) {
         popPnTitle.textContent = displayName;
+        // 既存格納製品の入出時はPOPUPのCSSを変更
+        popup.classList.add("popup-resize");
+        poplabelContainer.classList.add("popLblCont-resize");
+        stockContainer.classList.add("popStkCont-resize");
+        closeContainer.classList.add("clcCont-resize");
+
 
       }
 
       else {
+        popup.classList.remove("popup-resize");
+        poplabelContainer.classList.remove("popLblCont-resize");
+        stockContainer.classList.remove("popStkCont-resize");
+        closeContainer.classList.remove("clcCont-resize");
         popPnTitle.textContent = "格納する背番号を選んでください";
 
         const searchContainer = document.createElement('div');
@@ -73,7 +123,8 @@ export function createPopup() {
         table.dataset.cell_id = cellData.cell_id;
         table.className = "pn-table";
 
-        let input_pn = [];
+
+
         // 全品番許可と個別品番許可の場合の処理
         if (cellData.is_all_pn_allowed) {
           input_pn = pn_list
@@ -90,7 +141,6 @@ export function createPopup() {
         }
 
         // 絞り込みボタンの処理
-        // const searchBtn = document.getElementById('pop-serial-search-btn');
         searchBtn.addEventListener('click', () => {
           const searchInput = document.getElementById('pop-serial-search');
           const searchValue = searchInput.value.trim();
@@ -106,7 +156,7 @@ export function createPopup() {
         console.log("ポップアップ表示用品番リスト", input_pn);
         const newtable = createPopupPnlist(input_pn, table);
         inputContainer.appendChild(newtable);
-        
+
       }
 
 
@@ -126,13 +176,12 @@ export function createPopup() {
 
       popStockTitle.appendChild(popStockLabel);
       popStockTitle.appendChild(popStockMax);
-      // popPnTitle.appendChild(popStockTitle);
 
       poplabelContainer.appendChild(popPnTitle);
       poplabelContainer.appendChild(popStockTitle);
       popup.appendChild(poplabelContainer);
-      if( inputContainer !== null) {
-      popup.appendChild(inputContainer);
+      if (inputContainer !== null) {
+        popup.appendChild(inputContainer);
       };
 
 
@@ -140,41 +189,10 @@ export function createPopup() {
 
 
 
-      // 収容数操作部
-      const stockContainer = document.createElement('div');
-      stockContainer.className = "pop-stock-container"
-
-      const minusBtn = document.createElement('button');
-      minusBtn.className = "stock-btn";
-      minusBtn.id = "stock-btn";
-      const minusIcon = document.createElement('i');
-      minusIcon.className = "stock-btn-icon bi bi-dash-lg";
-      minusBtn.appendChild(minusIcon);
 
 
-      const gaugeContainer = document.createElement('div');
-      gaugeContainer.className = "gauge-container";
-
-      for (let i = 0; i < max_qty; i++) {
-        const block = document.createElement("div");
-        block.className = "gauge-block";
-        gaugeContainer.appendChild(block);
-      }
-
-      const plusBtn = document.createElement('button');
-      plusBtn.className = "stock-btn";
-      plusBtn.id = "stock-btn";
-      const plusIcon = document.createElement('i');
-      plusIcon.className = "stock-btn-icon bi bi-plus-lg";
-      plusBtn.appendChild(plusIcon);
 
 
-      stockContainer.appendChild(minusBtn);
-      stockContainer.appendChild(gaugeContainer);
-      stockContainer.appendChild(plusBtn);
-
-      const closeContainer = document.createElement('div');
-      closeContainer.className = "close-container";
 
       const saveContainer = document.createElement('div');
       saveContainer.className = "save-container";
@@ -209,14 +227,12 @@ export function createPopup() {
 
 
       const blocks = document.querySelectorAll('.gauge-block');
-      console.log("ブロック要素", blocks);
       const qty = Number(stock_qty) || 0; // undefined や null の場合 0 にする
 
 
       // 格納されている収容数のブロック描画
       if (qty >= 1 && qty <= blocks.length) {
-        for (let i = 0; i < qty; i++){
-          console.log("ブロックの数", blocks[i]);
+        for (let i = 0; i < qty; i++) {
           blocks[i].classList.add('active');
         }
       }
@@ -244,6 +260,9 @@ export function createPopup() {
       cancelBtn.addEventListener('click', () => {
         overlay.style.display = 'none';
         popup.style.display = 'none';
+        // モジュール内変数の初期化
+        input_pn = [];
+        inputContainer = null;
       });
 
       // SAVEボタンの処理
@@ -252,6 +271,9 @@ export function createPopup() {
         popup.style.display = 'none';
         // データ格納・保存処理
         saveCheckedData(button, cellData, stock_qty);
+        // モジュール内変数の初期化
+        input_pn = [];
+        inputContainer = null;
 
       });
 

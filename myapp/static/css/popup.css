@@ -38,10 +38,21 @@
     height: 25%;
 }
 
-#pop-serial-search{
+#pop-serial-search {
     height: 100%;
 
 }
+
+.pop-label-container {
+    font-size: 3vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 20%;
+    color: black;
+}
+
 
 .scroll-box {
     width: 100%;
@@ -58,6 +69,14 @@
     justify-content: center;
     gap: 1rem;
     height: 12.5%;
+}
+
+.minus-btn{
+    margin-right: 10%;
+}
+
+.plus-btn{
+    margin-left: 10%;
 }
 
 .close-container {
@@ -122,4 +141,22 @@
     text-align: center;
 
 
+}
+
+/* 既存格納製品表示時の表示範囲変更 */
+.popup-resize {
+    height: 45vh !important;
+}
+
+.popLblCont-resize {
+    height: 30% !important;
+}
+
+.popStkCont-resize {
+    height: 40% !important;
+}
+
+.clcCont-resize {
+    height: 30% !important;
+    padding-bottom: 0% !important;
 }
