@@ -20,6 +20,8 @@ export function createPopup() {
 
   cellBtns.forEach(button => {
     button.addEventListener('click', () => {
+      // 前回クリック時のinnerHTMLの初期化
+      popup.innerHTML = "";
       overlay.style.display = 'block';
       popup.style.display = 'block';
       const cellData = JSON.parse(button.dataset.item)
@@ -41,7 +43,7 @@ export function createPopup() {
       const minusIcon = document.createElement('i');
       minusIcon.className = "stock-btn-icon bi bi-dash-lg";
       minusBtn.appendChild(minusIcon);
-        // ゲージコンテナの定義
+      // ゲージコンテナの定義
       const gaugeContainer = document.createElement('div');
       gaugeContainer.className = "gauge-container";
 
@@ -66,8 +68,7 @@ export function createPopup() {
 
 
 
-      // 前回クリック時のinnerHTMLの初期化
-      popup.innerHTML = "";
+
 
       const poplabelContainer = document.createElement('div');
       poplabelContainer.className = "pop-label-container";

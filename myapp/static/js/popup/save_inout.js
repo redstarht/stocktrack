@@ -26,6 +26,7 @@ export async function saveCheckedData(button, cellData, stock_qty) {
   // データ格納処理
   if (new_stock_qty !== prev_stock_qty) {
     // HTMLデータ属性更新
+    console.log("✅更新背番号情報".displayname)
     cellData.stock_qty = stock_qty;
     cellData.pn_id = pn_id;
     button.dataset.item = JSON.stringify(cellData);
@@ -49,10 +50,15 @@ export async function saveCheckedData(button, cellData, stock_qty) {
 
     // 取り出した時のマップ描画処理  / 送信データ処理(格納０個時にしたときの処理)
     if (new_stock_qty == 0) {
+      console.log("✅部分取り出し時の処理",new_stock_qty)
       btnIcon.className = "bi bi-box-arrow-in-down";
       btnIcon.textContent= null;
+      button.parentElement.parentElement.removeAttribute("data-pn");
+      button.removeAttribute("data-item");
+      button.removeAttribute("data-displayname");
       console.log(btnIcon.className)
     } else {
+      console.log("✅部分取り出し字の処理",new_stock_qty)
       btnIcon.className = "btn-pn-stock";
       btnIcon.textContent = serial_no;
       console.log(btnIcon.className)
