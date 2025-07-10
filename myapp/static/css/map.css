@@ -58,18 +58,37 @@ html body {
     align-items: center;
     /* justify-content: center; */
     flex-direction: column;
-    width: 10%;
+    width: 5%;
     height: auto;
 
 }
 
 .pn-sidebar {
-    width: 15%;
+    width: 20%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-y: scroll;
+    overflow-y: hidden;
     overflow-x: hidden;
+    border-right: 2px solid #aaa9a9;
+}
+
+.side-top{
+    width: 100%;
+}
+
+.search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 1rem;
+}
+
+.search-container input{
+    width:90%
 }
 
 .zone-item {
@@ -107,8 +126,11 @@ html body {
     display: flex;
     flex-direction: column;
     gap: 0.1rem;
-    height: auto;
-    width: 90%;
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    align-items: center;
 
 }
 
@@ -129,14 +151,18 @@ html body {
 .pn-select {
     overflow-y: hidden;
     width: 100%;
-    height: auto;
+    height: 100%;
     display: flex;
     align-items: center;
+    justify-items: center;
     flex-direction: column;
     /* justify-content: center; */
+    overflow-y: hidden;
+    overflow-x: hidden;
 
 
 }
+
 
 
 .btn {
@@ -150,6 +176,11 @@ html body {
 
 }
 
+.pn-select .btn{
+    width: 90%;
+    font-size:  clamp(1px, 1vw, 15px);
+    white-space: nowrap;
+}
 
 
 

@@ -34,7 +34,15 @@
             </div>
             <!-- 品番サイドバー -->
             <div class="pn-sidebar">
-                <p class="pn-title">品番</p>
+                <div class="side-top">
+                    <div class="pn-title">背番号</div>
+                    <div class="search-container">
+                        <label for="serial-search">背番号検索</label>
+                        <input type="search" id="serial-search" name="serial-no" />
+                        <button id="search-button">検索</button>
+                    </div>
+                </div>
+
                 <div class="pn-select">
                     <div class="pn-list" id="pnlist">
                     </div>
@@ -95,13 +103,13 @@
     <script>
         const zone_list = {{ zones | tojson}};
         const shelf_list = {{ shelfs | tojson}};
-        const cell_list = {{cells | tojson}}
+        const cell_list = {{ cells | tojson}}
         const pn_list = {{ product_numbers | tojson }};
 
     </script>
 
-    <script type="module" src="../static/js/map_sideber.js"></script>    
-    <script src="../static/js/allow_strage_map/allow_map_main_section.js"></script>    
+    <script type="module" src="../static/js/map_sideber.js"></script>
+    <script src="../static/js/allow_strage_map/allow_map_main_section.js"></script>
     <script src="../static/js/pn_highlight.js"></script>
     <script src="../static/js/zone_sort.js"></script>
 

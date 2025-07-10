@@ -1,11 +1,12 @@
 import { createPopupPnlist } from "./common/pn_list.js";
 import { pop_serial_no_search } from "./common/serial_no_search.js";
 import { saveCheckedData } from "./popup/save_inout.js";
+import { createDisplayName } from "./common/displayname.js";
+
 
 export function createPopup() {
 
   const cellBtns = document.querySelectorAll('.cell-stock-btn');
-
   const overlay = document.getElementById('overlay');
   const popup = document.getElementById('popup');
 
@@ -27,7 +28,12 @@ export function createPopup() {
       const cellData = JSON.parse(button.dataset.item)
       let stock_qty = cellData.stock_qty;
       const max_qty = cellData.max_qty;
-      const displayName = button.dataset.displayname;
+      let pnItem = null;
+      let displayName = null;
+
+      if (cellData.pn_id) {
+        ({ pnItem, displayName } = createDisplayName(pn_list, cellData.pn_id));
+      };
 
       // 収容数操作部
       const stockContainer = document.createElement('div');

@@ -2,6 +2,7 @@ import { createPopup } from "./popup.js";
 import { stackGaugeCreate } from "./common/stack_gauge.js";
 import { initPnHighlight } from "./common/pn_highlight.js";
 import { initZoneSort } from "./common/zone_sort.js";
+import { createDisplayName } from "./common/displayname.js";
 
 document.addEventListener("DOMContentLoaded", function () {
     const shelfGridElm = document.getElementById("shelfGrid");
@@ -53,25 +54,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // 品番テーブルから街灯品番を抽出
             // 格納品番が存在した場合は該当セルに情報を描画
+
             let product_number = null;
+
             if (stock_cell) {
-                product_number = pn_list.find(pnItem => pnItem.id == stock_cell.pn_id)
+
+                const { pnItem , displayName }= createDisplayName(pn_list,stock_cell.pn_id);
+                // product_number = pn_list.find(pnItem => pnItem.id == stock_cell.pn_id)
+
+                product_number = pnItem;
                 cellElm.dataset.pn = stock_cell.pn_id;
 
                 // マップへのスタックゲージの表示
                 stackGaugeCreate(max_qty, stock_cell.stock_qty, stack);
 
-                btnIcon.textContent = product_number.serial_no;
+                btnIcon.textContent = pnItem.serial_no;
                 btnIcon.className = "btn-pn-stock"
-                // POPUPのディスプレイ名
-                const displayValue = (val) => (val === null || val === "" || val === -1.0 ? "***" : val);
-                const unionvalue = [
-                    displayValue(product_number.serial_no),
-                    displayValue(product_number.material),
-                    displayValue(product_number.material_thickness),
-                    displayValue(product_number.cut_length),
-                ].join(" / ");
-                cellBtn.dataset.displayname = unionvalue;
+                cellBtn.dataset.displayname = displayName;
 
 
 
