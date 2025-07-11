@@ -40,7 +40,6 @@
     <div class="pn-list">
         <div id="pn-overlay" class="pn-overlay"></div>
         <div id="input-container" class="scroll-box">
-            <!-- ここにJSモジュールで品番INPUTを出力 -->
             <table id="input-table">
                 <tr class="row-header">
                     <th class="col-header">
@@ -59,10 +58,14 @@
                         切断長さ
                     </th>
                     <th class="col-header">
+                        削除
+                    </th>
+                    <th class="col-header">
                         許可
                     </th>
                 </tr>
             </table>
+
         </div>
     </div>
     <div class="admin-buttons">
@@ -89,7 +92,6 @@
 
 </script>
 
-<script type="module" src="../static/js/pn_ctrl/existPnListCreate.js"></script>
-<script type="module" src="../static/js/cell_permission.js"></script>
+<script src="../static/js/cell_permission.js"></script>
 
 </html>

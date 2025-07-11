@@ -18,12 +18,15 @@ export function initZoneSort() {
         });
     });
 
+
+
     zoneBtns.forEach(zoneBtn => {
         zoneBtn.addEventListener("click", () => {
             const zoneId = zoneBtn.dataset.zone_id;
             shelves.forEach(shelf => {
                 if(shelf.dataset.zone_id === zoneId) {
                     shelf.style.display = "block"; // 表示
+                    console.log("✅棚が再生成されました！",zoneId)
                 } else {
                     shelf.style.display = "none"; // 非表示
                 }
@@ -38,7 +41,6 @@ export function initZoneSort() {
             //         pnBtn.style.display = "none"; // 非表示
             //     }
             // });
-
 
         });
     });

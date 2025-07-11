@@ -1,78 +1,165 @@
-export function existPnListCreate(pn_list,inputTable) {
-    // バックエンドで取得したデータをinput要素に設定
-    pn_list.forEach(pn => {
-      // テーブルにpn_listのレコードを反映
-      const existRow = document.createElement("tr");
-      existRow.className = "row-input";
-      // レコードのデータ属性にIDを設定
-      existRow.dataset.id = pn.id; // データセットにIDを設定
+export function existPnListCreate(pn_list, inputTable) {
+  // バックエンドで取得したデータをinput要素に設定
+  pn_list.forEach(pn => {
+    // テーブルにpn_listのレコードを反映
+    const existRow = document.createElement("tr");
+    existRow.className = "row-input";
+    // レコードのデータ属性にIDを設定
+    existRow.dataset.id = pn.id; // データセットにIDを設定
 
-      // 値を各セルに反映
+    // 値を各セルに反映
 
-      // 背番号
-      const existSerialCell = document.createElement("td");
-      existSerialCell.className = "input-cell";
-      const exsitSerialInput = document.createElement("input");
-      exsitSerialInput.type = "text";
-      exsitSerialInput.name = "serial_no";
-      exsitSerialInput.value = pn.serial_no;
-      existSerialCell.appendChild(exsitSerialInput);
-      existRow.appendChild(existSerialCell);
+    // 背番号
+    const existSerialCell = document.createElement("td");
+    existSerialCell.className = "input-cell";
+    const exsitSerialInput = document.createElement("input");
+    exsitSerialInput.type = "text";
+    exsitSerialInput.name = "serial_no";
+    exsitSerialInput.value = pn.serial_no;
+    existSerialCell.appendChild(exsitSerialInput);
+    existRow.appendChild(existSerialCell);
 
-      // 品番
-      const exsitProdNoCell = document.createElement("td");
-      exsitProdNoCell.className = "input-cell";
-      const exsitProdNoInput = document.createElement("input");
-      exsitProdNoInput.type = "text";
-      exsitProdNoInput.name = "product_no";
-      exsitProdNoInput.value = pn.product_no;
-      exsitProdNoCell.appendChild(exsitProdNoInput);
-      existRow.appendChild(exsitProdNoCell);
+    // 品番
+    const exsitProdNoCell = document.createElement("td");
+    exsitProdNoCell.className = "input-cell";
+    const exsitProdNoInput = document.createElement("input");
+    exsitProdNoInput.type = "text";
+    exsitProdNoInput.name = "product_no";
+    exsitProdNoInput.value = pn.product_no;
+    exsitProdNoCell.appendChild(exsitProdNoInput);
+    existRow.appendChild(exsitProdNoCell);
 
-      // 材質
-      const exsitMaterialCell = document.createElement("td");
-      exsitMaterialCell.className = "input-cell";
-      const exsitMaterialInput = document.createElement("input");
-      exsitMaterialInput.type = "text";
-      exsitMaterialInput.name = "material";
-      exsitMaterialInput.value = pn.material;
-      exsitMaterialCell.appendChild(exsitMaterialInput);
-      existRow.appendChild(exsitMaterialCell);
+    // 材質
+    const exsitMaterialCell = document.createElement("td");
+    exsitMaterialCell.className = "input-cell";
+    const exsitMaterialInput = document.createElement("input");
+    exsitMaterialInput.type = "text";
+    exsitMaterialInput.name = "material";
+    exsitMaterialInput.value = pn.material;
+    exsitMaterialCell.appendChild(exsitMaterialInput);
+    existRow.appendChild(exsitMaterialCell);
 
-      // 板厚
-      const exsitMatThkCell = document.createElement("td");
-      exsitMatThkCell.className = "input-cell";
-      const exsitMatThkInput = document.createElement("input");
-      exsitMatThkInput.type = "text";
-      exsitMatThkInput.name = "material_thickness";
-      exsitMatThkInput.value = pn.material_thickness < 0 ? "" : pn.material_thickness; // 負の値は空文字にする
-      exsitMatThkCell.appendChild(exsitMatThkInput);
-      existRow.appendChild(exsitMatThkCell);
+    // 板厚
+    const exsitMatThkCell = document.createElement("td");
+    exsitMatThkCell.className = "input-cell";
+    const exsitMatThkInput = document.createElement("input");
+    exsitMatThkInput.type = "text";
+    exsitMatThkInput.name = "material_thickness";
+    exsitMatThkInput.value = pn.material_thickness < 0 ? "" : pn.material_thickness; // 負の値は空文字にする
+    exsitMatThkCell.appendChild(exsitMatThkInput);
+    existRow.appendChild(exsitMatThkCell);
 
-      // 切断長さ
-      const exsitCutLengthCell = document.createElement("td");
-      exsitCutLengthCell.className = "input-cell";
-      const exsitCutLengthInput = document.createElement("input");
-      exsitCutLengthInput.type = "text";
-      exsitCutLengthInput.name = "cut_length";
-      exsitCutLengthInput.value = pn.cut_length < 0 ? "" : pn.cut_length; // 負の値は空文字にする
-      exsitCutLengthCell.appendChild(exsitCutLengthInput);
-      existRow.appendChild(exsitCutLengthCell);
+    // 切断長さ
+    const exsitCutLengthCell = document.createElement("td");
+    exsitCutLengthCell.className = "input-cell";
+    const exsitCutLengthInput = document.createElement("input");
+    exsitCutLengthInput.type = "text";
+    exsitCutLengthInput.name = "cut_length";
+    exsitCutLengthInput.value = pn.cut_length < 0 ? "" : pn.cut_length; // 負の値は空文字にする
+    exsitCutLengthCell.appendChild(exsitCutLengthInput);
+    existRow.appendChild(exsitCutLengthCell);
 
-      // 削除ボタン
-      const deleteBtnCell = document.createElement("td");
-      deleteBtnCell.className = "input-cell";
-      const deleteBtn = document.createElement("button");
-      deleteBtn.innerHTML = '<i class="bi bi-x-circle"></i>';
-      deleteBtn.className = "delete-button";
-      deleteBtn.addEventListener("click", function () {
-        existRow.dataset.deleted = "true"; // 削除フラグを設定
-        existRow.style.display = "none"; // 行を非表示にする
-      });
-      deleteBtnCell.appendChild(deleteBtn);
-      existRow.appendChild(deleteBtnCell);
-
-      inputTable.appendChild(existRow);
+    // 削除ボタン
+    const deleteBtnCell = document.createElement("td");
+    deleteBtnCell.className = "input-cell";
+    const deleteBtn = document.createElement("button");
+    deleteBtn.innerHTML = '<i class="bi bi-x-circle"></i>';
+    deleteBtn.className = "delete-button";
+    deleteBtn.addEventListener("click", function () {
+      existRow.dataset.deleted = "true"; // 削除フラグを設定
+      existRow.style.display = "none"; // 行を非表示にする
     });
+    deleteBtnCell.appendChild(deleteBtn);
+    existRow.appendChild(deleteBtnCell);
 
-  }
+    inputTable.appendChild(existRow);
+  });
+
+}
+
+
+export function allowPnListCreate(pn_list, inputTable) {
+  // バックエンドで取得したデータをinput要素に設定
+  pn_list.forEach(pn => {
+    // テーブルにpn_listのレコードを反映
+    const existRow = document.createElement("tr");
+    existRow.className = "row-input";
+    // レコードのデータ属性にIDを設定
+    existRow.dataset.id = pn.id; // データセットにIDを設定
+
+    // 値を各セルに反映
+
+
+    // 背番号
+    const existSerialCell = document.createElement("td");
+    existSerialCell.className = "serial-no";
+    existSerialCell.textContent=pn.serial_no;
+    existRow.appendChild(existSerialCell);
+
+    // 品番
+    const exsitProdNoCell = document.createElement("td");
+    exsitProdNoCell.className = "input-cell";
+    const exsitProdNoInput = document.createElement("input");
+    exsitProdNoInput.type = "text";
+    exsitProdNoInput.name = "product_no";
+    exsitProdNoInput.value = pn.product_no;
+    exsitProdNoCell.appendChild(exsitProdNoInput);
+    existRow.appendChild(exsitProdNoCell);
+
+    // 材質
+    const exsitMaterialCell = document.createElement("td");
+    exsitMaterialCell.className = "input-cell";
+    const exsitMaterialInput = document.createElement("input");
+    exsitMaterialInput.type = "text";
+    exsitMaterialInput.name = "material";
+    exsitMaterialInput.value = pn.material;
+    exsitMaterialCell.appendChild(exsitMaterialInput);
+    existRow.appendChild(exsitMaterialCell);
+
+    // 板厚
+    const exsitMatThkCell = document.createElement("td");
+    exsitMatThkCell.className = "input-cell";
+    const exsitMatThkInput = document.createElement("input");
+    exsitMatThkInput.type = "text";
+    exsitMatThkInput.name = "material_thickness";
+    exsitMatThkInput.value = pn.material_thickness < 0 ? "" : pn.material_thickness; // 負の値は空文字にする
+    exsitMatThkCell.appendChild(exsitMatThkInput);
+    existRow.appendChild(exsitMatThkCell);
+
+    // 切断長さ
+    const exsitCutLengthCell = document.createElement("td");
+    exsitCutLengthCell.className = "input-cell";
+    const exsitCutLengthInput = document.createElement("input");
+    exsitCutLengthInput.type = "text";
+    exsitCutLengthInput.name = "cut_length";
+    exsitCutLengthInput.value = pn.cut_length < 0 ? "" : pn.cut_length; // 負の値は空文字にする
+    exsitCutLengthCell.appendChild(exsitCutLengthInput);
+    existRow.appendChild(exsitCutLengthCell);
+
+    // 許可ボタン
+    const checkBtnCell = document.createElement("td");
+    checkBtnCell.className = "input-cell";
+    const checkBtn = document.createElement("input");
+    checkBtn.className = "check-box";
+    checkBtn.type = "checkbox";
+    checkBtn.name = "allow_storage";
+
+    const check_pn = allow_storage_list.filter(item => item.pn_id === pn.id);
+    if (check_pn.length > 0) {
+      checkBtn.checked = true;
+    };
+
+    checkBtn.addEventListener("change", function () {
+      if (checkBtn.checked) {
+        existRow.dataset.allow_storage = true;
+      } else {
+        delete existRow.dataset.allow_storage;
+      }
+    });
+    checkBtnCell.appendChild(checkBtn);
+    existRow.appendChild(checkBtnCell);
+
+    inputTable.appendChild(existRow);
+  });
+
+}

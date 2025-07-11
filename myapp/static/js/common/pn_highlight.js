@@ -19,8 +19,7 @@ export function initPnHighlight() {
                     cell.classList.remove("highlight");
                 }
             });
-            // 3. モック的な対応ロジック
-            //    ここでは、単純に「品番名と同じ属性のセルを強調」
+            //    品番名と同じ属性のセルを強調
             cells.forEach(cell => {
                 if (cell.getAttribute("data-pn") === selectedPn) {
                     cell.classList.add("highlight");
@@ -31,4 +30,5 @@ export function initPnHighlight() {
             });
         });
     });
+    console.log("✅品番ハイライトモジュール読み込み")
 };

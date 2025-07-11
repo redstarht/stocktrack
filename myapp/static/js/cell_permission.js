@@ -1,3 +1,6 @@
+import { allowPnListCreate } from "../js/pn_ctrl/existPnListCreate.js"
+
+
 document.addEventListener("DOMContentLoaded", function () {
   const container = document.getElementById("input-container");
 
@@ -7,42 +10,47 @@ document.addEventListener("DOMContentLoaded", function () {
   const table = document.createElement("table");
   table.className = "pn-table";
 
-  // バックエンドから取得したデータをinput要素に設定
-  pn_list.forEach(pn => {
-    const newRow = document.createElement("tr");
-    newRow.className = "pn-row";
-    newRow.dataset.id = pn.id;
+  const inputTable = document.getElementById("input-table");
+  console.log("対象テーブルを読み込み",inputTable)
 
-    const pnCell = document.createElement("td");
-    pnCell.className = "pn-cell"
-    pnCell.textContent = pn.product_no;
-    pnCell.dataset.id = pn.id; // データセットにIDを設定
+  // // バックエンドから取得したデータをinput要素に設定
+allowPnListCreate(pn_list,inputTable);
 
-    const checkbox = document.createElement("input");
-    checkbox.className = "check-box";
-    checkbox.type = "checkbox";
-    checkbox.name = "allow_storage";
-    checkbox.value = true;
+  // pn_list.forEach(pn => {
+  //   const newRow = document.createElement("tr");
+  //   newRow.className = "pn-row";
+  //   newRow.dataset.id = pn.id;
 
-    const check_pn = allow_storage_list.filter(item => item.pn_id === pn.id);
+  //   const pnCell = document.createElement("td");
+  //   pnCell.className = "pn-cell"
+  //   pnCell.textContent = pn.product_no;
+  //   pnCell.dataset.id = pn.id; // データセットにIDを設定
 
-    if(check_pn.length>0){
-      checkbox.checked = true;
-    };
+  //   const checkbox = document.createElement("input");
+  //   checkbox.className = "check-box";
+  //   checkbox.type = "checkbox";
+  //   checkbox.name = "allow_storage";
+  //   checkbox.value = true;
+
+  //   const check_pn = allow_storage_list.filter(item => item.pn_id === pn.id);
+
+  //   if(check_pn.length>0){
+  //     checkbox.checked = true;
+  //   };
     
-    checkbox.addEventListener("change", function () {
-      if (checkbox.checked) {
-        newRow.dataset.allow_storage = true;
-      } else {
-        delete newRow.dataset.allow_storage;
-      }
-    });
+  //   checkbox.addEventListener("change", function () {
+  //     if (checkbox.checked) {
+  //       newRow.dataset.allow_storage = true;
+  //     } else {
+  //       delete newRow.dataset.allow_storage;
+  //     }
+  //   });
 
-    newRow.appendChild(pnCell);
-    newRow.appendChild(checkbox);
-    table.appendChild(newRow);
-    container.appendChild(table);
-  });
+  //   newRow.appendChild(pnCell);
+  //   newRow.appendChild(checkbox);
+  //   table.appendChild(newRow);
+  //   container.appendChild(table);
+  // });
 
 
 

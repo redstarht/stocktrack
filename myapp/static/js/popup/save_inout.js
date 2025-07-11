@@ -63,8 +63,8 @@ export async function saveCheckedData(button, cellData, stock_qty) {
 
 
     // HTMLデータ属性更新
-    console.log("✅更新背番号情報", displayname);
-    cellData.stock_qty = stock_qty;
+    console.log("✅更新背番号情報", displayname,"新ストック",new_stock_qty,"旧ストック",prev_stock_qty);
+    cellData.stock_qty = new_stock_qty;
     cellData.pn_id = pn_id;
     cellData.serial_no = serial_no;
     button.dataset.item = JSON.stringify(cellData);
@@ -78,11 +78,10 @@ export async function saveCheckedData(button, cellData, stock_qty) {
     dataToSend.inout_log.cell_id = cellData.cell_id;
     dataToSend.inout_log.pn_id = pn_id;
     dataToSend.inout_log.inout_type = new_stock_qty > prev_stock_qty ? "in" : "out";
-    dataToSend.inout_log.change_qty = Math.abs(new_stock_qty || 0 - prev_stock_qty || 0);
+    dataToSend.inout_log.change_qty = Math.abs((new_stock_qty || 0) - (prev_stock_qty || 0));
     dataToSend.inout_log.stock_after = new_stock_qty || 0;
     // ハイライト用にcellにdata-pnをセット
     cell.dataset.pn = pn_id;
-
 
  
 
