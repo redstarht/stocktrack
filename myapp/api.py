@@ -37,8 +37,22 @@ def save_inout_popup():
         change_qty=inout_log.get("change_qty"),
         stock_after=inout_log.get("stock_after"))
     db.session.add(new_inout_log)
-    db.session.commit()
+    
 
+    '''
+    新規追加 / 既存データのストック数消す / stockが0になった場合はレコードを削除
+    '''
+    # 新規追加
+    if  CellStockStatus.query.get(cell_stock_status.get("cell_id")) is None:
+        new_cell_stock_status = CellStockStatus(
+            cell_id=cell_stock_status.get("cell_id"),
+            pn_id=cell_stock_status.get("pn_id"),
+            stock_qty=cell_stock_status.get("stock_qty")
+        )
+        db.session.add(new_cell_stock_status)
+    
+
+    db.session.commit()
 
     
 
@@ -122,6 +136,8 @@ def save_cell_permisson():
     allow_storage = cell_permisson.get("allow_storage", [])
     cell_id = cell_data.get("id")
     is_all_pn_allowed = cell_data.get("is_all_pn_allowed")
+    print("cell_permisson:", cell_permisson)
+    
 
     # --- Cellテーブルの更新 ---
     cell_obj = Cell.query.get(cell_id)

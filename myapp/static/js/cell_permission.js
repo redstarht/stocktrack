@@ -161,6 +161,7 @@ saveButton.addEventListener("click", async function () {
     const result = await response.json();
     console.log("送信結果:", result);
     alert("品番情報を保存しました。");
+    window.history.back(); // 前のページに戻る
 
   } catch (error) {
     console.error("送信エラー:", error);

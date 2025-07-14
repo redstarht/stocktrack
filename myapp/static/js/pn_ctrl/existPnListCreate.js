@@ -83,57 +83,41 @@ export function allowPnListCreate(pn_list, inputTable) {
   pn_list.forEach(pn => {
     // テーブルにpn_listのレコードを反映
     const existRow = document.createElement("tr");
-    existRow.className = "row-input";
+    existRow.className = "pn-row";
     // レコードのデータ属性にIDを設定
     existRow.dataset.id = pn.id; // データセットにIDを設定
 
     // 値を各セルに反映
-
+     const displayValue = (val) => (val === null || val === "" || val === -1.0 ? "***" : val);
 
     // 背番号
     const existSerialCell = document.createElement("td");
     existSerialCell.className = "serial-no";
-    existSerialCell.textContent=pn.serial_no?? "***";
+    existSerialCell.textContent=displayValue(pn.serial_no);
     existRow.appendChild(existSerialCell);
 
     // 品番
     const exsitProdNoCell = document.createElement("td");
-    exsitProdNoCell.className = "input-cell";
-    const exsitProdNoInput = document.createElement("input");
-    exsitProdNoInput.type = "text";
-    exsitProdNoInput.name = "product_no";
-    exsitProdNoInput.value = pn.product_no;
-    exsitProdNoCell.appendChild(exsitProdNoInput);
+    exsitProdNoCell.className = "product_no";
+    exsitProdNoCell.textContent = displayValue(pn.product_no);
     existRow.appendChild(exsitProdNoCell);
 
     // 材質
     const exsitMaterialCell = document.createElement("td");
-    exsitMaterialCell.className = "input-cell";
-    const exsitMaterialInput = document.createElement("input");
-    exsitMaterialInput.type = "text";
-    exsitMaterialInput.name = "material";
-    exsitMaterialInput.value = pn.material;
-    exsitMaterialCell.appendChild(exsitMaterialInput);
+    exsitMaterialCell.className = "material";
+    exsitMaterialCell.textContent = displayValue(pn.material);
     existRow.appendChild(exsitMaterialCell);
 
     // 板厚
     const exsitMatThkCell = document.createElement("td");
-    exsitMatThkCell.className = "input-cell";
-    const exsitMatThkInput = document.createElement("input");
-    exsitMatThkInput.type = "text";
-    exsitMatThkInput.name = "material_thickness";
-    exsitMatThkInput.value = pn.material_thickness < 0 ? "" : pn.material_thickness; // 負の値は空文字にする
-    exsitMatThkCell.appendChild(exsitMatThkInput);
+    exsitMatThkCell.className = "material_thickness";
+    exsitMatThkCell.textContent = displayValue(pn.material_thickness);
     existRow.appendChild(exsitMatThkCell);
 
     // 切断長さ
     const exsitCutLengthCell = document.createElement("td");
-    exsitCutLengthCell.className = "input-cell";
-    const exsitCutLengthInput = document.createElement("input");
-    exsitCutLengthInput.type = "text";
-    exsitCutLengthInput.name = "cut_length";
-    exsitCutLengthInput.value = pn.cut_length < 0 ? "" : pn.cut_length; // 負の値は空文字にする
-    exsitCutLengthCell.appendChild(exsitCutLengthInput);
+    exsitCutLengthCell.className = "cut_length";
+    exsitCutLengthCell.textContent = displayValue(pn.cut_length);
     existRow.appendChild(exsitCutLengthCell);
 
     // 許可ボタン
