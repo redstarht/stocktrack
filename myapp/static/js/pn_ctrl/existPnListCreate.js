@@ -93,7 +93,7 @@ export function allowPnListCreate(pn_list, inputTable) {
     // 背番号
     const existSerialCell = document.createElement("td");
     existSerialCell.className = "serial-no";
-    existSerialCell.textContent=pn.serial_no;
+    existSerialCell.textContent=pn.serial_no?? "***";
     existRow.appendChild(existSerialCell);
 
     // 品番
