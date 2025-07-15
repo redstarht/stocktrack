@@ -79,6 +79,7 @@ export function existPnListCreate(pn_list, inputTable) {
 
 
 export function allowPnListCreate(pn_list, inputTable) {
+  const rowBody = document.getElementById("row-body");
   // バックエンドで取得したデータをinput要素に設定
   pn_list.forEach(pn => {
     // テーブルにpn_listのレコードを反映
@@ -143,7 +144,7 @@ export function allowPnListCreate(pn_list, inputTable) {
     checkBtnCell.appendChild(checkBtn);
     existRow.appendChild(checkBtnCell);
 
-    inputTable.appendChild(existRow);
+    rowBody.appendChild(existRow);
   });
-
+  inputTable.appendChild(rowBody);
 }

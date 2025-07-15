@@ -8,26 +8,25 @@ body {
 }
 
 .wrapper {
-    width: 100vw;
-    height: 100%;
+    width: 100%;
+    height: 100% !important;
     display: flex;
     flex-direction: column;
     /* justify-content: center; */
-    /* ⇡をコメントアウトすると頂点揃えになる */
     align-items: center;
-    gap: 4vh;
+    gap: 1vh;
 }
 
 header {
     width: 30vw;
-    height: 10vh;
+    height: 5vh;
 }
 
 .all-allow-container {
     font-size: 3vh;
     display: flex;
     flex-direction: row;
-    height: 15vh;
+    height: 5vh;
 }
 
 .all-allow-container form {
@@ -72,23 +71,29 @@ header {
 
 .scroll-box {
     width: 100%;
-    height: 65vh;
+    height: 100%;
     /* border: 1px solid #ccc; */
     overflow-y: auto;
     /* 縦スクロールを有効に */
     padding: 1rem;
 }
 
-.pn-table {
+#input-table {
     /* border-collapse: collapse;
     border: 2px solid rgb(140 140 140); */
     width: 100%;
+    height: 100%;
 }
 
+.row-header{
+    width: 100%;
+}
 
+#row-body{
+    width:100%
+}
 
 .pn-row {
-    display: flex;
     align-items: center;
     margin-bottom: 10px;
     margin: 0rem 1rem 1rem 1rem;
@@ -111,4 +116,17 @@ header {
     text-align: center;
 
 
+}
+
+.admin-buttons {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+
+.admin-button {
+    font-size: clamp(20px, 2vw, 40px);
 }
