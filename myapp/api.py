@@ -116,9 +116,34 @@ def save_product_number():
         product_no = pn_item.get("product_no", "").strip()
         serial_no = pn_item.get("serial_no", "").strip()
         material = pn_item.get("material", "").strip()
-        material_thickness = pn_item.get("material_thickness", -1.0)
-        cut_length = pn_item.get("cut_length",-1.0)
+        material_thickness = pn_item.get("material_thickness", "").strip()
+        
+        # 空文字と文字列の変換
+        if material_thickness == "":
+            material_thickness = -1.0
+        else:
+            try:
+                material_thickness = float(material_thickness)
+            except ValueError:
+                material_thickness = -1.0
+
+        cut_length = pn_item.get("cut_length","")
+        if cut_length == "":
+            cut_length = -1.0
+        else:
+            try:
+                cut_length = float(cut_length)
+            except ValueError:
+                cut_length = -1.0
+        
         is_deleted = pn_item.get("is_deleted", False)
+        if is_deleted == "true":
+            is_deleted = True
+        elif is_deleted == "false":
+            is_deleted = False
+        else:
+            is_deleted = False
+        
 
         # 既存レコード更新
         if id:
@@ -148,6 +173,9 @@ def save_product_number():
 
                 if is_deleted != update_pn.is_deleted:
                     update_pn.is_deleted = is_deleted
+                    
+                    
+                    
 
         else:  # 新規レコード(update_pn既存レコード判別に何もない場合)
             if product_no and id is None:

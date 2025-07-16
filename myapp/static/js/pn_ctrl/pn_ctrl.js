@@ -1,15 +1,15 @@
-import {existPnListCreate} from "./existPnListCreate.js"
-import {serial_no_search} from "./serial_no_search.js"
+import { existPnListCreate } from "./existPnListCreate.js"
+import { serial_no_search } from "./serial_no_search.js"
 
 
 document.addEventListener("DOMContentLoaded", function () {
   const container = document.getElementById("input-container");
   const inputTable = document.getElementById("input-table");
 
-  existPnListCreate(pn_list,inputTable);
+  existPnListCreate(pn_list, inputTable);
   console.log(pn_list);
 
-  
+
 
 
 
@@ -124,10 +124,15 @@ saveButton.addEventListener("click", async function () {
     row.querySelectorAll("input").forEach(input => {
       // .name属性をキーとして、値を取得
       // 各input要素のnameをキーとして登録し、その値をオブジェクト形式で格納
+      if (input.name == ''){
+        input.name = None 
+      }
+        
       rowData[input.name] = input.value.trim();
     });
 
     rowData["id"] = row.dataset.id || null; // 既存であればIDを取得
+    rowData["is_deleted"] = row.dataset.deleted || false;
 
     dataToSend.push(rowData);
     if (!row.dataset.id) {

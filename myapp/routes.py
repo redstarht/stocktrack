@@ -50,7 +50,7 @@ def cell_permission():
     excluded_pn_ids = [allow.pn_id for allow in obj_allow_storage]
 
     # ProductNumberモデルから「削除フラグが立っていない」かつ「AllowStorageで取得した品番」以外の品番を取得
-    obj_product_numbers = ProductNumber.query.all()
+    obj_product_numbers = ProductNumber.query.filter_by(is_deleted=False).all()
     product_numbers = [pn.to_dict() for pn in obj_product_numbers]
     return render_template('cell_permission.html', cell=cell, product_numbers=product_numbers, allow_storage=allow_storage, excluded_pn_ids=excluded_pn_ids)
 

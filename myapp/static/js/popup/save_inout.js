@@ -26,23 +26,33 @@ export async function saveCheckedData(button, cellData, stock_qty) {
   // データ格納処理(数量に変更あったら)
   if (new_stock_qty !== prev_stock_qty) {
 
-       // 新規格納時の場合の例外処理
-    if(!cellData.pn_id)
-    try{
-      if(!pnCellTrue){
-        throw new Error("背番号を選択してください！")
+    // 新規格納時の場合の例外処理
+    if (!cellData.pn_id)
+      try {
+        if (!pnCellTrue) {
+          throw new Error("背番号を選択してください！")
+        }
+
+      } catch (error) {
+        alert(error.message);
+        return
+
       }
 
-    }catch(error){
-      alert(error.message);
-      return
 
-    }
-
-    
 
     // HTMLの描画処理
     stackGaugeCreate(max_qty, new_stock_qty, stack);
+
+
+
+    // HTMLデータ属性更新
+    console.log("✅更新背番号情報", displayname, "新ストック", new_stock_qty, "旧ストック", prev_stock_qty);
+    cellData.stock_qty = new_stock_qty;
+    cellData.pn_id = pn_id;
+    cellData.serial_no = serial_no;
+    button.dataset.item = JSON.stringify(cellData);
+    button.dataset.displayname = displayname;
 
 
     // 取り出した時のマップ描画処理  / 送信データ処理(格納０個時にしたときの処理)
@@ -50,25 +60,27 @@ export async function saveCheckedData(button, cellData, stock_qty) {
       console.log("✅全ストック取り出し時の処理", new_stock_qty)
       btnIcon.className = "bi bi-box-arrow-in-down";
       btnIcon.textContent = null;
-      button.parentElement.parentElement.removeAttribute("data-pn");
-      button.removeAttribute("data-item");
+      cell.removeAttribute("data-pn");
+      // セルデータの処理
+      cellData.pn_id = null;
+      cellData.serial_no = null;
+      button.dataset.item = JSON.stringify(cellData);
+      // button.removeAttribute("data-item");
       button.removeAttribute("data-displayname");
-      console.log(btnIcon.className)
+      if (cell.classList.contains("highlight")) {
+        cell.classList.remove("highlight");
+      }
+
+
     } else {
-      console.log("✅部分取り出し字の処理", new_stock_qty)
+      console.log("✅新規または部分取り出し字の処理", new_stock_qty)
       btnIcon.className = "btn-pn-stock";
       btnIcon.textContent = serial_no;
       console.log(btnIcon.className)
+      // ハイライト用にcellにdata-pnをセット
+      cell.dataset.pn = pn_id;
     }
 
-
-    // HTMLデータ属性更新
-    console.log("✅更新背番号情報", displayname,"新ストック",new_stock_qty,"旧ストック",prev_stock_qty);
-    cellData.stock_qty = new_stock_qty;
-    cellData.pn_id = pn_id;
-    cellData.serial_no = serial_no;
-    button.dataset.item = JSON.stringify(cellData);
-    button.dataset.displayname = displayname;
     // 送信用データ整形
     dataToSend.cell_stock_status = {};
     dataToSend.cell_stock_status.cell_id = cellData.cell_id;
@@ -80,10 +92,9 @@ export async function saveCheckedData(button, cellData, stock_qty) {
     dataToSend.inout_log.inout_type = new_stock_qty > prev_stock_qty ? "in" : "out";
     dataToSend.inout_log.change_qty = Math.abs((new_stock_qty || 0) - (prev_stock_qty || 0));
     dataToSend.inout_log.stock_after = new_stock_qty || 0;
-    // ハイライト用にcellにdata-pnをセット
-    cell.dataset.pn = pn_id;
 
- 
+
+
 
 
     // 送信処理(POST)
