@@ -106,10 +106,11 @@ export function createPopup() {
 
 
         const searchInput = document.createElement('input');
-        searchInput.type = "search";
+        searchInput.type = "text"; 
         searchInput.id = "pop-serial-search";
         searchInput.placeholder = "背番号検索";
         searchInput.name = "pop-serial_no";
+        searchInput.setAttribute("inputmode" ,"numeric")
 
         const searchBtn = document.createElement('button');
         searchBtn.textContent = "検索";

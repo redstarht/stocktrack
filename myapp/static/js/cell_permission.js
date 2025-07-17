@@ -11,10 +11,12 @@ document.addEventListener("DOMContentLoaded", function () {
   table.className = "pn-table";
 
   const inputTable = document.getElementById("input-table");
-  console.log("対象テーブルを読み込み",inputTable)
+  console.log("対象テーブルを読み込み", inputTable)
 
   // // バックエンドから取得したデータをinput要素に設定
-allowPnListCreate(pn_list,inputTable);
+  allowPnListCreate(pn_list, inputTable);
+
+
 
   // pn_list.forEach(pn => {
   //   const newRow = document.createElement("tr");
@@ -37,7 +39,7 @@ allowPnListCreate(pn_list,inputTable);
   //   if(check_pn.length>0){
   //     checkbox.checked = true;
   //   };
-    
+
   //   checkbox.addEventListener("change", function () {
   //     if (checkbox.checked) {
   //       newRow.dataset.allow_storage = true;
@@ -96,6 +98,15 @@ allowPnListCreate(pn_list,inputTable);
 
 });
 
+// キャンセルボタン処理
+const cancelButton = document.getElementById("cancel-button");
+cancelButton.addEventListener("click", function () {
+  if (confirm("入力内容を破棄してよろしいですか？")) {
+    window.location.href = `/cell_permission?cell_id=${cell_list[0].id}`; // ページをリロード
+  }
+});
+
+
 
 // SAVEボタン押下時の送信データ準備処理
 // 送付データまとめ用変数の構造定義
@@ -119,6 +130,11 @@ saveButton.addEventListener("click", async function () {
     is_all_pn_allowed: is_all_pn_allowed
   };
 
+  // エラーチェック用変数(個別品番許可で選択なし時のエラー検出用)
+  let hasCheckRow = false;
+
+
+
 
   // allow_storage用データ取得
   rows.forEach(row => {
@@ -131,17 +147,15 @@ saveButton.addEventListener("click", async function () {
         cell_id: cell_list[0].id,
         pn_id: pn_id
       })
+      hasCheckRow = true
     }
   })
 
-
-  // キャンセルボタン処理
-  const cancelButton = document.getElementById("cancel-button");
-  cancelButton.addEventListener("click", function () {
-    if (confirm("入力内容を破棄してよろしいですか？")) {
-      window.location.href = `/cell_permission?cell_id=${cell_list[0].id}`; // ページをリロード
-    }
-  });
+  // hasCheckRow = false かつ is_all_pn_allowed = false; であれば エラー通知
+  if (!hasCheckRow && !is_all_pn_allowed) {
+    alert("許可対象が選択されていません。");
+    return; // POST 処理をスキップ
+  }
 
 
   // 送信処理(POST)

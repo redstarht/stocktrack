@@ -1,5 +1,6 @@
 import { existPnListCreate } from "./existPnListCreate.js"
 import { serial_no_search } from "./serial_no_search.js"
+import { validateFloat } from "../common/validation.js"
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -118,30 +119,43 @@ const saveButton = document.getElementById("save-button");
 saveButton.addEventListener("click", async function () {
   const dataToSend = [];
   const alertNewData = [];
+  let hasCheckRow = false;
   document.querySelectorAll("tr.row-input").forEach(row => {
     console.log("行データ:", row);
     const rowData = {};
     row.querySelectorAll("input").forEach(input => {
       // .name属性をキーとして、値を取得
       // 各input要素のnameをキーとして登録し、その値をオブジェクト形式で格納
-      if (input.name == ''){
-        input.name = None 
+      if (input.name == '') {
+        input.name = None
       }
-        
+
       rowData[input.name] = input.value.trim();
     });
 
     rowData["id"] = row.dataset.id || null; // 既存であればIDを取得
     rowData["is_deleted"] = row.dataset.deleted || false;
 
-    dataToSend.push(rowData);
-    if (!row.dataset.id) {
-      alertNewData.push(rowData);
+    // Float列（板厚・切断長さ)のバリデーションチェック
+    if (validateFloat(rowData["material_thickness"]) && validateFloat(rowData["cut_length"])) {
+      dataToSend.push(rowData);
+    } else {
+      hasCheckRow = true;
     }
+
+
+
+    // if (!row.dataset.id) {
+    //   alertNewData.push(rowData);
+    // }
   });
   console.log("送信データ:", dataToSend);
 
-
+  // バリデーションチェックでエラーなら警告
+  if (hasCheckRow) {
+    alert("板厚または切断長さに不正な値が含まれています！")
+    return;
+  }
 
   // 送信処理(POST)
   try {
@@ -160,6 +174,7 @@ saveButton.addEventListener("click", async function () {
     const result = await response.json();
     console.log("送信結果:", result);
     alert(`保存完了しました！`);
+    window.location.href = "/pn_ctrl";
 
   } catch (error) {
     console.error("送信エラー:", error);
