@@ -1,6 +1,6 @@
 import { existPnListCreate } from "./existPnListCreate.js"
 import { serial_no_search } from "./serial_no_search.js"
-import { validateFloat } from "../common/validation.js"
+import { validateFloat,checkifStockExists } from "../common/validation.js"
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -119,7 +119,7 @@ const saveButton = document.getElementById("save-button");
 saveButton.addEventListener("click", async function () {
   const dataToSend = [];
   const alertNewData = [];
-  let hasCheckRow = false;
+  let hasCheckmaThkCutLength = false;
   document.querySelectorAll("tr.row-input").forEach(row => {
     console.log("行データ:", row);
     const rowData = {};
@@ -143,6 +143,11 @@ saveButton.addEventListener("click", async function () {
       hasCheckRow = true;
     }
 
+    // 削除品番しようとした品番が格納されていないかチェック
+    if( rowData["is_deleted"] === "true" && !checkifStockExists(rowData["id"])) {
+      alertNewData.push(rowData);
+    }
+
 
 
     // if (!row.dataset.id) {
@@ -150,10 +155,15 @@ saveButton.addEventListener("click", async function () {
     // }
   });
   console.log("送信データ:", dataToSend);
-
+  
   // バリデーションチェックでエラーなら警告
-  if (hasCheckRow) {
+  if (hasCheckmaThkCutLength) {
     alert("板厚または切断長さに不正な値が含まれています！")
+    return;
+  }else if (alertNewData.length > 0) {
+    // 削除品番しようとした品番が格納されていない場合は警告
+    const alertMessage = alertNewData.map(item => `削除エラー:${item}はまだ格納されています`).join("\n");
+    alert(alertMessage);
     return;
   }
 
