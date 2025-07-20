@@ -22,6 +22,7 @@ from .data_management import check_stock_status
 
 api = Blueprint("api", __name__)
 
+
 @api.route("/api/inout/save", methods=["POST"])
 def save_inout_popup():
     data = request.get_json()
@@ -39,7 +40,6 @@ def save_inout_popup():
         change_qty=inout_log.get("change_qty"),
         stock_after=inout_log.get("stock_after"))
     db.session.add(new_inout_log)
-    
 
     '''
     新規追加 / 既存データのストック数消す / stockが0になった場合はレコードを削除
@@ -51,20 +51,20 @@ def save_inout_popup():
     '''
     # 新規追加
     if not CellStockStatus.query.filter_by(
-            cell_id=cell_stock_status.get("cell_id"),
-            pn_id=cell_stock_status.get("pn_id")
-        ).all():
-        
+        cell_id=cell_stock_status.get("cell_id"),
+        pn_id=cell_stock_status.get("pn_id")
+    ).all():
+
         # 新規レコードに該当するかチェック
         check_stock_status(cell_stock_status)
-        
+
         new_cell_stock_status = CellStockStatus(
             cell_id=cell_stock_status.get("cell_id"),
             pn_id=cell_stock_status.get("pn_id"),
             stock_qty=cell_stock_status.get("stock_qty")
         )
         db.session.add(new_cell_stock_status)
-        
+
     # 削除処理(セル格納数が0になった場合はレコードを削除)
     elif cell_stock_status.get("stock_qty") == 0:
         delete_cell_stock_status = CellStockStatus.query.filter_by(
@@ -74,7 +74,7 @@ def save_inout_popup():
         if delete_cell_stock_status:
             db.session.delete(delete_cell_stock_status)
             print("削除処理実行")
-            
+
     # 更新処理
     else:
         update_cell_stock_status = CellStockStatus.query.filter_by(
@@ -82,13 +82,11 @@ def save_inout_popup():
             pn_id=cell_stock_status.get("pn_id")
         ).first()
         if update_cell_stock_status:
-            update_cell_stock_status.stock_qty = cell_stock_status.get("stock_qty")
+            update_cell_stock_status.stock_qty = cell_stock_status.get(
+                "stock_qty")
             print("更新処理実行")
-    
 
     db.session.commit()
-
-    
 
     print(data)
 
@@ -101,7 +99,7 @@ def save_inout_popup():
 def save_product_number():
     product_numbers = request.get_json()
     # product_numbers = data.get('product_no', [])
-   
+
     '''
     データ構造 print(product_numbers)
     [{'serial_no': '001', 'product_no': '12345-67890', 'material': 'XYZB10-100', 'material_thickness': '2', 'cut_length': '850', 'id': '1'},
@@ -109,15 +107,13 @@ def save_product_number():
     {'serial_no': '003', 'product_no': '98765-43210', 'material': 'LMNQ15-150', 'material_thickness': '1.5', 'cut_length': '780.3', 'id': '3'}
     '''
 
-
-
     for pn_item in product_numbers:
         id = pn_item.get("id")
         product_no = pn_item.get("product_no", "").strip()
         serial_no = pn_item.get("serial_no", "").strip()
         material = pn_item.get("material", "").strip()
         material_thickness = pn_item.get("material_thickness", "").strip()
-        
+
         # 空文字と文字列の変換
         if material_thickness == "":
             material_thickness = -1.0
@@ -127,7 +123,7 @@ def save_product_number():
             except ValueError:
                 material_thickness = -1.0
 
-        cut_length = pn_item.get("cut_length","")
+        cut_length = pn_item.get("cut_length", "")
         if cut_length == "":
             cut_length = -1.0
         else:
@@ -135,7 +131,7 @@ def save_product_number():
                 cut_length = float(cut_length)
             except ValueError:
                 cut_length = -1.0
-        
+
         is_deleted = pn_item.get("is_deleted", False)
         if is_deleted == "true":
             is_deleted = True
@@ -143,7 +139,6 @@ def save_product_number():
             is_deleted = False
         else:
             is_deleted = False
-        
 
         # 既存レコード更新
         if id:
@@ -173,12 +168,9 @@ def save_product_number():
 
                 if is_deleted != update_pn.is_deleted:
                     update_pn.is_deleted = is_deleted
-                    
-                    
-                    
 
         else:  # 新規レコード(update_pn既存レコード判別に何もない場合)
-            if product_no and id is None:
+            if serial_no and product_no and id is None:
                 new_pn = ProductNumber(product_no=product_no,
                                        serial_no=serial_no,
                                        material=material,
@@ -186,6 +178,8 @@ def save_product_number():
                                        cut_length=cut_length,
                                        is_deleted=False)
                 db.session.add(new_pn)
+            else:
+                return jsonify({"error": "追加した品番 または 背番号 が空です!"}), 400
 
     db.session.commit()
     return jsonify({"status": "保存完了！"})
@@ -199,7 +193,6 @@ def save_cell_permisson():
     cell_id = cell_data.get("id")
     is_all_pn_allowed = cell_data.get("is_all_pn_allowed")
     print("cell_permisson:", cell_permisson)
-    
 
     # --- Cellテーブルの更新 ---
     cell_obj = Cell.query.get(cell_id)

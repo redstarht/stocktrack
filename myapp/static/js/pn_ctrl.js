@@ -107,8 +107,14 @@ saveButton.addEventListener("click", async function () {
       body: JSON.stringify(dataToSend)
     });
     console.log("送信データ:", dataToSend)
+    
+     // リクエストのステータスコードエラーならエラー警告
     if (!response.ok) {
-      throw new Error("保存エラー");
+      return response.json()
+      .then(error => { 
+        alert(`エラー：${error.error}`);
+        throw new Error(error.error);
+      });
     }
 
     const result = await response.json();
