@@ -210,6 +210,14 @@ def save_cell_permisson():
             item.get("pn_id") for item in allow_storage if item.get("pn_id") is not None
         }
 
+        '''
+         新規追加するpn_idと削除するpn_idを計算
+         既存のpn_idと送信されたpn_idの差分を計算
+         既存のpn_idから送信されたpn_idを引いたものが削除対象
+         送信されたpn_idから既存のpn_idを引いたものが新規追加対象
+         例: existin_pn_ids = {1, 2, 3}, posted_pn_ids = {2, 3, 4}
+         deletepn_ids = {1}, new_pn_ids = {4}
+        '''
         deletepn_ids = existin_pn_ids - posted_pn_ids
         new_pn_ids = posted_pn_ids - existin_pn_ids
 
@@ -217,26 +225,15 @@ def save_cell_permisson():
             for pn_id in new_pn_ids:
                 db.session.add(AllowStorage(cell_id=cell_id, pn_id=pn_id))
 
+            # 削除対象(許可対象品番でなくなった場合はレコードを削除)
             if deletepn_ids:
                 AllowStorage.query.filter(
                     AllowStorage.cell_id == cell_id,
                     AllowStorage.pn_id.in_(deletepn_ids)
                 ).delete(synchronize_session=False)
+                #  synchronize_session = false セッション内のオブジェクトは無視して同期処理を一切しない
 
-        #  with db.session.no_autoflush:
-        #     # 新規追加(postedにあってexist(DB)にないもの
-
-        #     for pn_id in new_pn_ids:
-        #         db.session.add(AllowStorage(cell_id=cell_id, pn_id=pn_id))
-
-        #     # 削除対象(許可対象品番でなくなった場合はレコードを削除)
-
-        #     if deletepn_ids:
-        #         AllowStorage.query.filter(
-        #         AllowStorage.cell_id == cell_id, AllowStorage.pn_id.in_(deletepn_ids)
-        #         ).delete(synchronize_session=False)
-
-        #         #  synchronize_session = false セッション内のオブジェクトは無視して同期処理を一切しない
+    
 
     db.session.commit()
     return jsonify({"message": "保存完了"}), 200

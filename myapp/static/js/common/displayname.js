@@ -16,3 +16,16 @@ export function createDisplayName(pn_list, pn_id) {
         displayName: unionvalue
     }
 }
+
+export function createAlertDisplayName(pnItem) {
+    const displayValue = (val) => (val === null || val === "" || val === -1.0 ? "***" : val);
+    const unionvalue = [
+        displayValue(pnItem.serial_no),
+        displayValue(pnItem.material),
+        displayValue(pnItem.material_thickness),
+        displayValue(pnItem.cut_length),
+    ].join(" / ");
+    console.log("✅DisplayNameが読み込まれました!",unionvalue);
+
+    return unionvalue
+}

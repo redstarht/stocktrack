@@ -1,5 +1,6 @@
 import { existPnListCreate } from "./existPnListCreate.js"
 import { serial_no_search } from "./serial_no_search.js"
+import { createAlertDisplayName } from "../common/displayname.js"
 import { validateFloat,checkifStockExists } from "../common/validation.js"
 
 
@@ -121,7 +122,6 @@ saveButton.addEventListener("click", async function () {
   const alertNewData = [];
   let hasCheckmaThkCutLength = false;
   document.querySelectorAll("tr.row-input").forEach(row => {
-    console.log("行データ:", row);
     const rowData = {};
     row.querySelectorAll("input").forEach(input => {
       // .name属性をキーとして、値を取得
@@ -162,7 +162,7 @@ saveButton.addEventListener("click", async function () {
     return;
   }else if (alertNewData.length > 0) {
     // 削除品番しようとした品番が格納されていない場合は警告
-    const alertMessage = alertNewData.map(item => `削除エラー:${item}はまだ格納されています`).join("\n");
+    const alertMessage = alertNewData.map(item => '削除エラー:「 '+createAlertDisplayName(item)+' 」はまだ格納されています').join("\n");
     alert(alertMessage);
     return;
   }
