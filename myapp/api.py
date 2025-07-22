@@ -18,7 +18,7 @@ from .model import (
 )
 from . import db
 
-from .data_management import check_stock_status
+from .data_management import check_stock_status , convert_to_int_set,check_del_alwStorRec
 
 api = Blueprint("api", __name__)
 
@@ -187,53 +187,63 @@ def save_product_number():
 
 @api.route("/api/cell_permission/save", methods=["POST"])
 def save_cell_permisson():
-    cell_permisson = request.get_json()
-    cell_data = cell_permisson.get("cell")
-    allow_storage = cell_permisson.get("allow_storage", [])
-    cell_id = cell_data.get("id")
-    is_all_pn_allowed = cell_data.get("is_all_pn_allowed")
-    print("cell_permisson:", cell_permisson)
+    try:
+        cell_permisson = request.get_json()
+        cell_data = cell_permisson.get("cell")
+        allow_storage = cell_permisson.get("allow_storage", [])
+        cell_id = cell_data.get("id")
+        is_all_pn_allowed = cell_data.get("is_all_pn_allowed")
+        print("cell_permisson:", cell_permisson)
 
-    # --- Cellテーブルの更新 ---
-    cell_obj = Cell.query.get(cell_id)
-    if cell_obj and cell_obj.is_all_pn_allowed != is_all_pn_allowed:
-        cell_obj.is_all_pn_allowed = is_all_pn_allowed
+        # --- Cellテーブルの更新 ---
+        cell_obj = Cell.query.get(cell_id)
+        if cell_obj and cell_obj.is_all_pn_allowed != is_all_pn_allowed:
+            cell_obj.is_all_pn_allowed = is_all_pn_allowed
 
-    # 個別許可処理
-    if not is_all_pn_allowed:
-        # 現在のDBにある許可品番の一覧を{}集合で取得
-        existing_records = AllowStorage.query.filter_by(cell_id=cell_id).all()
-        existin_pn_ids = {rec.pn_id for rec in existing_records}
+        # 個別許可処理
+        if not is_all_pn_allowed:
+            # 現在のDBにある許可品番の一覧を{}集合で取得
+            existing_records = AllowStorage.query.filter_by(cell_id=cell_id).all()
+            existin_pn_ids = {rec.pn_id for rec in existing_records}
+            
 
-        # 送信されたpn_idの一覧を取得
-        posted_pn_ids = {
-            item.get("pn_id") for item in allow_storage if item.get("pn_id") is not None
-        }
+            # 送信されたpn_idの一覧を取得
+            posted_pn_ids = {
+                item.get("pn_id") for item in allow_storage if item.get("pn_id") is not None
+            }
 
-        '''
-         新規追加するpn_idと削除するpn_idを計算
-         既存のpn_idと送信されたpn_idの差分を計算
-         既存のpn_idから送信されたpn_idを引いたものが削除対象
-         送信されたpn_idから既存のpn_idを引いたものが新規追加対象
-         例: existin_pn_ids = {1, 2, 3}, posted_pn_ids = {2, 3, 4}
-         deletepn_ids = {1}, new_pn_ids = {4}
-        '''
-        deletepn_ids = existin_pn_ids - posted_pn_ids
-        new_pn_ids = posted_pn_ids - existin_pn_ids
+            '''
+            新規追加するpn_idと削除するpn_idを計算
+            既存のpn_idと送信されたpn_idの差分を計算
+            既存のpn_idから送信されたpn_idを引いたものが削除対象
+            送信されたpn_idから既存のpn_idを引いたものが新規追加対象
+            {}※集合は一意の値のみ保持のため利用
+            例: existin_pn_ids = {1, 2, 3}, posted_pn_ids = {2, 3, 4}
+            deletepn_ids = {1}, new_pn_ids = {4}
+            '''
+            deletepn_ids = convert_to_int_set(existin_pn_ids) - convert_to_int_set(posted_pn_ids)
+            
+            # 許可を取り外す品番がまだセルに格納されていないか確認
+            check_del_alwStorRec(cell_id,deletepn_ids)
+            
+            new_pn_ids = convert_to_int_set(posted_pn_ids) - convert_to_int_set(existin_pn_ids)
+            print(f"deletepn_ids:{deletepn_ids}\nexsisin_pnids:{existin_pn_ids}\nposted_pd_ids:{posted_pn_ids}\nnew_pn_ids:{new_pn_ids}")
+        
+            with db.session.no_autoflush:
+                for pn_id in new_pn_ids:
+                    db.session.add(AllowStorage(cell_id=cell_id, pn_id=pn_id))
 
-        with db.session.no_autoflush:
-            for pn_id in new_pn_ids:
-                db.session.add(AllowStorage(cell_id=cell_id, pn_id=pn_id))
+                # 削除対象(許可対象品番でなくなった場合はレコードを削除)
+                if deletepn_ids:
+                    AllowStorage.query.filter(
+                        AllowStorage.cell_id == cell_id,
+                        AllowStorage.pn_id.in_(deletepn_ids)
+                    ).delete(synchronize_session=False)
+                    #  synchronize_session = false セッション内のオブジェクトは無視して同期処理を一切しない
 
-            # 削除対象(許可対象品番でなくなった場合はレコードを削除)
-            if deletepn_ids:
-                AllowStorage.query.filter(
-                    AllowStorage.cell_id == cell_id,
-                    AllowStorage.pn_id.in_(deletepn_ids)
-                ).delete(synchronize_session=False)
-                #  synchronize_session = false セッション内のオブジェクトは無視して同期処理を一切しない
+        
 
-    
-
-    db.session.commit()
-    return jsonify({"message": "保存完了"}), 200
+        db.session.commit()
+        return jsonify({"message": "保存完了"}), 200
+    except ValueError as e:
+        return jsonify({"error":str(e)}),400

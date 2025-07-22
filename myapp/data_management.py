@@ -18,6 +18,7 @@ from .model import (
 )
 from . import db
 
+
 def check_stock_status(data):
     """
     cell_idとpn_idの組み合わせは新規なので新規レコードで登録する処理となるが
@@ -29,24 +30,40 @@ def check_stock_status(data):
     if CellStockStatus.query.filter_by(
         cell_id=data.get("cell_id"),
     ).first() is not None:
-        raise ValueError(f"Error: cell_id {data.get('cell_id')} already exists.")
+        raise ValueError(
+            f"Error: cell_id {data.get('cell_id')} already exists.")
     print("新規レコード追加処理起動")
 
 # def check_delete_pn(data):
 
 
-def check_del_alwStorRec(cell_id,data):
+def convert_to_int_set(input_set):
+    """集合内の要素を整数型に変換する関数"""
+    try:
+        # 各要素を整数型に変換して、新しい集合を作成
+        return {int(item) for item in input_set}
+    except ValueError as e:
+        # 変換できない場合はエラーを表示
+        print(f"型変換に失敗しました: {e}")
+        return set()  # 空の集合を返す
+
+
+def check_del_alwStorRec(cell_id, deletepn_ids):
     """
     cellテーブルのis_all_pn_allowedがfalseで
     cellStockStatusテーブルに現在格納されている品番を
     任意の品番の格納許可を外し、削除しようとしてしまった場合
     エラーを返す    
     """
-    if CellStockStatus.query.filter_by(
-        cell_id=cell_id,).first().pn_id == data.get("pn_id"):
-        raise ValueError(f"Error: cell_id {cell_id} には現在 {data.get('pn_id')} が格納されているため許可を外すことはできせん。")
-    print(f"cell_id {cell_id} の品番 {data.get('pn_id')} の格納許可を{data.get('is_all_pn_allowed')}に変更")
-
+    
+    for pn_id in deletepn_ids:
+        if CellStockStatus.query.filter_by(
+                cell_id=cell_id,).first().pn_id == pn_id:
+            print(f"Error: cell_id： {cell_id} には現在 品番ID：{pn_id} が格納されているため許可を外すことはできせん。")
+            raise ValueError(
+                f"Error: cell_id： {cell_id} には現在 品番ID：{pn_id} が格納されているため許可を外すことはできせん。")
+        print(
+            f"cell_id {cell_id} の品番ID: {pn_id} の格納許可レコードを削除")
 
 
 # def check_allow_storage(data):

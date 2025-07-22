@@ -168,8 +168,12 @@ saveButton.addEventListener("click", async function () {
       body: JSON.stringify(dataToSend)
     });
     console.log("送信データ:", dataToSend)
+    
+    // レスポンスが正常ではない場合、バックエンドのエラーレスポンスを取得して処理
     if (!response.ok) {
-      throw new Error("保存エラー");
+      const errorResult = await response.json(); // バックエンドのエラーレスポンスを取得
+      console.error("バックエンドエラー:", errorResult);
+      throw new Error(errorResult.error || "保存エラー"); // バックエンドのエラーメッセージを投げる
     }
 
     const result = await response.json();
@@ -179,7 +183,7 @@ saveButton.addEventListener("click", async function () {
 
   } catch (error) {
     console.error("送信エラー:", error);
-    alert("送信中にエラーが発生しました。コンソールを確認してください。");
+    alert(error);
   }
 
 })
