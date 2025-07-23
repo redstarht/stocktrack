@@ -148,6 +148,11 @@ saveButton.addEventListener("click", async function () {
       alertNewData.push(rowData);
     }
 
+    // 背番号と品番が未記入になっていないかチェック
+    if(rowData["serial_no"] || rowData["product_mo"]){
+      
+    }
+
 
 
     // if (!row.dataset.id) {
@@ -156,7 +161,7 @@ saveButton.addEventListener("click", async function () {
   });
   console.log("送信データ:", dataToSend);
   
-  // バリデーションチェックでエラーなら警告
+  // バリデーションチェックで板厚または切断長さがエラーなら警告
   if (hasCheckmaThkCutLength) {
     alert("板厚または切断長さに不正な値が含まれています！")
     return;

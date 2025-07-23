@@ -21,3 +21,15 @@ export function checkifStockExists(pn_id) {
 // pn_ctrlで棚に格納されている品番を削除してしまった(is_deleted = True)の場合は
 // エラー警告を出す
 // ```
+
+
+class prodNumValidator{
+    constructor(row){
+        this.row=row;
+        this.dataTosend=[];
+        this.
+    }
+
+
+
+}
