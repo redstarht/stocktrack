@@ -1,7 +1,7 @@
 import { existPnListCreate } from "./existPnListCreate.js"
 import { serial_no_search } from "./serial_no_search.js"
 import { createAlertDisplayName } from "../common/displayname.js"
-import { validateFloat,checkifStockExists } from "../common/validation.js"
+import { prodNumValidator } from "../common/validation.js"
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -135,6 +135,8 @@ saveButton.addEventListener("click", async function () {
 
     rowData["id"] = row.dataset.id || null; // 既存であればIDを取得
     rowData["is_deleted"] = row.dataset.deleted || false;
+
+    thisRow = new prodNumValidator();
 
     // Float列（板厚・切断長さ)のバリデーションチェック
     if (validateFloat(rowData["material_thickness"]) && validateFloat(rowData["cut_length"])) {
