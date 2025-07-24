@@ -151,9 +151,9 @@ saveButton.addEventListener("click", async function () {
     }
 
     // 背番号と品番が未記入になっていないかチェック
-    if(rowData["serial_no"] || rowData["product_mo"]){
+    // if(rowData["serial_no"] || rowData["product_mo"]){
       
-    }
+    // }
 
 
 
