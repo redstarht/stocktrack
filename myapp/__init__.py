@@ -1,6 +1,17 @@
 from flask import Flask
 from .extensions import db, migrate
 from .routes import main
+from .model import (
+    Zone,
+    Shelf,
+    ProductNumber,
+    Cell,
+    CellStockStatus,
+    AllowStorage,
+    InoutLog,
+)
+import os
+
 
 def create_app():
     app = Flask(__name__)
@@ -11,6 +22,10 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
 
+    if not os.path.exists('myapp.db'):
+        print(os.path.exists('myapp.db'))
+        with app.app_context():
+            db.create_all()
     
     # blueprintを登録
     from myapp.routes import main
@@ -20,3 +35,7 @@ def create_app():
     app.register_blueprint(main)
     app.register_blueprint(api)
     return app
+
+def initialize_db():
+    # 初期データの追加
+    print("初期データの追加をします")

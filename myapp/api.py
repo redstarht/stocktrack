@@ -7,6 +7,8 @@ from flask import (
     url_for,
     session,
 )
+
+
 from .model import (
     Zone,
     Shelf,
@@ -18,7 +20,7 @@ from .model import (
 )
 from . import db
 
-from .data_management import check_stock_status , convert_to_int_set,check_del_alwStorRec
+from .data_management import check_del_pn_ctrl,check_stock_status , convert_to_int_set,check_del_alwStorRec
 
 api = Blueprint("api", __name__)
 
@@ -135,6 +137,8 @@ def save_product_number():
         is_deleted = pn_item.get("is_deleted", False)
         if is_deleted == "true":
             is_deleted = True
+            # 論理削除する品番が格納されていないか
+            check_del_pn_ctrl(id)
         elif is_deleted == "false":
             is_deleted = False
         else:

@@ -6,9 +6,14 @@ import { prodNumValidator } from "../common/validation.js"
 
 document.addEventListener("DOMContentLoaded", function () {
   const container = document.getElementById("input-container");
+
+
   const inputTable = document.getElementById("input-table");
 
   existPnListCreate(pn_list, inputTable);
+  setTimeout(() => {
+    container.scrollTop = container.scrollHeight;
+  }, 0);
   console.log(pn_list);
 
 
@@ -84,6 +89,10 @@ document.addEventListener("DOMContentLoaded", function () {
     newRow.appendChild(newDeleteCell);
 
     inputTable.appendChild(newRow);
+
+    setTimeout(() => {
+    container.scrollTop = container.scrollHeight;
+  }, 0);
   });
 
   // キャンセルボタン処理

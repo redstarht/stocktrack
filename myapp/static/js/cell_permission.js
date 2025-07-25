@@ -16,6 +16,11 @@ document.addEventListener("DOMContentLoaded", function () {
   // // バックエンドから取得したデータをinput要素に設定
   allowPnListCreate(pn_list, inputTable);
 
+  // 最下部スクロール
+  setTimeout(() => {
+    container.scrollTop = container.scrollHeight;
+  }, 0);
+
 
 
   // pn_list.forEach(pn => {
@@ -92,7 +97,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // 変更時処理
   radioButtons.forEach(radio => {
     radio.addEventListener("change", toggleOverlay);
-
+    setTimeout(() => {
+      container.scrollTop = container.scrollHeight;
+    }, 0);
   });
 
 
@@ -168,7 +175,7 @@ saveButton.addEventListener("click", async function () {
       body: JSON.stringify(dataToSend)
     });
     console.log("送信データ:", dataToSend)
-    
+
     // レスポンスが正常ではない場合、バックエンドのエラーレスポンスを取得して処理
     if (!response.ok) {
       const errorResult = await response.json(); // バックエンドのエラーレスポンスを取得

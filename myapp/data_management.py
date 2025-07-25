@@ -66,6 +66,15 @@ def check_del_alwStorRec(cell_id, deletepn_ids):
             f"cell_id {cell_id} の品番ID: {pn_id} の格納許可レコードを削除")
 
 
+def check_del_pn_ctrl(pn_id):
+    if CellStockStatus.query.filter_by(pn_id=pn_id).first():
+        message = f"Error:pn_id:{pn_id}はまだ格納されているため削除不可"
+        print(message)
+        raise ValueError(message)
+    print(f"pn_id:{pn_id}を論理削除")
+
+
+
 # def check_allow_storage(data):
 #     """
 #     cellテーブルのis_all_pn_allowedがfalseだが

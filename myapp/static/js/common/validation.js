@@ -43,17 +43,21 @@ export class prodNumValidator {
         return Number(value) === value || !isNaN(Number(value));
     }
 
-    checkifStockExists(pn_id) {
-        const stockExist = cell_stock_statuses.find(item => item.id === pn_id);
-        return stockExist !== undefined;
+    checkifStockExists(is_deleted,pn_id) {
+        console.log(this.row);
+        console.log(cell_stock_statuses);
+        const stockExist = cell_stock_statuses.find(item => String(item.pn_id) === String(pn_id));
+        return is_deleted === "true"  && stockExist !== undefined;
     }
+
+
 
     checkAlertprefix(alertprefix, message) {
         if (alertprefix) {
             this.alertMessages.push(message)
         } else {
             this.alertprefix = this.alertName;
-            this.alertMessages.push(`${this.alertName}の${message}`)
+            this.alertMessages.push(`${this.alertName}:${message}`)
         }
     }
 
@@ -86,6 +90,15 @@ export class prodNumValidator {
             message = '背番号が無効'
             this.checkAlertprefix(this.alertprefix, message);
         }
+
+        //削除しようとした品番が格納されていないか判定
+        const isValidifStockExsit = this.checkifStockExists(this.row["is_deleted"],this.row["id"]);
+        if(isValidifStockExsit){
+            message=`格納されているため削除できません`
+            this.checkAlertprefix(this.alertprefix,message);
+        }
+
+
         // console.log(this.alertMessages);
         return this.alertMessages
 
