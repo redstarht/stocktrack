@@ -27,6 +27,7 @@ def create_app():
         print(os.path.exists('myapp.db'))
         with app.app_context():
             db.create_all()
+    initialize_db()
     
     # blueprintを登録
     from myapp.routes import main
@@ -39,7 +40,8 @@ def create_app():
 
 def initialize_db():
     # 初期データの追加
-    seed_cell = pandas.read_csv('/seed/cell.csv')
-    seed_zone = pandas.read_csv('/seed/zone.csv')
-    seed_shelf = pandas.read_csv('/seed/shelf.csv')
+    seed_cell = pandas.read_csv('./seed/cell.csv')
+    print(f'seed_cell\n{seed_cell}')
+    seed_zone = pandas.read_csv('./seed/zone.csv')
+    seed_shelf = pandas.read_csv('./seed/shelf.csv')
     print("初期データの追加をします")
