@@ -52,22 +52,22 @@ class prodNumValidator{
         // 板厚判定
         const isValidThickness = this.validateFloat(this.row["material_thickness"]);
         if(!isValidThickness){
-            this.alertMessages.push(`${this.alertName}の板厚が無効です`)
+            this.alertMessages.push(`${this.alertName}の板厚が無効です\n`)
         }
         // 切断長さ判定
         const isValidLength = this.validateFloat(this.row["cut_length"]);
         if(!isValidLength){
-            this.alertMessages.push(`${this.alertName}の切断長さが無効です`)
+            this.alertMessages.push(`${this.alertName}の切断長さが無効です\n`)
         }
         // 品番判定
         const isValidprodNum = this.isEmpty(this.row["product_no"]);
         if(!isValidprodNum){
-            this.alertMessages.push(`${this.alertName}の品番が無効です`);
+            this.alertMessages.push(`${this.alertName}の品番が無効です\n`);
         }
         // 背番号判定
         const isValidSerialNo = this.isEmpty(this.row["serial_no"]);
         if(!isValidSerialNo){
-            this.alertMessages.push(`${this.alertName}の背番号が無効です`)
+            this.alertMessages.push(`${this.alertName}の背番号が無効です\n`)
         }
 
         return this.alertMessages

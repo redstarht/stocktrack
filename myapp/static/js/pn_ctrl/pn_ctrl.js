@@ -136,24 +136,25 @@ saveButton.addEventListener("click", async function () {
     rowData["id"] = row.dataset.id || null; // 既存であればIDを取得
     rowData["is_deleted"] = row.dataset.deleted || false;
 
-    thisRow = new prodNumValidator();
+    thisRow = new prodNumValidator(rowData);
+    alertNewData.push = thisRow.validateRowdata();
 
-    // Float列（板厚・切断長さ)のバリデーションチェック
-    if (validateFloat(rowData["material_thickness"]) && validateFloat(rowData["cut_length"])) {
-      dataToSend.push(rowData);
-    } else {
-      hasCheckRow = true;
-    }
+    // // Float列（板厚・切断長さ)のバリデーションチェック
+    // if (validateFloat(rowData["material_thickness"]) && validateFloat(rowData["cut_length"])) {
+    //   dataToSend.push(rowData);
+    // } else {
+    //   hasCheckRow = true;
+    // }
 
-    // 削除品番しようとした品番が格納されていないかチェック
-    if( rowData["is_deleted"] === "true" && !checkifStockExists(rowData["id"])) {
-      alertNewData.push(rowData);
-    }
+    // // 削除品番しようとした品番が格納されていないかチェック
+    // if( rowData["is_deleted"] === "true" && !checkifStockExists(rowData["id"])) {
+    //   alertNewData.push(rowData);
+    // }
 
-    // 背番号と品番が未記入になっていないかチェック
-    if(rowData["serial_no"] || rowData["product_mo"]){
+    // // 背番号と品番が未記入になっていないかチェック
+    // if(rowData["serial_no"] || rowData["product_mo"]){
       
-    }
+    // }
 
 
 
@@ -169,7 +170,7 @@ saveButton.addEventListener("click", async function () {
     return;
   }else if (alertNewData.length > 0) {
     // 削除品番しようとした品番が格納されていない場合は警告
-    const alertMessage = alertNewData.map(item => '削除エラー:「 '+createAlertDisplayName(item)+' 」はまだ格納されています').join("\n");
+    const alertMessage = alertNewData.map(item => `削除エラー:「 ${item}」`).join("\n");
     alert(alertMessage);
     return;
   }
