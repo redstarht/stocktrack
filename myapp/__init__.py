@@ -11,6 +11,7 @@ from .model import (
     InoutLog,
 )
 import os
+import pandas
 
 
 def create_app():
@@ -38,4 +39,7 @@ def create_app():
 
 def initialize_db():
     # 初期データの追加
+    seed_cell = pandas.read_csv('/seed/cell.csv')
+    seed_zone = pandas.read_csv('/seed/zone.csv')
+    seed_shelf = pandas.read_csv('/seed/shelf.csv')
     print("初期データの追加をします")
