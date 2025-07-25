@@ -120,7 +120,9 @@ const saveButton = document.getElementById("save-button");
 saveButton.addEventListener("click", async function () {
   const dataToSend = [];
   const alertNewData = [];
-  let hasCheckmaThkCutLength = false;
+  let thisRow = null;
+  let checkRow = null;
+  // let hasCheckmaThkCutLength = false;
   document.querySelectorAll("tr.row-input").forEach(row => {
     const rowData = {};
     row.querySelectorAll("input").forEach(input => {
@@ -137,7 +139,10 @@ saveButton.addEventListener("click", async function () {
     rowData["is_deleted"] = row.dataset.deleted || false;
 
     thisRow = new prodNumValidator(rowData);
-    alertNewData.push = thisRow.validateRowdata();
+    checkRow = thisRow.validateRowData();
+    if (checkRow && checkRow.length > 0) {
+      alertNewData.push(checkRow);
+    } else { dataToSend.push(rowData) }
 
     // // Float列（板厚・切断長さ)のバリデーションチェック
     // if (validateFloat(rowData["material_thickness"]) && validateFloat(rowData["cut_length"])) {
@@ -153,7 +158,7 @@ saveButton.addEventListener("click", async function () {
 
     // // 背番号と品番が未記入になっていないかチェック
     // if(rowData["serial_no"] || rowData["product_mo"]){
-      
+
     // }
 
 
@@ -163,14 +168,16 @@ saveButton.addEventListener("click", async function () {
     // }
   });
   console.log("送信データ:", dataToSend);
-  
+
   // バリデーションチェックで板厚または切断長さがエラーなら警告
-  if (hasCheckmaThkCutLength) {
-    alert("板厚または切断長さに不正な値が含まれています！")
-    return;
-  }else if (alertNewData.length > 0) {
-    // 削除品番しようとした品番が格納されていない場合は警告
-    const alertMessage = alertNewData.map(item => `削除エラー:「 ${item}」`).join("\n");
+  // if (hasCheckmaThkCutLength) {
+  //   alert("板厚または切断長さに不正な値が含まれています！")
+  //   return;
+  // }else 
+  if (alertNewData.length > 0) {
+    //エラーがあった場合は表示
+    console.log(alertNewData);
+    const alertMessage = alertNewData.map(item => `エラー:「 ${item}」`).join("\n");
     alert(alertMessage);
     return;
   }
