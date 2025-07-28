@@ -250,4 +250,5 @@ def save_cell_permisson():
         db.session.commit()
         return jsonify({"message": "保存完了"}), 200
     except ValueError as e:
+        session.rollback()
         return jsonify({"error":str(e)}),400
