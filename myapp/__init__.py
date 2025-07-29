@@ -12,6 +12,15 @@ from .model import (
 )
 import os
 import pandas
+from .backup import backup_sqlite ,backup_scheduler
+import schedule
+import time
+import threading
+
+base_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(base_dir)
+backup_dir = os.path.join(parent_dir,"backup")
+db_path = os.path.join(parent_dir, 'instance', 'myapp.db')
 
 
 def create_app():
@@ -23,11 +32,18 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
 
-    if not os.path.exists('myapp.db'):
-        print(os.path.exists('myapp.db'))
+
+    # .dbファイルが存在しない場合は作成し初期データを格納
+    if not os.path.exists(db_path):
+        print(os.path.exists(db_path))
         with app.app_context():
             db.create_all()
             initialize_db()
+    
+    # バックアップ機能を別スレッドで起動(毎日0:30にバックアップ処理)
+    backup_thread = threading.Thread(target=backup_scheduler, args=(db_path, backup_dir),daemon=True)
+    backup_thread.start()
+            
 
     # blueprintを登録
     from myapp.routes import main
@@ -51,8 +67,8 @@ def initialize_db():
         zone_instances = []
         for _, rec in seed_zone.iterrows():
             zone_instance = Zone(id=rec["id"],
-                                name=rec["name"]
-                                )
+                                 name=rec["name"]
+                                 )
             zone_instances.append(zone_instance)
         db.session.bulk_save_objects(zone_instances)
 
@@ -77,18 +93,17 @@ def initialize_db():
 
         for _, rec in seed_cell.iterrows():
             cell_instance = Cell(id=rec["id"],
-                                name=rec["name"],
-                                shelf_id=rec["shelf_id"],
-                                max_qty=rec["max_qty"],
-                                is_all_pn_allowed=rec["is_all_pn_allowed"])
+                                 name=rec["name"],
+                                 shelf_id=rec["shelf_id"],
+                                 max_qty=rec["max_qty"],
+                                 is_all_pn_allowed=rec["is_all_pn_allowed"])
             cell_instances.append(cell_instance)
         # リストcell_instancesを一括でbulkインサート
         db.session.bulk_save_objects(cell_instances)
         db.session.commit()
+        print("初期データの追加成功✅")
     except Exception as e:
         db.session.rollback()
         print(f"エラー発生❌:{e}")
-        
     finally:
-        print("初期データの追加成功✅")
         db.session.close()
