@@ -106,11 +106,11 @@ export function createPopup() {
 
 
         const searchInput = document.createElement('input');
-        searchInput.type = "text"; 
+        searchInput.type = "text";
         searchInput.id = "pop-serial-search";
         searchInput.placeholder = "背番号検索";
         searchInput.name = "pop-serial_no";
-        searchInput.setAttribute("inputmode" ,"numeric")
+        searchInput.setAttribute("inputmode", "numeric")
 
         const searchBtn = document.createElement('button');
         searchBtn.textContent = "検索";
@@ -265,14 +265,21 @@ export function createPopup() {
       });
 
       // SAVEボタンの処理
-      saveBtn.addEventListener('click', () => {
+      saveBtn.addEventListener('click',async () => {
+        try {
+          // データ格納・保存処理
+          await saveCheckedData(button, cellData, stock_qty);
+
+        } catch (error) {
+          alert(error.message);
+          return;
+        }
         overlay.style.display = 'none';
         popup.style.display = 'none';
-        // データ格納・保存処理
-        saveCheckedData(button, cellData, stock_qty);
         // モジュール内変数の初期化
         input_pn = [];
         inputContainer = null;
+
 
       });
 

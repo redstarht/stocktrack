@@ -27,18 +27,11 @@ export async function saveCheckedData(button, cellData, stock_qty) {
   if (new_stock_qty !== prev_stock_qty) {
 
     // 新規格納時の場合の例外処理
-    if (!cellData.pn_id)
-      try {
-        if (!pnCellTrue) {
-          throw new Error("背番号を選択してください！")
-        }
-
-      } catch (error) {
-        alert(error.message);
-        return
-
+    if (!cellData.pn_id) {
+      if (!pnCellTrue) {
+        throw new Error("背番号を選択してください！"); // エラーをスロー
       }
-
+    }
 
 
     // HTMLの描画処理
