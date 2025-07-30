@@ -29,7 +29,7 @@ export async function saveCheckedData(button, cellData, stock_qty) {
     // 新規格納時の場合の例外処理
     if (!cellData.pn_id) {
       if (!pnCellTrue) {
-        throw new Error("背番号を選択してください！"); // エラーをスロー
+        throw new Error("\u274c背番号を選択してください！"); // エラーをスロー
       }
     }
 
@@ -106,7 +106,7 @@ export async function saveCheckedData(button, cellData, stock_qty) {
 
       const result = await response.json();
       console.log("送信結果:", result);
-      alert(`保存完了しました！`);
+      alert(`\u2b55保存完了しました！`);
 
     } catch (error) {
       console.error("送信エラー:", error);
