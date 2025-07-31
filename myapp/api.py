@@ -19,8 +19,8 @@ from .model import (
     InoutLog,
 )
 from . import db
-
-from .data_management import check_del_pn_ctrl,check_stock_status , convert_to_int_set,check_del_alwStorRec
+import datetime
+from .data_management import check_del_pn_ctrl, check_stock_status, convert_to_int_set, check_del_alwStorRec
 
 api = Blueprint("api", __name__)
 
@@ -207,9 +207,9 @@ def save_cell_permisson():
         # 個別許可処理
         if not is_all_pn_allowed:
             # 現在のDBにある許可品番の一覧を{}集合で取得
-            existing_records = AllowStorage.query.filter_by(cell_id=cell_id).all()
+            existing_records = AllowStorage.query.filter_by(
+                cell_id=cell_id).all()
             existin_pn_ids = {rec.pn_id for rec in existing_records}
-            
 
             # 送信されたpn_idの一覧を取得
             posted_pn_ids = {
@@ -225,14 +225,17 @@ def save_cell_permisson():
             例: existin_pn_ids = {1, 2, 3}, posted_pn_ids = {2, 3, 4}
             deletepn_ids = {1}, new_pn_ids = {4}
             '''
-            deletepn_ids = convert_to_int_set(existin_pn_ids) - convert_to_int_set(posted_pn_ids)
-            
+            deletepn_ids = convert_to_int_set(
+                existin_pn_ids) - convert_to_int_set(posted_pn_ids)
+
             # 許可を取り外す品番がまだセルに格納されていないか確認
-            check_del_alwStorRec(cell_id,deletepn_ids)
-            
-            new_pn_ids = convert_to_int_set(posted_pn_ids) - convert_to_int_set(existin_pn_ids)
-            print(f"deletepn_ids:{deletepn_ids}\nexsisin_pnids:{existin_pn_ids}\nposted_pd_ids:{posted_pn_ids}\nnew_pn_ids:{new_pn_ids}")
-        
+            check_del_alwStorRec(cell_id, deletepn_ids)
+
+            new_pn_ids = convert_to_int_set(
+                posted_pn_ids) - convert_to_int_set(existin_pn_ids)
+            print(
+                f"deletepn_ids:{deletepn_ids}\nexsisin_pnids:{existin_pn_ids}\nposted_pd_ids:{posted_pn_ids}\nnew_pn_ids:{new_pn_ids}")
+
             with db.session.no_autoflush:
                 for pn_id in new_pn_ids:
                     db.session.add(AllowStorage(cell_id=cell_id, pn_id=pn_id))
@@ -245,10 +248,27 @@ def save_cell_permisson():
                     ).delete(synchronize_session=False)
                     #  synchronize_session = false セッション内のオブジェクトは無視して同期処理を一切しない
 
-        
-
         db.session.commit()
         return jsonify({"message": "保存完了"}), 200
     except ValueError as e:
         session.rollback()
-        return jsonify({"error":str(e)}),400
+        return jsonify({"error": str(e)}), 400
+
+
+@api.route("/api/cell_status")
+# crll_stock_statusの値を、
+# 更新時間を描画するため、今の時間を返す
+def order_cell_status():
+    obj_cell_stock_status = CellStockStatus.query.all()
+    cell_stock_statuses = [cell_stock_status.to_dict()
+                           for cell_stock_status in obj_cell_stock_status]
+    
+    response_data = {
+        "time_stamp ":datetime.datetime.now(),
+        "cell_stock_statuses":cell_stock_statuses
+    }
+    
+    
+
+    return jsonify(response_data)
+

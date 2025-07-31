@@ -1,0 +1,63 @@
+# ビュー画面設計
+### 目的
+ cell_stock_statusから一定間隔で最新情報を取得しmap上に最新状態のマップを描画する
+
+### バックエンド設計
+
+#### エンドポイント一覧
+| エンドポイント名 | 役割                                                                              |
+| ---------------- | --------------------------------------------------------------------------------- |
+| /view_map        | Zone , Shelf ,Cell を格納されている構造に従ってデータを渡す , view_map.htmlを渡す |
+| /api/cell_status | cell_stock_statusのデータ最新状態を、現在時刻とともに渡す           |
+
+#### データ取得ロジック
+```py
+@api.route("/api/cell_status", methods=["POST"])
+# crll_stock_statusの属性に加えて、更新時間を描画するため、今の時間を返す
+def order_cell_status():
+    loadtime = datetime.datetime.now()
+    obj_cell_stock_status = CellStockStatus.query.all()
+    cell_stock_statuses = [cell_stock_status.to_dict()
+                           for cell_stock_status in obj_cell_stock_status]
+
+    return loadtime=loadtime , cell_stock_status = cell_stock_status
+```
+#### データ構造
+```json
+cell_stock_status = {
+"cell_id":1,
+"pn_id":1,
+"stock_qty":2
+}
+
+```
+
+
+### フロントエンド設計
+#### 画面設計
+・inout_map.htmlと同じ仕様をもつ
+　Zone絞り込みボタン,品番検索ボタンを配置する
+・棚の描画手法が切り替えられる
+・すべての棚をフルページで画面いっぱいに表示
+
+#### settimeout() 
+２秒に１回データを取得するために利用
+➡　APIエンドポイントからデータをfetch
+
+#### setinterval()
+関連するデータをリセットするために利用
+➡　現在描画されている htmlの構造と要素をrefresh
+
+#### 動作仕様
+・2秒に１回最新状態のcell_stock_statusのデータをマップに描画する
+・更新時刻 YYMMDDTHH:MM:SSを表示する
+・エラーハンドリング
+　・データ取得エラー
+　  ・リトライ警告
+　  ・
+
+
+補足
+　対象のセルをクリックしたらそのセルの入出ログが見れる仕様？
+
+

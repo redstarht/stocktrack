@@ -106,3 +106,22 @@ def inout_map():
                            for cell_stock_status in obj_cell_stock_status]
 
     return render_template('inout_map.html', zones=zones, shelfs=shelfs, cells=cells, product_numbers=product_numbers, allow_storage=allow_storage, cell_stock_statuses=cell_stock_statuses)
+
+
+
+@main.route('/view_map')
+def view_map():
+    obj_zones = Zone.query.all()
+    zones = [zone.to_dict() for zone in obj_zones]
+
+    obj_shelfs = Shelf.query.all()
+    raw_shelfs = [shelf.to_dict() for shelf in obj_shelfs]
+    shelfs = shelfs_with_class(raw_shelfs)
+    obj_product_numbers = ProductNumber.query.filter_by(is_deleted=False).all()
+    product_numbers = [pn.to_dict() for pn in obj_product_numbers]
+
+    obj_cells = Cell.query.all()
+    cells = [cell.to_dict() for cell in obj_cells]
+
+
+    return render_template('view_map.html', zones=zones, shelfs=shelfs, cells=cells, product_numbers=product_numbers)
