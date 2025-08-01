@@ -48,6 +48,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const btnIcon = document.createElement("i");
 
             cellElm.className = "cell";
+            cellElm.dataset.cellId = cell.id;
+
 
             // ストック状態テーブルから該当のセルIDに品番があるか確認
             const stock_cell = cell_stock_list.find(stock => stock.cell_id == cell.id);
@@ -59,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (stock_cell) {
 
-                const { pnItem , displayName }= createDisplayName(pn_list,stock_cell.pn_id);
+                const { pnItem, displayName } = createDisplayName(pn_list, stock_cell.pn_id);
                 // product_number = pn_list.find(pnItem => pnItem.id == stock_cell.pn_id)
 
                 product_number = pnItem;

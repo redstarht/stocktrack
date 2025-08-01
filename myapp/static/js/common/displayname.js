@@ -8,8 +8,6 @@ export function createDisplayName(pn_list, pn_id) {
         displayValue(pnItem.material_thickness),
         displayValue(pnItem.cut_length),
     ].join(" / ");
-    console.log("✅選択した品番",pnItem)
-    console.log("✅DisplayNameが読み込まれました!",unionvalue);
 
     return {
         pnItem: pnItem,
