@@ -12,12 +12,32 @@ export function render_shelf(renderInfo, reloadCellStockData) {
                     : null;
                 // cellElmをdata属性を使って取得
                 const cellElm = renderInfo.shelfGridElm.querySelector(`[data-cell-id="${cell.id}"]`);
-                console.log(cellElm);
                 
 
                 if (cellElm) {
                     // stock_cellが存在する場合
+                    /*
+                    条件分岐
+                    1.スタックゲージそのまま
+                    2.スタックゲージの増減
+                    3.空➡スタックゲージ表示
+                    4.スタックゲージ➡空
+
+                    現状描画されている情報(Class名から)
+                    上記1~4パターンを判定
+
+                    */
                     if (stock_cell) {
+                        /*
+                        div.classname = stack DOMの状態を更新
+                        div.classname = cell-stock-btn DOMの状態を更新
+                        // レコードあるとき
+                        <i class="btn-pn-stock">004</i>
+
+                        // レコードないとき
+                        bi bi-box-arrow-in-down"                   
+                
+                        */
                         let product_number = pn_list.find(pnItem => pnItem.id == stock_cell.pn_id);
                         cellElm.dataset.pn = stock_cell.pn_id;
 
@@ -25,12 +45,15 @@ export function render_shelf(renderInfo, reloadCellStockData) {
                         const stack = cellElm.querySelector('.stack');
                         stackGaugeCreate(cell.max_qty, stock_cell.stock_qty, stack);
 
-                        const divIcon = cellElm.querySelector('.btn-pn-stock');
+                        const divIcon = cellElm.querySelector('i');
                         divIcon.textContent = product_number.serial_no;
                         divIcon.className = "btn-pn-stock";
                     } else {
                         // stock_cellが存在しない場合の処理
-                        const divIcon = cellElm.querySelector('.btn-pn-stock');
+                        const stack = cellElm.querySelector('.stack');
+                        stack.innerHTML = "";
+                        const divIcon = cellElm.querySelector('i');
+                        divIcon.textContent="";
                         divIcon.className = "bi bi-box-arrow-in-down";
                     }
                 }
@@ -90,7 +113,7 @@ export function render_shelf(renderInfo, reloadCellStockData) {
                 // stock_cellを取得する前に存在確認
                 const stock_cell = reloadCellStockData && reloadCellStockData.cell_stock_statuses
                     ? reloadCellStockData.cell_stock_statuses.find(stock => stock.cell_id == cell.id)
-                    : null;
+                    : false;
 
                 // 品番テーブルから街灯品番を抽出
                 // 格納品番が存在した場合は該当セルに情報を描画
@@ -98,6 +121,12 @@ export function render_shelf(renderInfo, reloadCellStockData) {
 
 
                 if (stock_cell) {
+                    /*
+                    stock_cellにレコードがあった場合は
+                    stackGaugeCreateからゲージDOM要素を作成
+                    divIcon
+                    
+                    */
                     let product_number = null;
 
                     // const { pnItem, displayName } = createDisplayName(pn_list, stock_cell.pn_id);
@@ -112,8 +141,6 @@ export function render_shelf(renderInfo, reloadCellStockData) {
                     divIcon.textContent = product_number.serial_no;
                     divIcon.className = "btn-pn-stock"
                     // cellDiv.dataset.displayname = displayName;
-
-
 
                 } else {
 
