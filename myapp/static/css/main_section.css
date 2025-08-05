@@ -1,5 +1,8 @@
-/* ゾーンサイド width 10% */
-/* PNサイド width 15% */
+button, input, optgroup, select, textarea {
+  font-size: normal; 
+  line-height: normal; 
+}
+
 
 .main-section {
     display: flex;
@@ -83,7 +86,7 @@
     /* position: absolute; */
     display: flex;
     text-align: center;
-    align-items:center;
+    align-items: center;
     justify-content: center;
     /* padding: 0.5rem; */
     border-radius: 5%;
@@ -137,16 +140,17 @@
 }
 
 .stack-box {
-  width: 100%;
-  height: 33%;
-  background-color: #eee;
-  border: 1px solid #999;
-  box-sizing: border-box;
+    width: 100%;
+    height: 33%;
+    background-color: #eee;
+    border: 1px solid #999;
+    box-sizing: border-box;
 }
 
 /* 在庫があるボックス */
 .stack-box.filled {
-  background-color: rgba(255, 146, 20, 0.5); /* 緑 */
+    background-color: rgba(255, 146, 20, 0.5);
+    /* 緑 */
 
 }
 
@@ -155,7 +159,8 @@
     width: 100%;
     height: 100%;
     /* aspect-ratio: 1 / 1; */
-    text-align: center;
+    display:flex;
+    text-align: center;    
     align-items: center;
     justify-content: center;
     border: none;
@@ -168,7 +173,7 @@
 }
 
 .cell-stock-btn i {
-    font-size: 100%;
+    font-size: 1em;
     color: rgb(255, 255, 255);
     text-align: center;
     font-style: normal;
@@ -187,6 +192,11 @@
     overflow: hidden;
     text-align: center;
     z-index: 0;
+}
+
+.bi{
+    text-align: center;
+
 }
 
 

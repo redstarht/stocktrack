@@ -106,7 +106,6 @@ export async function saveCheckedData(button, cellData, stock_qty) {
 
       const result = await response.json();
       console.log("送信結果:", result);
-      alert(`\u2b55保存完了しました！`);
 
     } catch (error) {
       console.error("送信エラー:", error);
