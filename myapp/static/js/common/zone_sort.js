@@ -3,7 +3,7 @@ export function initZoneSort() {
     const zoneBtns = document.querySelectorAll(".zone-item");
     // すべての品番ボタンを取得
     const pnBtns = document.querySelectorAll(".pn-item");
-    
+
     // すべての棚を取得
     const shelves = document.querySelectorAll(".shelf");
     const allzone = document.querySelector(".allzone");
@@ -24,9 +24,9 @@ export function initZoneSort() {
         zoneBtn.addEventListener("click", () => {
             const zoneId = zoneBtn.dataset.zone_id;
             shelves.forEach(shelf => {
-                if(shelf.dataset.zone_id === zoneId) {
+                if (shelf.dataset.zone_id === zoneId) {
                     shelf.style.display = "block"; // 表示
-                    console.log("✅棚が再生成されました！",zoneId)
+                    console.log("✅棚が再生成されました！", zoneId)
                 } else {
                     shelf.style.display = "none"; // 非表示
                 }
@@ -44,4 +44,20 @@ export function initZoneSort() {
 
         });
     });
+};
+
+export function cycleZone(zoneList) {
+
+    // すべての棚を取得
+    const shelves = document.querySelectorAll(".shelf");
+    shelves.forEach(shelf => {
+        if (shelf.dataset.zone_id === zoneId) {
+            shelf.style.display = "block"; // 表示
+            console.log("✅棚が再生成されました！", zoneId)
+        } else {
+            shelf.style.display = "none"; // 非表示
+        }
+    });
+
+
 };
