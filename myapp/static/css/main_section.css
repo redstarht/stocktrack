@@ -1,18 +1,42 @@
-button, input, optgroup, select, textarea {
-  font-size: normal; 
-  line-height: normal; 
+button,
+input,
+optgroup,
+select,
+textarea {
+    font-size: normal;
+    line-height: normal;
 }
 
 
 .main-section {
     display: flex;
     /* flex-direction: row; */
+    position: relative;
     gap: 3rem;
 
     width: 74%;
     height: 100%;
     margin-top: 0.5rem;
     margin-left: 0.5rem;
+}
+
+.main-header {
+    z-index: 1;
+    font-weight: bold;
+    /* 太字 */
+    color: #333;
+    /* テキストの色 */
+    font-size: 0.7em;
+    padding: 0.2%;
+    background-color: rgba(255, 255, 255, 0.8);
+    /* 半透明の背景色 */
+    border-radius: 8px;
+    /* 角を丸くする */
+    width: 100%;
+    height: 3.7%;
+    display: flex;
+    justify-content: space-between;
+
 }
 
 /* 親：横並び＋折り返し対応 */
@@ -30,6 +54,8 @@ button, input, optgroup, select, textarea {
     height: 100%;
     overflow-y: auto;
     padding: 1.5rem;
+    position: absolute;
+    z-index: 0;
     /* aspect-ratio: 2 / 2; */
     /* place-content: center;
     place-items: center; */
@@ -159,8 +185,8 @@ button, input, optgroup, select, textarea {
     width: 100%;
     height: 100%;
     /* aspect-ratio: 1 / 1; */
-    display:flex;
-    text-align: center;    
+    display: flex;
+    text-align: center;
     align-items: center;
     justify-content: center;
     border: none;
@@ -194,7 +220,7 @@ button, input, optgroup, select, textarea {
     z-index: 0;
 }
 
-.bi{
+.bi {
     text-align: center;
 
 }

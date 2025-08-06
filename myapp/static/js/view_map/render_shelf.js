@@ -4,6 +4,9 @@ import { createDisplayName } from "../common/displayname.js";
 export function render_shelf(renderInfo, reloadCellStockData) {
     if (renderInfo.shelfGridElm.hasChildNodes()) {
         console.log("リロード処理:", reloadCellStockData);
+        const timeStampLabel = renderInfo.mainHeader.querySelector(".timeStamp");
+        timeStampLabel.textContent = `更新時間：${reloadCellStockData.time_stamp}`;
+
         renderInfo.shelf_list.forEach(shelfItem => {
             const shelf_cells = cell_list.filter(cell => cell.shelf_id === shelfItem.id);
             shelf_cells.forEach(cell => {
@@ -12,7 +15,7 @@ export function render_shelf(renderInfo, reloadCellStockData) {
                     : null;
                 // cellElmをdata属性を使って取得
                 const cellElm = renderInfo.shelfGridElm.querySelector(`[data-cell-id="${cell.id}"]`);
-                
+
 
                 if (cellElm) {
                     // stock_cellが存在する場合
@@ -53,7 +56,7 @@ export function render_shelf(renderInfo, reloadCellStockData) {
                         const stack = cellElm.querySelector('.stack');
                         stack.innerHTML = "";
                         const divIcon = cellElm.querySelector('i');
-                        divIcon.textContent="";
+                        divIcon.textContent = "";
                         divIcon.className = "bi bi-box-arrow-in-down";
                     }
                 }
@@ -65,6 +68,15 @@ export function render_shelf(renderInfo, reloadCellStockData) {
         // renderInfo.shelfGridElm= null;
     } else {
         console.log("初期描画処理");
+        // mainセクションのヘッダー情報描画
+        const mainTitle = document.createElement("div");
+        mainTitle.textContent = "マップ確認画面";
+        const timeStampLabel = document.createElement("div");
+        timeStampLabel.className = "timeStamp"
+        timeStampLabel.textContent = `更新時間：${reloadCellStockData.time_stamp}`;
+        renderInfo.mainHeader.appendChild(mainTitle);
+        renderInfo.mainHeader.appendChild(timeStampLabel)
+
         renderInfo.shelf_list.forEach(shelfItem => {
             // shelfContainerにcellが入る
             const shelfContainer = document.createElement("div");
@@ -160,6 +172,8 @@ export function render_shelf(renderInfo, reloadCellStockData) {
 
             shelfContainer.appendChild(renderInfo.cellGridElm);
             renderInfo.shelfGridElm.appendChild(shelfContainer);
+
+
 
         });
     }

@@ -20,6 +20,7 @@ from .model import (
 )
 from . import db
 import datetime
+import pytz
 from .data_management import check_del_pn_ctrl, check_stock_status, convert_to_int_set, check_del_alwStorRec
 
 api = Blueprint("api", __name__)
@@ -262,9 +263,11 @@ def order_cell_status():
     obj_cell_stock_status = CellStockStatus.query.all()
     cell_stock_statuses = [cell_stock_status.to_dict()
                            for cell_stock_status in obj_cell_stock_status]
+    timestamp = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
+    formatted_time = timestamp.strftime('%Y/%m/%d %H:%M:%S')
     
     response_data = {
-        "time_stamp ":datetime.datetime.now(),
+        "time_stamp":formatted_time,
         "cell_stock_statuses":cell_stock_statuses
     }
     
