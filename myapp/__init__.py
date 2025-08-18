@@ -12,7 +12,7 @@ from .model import (
 )
 from .backup import backup_sqlite ,backup_scheduler
 import schedule,pandas,os,threading,time
-from logging import getLogger
+from .logging_setup import setup_logging
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
@@ -29,6 +29,7 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
     
+    setup_logging()
 
 
     # .dbファイルが存在しない場合は作成し初期データを格納
