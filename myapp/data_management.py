@@ -23,7 +23,7 @@ def check_stock_status(data):
     """
     cell_idとpn_idの組み合わせは新規なので新規レコードで登録する処理となるが
     cell_idはすでに登録されている場合(別のpn_idが存在) はエラーを返す
-    ※cell_idとpn_idの組合わせはユニークである必要がある
+    ※cell_idとpn_idの組合わせはユニーク
     例: cell_id=1, pn_id=2 が登録されている場合
     cell_id=1, pn_id=3 を登録しようとするとエラーとなる
     """

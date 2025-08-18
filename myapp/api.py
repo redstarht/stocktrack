@@ -104,7 +104,7 @@ def save_product_number():
     # product_numbers = data.get('product_no', [])
 
     '''
-    データ構造 print(product_numbers)
+
     [{'serial_no': '001', 'product_no': '12345-67890', 'material': 'XYZB10-100', 'material_thickness': '2', 'cut_length': '850', 'id': '1'},
     {'serial_no': '002', 'product_no': '54321-09876', 'material': 'ABCZ20-200', 'material_thickness': '3', 'cut_length': '920.5', 'id': '2'},
     {'serial_no': '003', 'product_no': '98765-43210', 'material': 'LMNQ15-150', 'material_thickness': '1.5', 'cut_length': '780.3', 'id': '3'}

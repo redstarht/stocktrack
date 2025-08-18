@@ -1,0 +1,7 @@
+2025-08-08 11:35:57,024 - root - INFO - アプリケーションが開始されました
+2025-08-08 11:35:57,032 - root - ERROR - ゼロ除算エラーが発生しました
+Traceback (most recent call last):
+  File "C:\Users\2312020\AppData\Local\Temp\ipykernel_26400\3136766304.py", line 33, in <module>
+    1 / 0
+    ~~^~~
+ZeroDivisionError: division by zero
