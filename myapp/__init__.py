@@ -1,5 +1,5 @@
 from flask import Flask
-from .extensions import db, migrate
+from .extensions import db, migrate, fetch_base_path
 from .routes import main
 from .model import (
     Zone,
@@ -10,27 +10,41 @@ from .model import (
     AllowStorage,
     InoutLog,
 )
-from .backup import backup_sqlite ,backup_scheduler
-import schedule,pandas,os,threading,time
+
+
+from .backup import backup_sqlite, backup_scheduler
+import schedule
+import pandas
+import os
+import sys
+import threading
+import time
 from .logging_setup import setup_logging
 
-base_dir = os.path.dirname(os.path.abspath(__file__))
+
+base_dir = None
+base_dir = fetch_base_path()
 parent_dir = os.path.dirname(base_dir)
-backup_dir = os.path.join(parent_dir,"backup")
+backup_dir = os.path.join(parent_dir, "backup")
+seed_dir = os.path.join(parent_dir, "seed")
+shelfCsv_dir = os.path.join(seed_dir, "shelf.csv")
+zoneCsv_dir = os.path.join(seed_dir, "zone.csv")
+cellCsv_dir = os.path.join(seed_dir, "cell.csv")
+
 db_path = os.path.join(parent_dir, 'instance', 'myapp.db')
 
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__,template_folder=os.path.join(base_dir,'templates'))
     app.config.from_mapping(
-        SQLALCHEMY_DATABASE_URI='sqlite:///myapp.db',
+        SQLALCHEMY_DATABASE_URI=f'sqlite:///{db_path}',
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
     )
+   
     db.init_app(app)
     migrate.init_app(app, db)
-    
-    setup_logging()
 
+    setup_logging()
 
     # .dbファイルが存在しない場合は作成し初期データを格納
     if not os.path.exists(db_path):
@@ -38,11 +52,11 @@ def create_app():
         with app.app_context():
             db.create_all()
             initialize_db()
-    
+
     # バックアップ機能を別スレッドで起動(毎日0:30にバックアップ処理)
-    backup_thread = threading.Thread(target=backup_scheduler, args=(db_path, backup_dir),daemon=True)
+    backup_thread = threading.Thread(
+        target=backup_scheduler, args=(db_path, backup_dir), daemon=True)
     backup_thread.start()
-            
 
     # blueprintを登録
     from myapp.routes import main
@@ -62,7 +76,7 @@ def initialize_db():
     print("初期データの追加をします")
     try:
         # zoneテーブルへの挿入
-        seed_zone = pandas.read_csv('./seed/zone.csv')
+        seed_zone = pandas.read_csv(zoneCsv_dir)
         zone_instances = []
         for _, rec in seed_zone.iterrows():
             zone_instance = Zone(id=rec["id"],
@@ -72,7 +86,7 @@ def initialize_db():
         db.session.bulk_save_objects(zone_instances)
 
         # shelfテーブルへの挿入
-        seed_shelf = pandas.read_csv('./seed/shelf.csv')
+        seed_shelf = pandas.read_csv(shelfCsv_dir)
         shelf_instances = []
         for _, rec in seed_shelf.iterrows():
             shelf_instance = Shelf(
@@ -87,7 +101,7 @@ def initialize_db():
         db.session.bulk_save_objects(shelf_instances)
 
         # セルテーブルへの挿入
-        seed_cell = pandas.read_csv('./seed/cell.csv')
+        seed_cell = pandas.read_csv(cellCsv_dir)
         cell_instances = []
 
         for _, rec in seed_cell.iterrows():
@@ -106,3 +120,5 @@ def initialize_db():
         print(f"エラー発生❌:{e}")
     finally:
         db.session.close()
+
+
