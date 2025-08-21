@@ -31,7 +31,7 @@ def fetch_base_path() -> str:
         print("Running in a PyInstaller bundled environment")
         print(f"sys._MEIPASS: {sys._MEIPASS}")
         print(f"EXE実行ファイルのPASS : {os.path.dirname(sys.executable)}")
-        return os.path.dirname(sys.executable)
+        return sys._MEIPASS
     else:
         # スクリプトの実行ファイルのパスを取得
         print("Running in a regular Python environment")

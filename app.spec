@@ -1,14 +1,11 @@
 # -*- mode: python ; coding: utf-8 -*-
 
-paths = [
-         './'
-         ]
 
 a = Analysis(
     ['app.py'],
     pathex=[],
     binaries=[],
-    datas=[('C:/z/app/stocktrack/myapp/templates', 'templates'), ('C:/z/app/stocktrack/myapp/static', 'static'), ('C:/z/app/stocktrack/instance', 'instance'), ('C:/z/app/stocktrack/seed', 'seed')],
+    datas=[('myapp/templates', 'templates'), ('myapp/static', 'static'), ('instance', 'instance'), ('myapp/seed', 'seed')],
     hiddenimports=['flask', 'jinja2'],
     hookspath=[],
     hooksconfig={},

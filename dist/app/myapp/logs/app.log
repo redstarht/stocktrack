@@ -1,1 +1,12 @@
-2025-08-21 15:47:13,329 - waitress - INFO - Serving on http://0.0.0.0:8080
+2025-08-22 01:03:13,314 - waitress - INFO - Serving on http://0.0.0.0:8080
+2025-08-22 01:03:25,224 - waitress.queue - WARNING - Task queue depth is 1
+2025-08-22 01:03:30,017 - waitress.queue - WARNING - Task queue depth is 1
+2025-08-22 01:03:32,707 - waitress.queue - WARNING - Task queue depth is 1
+2025-08-22 01:03:32,708 - waitress.queue - WARNING - Task queue depth is 2
+2025-08-22 01:03:47,322 - waitress.queue - WARNING - Task queue depth is 1
+2025-08-22 01:03:47,328 - waitress.queue - WARNING - Task queue depth is 2
+2025-08-22 01:03:54,232 - waitress - INFO - Serving on http://0.0.0.0:8080
+2025-08-22 01:04:31,844 - waitress.queue - WARNING - Task queue depth is 1
+2025-08-22 01:04:31,846 - waitress.queue - WARNING - Task queue depth is 2
+2025-08-22 01:04:32,154 - waitress.queue - WARNING - Task queue depth is 1
+2025-08-22 01:04:32,155 - waitress.queue - WARNING - Task queue depth is 2

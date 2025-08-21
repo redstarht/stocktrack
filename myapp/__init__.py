@@ -26,7 +26,7 @@ base_dir = None
 base_dir = fetch_base_path()
 parent_dir = os.path.dirname(base_dir)
 backup_dir = os.path.join(parent_dir, "backup")
-seed_dir = os.path.join(parent_dir, "seed")
+seed_dir = os.path.join(base_dir, "seed")
 shelfCsv_dir = os.path.join(seed_dir, "shelf.csv")
 zoneCsv_dir = os.path.join(seed_dir, "zone.csv")
 cellCsv_dir = os.path.join(seed_dir, "cell.csv")
@@ -39,7 +39,7 @@ db_path = os.path.join(parent_dir, 'instance', 'myapp.db')
 
 
 def create_app():
-    app = Flask(__name__,template_folder=os.path.join(base_dir,'templates'))
+    app = Flask(__name__,template_folder=os.path.join(base_dir,'templates'),static_folder=os.path.join(base_dir,'static'))
     app.config.from_mapping(
         SQLALCHEMY_DATABASE_URI=f'sqlite:///{db_path}',
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
