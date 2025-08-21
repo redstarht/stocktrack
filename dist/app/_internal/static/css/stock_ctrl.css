@@ -1,0 +1,78 @@
+.gauge-container {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.gauge-block {
+    width: 4vh;
+    height: 4vh;
+    background-color: #ccc;
+    border: 0.1rem solid #999;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+
+.gauge-block.active {
+    background-color: #4caf50;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #4caf50;
+}
+
+.stock-btn {
+    /* border-radius: 50%; */
+    width: 15vh;
+    height: 8vh;
+    background-color: #4caf50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+.stock-btn-icon {
+    font-size: 3vh;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(1.1);
+}
+
+.minus-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    /* ホバー時のトランジション */
+}
+
+.minus-btn:hover {
+    background-color: #c0392b;
+    /* ホバー時は少し暗い赤 */
+}
+
+.plus-btn {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.plus-btn:hover {
+    background-color: #27ae60;
+    /* ホバー時は少し暗い緑 */
+}
+
+
+
+
+.close-popup-btn {
+    font-size: 3vh;
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>スクロールバー表示はメインだけ</title>
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;         /* 画面全体の高さ */
+  overflow: hidden;      /* 全体のスクロールバーを消す */
+  background: #000;
+  color: #fff;
+  font-size: 16px;
+}
+
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  flex: 1;               /* 縦方向を全部埋める */
+  display: flex;
+  min-height: 0; /* 子要素の高さを制限 */
+}
+
+.zone-sidebar {
+  width: 10%;
+  background: #444;
+}
+
+.pn-sidebar {
+  width: 15%;
+  background: #555;
+}
+
+.main-section {
+  width: 75%;
+  background: #666;
+  overflow-y: auto;      /* main-sectionだけがスクロールする */
+  min-height: 0;  /* flexで「中身の高さに合わせる」ため */
+}
+
+.zone-sidebar, .pn-sidebar, .main-section {
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* メイン中のグリッド例 */
+.shelf-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  overflow-y: scroll;  
+  flex: 1; /* グリッドも縦方向を全部埋める */
+  height: 100%;
+}
+
+.shelf {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #0ff;
+  aspect-ratio: 1 / 1.1;
+}
+
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="row">
+    <div class="zone-sidebar">
+      <p>Zone Sidebar</p>
+    </div>
+    <div class="pn-sidebar">
+      <p>PN Sidebar</p>
+    </div>
+    <div class="main-section">
+      <div class="shelf-grid">
+        <div class="shelf">棚1</div>
+        <div class="shelf">棚2</div>
+        <div class="shelf">棚3</div>
+        <div class="shelf">棚4</div>
+        <div class="shelf">棚5</div>
+        <div class="shelf">棚6</div>
+        <div class="shelf">棚7</div>
+        <div class="shelf">棚8</div>
+        <div class="shelf">棚9</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
+<script src="../static/js/test.js"></script>
+

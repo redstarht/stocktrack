@@ -1,0 +1,131 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    background-color: #000000 !important;
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+
+}
+
+.wrapper {
+    width: 100%;
+    height: 100% !important;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* ⇡をコメントアウトすると頂点揃えになる */
+    align-items: center;
+    gap: 1vh;
+}
+
+.header {
+    margin-top: 1%;
+    width: 40vw;
+    font-size: 5vh;
+    color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.pn-input {
+    width: 90%;
+    display: flex;
+    border: 2px solid #32fc17;
+    border-radius: 0.5rem;
+    background-color: rgb(202, 202, 202, 0.5);
+}
+
+
+#input-container {
+    width: 100%;
+    height: 65vh;
+    /* border: 1px solid #ccc; */
+    overflow-y: scroll;
+    /* 縦スクロールを有効に */
+    padding: 1rem;
+}
+
+/* .scroll-box {} */
+
+.delete-button {
+    width: 99%;
+    height: 99%;
+    margin-left: 1px;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: auto;
+}
+
+.top-btn-container {
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+}
+
+.top-btn-container {
+    margin-left: 10vw;
+}
+
+.add-button-container {
+    padding-left: 40%;
+    /* width: 20vw; */
+    align-self: flex-end;
+    text-align: end;
+    white-space: nowrap;
+}
+
+#add-button {
+    padding: 1.5% 20% 1.5% 20%;
+    /* display: flex; */
+    font-size: auto;
+    border: #000000 3px solid;
+}
+
+@media (max-width:1000px) {
+    .add-button-container {
+        width: 2vw;
+        padding-left: 10%;
+    }
+
+    #add-button {
+        white-space: nowrap
+    }
+
+}
+
+#input-table {
+    border: #ffffff 0.1rem solid;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#input-table th {
+    background-color: #000000;
+
+}
+
+#input-table th,
+#input-table td {
+    border: #ffffff 0.1rem solid;
+
+}
+
+.row-input input {
+    width: 100%;
+    height: 100%;
+
+}
+
+.button,
+input,
+optgroup,
+select,
+textarea {
+    line-height: normal !important;
+    font-family: normal;
+}

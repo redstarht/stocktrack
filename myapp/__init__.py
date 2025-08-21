@@ -31,6 +31,10 @@ shelfCsv_dir = os.path.join(seed_dir, "shelf.csv")
 zoneCsv_dir = os.path.join(seed_dir, "zone.csv")
 cellCsv_dir = os.path.join(seed_dir, "cell.csv")
 
+# DBディレクトリの確認
+instance_dir = os.path.join(parent_dir, 'instance')
+if not os.path.exists(instance_dir):
+    os.makedirs(instance_dir)  # フォルダを作成
 db_path = os.path.join(parent_dir, 'instance', 'myapp.db')
 
 
