@@ -45,6 +45,8 @@ cell_stock_status = {
 queryselectorAllでボタン要素を配列で取得
 その配列分、ループさせる機能を構築
 
+自動切換えボタン checked付与時
+
 
 #### settimeout() 
 ２秒に１回データを取得するために利用
