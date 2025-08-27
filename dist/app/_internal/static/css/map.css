@@ -63,6 +63,23 @@ html body {
 
 }
 
+/* view_mapのトグルエリア */
+.form-switch {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    padding-left: 0%; 
+    font-size:0.7rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-switch .form-check-input{
+    margin-left: 0%;
+    font-size:1.5rem;
+}
+
+
 .pn-sidebar {
     width: 20%;
     height: 100vh;
@@ -74,7 +91,9 @@ html body {
     border-right: 2px solid #aaa9a9;
 }
 
-.side-top{
+
+
+.side-top {
     width: 100%;
 }
 
@@ -87,8 +106,8 @@ html body {
     font-size: 1rem;
 }
 
-.search-container input{
-    width:90%
+.search-container input {
+    width: 90%
 }
 
 .zone-item {
@@ -176,9 +195,9 @@ html body {
 
 }
 
-.pn-select .btn{
+.pn-select .btn {
     width: 90%;
-    font-size:  clamp(1px, 1vw, 15px);
+    font-size: clamp(1px, 1vw, 15px);
     white-space: nowrap;
 }
 

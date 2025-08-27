@@ -1,6 +1,6 @@
 import { stackGaugeCreate } from "../common/stack_gauge.js";
 import { initPnHighlight } from "../common/pn_highlight.js";
-import { initZoneSort } from "../common/zone_sort.js";
+import { initZoneSort,cycleZone } from "../common/zone_sort.js";
 import { createDisplayName } from "../common/displayname.js";
 import { get_cell_status_data } from "./data_fetch.js"
 import { render_shelf } from "./render_shelf.js";
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         shelfGridElm: shelfGridElm, //shelf の DOM
         reloadCellStockData: reloadCellStockData,//cellの最新格納ステータス
         cellGridElm: cellGridElm,//cellのDOM
-        mainHeader:mainHeader
+        mainHeader: mainHeader
     }
 
     //描画情報更新 
@@ -43,5 +43,11 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     initPnHighlight();
     initZoneSort();
+
+
+    // Zoneボタンの自動切換
+    cycleZone();
+
+
 
 });
