@@ -1,3 +1,5 @@
 置き場管理/案/
 __pycache__/
 *.pyc
+*.db
+myapp/seed/pipe_prodNum.csv

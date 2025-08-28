@@ -29,8 +29,9 @@
                 <button class="index-button btn btn-primary align-items-center gap-9 px-9 py-9 fs-9 main-button"
                     onclick="window.location.href='{{ url_for('main.view_map')}}'">
                     <i class=" bi bi-clipboard-data fs-9"></i>
-                    確認画面
+                    マップ確認画面
                 </button>
+
             </div>
             <div class="admin-section">
                 <div class="admin-title">
@@ -48,6 +49,12 @@
                         <i class="bi bi-bookshelf fs-9"></i>
                         棚管理
                     </button>
+                    <button class="index-button btn btn-primary align-items-center gap-9 px-9 py-9 fs-9 admin-button"
+                        onclick="window.location.href='{{ url_for('main.inout_logviewer') }}'">
+                        <i class="bi bi-table fs-9"></i>
+                        ログ確認
+                    </button>
+                    
                 </div>
             </div>
 

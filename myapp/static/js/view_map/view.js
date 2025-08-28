@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             console.log(error)
         } finally {
             // 2秒後に再度データを取得
-            setTimeout(() => reloadData(renderInfo), 2000);
+            setTimeout(() => reloadData(renderInfo), 1000);
 
         }
     }

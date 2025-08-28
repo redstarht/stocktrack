@@ -1,5 +1,5 @@
 from flask import Flask
-from .extensions import db, migrate, fetch_base_path
+from .extensions import db, migrate,BuildDir
 from .routes import main
 from .model import (
     Zone,
@@ -22,14 +22,16 @@ import time
 from .logging_setup import setup_logging
 
 
-base_dir = None
-base_dir = fetch_base_path()
-parent_dir = os.path.dirname(base_dir)
-backup_dir = os.path.join(parent_dir, "backup")
-seed_dir = os.path.join(parent_dir, "seed")
-shelfCsv_dir = os.path.join(seed_dir, "shelf.csv")
-zoneCsv_dir = os.path.join(seed_dir, "zone.csv")
-cellCsv_dir = os.path.join(seed_dir, "cell.csv")
+build_dir = BuildDir()
+base_dir = build_dir.base_dir
+parent_dir = build_dir.parent_dir
+backup_dir = build_dir.backup_dir
+seed_dir = build_dir.seed_dir
+shelfCsv_dir = build_dir.shelfCsv_dir
+zoneCsv_dir = build_dir.zoneCsv_dir
+cellCsv_dir = build_dir.cellCsv_dir
+prodCsv_dir = build_dir.prodCsv_dir
+
 
 # DBディレクトリの確認
 instance_dir = os.path.join(parent_dir, 'instance')
@@ -39,12 +41,12 @@ db_path = os.path.join(parent_dir, 'instance', 'myapp.db')
 
 
 def create_app():
-    app = Flask(__name__,template_folder=os.path.join(base_dir,'templates'))
+    app = Flask(__name__, template_folder=os.path.join(base_dir, 'templates'))
     app.config.from_mapping(
         SQLALCHEMY_DATABASE_URI=f'sqlite:///{db_path}',
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
     )
-   
+
     db.init_app(app)
     migrate.init_app(app, db)
 
@@ -117,6 +119,21 @@ def initialize_db():
             cell_instances.append(cell_instance)
         # リストcell_instancesを一括でbulkインサート
         db.session.bulk_save_objects(cell_instances)
+
+        # 品番テーブルへの挿入
+        seed_prodNum = pandas.read_csv(prodCsv_dir)
+        prod_instances = []
+
+        for _, rec in seed_prodNum.iterrows():
+            prod_instance = ProductNumber(
+                product_no=rec["product_no"],
+                serial_no=rec["serial_no"],
+                material=rec["material"],
+                material_thickness=rec["material_thickness"],
+                cut_length=rec["cut_length"])
+            prod_instances.append(prod_instance)
+        db.session.bulk_save_objects(prod_instances)
+
         db.session.commit()
         print("初期データの追加成功✅")
     except Exception as e:
@@ -124,5 +141,3 @@ def initialize_db():
         print(f"エラー発生❌:{e}")
     finally:
         db.session.close()
-
-

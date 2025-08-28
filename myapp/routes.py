@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, jsonify, redirect, url_fo
 from .model import Zone, Shelf, ProductNumber, Cell, CellStockStatus, AllowStorage, InoutLog
 from . import db
 from .services import shelfs_with_class
+from sqlalchemy import desc
 
 main = Blueprint('main', __name__)
 
@@ -61,29 +62,6 @@ def cell_permission():
     return render_template('cell_permission.html', cell=cell, product_numbers=product_numbers, allow_storage=allow_storage, excluded_pn_ids=excluded_pn_ids)
 
 
-# @main.route('/inout_map')
-# def inout_map():
-#     obj_zones = Zone.query.all()
-#     zones = [zone.to_dict() for zone in obj_zones]
-
-#     obj_shelfs = Shelf.query.all()
-#     raw_shelfs = [shelf.to_dict() for shelf in obj_shelfs]
-#     shelfs = shelfs_with_class(raw_shelfs)
-#     obj_product_numbers = ProductNumber.query.filter_by(is_deleted=False).all()
-#     product_numbers = [pn.to_dict() for pn in obj_product_numbers]
-
-#     obj_cells = Cell.query.all()
-#     cells = [cell.to_dict() for cell in obj_cells]
-
-#     obj_allow_storage = AllowStorage.query.all()
-#     allow_storage = [allow_pn.to_dict() for allow_pn in obj_allow_storage]
-
-#     obj_cell_stock_status = CellStockStatus.query.all()
-#     cell_stock_statuses = [cell_stock_status.to_dict()
-#                            for cell_stock_status in obj_cell_stock_status]
-
-#     return render_template('inout_map.html', zones=zones, shelfs=shelfs, cells=cells, product_numbers=product_numbers,allow_storage=allow_storage, cell_stock_statuses=cell_stock_statuses)
-
 @main.route('/inout_map')
 def inout_map():
     obj_zones = Zone.query.all()
@@ -108,6 +86,20 @@ def inout_map():
     return render_template('inout_map.html', zones=zones, shelfs=shelfs, cells=cells, product_numbers=product_numbers, allow_storage=allow_storage, cell_stock_statuses=cell_stock_statuses)
 
 
+@main.route('/inout_logview')
+# 上位300件(DESC)でレスポンス
+def inout_logview():
+    obj_shelfs = Shelf.query.all()
+    shelfs = [shelf.to_dict() for shelf in obj_shelfs]
+    obj_product_numbers = ProductNumber.query.filter_by(is_deleted=False).all()
+    product_numbers = [pn.to_dict() for pn in obj_product_numbers]
+    obj_cells = Cell.query.all()
+    cells = [cell.to_dict() for cell in obj_cells]
+    obj_inoutlogs =InoutLog.query.order_by(desc(InoutLog.id)).limit(300).all()
+    inoutlogs = [inoutlog.to_dict() for inoutlog in obj_inoutlogs]
+    
+    return render_template('inout_logview.html',shelfs=shelfs,cells=cells,product_numbers=product_numbers,inoutlogs=inoutlogs)
+    
 
 @main.route('/view_map')
 def view_map():

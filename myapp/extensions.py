@@ -22,17 +22,30 @@ db = SQLAlchemy()
 migrate = Migrate()
 
 
-def fetch_base_path() -> str:
-    """基準パスを取得する関数"""
+class BuildDir:
+    """基準パスを取得し必要なパスを構成する"""
 
-    # PyInstallerで実行されているかどうかをチェック
-    if getattr(sys, "frozen", False):
-        # EXEの実行ファイルのパスを取得
-        print("Running in a PyInstaller bundled environment")
-        print(f"sys._MEIPASS: {sys._MEIPASS}")
-        print(f"EXE実行ファイルのPASS : {os.path.dirname(sys.executable)}")
-        return sys._MEIPASS
-    else:
-        # スクリプトの実行ファイルのパスを取得
-        print("Running in a regular Python environment")
-        return os.path.dirname(os.path.abspath(__file__))
+    def __init__(self):
+        if getattr(sys, "frozen", False):
+            # EXEの実行ファイルのパスを取得
+            print("Running in a PyInstaller bundled environment")
+            print(f"sys._MEIPASS: {sys._MEIPASS}")
+            print(f"EXE実行ファイルのPASS : {os.path.dirname(sys.executable)}")
+            self.base_dir = sys._MEIPASS
+            self.parent_dir = os.path.dirname(self.base_dir)
+            # frozen の場合は _internal/seed ディレクトリを使用
+            self.seed_dir = os.path.join(self.base_dir, "_internal", "seed")
+
+        else:
+            # スクリプトの実行ファイルのパスを取得
+            print("Running in a regular Python environment")
+            self.base_dir = os.path.dirname(os.path.abspath(__file__))
+            self.parent_dir = os.path.dirname(self.base_dir)
+            self.seed_dir = os.path.join(self.parent_dir, "myapp","seed")
+
+        self.backup_dir = os.path.join(self.parent_dir, "backup")
+        self.shelfCsv_dir = os.path.join(self.seed_dir, "shelf.csv")
+        self.zoneCsv_dir = os.path.join(self.seed_dir, "zone.csv")
+        self.cellCsv_dir = os.path.join(self.seed_dir, "cell.csv")
+        self.prodCsv_dir = os.path.join(self.seed_dir, "pipe_prodNum.csv")
+

@@ -15,6 +15,12 @@ export function createDisplayName(pn_list, pn_id) {
     }
 }
 
+export function searchShelfName(shelf_list,cell_list,cell_id){
+    const cellItem = cell_list.find(cellItem => cellItem.id = cell_id);
+    const shelfItem = shelf_list.find(shelfItem => shelfItem.id == cellItem.shelf_id);
+    return shelfItem.name;
+}
+
 export function createAlertDisplayName(pnItem) {
     const displayValue = (val) => (val === null || val === "" || val === -1.0 ? "***" : val);
     const unionvalue = [

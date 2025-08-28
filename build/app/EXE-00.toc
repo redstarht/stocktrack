@@ -78,7 +78,7 @@
  [],
  False,
  False,
- 1756267774,
+ 1756355482,
  [('run.exe',
    'C:\\z\\venv\\stocktrack\\Lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit-intel\\run.exe',
    'EXECUTABLE')],
