@@ -18,7 +18,14 @@ export function createDisplayName(pn_list, pn_id) {
 export function logDisplayName(shelf_list,cell_list,pn_list,logItem){
     const shelfName = searchShelfName(shelf_list,cell_list,logItem.cell_id);
     const pnItem = searchPN(pn_list,logItem.pn_id);
-
+    let logInout_type = null;
+    if(logItem.inout_type === "in"){
+        logInout_type ="入庫";
+    }else if(logItem.inout_type === "out"){
+        logInout_type="出庫";
+    }else{
+        logInout_type="エラー";
+    }
     return {
         id: logItem.id,
         timestamp: logItem.processed_at,
@@ -28,7 +35,7 @@ export function logDisplayName(shelf_list,cell_list,pn_list,logItem){
         material:pnItem.material,
         material_thickness:pnItem.material_thickness,
         cut_length:pnItem.cut_length,
-        inout_type:logItem.inout_type,
+        inout_type:logInout_type,
         change_qty:logItem.change_qty,
         stock_after:logItem.stock_after
     }
@@ -46,7 +53,7 @@ export function searchShelfName(shelf_list,cell_list,cell_id){
 
 
 function searchPN(pn_list,pn_id){
-    pnItem = pn_list.find(pnItem => pnItem.id == pn_id);
+    const pnItem = pn_list.find(pnItem => pnItem.id == pn_id);
     return pnItem;
 
 }

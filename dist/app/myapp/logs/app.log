@@ -1,3 +1,1 @@
-2025-08-28 13:35:11,621 - waitress - INFO - Serving on http://0.0.0.0:8080
-2025-08-28 13:36:12,806 - waitress.queue - WARNING - Task queue depth is 1
-2025-08-28 13:36:15,443 - waitress.queue - WARNING - Task queue depth is 1
+2025-08-29 10:40:34,922 - waitress - INFO - Serving on http://0.0.0.0:8080

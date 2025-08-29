@@ -13,7 +13,7 @@
         <h1>入出庫ログ</h1>
         <button class="home-button" onclick="location.href='{{ url_for('main.index') }}'">HOMEに戻る</button>
         <div class="log-container">
-            <table class="log-table">
+            <table id="log-table">
                 <thead class="log-head">
                     <tr>
                         <th>日時</th>
@@ -42,7 +42,8 @@
     const inout_log_list = {{inoutlogs | tojson}};
 
 </script>
+<script type="module" src="../static/js/inout_logview/render_log.js"></script>
+<script type="module" src="../static/js/inout_logview/logrecCreate.js"></script>
 
-<script type="module" src="../static/js/popup.js"></script>
 
 </html>

@@ -46,7 +46,7 @@ export function inoutLogRecCreate(inout_log_list, tableElm) {
     // 板厚
     const materialThkCell = document.createElement("td");
     materialThkCell.className = "material-thickness";
-    materialThkCell.textContent = loginfo.material;
+    materialThkCell.textContent = loginfo.material_thickness;
     logRec.appendChild(materialThkCell);
     // 切断長さ
     const cutLengthCell = document.createElement("td");
@@ -57,7 +57,7 @@ export function inoutLogRecCreate(inout_log_list, tableElm) {
     //IN/OUT
     const inoutTypeCell = document.createElement("td");
     inoutTypeCell.className = "inout-type";
-    inoutTypeCell.textContent = loginfo.cut_length;
+    inoutTypeCell.textContent = loginfo.inout_type;
     logRec.appendChild(inoutTypeCell);
 
     // 変更数

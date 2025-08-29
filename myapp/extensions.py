@@ -34,7 +34,7 @@ class BuildDir:
             self.base_dir = sys._MEIPASS
             self.parent_dir = os.path.dirname(self.base_dir)
             # frozen の場合は _internal/seed ディレクトリを使用
-            self.seed_dir = os.path.join(self.base_dir, "_internal", "seed")
+            self.seed_dir = os.path.join(self.base_dir, "seed")
 
         else:
             # スクリプトの実行ファイルのパスを取得

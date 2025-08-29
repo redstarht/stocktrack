@@ -171,5 +171,7 @@ class InoutLog(db.Model):
             'cell_id': self.cell_id,
             'pn_id': self.pn_id,
             'inout_type': self.inout_type,
-            'processed_at': self.processed_at.isoformat()
+            'change_qty':self.change_qty,
+            'stock_after':self.stock_after,
+            'processed_at': self.processed_at.strftime('%Y-%m-%d %H:%M:%S')
         }

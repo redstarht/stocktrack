@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>入出庫ログ</title>
+    <link rel="stylesheet" href="../static/css/inout_logview.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>入出庫ログ</h1>
+        <button class="home-button" onclick="location.href='{{ url_for('main.index') }}'">HOMEに戻る</button>
+        <div class="log-container">
+            <table id="log-table">
+                <thead class="log-head">
+                    <tr>
+                        <th>日時</th>
+                        <th>棚名</th>
+                        <th>品番</th>
+                        <th>背番号</th>
+                        <th>材質</th>
+                        <th>板厚</th>
+                        <th>切断長さ</th>
+                        <th>IN/OUT</th>
+                        <th>変更数</th>
+                        <th>残数</th>
+                    </tr>
+                </thead>
+                <tbody id="log-body">
+                    <!-- 追加のログ行をここに追加 -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+<script>
+    const shelf_list = {{ shelfs | tojson}};
+    const cell_list = {{ cells | tojson}}
+    const pn_list = {{ product_numbers | tojson }};
+    const inout_log_list = {{inoutlogs | tojson}};
+
+</script>
+<script type="module" src="../static/js/inout_logview/render_log.js"></script>
+<script type="module" src="../static/js/inout_logview/logrecCreate.js"></script>
+
+
+</html>
