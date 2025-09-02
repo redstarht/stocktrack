@@ -129,8 +129,10 @@ def initialize_db():
                 product_no=rec["product_no"],
                 serial_no=rec["serial_no"],
                 material=rec["material"],
+                outer_diam =rec["outer_diam"],
                 material_thickness=rec["material_thickness"],
-                cut_length=rec["cut_length"])
+                cut_length=rec["cut_length"],
+                long_length=rec["long_length"])
             prod_instances.append(prod_instance)
         db.session.bulk_save_objects(prod_instances)
 

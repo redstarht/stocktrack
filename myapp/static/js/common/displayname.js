@@ -33,8 +33,10 @@ export function logDisplayName(shelf_list,cell_list,pn_list,logItem){
         product_no:pnItem.product_no,
         serial_no:pnItem.serial_no,
         material:pnItem.material,
+        outer_diam:pnItem.outer_diam,
         material_thickness:pnItem.material_thickness,
         cut_length:pnItem.cut_length,
+        long_length:pnItem.long_length,
         inout_type:logInout_type,
         change_qty:logItem.change_qty,
         stock_after:logItem.stock_after

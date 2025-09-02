@@ -61,8 +61,10 @@ class ProductNumber(db.Model):
     name = db.Column(db.String(100), nullable=False, default="")
     serial_no = db.Column(db.String(20),default = "",nullable=False)
     material = db.Column(db.String(20),default="",nullable=False)
+    outer_diam = db.Column(db.Float,default=-1.0,nullable=False)
     material_thickness = db.Column(db.Float,default=-1.0,nullable=False)
     cut_length = db.Column(db.Float,default=-1.0,nullable=False)
+    long_length = db.Column(db.Float,default=-1.0,nullable=False)
     is_deleted = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(
         timezone(timedelta(hours=9))))
@@ -78,8 +80,10 @@ class ProductNumber(db.Model):
             'name': self.name,
             'serial_no':self.serial_no,
             'material':self.material,
+            'outer_diam':self.outer_diam,
             'material_thickness':self.material_thickness,
             'cut_length':self.cut_length,
+            'long_length':self.long_length,
             'is_deleted': self.is_deleted,
             'created_at': self.created_at.isoformat() if self.created_at else None,
             'updated_at': self.updated_at.isoformat() if self.updated_at else None

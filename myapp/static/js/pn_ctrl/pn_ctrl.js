@@ -58,6 +58,15 @@ document.addEventListener("DOMContentLoaded", function () {
     newMaterialCell.appendChild(newMaterialInput);
     newRow.appendChild(newMaterialCell);
 
+    // 外径
+    const newOuterDIamCell = document.createElement("td");
+    newOuterDIamCell.className = "input-cell";
+    const newOuterDIamInput = document.createElement("input");
+    newOuterDIamInput.type = "text";
+    newOuterDIamInput.name = "outer_input";
+    newOuterDIamCell.appendChild(newOuterDIamInput);
+    newRow.appendChild(newOuterDIamCell);
+
     // 板厚
     const newMatThkCell = document.createElement("td");
     newMatThkCell.className = "input-cell";
@@ -75,6 +84,15 @@ document.addEventListener("DOMContentLoaded", function () {
     newCutLengthInput.name = "cut_length";
     newCutLengthCell.appendChild(newCutLengthInput);
     newRow.appendChild(newCutLengthCell);
+
+    // 長尺長さ
+    const newLongLengthCell = document.createElement("td");
+    newLongLengthCell.className = "input-cell";
+    const newLongLengthInput = document.createElement("input");
+    newLongLengthInput.type = "text";
+    newLongLengthInput.name = "long_length";
+    newLongLengthCell.appendChild(newLongLengthInput);
+    newRow.appendChild(newLongLengthCell);
 
     // 削除ボタン
     const newDeleteCell = document.createElement("td");
