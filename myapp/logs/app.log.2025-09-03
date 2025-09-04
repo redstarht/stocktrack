@@ -1,0 +1,281 @@
+2025-09-03 08:54:46,875 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-03 08:54:46,880 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-03 08:54:58,293 - waitress - INFO - Serving on http://0.0.0.0:8080
+2025-09-03 09:02:05,470 - waitress.queue - WARNING - Task queue depth is 1
+2025-09-03 09:02:05,474 - waitress.queue - WARNING - Task queue depth is 2
+2025-09-03 09:02:05,801 - waitress.queue - WARNING - Task queue depth is 1
+2025-09-03 09:02:05,846 - waitress.queue - WARNING - Task queue depth is 1
+2025-09-03 09:05:18,223 - waitress.queue - WARNING - Task queue depth is 1
+2025-09-03 09:05:42,950 - waitress.queue - WARNING - Task queue depth is 1
+2025-09-03 09:05:42,966 - waitress.queue - WARNING - Task queue depth is 1
+2025-09-03 09:05:42,987 - waitress.queue - WARNING - Task queue depth is 1
+2025-09-03 09:05:42,990 - waitress.queue - WARNING - Task queue depth is 1
+2025-09-03 09:07:37,431 - waitress.queue - WARNING - Task queue depth is 1
+2025-09-03 09:07:37,432 - waitress.queue - WARNING - Task queue depth is 2
+2025-09-03 09:07:54,814 - waitress.queue - WARNING - Task queue depth is 1
+2025-09-03 09:07:54,818 - waitress.queue - WARNING - Task queue depth is 2
+2025-09-03 09:08:45,200 - waitress.queue - WARNING - Task queue depth is 1
+2025-09-03 09:08:45,200 - waitress.queue - WARNING - Task queue depth is 2
+2025-09-03 09:08:45,516 - waitress.queue - WARNING - Task queue depth is 1
+2025-09-03 09:08:45,522 - waitress.queue - WARNING - Task queue depth is 2
+2025-09-03 09:10:09,833 - waitress.queue - WARNING - Task queue depth is 1
+2025-09-03 09:10:09,835 - waitress.queue - WARNING - Task queue depth is 1
+2025-09-03 09:10:10,150 - waitress.queue - WARNING - Task queue depth is 1
+2025-09-03 09:10:10,150 - waitress.queue - WARNING - Task queue depth is 1
+2025-09-03 10:15:12,051 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-03 10:15:12,051 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-03 10:15:22,294 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:22] "GET / HTTP/1.1" 200 -
+2025-09-03 10:15:22,654 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:22] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-09-03 10:15:22,674 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:22] "[36mGET /static/css/bootstrap-icons-1.13.1/bootstrap-icons.css HTTP/1.1[0m" 304 -
+2025-09-03 10:15:22,679 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:22] "[36mGET /static/css/bootstrap.min.css HTTP/1.1[0m" 304 -
+2025-09-03 10:15:22,804 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:22] "[36mGET /static/css/bootstrap-icons-1.13.1/fonts/bootstrap-icons.woff2?e34853135f9e39acf64315236852cd5a HTTP/1.1[0m" 304 -
+2025-09-03 10:15:22,829 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:22] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-09-03 10:15:23,821 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:23] "GET /inout_logview HTTP/1.1" 200 -
+2025-09-03 10:15:23,879 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:23] "[36mGET /static/css/inout_logview.css HTTP/1.1[0m" 304 -
+2025-09-03 10:15:23,884 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:23] "[36mGET /static/js/inout_logview/render_log.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:23,898 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:23] "[36mGET /static/js/inout_logview/logrecCreate.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:23,913 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:23] "[36mGET /static/js/common/displayname.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:27,154 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:27] "GET /allow_storage_map HTTP/1.1" 200 -
+2025-09-03 10:15:27,190 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:27] "[36mGET /static/css/bootstrap-icons-1.13.1/bootstrap-icons.css HTTP/1.1[0m" 304 -
+2025-09-03 10:15:27,196 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:27] "[36mGET /static/css/bootstrap.min.css HTTP/1.1[0m" 304 -
+2025-09-03 10:15:27,210 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:27] "[36mGET /static/css/highlight.css HTTP/1.1[0m" 304 -
+2025-09-03 10:15:27,220 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:27] "[36mGET /static/css/allow_storage_map.css HTTP/1.1[0m" 304 -
+2025-09-03 10:15:27,221 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:27] "[36mGET /static/css/stock_ctrl.css HTTP/1.1[0m" 304 -
+2025-09-03 10:15:27,223 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:27] "[36mGET /static/css//popup.css HTTP/1.1[0m" 304 -
+2025-09-03 10:15:27,231 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:27] "[36mGET /static/css/main_section.css HTTP/1.1[0m" 304 -
+2025-09-03 10:15:27,245 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:27] "[36mGET /static/js/common/zone_list.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:27,252 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:27] "[36mGET /static/css/bootstrap-icons-1.13.1/fonts/bootstrap-icons.woff2?e34853135f9e39acf64315236852cd5a HTTP/1.1[0m" 304 -
+2025-09-03 10:15:27,254 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:27] "[36mGET /static/js/allow_strage_map/allow_map_main_section.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:27,266 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:27] "[36mGET /static/js/common/zone_sort.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:29,507 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:29] "GET /view_map HTTP/1.1" 200 -
+2025-09-03 10:15:29,545 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:29] "[36mGET /static/css/bootstrap-icons-1.13.1/bootstrap-icons.css HTTP/1.1[0m" 304 -
+2025-09-03 10:15:29,552 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:29] "[36mGET /static/css/bootstrap.min.css HTTP/1.1[0m" 304 -
+2025-09-03 10:15:29,556 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:29] "[36mGET /static/css/stock_ctrl.css HTTP/1.1[0m" 304 -
+2025-09-03 10:15:29,563 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:29] "[36mGET /static/css/popup.css HTTP/1.1[0m" 304 -
+2025-09-03 10:15:29,567 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:29] "[36mGET /static/css/main_section.css HTTP/1.1[0m" 304 -
+2025-09-03 10:15:29,570 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:29] "[36mGET /static/css/highlight.css HTTP/1.1[0m" 304 -
+2025-09-03 10:15:29,574 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:29] "[36mGET /static/css/map.css HTTP/1.1[0m" 304 -
+2025-09-03 10:15:29,576 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:29] "[36mGET /static/js/common/displayname.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:29,590 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:29] "[36mGET /static/js/common/zone_sort.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:29,610 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:29] "[36mGET /static/js/map_sideber.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:29,623 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:29] "[36mGET /static/css/bootstrap-icons-1.13.1/fonts/bootstrap-icons.woff2?e34853135f9e39acf64315236852cd5a HTTP/1.1[0m" 304 -
+2025-09-03 10:15:29,625 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:29] "[36mGET /static/js/common/pn_list.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:29,629 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:29] "[36mGET /static/js/popup/save_inout.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:29,630 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:29] "[36mGET /static/js/view_map/view.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:29,635 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:29] "[36mGET /static/js/common/stack_gauge.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:29,649 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:29] "[36mGET /static/js/common/zone_list.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:29,651 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:29] "[36mGET /static/js/common/pn_highlight.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:29,677 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:29] "[36mGET /static/js/popup.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:29,682 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:29] "[36mGET /static/js/common/serial_no_search.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:29,687 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:29] "[36mGET /static/js/view_map/data_fetch.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:29,697 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:29] "[36mGET /static/js/view_map/render_shelf.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:34,517 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:34] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 10:15:36,969 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:36] "GET /inout_map HTTP/1.1" 200 -
+2025-09-03 10:15:37,012 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:37] "[36mGET /static/css/bootstrap-icons-1.13.1/bootstrap-icons.css HTTP/1.1[0m" 304 -
+2025-09-03 10:15:37,020 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:37] "[36mGET /static/css/bootstrap.min.css HTTP/1.1[0m" 304 -
+2025-09-03 10:15:37,026 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:37] "[36mGET /static/css/map.css HTTP/1.1[0m" 304 -
+2025-09-03 10:15:37,030 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:37] "[36mGET /static/css/popup.css HTTP/1.1[0m" 304 -
+2025-09-03 10:15:37,037 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:37] "[36mGET /static/css/main_section.css HTTP/1.1[0m" 304 -
+2025-09-03 10:15:37,038 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:37] "[36mGET /static/css/stock_ctrl.css HTTP/1.1[0m" 304 -
+2025-09-03 10:15:37,045 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:37] "[36mGET /static/css/highlight.css HTTP/1.1[0m" 304 -
+2025-09-03 10:15:37,053 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:37] "[36mGET /static/js/common/displayname.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:37,058 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:37] "[36mGET /static/js/map_sideber.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:37,066 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:37] "[36mGET /static/js/common/pn_list.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:37,069 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:37] "[36mGET /static/js/popup/save_inout.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:37,077 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:37] "[36mGET /static/js/common/stack_gauge.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:37,081 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:37] "[36mGET /static/js/common/pn_highlight.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:37,085 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:37] "[36mGET /static/css/bootstrap-icons-1.13.1/fonts/bootstrap-icons.woff2?e34853135f9e39acf64315236852cd5a HTTP/1.1[0m" 304 -
+2025-09-03 10:15:37,095 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:37] "[36mGET /static/js/popup.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:37,097 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:37] "[36mGET /static/js/common/zone_sort.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:37,100 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:37] "[36mGET /static/js/common/zone_list.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:37,102 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:37] "[36mGET /static/js/map_main_section.js HTTP/1.1[0m" 304 -
+2025-09-03 10:15:37,105 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:15:37] "[36mGET /static/js/common/serial_no_search.js HTTP/1.1[0m" 304 -
+2025-09-03 10:23:58,371 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:23:58] "GET /inout_map HTTP/1.1" 200 -
+2025-09-03 10:23:58,447 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:23:58] "[36mGET /static/css/popup.css HTTP/1.1[0m" 304 -
+2025-09-03 10:23:58,448 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:23:58] "[36mGET /static/css/map.css HTTP/1.1[0m" 304 -
+2025-09-03 10:23:58,449 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:23:58] "[36mGET /static/css/bootstrap-icons-1.13.1/bootstrap-icons.css HTTP/1.1[0m" 304 -
+2025-09-03 10:23:58,449 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:23:58] "[36mGET /static/css/stock_ctrl.css HTTP/1.1[0m" 304 -
+2025-09-03 10:23:58,450 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:23:58] "[36mGET /static/css/bootstrap.min.css HTTP/1.1[0m" 304 -
+2025-09-03 10:23:58,451 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:23:58] "[36mGET /static/css/main_section.css HTTP/1.1[0m" 304 -
+2025-09-03 10:23:58,462 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:23:58] "[36mGET /static/css/highlight.css HTTP/1.1[0m" 304 -
+2025-09-03 10:23:58,505 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:23:58] "[36mGET /static/js/map_sideber.js HTTP/1.1[0m" 304 -
+2025-09-03 10:23:58,506 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:23:58] "[36mGET /static/js/common/displayname.js HTTP/1.1[0m" 304 -
+2025-09-03 10:23:58,517 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:23:58] "[36mGET /static/js/common/pn_list.js HTTP/1.1[0m" 304 -
+2025-09-03 10:23:58,519 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:23:58] "[36mGET /static/js/popup/save_inout.js HTTP/1.1[0m" 304 -
+2025-09-03 10:23:58,526 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:23:58] "[36mGET /static/js/common/stack_gauge.js HTTP/1.1[0m" 304 -
+2025-09-03 10:23:58,528 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:23:58] "[36mGET /static/js/map_main_section.js HTTP/1.1[0m" 304 -
+2025-09-03 10:23:58,545 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:23:58] "[36mGET /static/js/common/pn_highlight.js HTTP/1.1[0m" 304 -
+2025-09-03 10:23:58,553 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:23:58] "[36mGET /static/js/common/zone_sort.js HTTP/1.1[0m" 304 -
+2025-09-03 10:23:58,557 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:23:58] "[36mGET /static/js/popup.js HTTP/1.1[0m" 304 -
+2025-09-03 10:23:58,603 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:23:58] "[36mGET /static/css/bootstrap-icons-1.13.1/fonts/bootstrap-icons.woff2?e34853135f9e39acf64315236852cd5a HTTP/1.1[0m" 304 -
+2025-09-03 10:23:58,608 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:23:58] "[36mGET /static/js/common/serial_no_search.js HTTP/1.1[0m" 304 -
+2025-09-03 10:23:58,612 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:23:58] "[36mGET /static/js/common/zone_list.js HTTP/1.1[0m" 304 -
+2025-09-03 10:24:12,713 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:24:12] "POST /api/inout/save HTTP/1.1" 200 -
+2025-09-03 10:44:54,983 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:44:54] "GET /inout_map HTTP/1.1" 200 -
+2025-09-03 10:44:55,056 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:44:55] "[36mGET /static/css/map.css HTTP/1.1[0m" 304 -
+2025-09-03 10:44:55,057 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:44:55] "[36mGET /static/css/bootstrap-icons-1.13.1/bootstrap-icons.css HTTP/1.1[0m" 304 -
+2025-09-03 10:44:55,058 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:44:55] "[36mGET /static/css/bootstrap.min.css HTTP/1.1[0m" 304 -
+2025-09-03 10:44:55,058 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:44:55] "[36mGET /static/css/popup.css HTTP/1.1[0m" 304 -
+2025-09-03 10:44:55,060 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:44:55] "[36mGET /static/css/stock_ctrl.css HTTP/1.1[0m" 304 -
+2025-09-03 10:44:55,067 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:44:55] "[36mGET /static/css/main_section.css HTTP/1.1[0m" 304 -
+2025-09-03 10:44:55,073 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:44:55] "[36mGET /static/css/highlight.css HTTP/1.1[0m" 304 -
+2025-09-03 10:44:55,112 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:44:55] "[36mGET /static/js/common/displayname.js HTTP/1.1[0m" 304 -
+2025-09-03 10:44:55,113 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:44:55] "[36mGET /static/js/map_sideber.js HTTP/1.1[0m" 304 -
+2025-09-03 10:44:55,117 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:44:55] "[36mGET /static/js/common/pn_list.js HTTP/1.1[0m" 304 -
+2025-09-03 10:44:55,118 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:44:55] "[36mGET /static/js/map_main_section.js HTTP/1.1[0m" 304 -
+2025-09-03 10:44:55,124 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:44:55] "[36mGET /static/js/common/stack_gauge.js HTTP/1.1[0m" 304 -
+2025-09-03 10:44:55,135 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:44:55] "[36mGET /static/js/popup/save_inout.js HTTP/1.1[0m" 304 -
+2025-09-03 10:44:55,175 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:44:55] "[36mGET /static/js/common/zone_sort.js HTTP/1.1[0m" 304 -
+2025-09-03 10:44:55,192 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:44:55] "[36mGET /static/js/common/pn_highlight.js HTTP/1.1[0m" 304 -
+2025-09-03 10:44:55,211 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:44:55] "[36mGET /static/js/popup.js HTTP/1.1[0m" 304 -
+2025-09-03 10:44:55,253 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:44:55] "[36mGET /static/css/bootstrap-icons-1.13.1/fonts/bootstrap-icons.woff2?e34853135f9e39acf64315236852cd5a HTTP/1.1[0m" 304 -
+2025-09-03 10:44:55,256 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:44:55] "[36mGET /static/js/common/zone_list.js HTTP/1.1[0m" 304 -
+2025-09-03 10:44:55,257 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 10:44:55] "[36mGET /static/js/common/serial_no_search.js HTTP/1.1[0m" 304 -
+2025-09-03 11:38:42,861 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 11:38:42] "GET /inout_map HTTP/1.1" 200 -
+2025-09-03 11:38:42,971 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 11:38:42] "[36mGET /static/css/highlight.css HTTP/1.1[0m" 304 -
+2025-09-03 11:38:43,029 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 11:38:43] "[36mGET /static/css/popup.css HTTP/1.1[0m" 304 -
+2025-09-03 11:38:43,032 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 11:38:43] "[36mGET /static/css/map.css HTTP/1.1[0m" 304 -
+2025-09-03 11:38:43,035 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 11:38:43] "[36mGET /static/css/stock_ctrl.css HTTP/1.1[0m" 304 -
+2025-09-03 11:38:43,035 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 11:38:43] "[36mGET /static/css/main_section.css HTTP/1.1[0m" 304 -
+2025-09-03 11:38:43,037 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 11:38:43] "[36mGET /static/css/bootstrap-icons-1.13.1/bootstrap-icons.css HTTP/1.1[0m" 304 -
+2025-09-03 11:38:43,039 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 11:38:43] "[36mGET /static/css/bootstrap.min.css HTTP/1.1[0m" 304 -
+2025-09-03 11:38:43,145 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 11:38:43] "[36mGET /static/js/map_sideber.js HTTP/1.1[0m" 304 -
+2025-09-03 11:38:43,145 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 11:38:43] "[36mGET /static/js/map_main_section.js HTTP/1.1[0m" 304 -
+2025-09-03 11:38:43,148 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 11:38:43] "[36mGET /static/js/common/displayname.js HTTP/1.1[0m" 304 -
+2025-09-03 11:38:43,148 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 11:38:43] "[36mGET /static/js/common/pn_list.js HTTP/1.1[0m" 304 -
+2025-09-03 11:38:43,150 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 11:38:43] "[36mGET /static/js/common/stack_gauge.js HTTP/1.1[0m" 304 -
+2025-09-03 11:38:43,165 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 11:38:43] "[36mGET /static/js/popup.js HTTP/1.1[0m" 304 -
+2025-09-03 11:38:43,221 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 11:38:43] "[36mGET /static/js/common/pn_highlight.js HTTP/1.1[0m" 304 -
+2025-09-03 11:38:43,226 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 11:38:43] "[36mGET /static/js/popup/save_inout.js HTTP/1.1[0m" 304 -
+2025-09-03 11:38:43,230 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 11:38:43] "[36mGET /static/js/common/zone_sort.js HTTP/1.1[0m" 304 -
+2025-09-03 11:38:43,283 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 11:38:43] "[36mGET /static/css/bootstrap-icons-1.13.1/fonts/bootstrap-icons.woff2?e34853135f9e39acf64315236852cd5a HTTP/1.1[0m" 304 -
+2025-09-03 11:38:43,283 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 11:38:43] "[36mGET /static/js/common/zone_list.js HTTP/1.1[0m" 304 -
+2025-09-03 11:38:43,283 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 11:38:43] "[36mGET /static/js/common/serial_no_search.js HTTP/1.1[0m" 304 -
+2025-09-03 13:07:07,251 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-09-03 13:07:07,252 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-03 13:07:54,255 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:07:54] "GET / HTTP/1.1" 200 -
+2025-09-03 13:07:54,499 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:07:54] "[36mGET /static/css/bootstrap.min.css HTTP/1.1[0m" 304 -
+2025-09-03 13:07:54,507 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:07:54] "[36mGET /static/css/bootstrap-icons-1.13.1/bootstrap-icons.css HTTP/1.1[0m" 304 -
+2025-09-03 13:07:54,519 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:07:54] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-09-03 13:07:54,630 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:07:54] "[36mGET /static/css/bootstrap-icons-1.13.1/fonts/bootstrap-icons.woff2?e34853135f9e39acf64315236852cd5a HTTP/1.1[0m" 304 -
+2025-09-03 13:07:57,579 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:07:57] "GET /inout_map HTTP/1.1" 200 -
+2025-09-03 13:07:57,633 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:07:57] "[36mGET /static/css/bootstrap-icons-1.13.1/bootstrap-icons.css HTTP/1.1[0m" 304 -
+2025-09-03 13:07:57,651 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:07:57] "[36mGET /static/css/bootstrap.min.css HTTP/1.1[0m" 304 -
+2025-09-03 13:07:57,682 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:07:57] "[36mGET /static/css/map.css HTTP/1.1[0m" 304 -
+2025-09-03 13:07:57,691 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:07:57] "[36mGET /static/css/popup.css HTTP/1.1[0m" 304 -
+2025-09-03 13:07:57,698 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:07:57] "[36mGET /static/css/highlight.css HTTP/1.1[0m" 304 -
+2025-09-03 13:07:57,718 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:07:57] "[36mGET /static/css/stock_ctrl.css HTTP/1.1[0m" 304 -
+2025-09-03 13:07:57,721 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:07:57] "[36mGET /static/css/main_section.css HTTP/1.1[0m" 304 -
+2025-09-03 13:07:57,746 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:07:57] "[36mGET /static/js/common/displayname.js HTTP/1.1[0m" 304 -
+2025-09-03 13:07:57,757 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:07:57] "[36mGET /static/css/bootstrap-icons-1.13.1/fonts/bootstrap-icons.woff2?e34853135f9e39acf64315236852cd5a HTTP/1.1[0m" 304 -
+2025-09-03 13:07:57,758 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:07:57] "[36mGET /static/js/map_main_section.js HTTP/1.1[0m" 304 -
+2025-09-03 13:07:57,759 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:07:57] "[36mGET /static/js/map_sideber.js HTTP/1.1[0m" 304 -
+2025-09-03 13:07:57,770 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:07:57] "[36mGET /static/js/common/pn_list.js HTTP/1.1[0m" 304 -
+2025-09-03 13:07:57,784 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:07:57] "[36mGET /static/js/popup/save_inout.js HTTP/1.1[0m" 304 -
+2025-09-03 13:07:57,794 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:07:57] "[36mGET /static/js/common/pn_highlight.js HTTP/1.1[0m" 304 -
+2025-09-03 13:07:57,807 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:07:57] "[36mGET /static/js/popup.js HTTP/1.1[0m" 304 -
+2025-09-03 13:07:57,809 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:07:57] "[36mGET /static/js/common/zone_sort.js HTTP/1.1[0m" 304 -
+2025-09-03 13:07:57,815 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:07:57] "[36mGET /static/js/common/stack_gauge.js HTTP/1.1[0m" 304 -
+2025-09-03 13:07:57,820 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:07:57] "[36mGET /static/js/common/serial_no_search.js HTTP/1.1[0m" 304 -
+2025-09-03 13:07:57,822 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:07:57] "[36mGET /static/js/common/zone_list.js HTTP/1.1[0m" 304 -
+2025-09-03 13:08:28,372 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:28] "GET /view_map HTTP/1.1" 200 -
+2025-09-03 13:08:28,420 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:28] "[36mGET /static/css/bootstrap-icons-1.13.1/bootstrap-icons.css HTTP/1.1[0m" 304 -
+2025-09-03 13:08:28,423 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:28] "[36mGET /static/css/bootstrap.min.css HTTP/1.1[0m" 304 -
+2025-09-03 13:08:28,429 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:28] "[36mGET /static/css/map.css HTTP/1.1[0m" 304 -
+2025-09-03 13:08:28,433 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:28] "[36mGET /static/css/popup.css HTTP/1.1[0m" 304 -
+2025-09-03 13:08:28,438 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:28] "[36mGET /static/css/stock_ctrl.css HTTP/1.1[0m" 304 -
+2025-09-03 13:08:28,445 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:28] "[36mGET /static/css/main_section.css HTTP/1.1[0m" 304 -
+2025-09-03 13:08:28,450 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:28] "[36mGET /static/css/highlight.css HTTP/1.1[0m" 304 -
+2025-09-03 13:08:28,457 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:28] "[36mGET /static/js/common/displayname.js HTTP/1.1[0m" 304 -
+2025-09-03 13:08:28,463 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:28] "[36mGET /static/js/map_sideber.js HTTP/1.1[0m" 304 -
+2025-09-03 13:08:28,475 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:28] "[36mGET /static/js/common/pn_list.js HTTP/1.1[0m" 304 -
+2025-09-03 13:08:28,478 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:28] "[36mGET /static/js/popup/save_inout.js HTTP/1.1[0m" 304 -
+2025-09-03 13:08:28,480 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:28] "[36mGET /static/js/common/stack_gauge.js HTTP/1.1[0m" 304 -
+2025-09-03 13:08:28,490 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:28] "[36mGET /static/js/common/pn_highlight.js HTTP/1.1[0m" 304 -
+2025-09-03 13:08:28,495 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:28] "[36mGET /static/js/common/zone_sort.js HTTP/1.1[0m" 304 -
+2025-09-03 13:08:28,500 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:28] "[36mGET /static/css/bootstrap-icons-1.13.1/fonts/bootstrap-icons.woff2?e34853135f9e39acf64315236852cd5a HTTP/1.1[0m" 304 -
+2025-09-03 13:08:28,503 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:28] "[36mGET /static/js/popup.js HTTP/1.1[0m" 304 -
+2025-09-03 13:08:28,505 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:28] "[36mGET /static/js/view_map/view.js HTTP/1.1[0m" 304 -
+2025-09-03 13:08:28,509 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:28] "[36mGET /static/js/common/zone_list.js HTTP/1.1[0m" 304 -
+2025-09-03 13:08:28,514 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:28] "[36mGET /static/js/common/serial_no_search.js HTTP/1.1[0m" 304 -
+2025-09-03 13:08:28,547 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:28] "[36mGET /static/js/view_map/data_fetch.js HTTP/1.1[0m" 304 -
+2025-09-03 13:08:28,562 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:28] "[36mGET /static/js/view_map/render_shelf.js HTTP/1.1[0m" 304 -
+2025-09-03 13:08:32,692 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:32] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:33,710 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:33] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:34,757 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:34] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:35,789 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:35] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:36,803 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:36] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:37,824 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:37] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:38,836 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:38] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:39,852 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:39] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:40,869 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:40] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:41,893 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:41] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:42,906 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:42] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:43,918 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:43] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:44,937 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:44] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:45,951 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:45] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:46,969 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:46] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:47,982 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:47] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:49,003 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:49] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:50,018 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:50] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:51,035 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:51] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:52,052 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:52] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:53,068 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:53] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:54,085 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:54] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:55,101 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:55] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:56,113 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:56] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:57,135 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:57] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:58,151 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:58] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:08:59,164 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:08:59] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:09:00,179 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:00] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:09:01,201 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:01] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:09:02,217 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:02] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:09:03,231 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:03] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:09:04,244 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:04] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:09:05,261 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:05] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:09:06,284 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:06] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:09:07,299 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:07] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:09:08,310 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:08] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:09:09,327 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:09] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:09:10,348 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:10] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:09:11,359 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:11] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:09:12,379 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:12] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:09:13,397 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:13] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:09:14,412 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:14] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:09:15,452 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:15] "GET /api/cell_status HTTP/1.1" 200 -
+2025-09-03 13:09:16,209 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:16] "GET /pn_ctrl HTTP/1.1" 200 -
+2025-09-03 13:09:16,254 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:16] "[36mGET /static/css/bootstrap.min.css HTTP/1.1[0m" 304 -
+2025-09-03 13:09:16,256 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:16] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-09-03 13:09:16,261 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:16] "[36mGET /static/css/bootstrap-icons-1.13.1/bootstrap-icons.css HTTP/1.1[0m" 304 -
+2025-09-03 13:09:16,271 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:16] "[36mGET /static/js/common/displayname.js HTTP/1.1[0m" 304 -
+2025-09-03 13:09:16,284 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:16] "[36mGET /static/css/pn_ctrl.css HTTP/1.1[0m" 304 -
+2025-09-03 13:09:16,296 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:16] "[36mGET /static/js/common/validation.js HTTP/1.1[0m" 304 -
+2025-09-03 13:09:16,326 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:16] "[36mGET /static/js/pn_ctrl/pn_ctrl.js HTTP/1.1[0m" 304 -
+2025-09-03 13:09:16,398 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:16] "[36mGET /static/css/bootstrap-icons-1.13.1/fonts/bootstrap-icons.woff2?e34853135f9e39acf64315236852cd5a HTTP/1.1[0m" 304 -
+2025-09-03 13:09:16,416 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:16] "[36mGET /static/js/pn_ctrl/existPnListCreate.js HTTP/1.1[0m" 304 -
+2025-09-03 13:09:16,421 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:16] "[36mGET /static/js/pn_ctrl/serial_no_search.js HTTP/1.1[0m" 304 -
+2025-09-03 13:09:45,820 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:45] "GET /allow_storage_map HTTP/1.1" 200 -
+2025-09-03 13:09:45,876 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:45] "[36mGET /static/css/bootstrap-icons-1.13.1/bootstrap-icons.css HTTP/1.1[0m" 304 -
+2025-09-03 13:09:45,883 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:45] "[36mGET /static/css/bootstrap.min.css HTTP/1.1[0m" 304 -
+2025-09-03 13:09:45,884 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:45] "[36mGET /static/css/stock_ctrl.css HTTP/1.1[0m" 304 -
+2025-09-03 13:09:45,888 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:45] "[36mGET /static/css/main_section.css HTTP/1.1[0m" 304 -
+2025-09-03 13:09:45,895 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:45] "[36mGET /static/css//popup.css HTTP/1.1[0m" 304 -
+2025-09-03 13:09:45,900 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:45] "[36mGET /static/css/highlight.css HTTP/1.1[0m" 304 -
+2025-09-03 13:09:45,904 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:45] "[36mGET /static/js/common/zone_list.js HTTP/1.1[0m" 304 -
+2025-09-03 13:09:45,907 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:45] "[36mGET /static/js/common/zone_sort.js HTTP/1.1[0m" 304 -
+2025-09-03 13:09:45,912 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:45] "[36mGET /static/css/allow_storage_map.css HTTP/1.1[0m" 304 -
+2025-09-03 13:09:45,946 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:45] "[36mGET /static/js/allow_strage_map/allow_map_main_section.js HTTP/1.1[0m" 304 -
+2025-09-03 13:09:45,952 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:09:45] "[36mGET /static/css/bootstrap-icons-1.13.1/fonts/bootstrap-icons.woff2?e34853135f9e39acf64315236852cd5a HTTP/1.1[0m" 304 -
+2025-09-03 13:10:04,715 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:10:04] "GET /inout_logview HTTP/1.1" 200 -
+2025-09-03 13:10:04,773 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:10:04] "[36mGET /static/css/inout_logview.css HTTP/1.1[0m" 304 -
+2025-09-03 13:10:04,785 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:10:04] "[36mGET /static/js/inout_logview/render_log.js HTTP/1.1[0m" 304 -
+2025-09-03 13:10:04,806 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:10:04] "[36mGET /static/js/inout_logview/logrecCreate.js HTTP/1.1[0m" 304 -
+2025-09-03 13:10:04,814 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:10:04] "[36mGET /static/js/common/displayname.js HTTP/1.1[0m" 304 -
+2025-09-03 13:14:26,092 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:14:26] "GET / HTTP/1.1" 200 -
+2025-09-03 13:14:26,155 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:14:26] "[36mGET /static/css/bootstrap-icons-1.13.1/bootstrap-icons.css HTTP/1.1[0m" 304 -
+2025-09-03 13:14:26,157 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:14:26] "[36mGET /static/css/bootstrap.min.css HTTP/1.1[0m" 304 -
+2025-09-03 13:14:26,160 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:14:26] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-09-03 13:14:26,197 - werkzeug - INFO - 127.0.0.1 - - [03/Sep/2025 13:14:26] "[36mGET /static/css/bootstrap-icons-1.13.1/fonts/bootstrap-icons.woff2?e34853135f9e39acf64315236852cd5a HTTP/1.1[0m" 304 -

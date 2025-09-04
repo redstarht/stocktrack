@@ -69,7 +69,6 @@ export async function saveCheckedData(button, cellData, stock_qty) {
       console.log("✅新規または部分取り出し字の処理", new_stock_qty)
       btnIcon.className = "btn-pn-stock";
       btnIcon.textContent = serial_no;
-      console.log(btnIcon.className)
       // ハイライト用にcellにdata-pnをセット
       cell.dataset.pn = pn_id;
     }

@@ -2,11 +2,11 @@ import { stackGaugeCreate } from "../common/stack_gauge.js";
 import { initPnHighlight } from "../common/pn_highlight.js";
 import { initZoneSort,cycleZone } from "../common/zone_sort.js";
 import { createDisplayName } from "../common/displayname.js";
-import { get_cell_status_data } from "./data_fetch.js"
+import { get_cell_status_data } from "../common/data_fetch.js"
 import { render_shelf } from "./render_shelf.js";
 
 document.addEventListener("DOMContentLoaded", async function () {
-
+    const pageId = viewmap;
 
     const shelfGridElm = document.getElementById("shelfGrid");
     const mainHeader = document.getElementById("mainheader");
@@ -19,7 +19,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         shelfGridElm: shelfGridElm, //shelf の DOM
         reloadCellStockData: reloadCellStockData,//cellの最新格納ステータス
         cellGridElm: cellGridElm,//cellのDOM
-        mainHeader: mainHeader
+        mainHeader: mainHeader,
+        pageId:pageId
     }
 
     //描画情報更新 
