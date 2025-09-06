@@ -257,7 +257,7 @@ def save_cell_permisson():
 
 
 @api.route("/api/cell_status")
-# crll_stock_statusの値を、
+# cell_stock_statusの値を、
 # 更新時間を描画するため、今の時間を返す
 def order_cell_status():
     obj_cell_stock_status = CellStockStatus.query.all()

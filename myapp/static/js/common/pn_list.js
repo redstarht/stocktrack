@@ -9,8 +9,10 @@ export function createPnListElm(pn_list, pnListElm) {
         const unionvalue = [
             displayValue(pnItem.serial_no),
             displayValue(pnItem.material),
+            displayValue(pnItem.outer_diam),
             displayValue(pnItem.material_thickness),
             displayValue(pnItem.cut_length),
+            displayValue(pnItem.long_length)
         ].join(" / ");
         pnBtn.textContent = unionvalue;
         pnListElm.appendChild(pnBtn);
@@ -31,13 +33,16 @@ export function createPopupPnlist(input_pn,table) {
         const unionvalue = [
             displayValue(pn.serial_no),
             displayValue(pn.material),
+            displayValue(pn.outer_diam),
             displayValue(pn.material_thickness),
             displayValue(pn.cut_length),
+            displayValue(pn.long_length)
         ].join(" / ");
 
         pnCell.textContent = unionvalue;
         pnCell.dataset.id = pn.id; // データセットにIDを設定
         pnCell.dataset.serial_no =pn.serial_no;
+        pnCell.dataset.long_length=pn.long_length;
 
         const radioBtn = document.createElement("input");
         radioBtn.className = "radio-btn";

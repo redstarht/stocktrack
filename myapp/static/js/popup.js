@@ -17,6 +17,7 @@ export function createPopup() {
   let inputContainer = null;
 
   // input_pnをモジュール内スコープ変数として宣言 (popup終了処理時に都度初期化)
+  // ※個別品番許可時に、pn_list全部を表示させるのではなく、許可された品番(input_pn)のみの表示とする
   let input_pn = [];
 
   cellBtns.forEach(button => {

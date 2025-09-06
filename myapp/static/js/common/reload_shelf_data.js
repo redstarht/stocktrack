@@ -1,6 +1,7 @@
 import { stackGaugeCreate } from "../common/stack_gauge.js";
+import { pageSettings } from "../common/settings.js"
 
-export function reload_shelf_data(shelf_list, shelfGridElm, reloadCellStockData) {
+export function reload_shelf_data(shelf_list, shelfGridElm, reloadCellStockData,pageName) {
     shelf_list.forEach(shelfItem => {
         const shelf_cells = cell_list.filter(cell => cell.shelf_id === shelfItem.id);
         shelf_cells.forEach(cell => {
@@ -11,6 +12,7 @@ export function reload_shelf_data(shelf_list, shelfGridElm, reloadCellStockData)
             const stock_cell = reloadCellStockData && reloadCellStockData.cell_stock_statuses
                 ? reloadCellStockData.cell_stock_statuses.find(stock => stock.cell_id == cell.id)
                 : null;
+
             // cellElmをdata属性を使って取得
             const cellElm = shelfGridElm.querySelector(`[data-cell-id="${cell.id}"]`);
 
@@ -30,33 +32,28 @@ export function reload_shelf_data(shelf_list, shelfGridElm, reloadCellStockData)
                 */
             //    共通化部★
                 if (stock_cell) {
-                    /*
-                    div.classname = stack DOMの状態を更新
-                    div.classname = cell-stock-btn DOMの状態を更新
-                    // レコードあるとき
-                    <i class="btn-pn-stock">004</i>
 
-                    // レコードないとき
-                    bi bi-box-arrow-in-down"                   
-            
-                    */
-                    let product_number = pn_list.find(pnItem => pnItem.id == stock_cell.pn_id);
+                    // セルに格納されている品番情報を取得
+                    const prod_num = pn_list.find(pnItem => pnItem.id == stock_cell.pn_id);
                     cellElm.dataset.pn = stock_cell.pn_id;
 
                     // スタックゲージの更新
                     const stack = cellElm.querySelector('.stack');
                     stackGaugeCreate(cell.max_qty, stock_cell.stock_qty, stack);
 
-                    const divIcon = cellElm.querySelector('i');
-                    divIcon.textContent = product_number.serial_no;
-                    divIcon.className = "btn-pn-stock";
+                    pageSettings[pageName].reload_exist_cellElm(cellElm,stock_cell,prod_num);
+
+                    // const divIcon = cellElm.querySelector('i');
+                    // divIcon.textContent = product_number.serial_no;
+                    // divIcon.className = "btn-pn-stock";
                 } else {
                     // stock_cellが存在しない場合の処理
                     const stack = cellElm.querySelector('.stack');
                     stack.innerHTML = "";
-                    const divIcon = cellElm.querySelector('i');
-                    divIcon.textContent = "";
-                    divIcon.className = "bi bi-box-arrow-in-down";
+                    pageSettings[pageName].reload_none_cellElm(cellElm);
+                    // const divIcon = cellElm.querySelector('i');
+                    // divIcon.textContent = "";
+                    // divIcon.className = "bi bi-box-arrow-in-down";
                 }
             }
 

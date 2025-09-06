@@ -91,7 +91,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 max_qty: max_qty ?? '',
                 pn_id: stock_cell?.pn_id ?? '',
                 serial_no: product_number?.serial_no ?? '',
-                stock_qty: stock_cell?.stock_qty ?? 0
+                stock_qty: stock_cell?.stock_qty ?? 0,
+                stock_fraction: stock_cell?.stock_fraction ?? '',
             }
             cellBtn.dataset.item = JSON.stringify(dataObj);
 

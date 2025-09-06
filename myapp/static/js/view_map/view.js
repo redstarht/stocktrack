@@ -1,12 +1,11 @@
 import { stackGaugeCreate } from "../common/stack_gauge.js";
 import { initPnHighlight } from "../common/pn_highlight.js";
 import { initZoneSort,cycleZone } from "../common/zone_sort.js";
-import { createDisplayName } from "../common/displayname.js";
 import { get_cell_status_data } from "../common/data_fetch.js"
 import { render_shelf } from "./render_shelf.js";
 
 document.addEventListener("DOMContentLoaded", async function () {
-    const pageId = viewmap;
+    const pageId = "viewmap";
 
     const shelfGridElm = document.getElementById("shelfGrid");
     const mainHeader = document.getElementById("mainheader");

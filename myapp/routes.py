@@ -12,11 +12,6 @@ def index():
     return render_template('index.html')
 
 
-@main.route('/old_inout_map')
-def old_inout_map():
-    return render_template('old_inout_map.html')
-
-
 @main.route('/pn_ctrl')
 def pn_ctrl():
     # ProductNumberモデルから削除フラグが立っていない品番を取得

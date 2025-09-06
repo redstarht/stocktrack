@@ -45,7 +45,7 @@ export async function saveCheckedData(button, cellData, stock_qty) {
     cellData.pn_id = pn_id;
     cellData.serial_no = serial_no;
     button.dataset.item = JSON.stringify(cellData);
-    button.dataset.displayname = displayname;
+    // button.dataset.displayname = displayname;
 
 
     // 取り出した時のマップ描画処理  / 送信データ処理(格納０個時にしたときの処理)
