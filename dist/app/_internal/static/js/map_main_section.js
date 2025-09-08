@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         const cellGridElm = document.createElement("div");
-        cellGridElm.className = shelfItem.css_class;
+        cellGridElm.className = shelfItem.column_class;
 
 
         // 対象の棚にあるセルを描画

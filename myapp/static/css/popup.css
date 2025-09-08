@@ -119,14 +119,22 @@
 }
 
 .pn-cell {
-    flex: 0.7;
+    flex: 0.9;
     font-size: 1.2rem;
     /* text-align: center; */
     padding-left: 10%;
     color: black;
 }
 
+
+.pn-label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .radio-btn {
+    margin-left: 2em;
     color: white;
     border: none;
     cursor: pointer;

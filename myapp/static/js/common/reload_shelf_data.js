@@ -21,10 +21,10 @@ export function reload_shelf_data(shelf_list, shelfGridElm, reloadCellStockData,
                 // stock_cellが存在する場合
                 /*
                 条件分岐
-                1.スタックゲージそのまま
-                2.スタックゲージの増減
-                3.空➡スタックゲージ表示
-                4.スタックゲージ➡空
+                1：スタックゲージそのまま
+                2：スタックゲージの増減
+                3：空➡スタックゲージ表示
+                4：スタックゲージ➡空
 
                 現状描画されている情報(Class名から)
                 上記1~4パターンを判定

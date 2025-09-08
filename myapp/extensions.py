@@ -7,8 +7,6 @@ import sys
 import os
 
 # DB接続時に起動
-
-
 @event.listens_for(Engine, "connect")
 def set_sqlite_pragma(dbapi_connection, _):
     if isinstance(dbapi_connection, sqlite3.Connection):

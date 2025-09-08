@@ -21,9 +21,6 @@
                                 const stack = cellElm.querySelector('.stack');
                                 stackGaugeCreate(cell.max_qty, stock_cell.stock_qty, stack);
 
-                                // 入出マップ or 確認マップ
-                                pagesetting.exist_stack
-
                                 const divIcon = cellElm.querySelector('i');
                                 divIcon.textContent = product_number.serial_no;
                                 divIcon.className = "btn-pn-stock";

@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         const cellGridElm = document.createElement("div");
-        cellGridElm.className = shelfItem.css_class;
+        cellGridElm.className = shelfItem.column_class;
 
 
         // 対象の棚にあるセルを描画
@@ -45,7 +45,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const cellLabel = document.createElement("div");
             const stack = document.createElement("div");
             const cellBtn = document.createElement("button");
-            const btnIcon = document.createElement("i");
+            const pnSNLbl = document.createElement("i");
+            const pnLenLbl = document.createElement('i');
 
             cellElm.className = "cell";
             cellElm.dataset.cellId = cell.id;
@@ -70,15 +71,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 // マップへのスタックゲージの表示
                 stackGaugeCreate(max_qty, stock_cell.stock_qty, stack);
 
-                btnIcon.textContent = pnItem.serial_no;
-                btnIcon.className = "btn-pn-stock"
+                pnSNLbl.textContent = pnItem.serial_no;
+                pnSNLbl.className = "serial-lbl btn-pn-stock"
                 cellBtn.dataset.displayname = displayName;
+                pnLenLbl.textContent = pnItem.long_length;
+                pnLenLbl.className="length-lbl btn-pn-stock" 
 
 
 
             } else {
 
-                btnIcon.className = "bi bi-box-arrow-in-down";
+                pnSNLbl.className = "serial-lbl bi bi-box-arrow-in-down";
             }
             cellLabel.className = "cell-label";
             stack.className = "stack";
@@ -99,7 +102,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-            cellBtn.appendChild(btnIcon);
+            cellBtn.appendChild(pnSNLbl);
+            cellBtn.appendChild(pnLenLbl);
             cellLabel.appendChild(stack);
             cellLabel.appendChild(cellBtn);
             cellElm.appendChild(cellLabel);

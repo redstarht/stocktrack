@@ -20,7 +20,7 @@ export function createPnListElm(pn_list, pnListElm) {
 
 }
 
-export function createPopupPnlist(input_pn,table) {
+export function createPopupPnlist(input_pn, table) {
     input_pn.forEach(pn => {
         const newRow = document.createElement("tr");
         newRow.className = "pn-row";
@@ -28,6 +28,7 @@ export function createPopupPnlist(input_pn,table) {
         newRow.dataset.serial_no = pn.serial_no;
 
         const pnCell = document.createElement("td");
+        const pnLabel = document.createElement("label")
         pnCell.className = "pn-cell";
         const displayValue = (val) => (val === null || val === "" || val === -1.0 ? "***" : val);
         const unionvalue = [
@@ -39,18 +40,20 @@ export function createPopupPnlist(input_pn,table) {
             displayValue(pn.long_length)
         ].join(" / ");
 
-        pnCell.textContent = unionvalue;
         pnCell.dataset.id = pn.id; // データセットにIDを設定
-        pnCell.dataset.serial_no =pn.serial_no;
-        pnCell.dataset.long_length=pn.long_length;
+        pnCell.dataset.serial_no = pn.serial_no;
+        pnCell.dataset.long_length = pn.long_length;
+        pnLabel.textContent = unionvalue;
+        pnLabel.className ="pn-label"
 
         const radioBtn = document.createElement("input");
+        radioBtn.dataset.id=pn.id;
         radioBtn.className = "radio-btn";
         radioBtn.type = "radio";
         radioBtn.name = "choice";
         radioBtn.value = true;
 
-        const check_pn =cell_stock_list.filter(item => item.pn_id === pn.id && item.cell_id === table.dataset.cell_id);
+        const check_pn = cell_stock_list.filter(item => item.pn_id === pn.id && item.cell_id === table.dataset.cell_id);
 
         if (check_pn.length > 0) {
             radioBtn.checked = true;
@@ -65,11 +68,11 @@ export function createPopupPnlist(input_pn,table) {
         });
 
 
-
+        pnLabel.appendChild(radioBtn);
+        pnCell.appendChild(pnLabel);
         newRow.appendChild(pnCell);
-        newRow.appendChild(radioBtn);
         table.appendChild(newRow);
-        
+
     })
     return table;
 }

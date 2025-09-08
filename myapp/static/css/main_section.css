@@ -226,6 +226,10 @@ textarea {
 
 }
 
+/* 未格納時のアイコンサイズ */
+.bi-box-arrow-in-down{
+    font-size: 2rem !important;
+}
 
 .shelf-label {
     display: flex;

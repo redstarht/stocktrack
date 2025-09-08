@@ -98,7 +98,7 @@ export function render_shelf(renderInfo, reloadCellStockData) {
 
 
             renderInfo.cellGridElm = document.createElement("div");
-            renderInfo.cellGridElm.className = shelfItem.css_class;
+            renderInfo.cellGridElm.className = shelfItem.column_class;
 
 
             // 対象の棚にあるセルを描画

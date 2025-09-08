@@ -28,74 +28,87 @@ api = Blueprint("api", __name__)
 
 @api.route("/api/inout/save", methods=["POST"])
 def save_inout_popup():
-    data = request.get_json()
-    if not data:
-        return jsonify({"error": "データが格納されていません"}), 400
-    cell_stock_status = data.get("cell_stock_status", {})
-    inout_log = data.get("inout_log", {})
-    print(cell_stock_status, inout_log)
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({"error": "データが格納されていません"}), 400
+        cell_stock_status = data.get("cell_stock_status", {})
+        inout_log = data.get("inout_log", {})
+        print(cell_stock_status, inout_log)
 
-    # 新規登録時 / 更新時 どちらも登録
-    new_inout_log = InoutLog(
-        cell_id=inout_log.get("cell_id"),
-        pn_id=inout_log.get("pn_id"),
-        inout_type=inout_log.get("inout_type"),
-        change_qty=inout_log.get("change_qty"),
-        stock_after=inout_log.get("stock_after"))
-    db.session.add(new_inout_log)
+        # 新規登録時 / 更新時 どちらも登録
+        new_inout_log = InoutLog(
+            cell_id=inout_log.get("cell_id"),
+            pn_id=inout_log.get("pn_id"),
+            inout_type=inout_log.get("inout_type"),
+            change_qty=inout_log.get("change_qty"),
+            stock_after=inout_log.get("stock_after"))
+        db.session.add(new_inout_log)
 
-    '''
-    新規追加 / 既存データのストック数消す / stockが0になった場合はレコードを削除
-    
-    なおかつ新規追加時にcell_idが一致しているレコードが１つでもあったら
-    新規レコードとして追加せずにエラーで返す➡「すでにそのセルには品番が格納されています」
-    
-    
-    '''
-    # 新規追加
-    if not CellStockStatus.query.filter_by(
-        cell_id=cell_stock_status.get("cell_id"),
-        pn_id=cell_stock_status.get("pn_id")
-    ).all():
-
-        # 新規レコードに該当するかチェック
-        check_stock_status(cell_stock_status)
-
-        new_cell_stock_status = CellStockStatus(
-            cell_id=cell_stock_status.get("cell_id"),
-            pn_id=cell_stock_status.get("pn_id"),
-            stock_qty=cell_stock_status.get("stock_qty")
-        )
-        db.session.add(new_cell_stock_status)
-
-    # 削除処理(セル格納数が0になった場合はレコードを削除)
-    elif cell_stock_status.get("stock_qty") == 0:
-        delete_cell_stock_status = CellStockStatus.query.filter_by(
+        '''
+        新規追加 / 既存データのストック数消す / stockが0になった場合はレコードを削除
+        
+        なおかつ新規追加時にcell_idが一致しているレコードが１つでもあったら
+        新規レコードとして追加せずにエラーで返す➡「すでにそのセルには品番が格納されています」
+        
+        
+        '''
+        # 新規追加
+        if not CellStockStatus.query.filter_by(
             cell_id=cell_stock_status.get("cell_id"),
             pn_id=cell_stock_status.get("pn_id")
-        ).first()
-        if delete_cell_stock_status:
-            db.session.delete(delete_cell_stock_status)
-            print("削除処理実行")
+        ).all():
 
-    # 更新処理
-    else:
-        update_cell_stock_status = CellStockStatus.query.filter_by(
-            cell_id=cell_stock_status.get("cell_id"),
-            pn_id=cell_stock_status.get("pn_id")
-        ).first()
-        if update_cell_stock_status:
-            update_cell_stock_status.stock_qty = cell_stock_status.get(
-                "stock_qty")
-            print("更新処理実行")
+            # 新規レコードに該当するかチェック
+            check_stock_status(cell_stock_status)
 
-    db.session.commit()
+            new_cell_stock_status = CellStockStatus(
+                cell_id=cell_stock_status.get("cell_id"),
+                pn_id=cell_stock_status.get("pn_id"),
+                stock_qty=cell_stock_status.get("stock_qty")
+            )
+            db.session.add(new_cell_stock_status)
 
-    print(data)
+        # 削除処理(セル格納数が0になった場合はレコードを削除)
+        elif cell_stock_status.get("stock_qty") == 0:
+            delete_cell_stock_status = CellStockStatus.query.filter_by(
+                cell_id=cell_stock_status.get("cell_id"),
+                pn_id=cell_stock_status.get("pn_id")
+            ).first()
+            if delete_cell_stock_status:
+                db.session.delete(delete_cell_stock_status)
+                print("削除処理実行")
 
-    # データの検証
+        # 更新処理
+        else:
+            update_cell_stock_status = CellStockStatus.query.filter_by(
+                cell_id=cell_stock_status.get("cell_id"),
+                pn_id=cell_stock_status.get("pn_id")
+            ).first()
+            if update_cell_stock_status:
+                update_cell_stock_status.stock_qty = cell_stock_status.get(
+                    "stock_qty")
+                print("更新処理実行")
 
-    return jsonify({"status": "保存完了！"})
+        db.session.commit()
+
+        print(data)
+
+        # 更新データの再取得
+        obj_cell_stock_status = CellStockStatus.query.all()
+        cell_stock_statuses = [cell_stock_status.to_dict()
+                            for cell_stock_status in obj_cell_stock_status]
+        timestamp = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
+        formatted_time = timestamp.strftime('%Y/%m/%d %H:%M:%S')
+
+        response_data = {
+            "time_stamp": formatted_time,
+            "cell_stock_statuses": cell_stock_statuses
+        }
+
+        return jsonify(response_data),200
+    except Exception as e:
+        return jsonify({"error":str(e)}),500
 
 
 @api.route("/api/pn_ctrl/save", methods=["POST"])
@@ -265,13 +278,10 @@ def order_cell_status():
                            for cell_stock_status in obj_cell_stock_status]
     timestamp = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
     formatted_time = timestamp.strftime('%Y/%m/%d %H:%M:%S')
-    
+
     response_data = {
-        "time_stamp":formatted_time,
-        "cell_stock_statuses":cell_stock_statuses
+        "time_stamp": formatted_time,
+        "cell_stock_statuses": cell_stock_statuses
     }
-    
-    
 
     return jsonify(response_data)
-

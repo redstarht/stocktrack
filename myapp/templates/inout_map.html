@@ -38,7 +38,7 @@
                     <div class="pn-title">パイプ情報</div>
                     <div class="search-container">
                         <label for="serial-search">背番号検索</label>
-                        <input  id="serial-search" name="serial-no" inputmode="numeric" />
+                        <input id="serial-search" name="serial-no" inputmode="numeric" />
                         <button id="search-button">検索</button>
                     </div>
                 </div>
@@ -79,8 +79,9 @@
         const cell_stock_list = {{ cell_stock_statuses | tojson }};
 
     </script>
-    
+
     <script type="module" src="../static/js/common/displayname.js"></script>
+    <script type="module" src="../static/js/common/reload_shelf_data.js"></script>
     <script type="module" src="../static/js/map_sideber.js"></script>
     <script type="module" src="../static/js/map_main_section.js"></script>
     <script type="module" src="../static/js/common/pn_list.js"></script>
