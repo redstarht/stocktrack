@@ -28,7 +28,6 @@ export async function saveCheckedData(button, cellData, stock_qty) {
         throw new Error("\u274c背番号を選択してください！"); // エラーをスロー
       }
     }
-
   }
   // 送信用データ整形
   dataToSend.cell_stock_status = {};

@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             cellLabel.className = "cell-label";
             stack.className = "stack";
-            cellBtn.className = "cell-stock-btn";
+            cellBtn.className = shelfItem.row_class;
 
             // セルボタンのデータまとめ用（データがない場合は空文字)
             const dataObj = {

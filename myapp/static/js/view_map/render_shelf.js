@@ -58,7 +58,8 @@ export function render_shelf(renderInfo, reloadCellStockData) {
                 const cellLabel = document.createElement("div");
                 const stack = document.createElement("div");
                 const cellDiv = document.createElement("div");
-                const divIcon = document.createElement("i");
+                const pnSNLbl = document.createElement("i");
+                const pnLenLbl = document.createElement("i");
 
                 cellElm.className = "cell";
                 cellElm.dataset.cellId = cell.id;
@@ -79,7 +80,7 @@ export function render_shelf(renderInfo, reloadCellStockData) {
                     /*
                     stock_cellにレコードがあった場合は
                     stackGaugeCreateからゲージDOM要素を作成
-                    divIcon
+                    pnSNLbl
                     
                     */
                     let product_number = null;
@@ -93,20 +94,23 @@ export function render_shelf(renderInfo, reloadCellStockData) {
                     // マップへのスタックゲージの表示
                     stackGaugeCreate(max_qty, stock_cell.stock_qty, stack);
 
-                    divIcon.textContent = product_number.serial_no;
-                    divIcon.className = "btn-pn-stock"
+                    pnSNLbl.textContent = product_number.serial_no;
+                    pnSNLbl.className = "serial-lbl btn-pn-stock"
+                    pnLenLbl.textContent =product_number.long_length;
+                    pnLenLbl.className ="length-lbl btn-pn-stock"
                     // cellDiv.dataset.displayname = displayName;
 
                 } else {
 
-                    divIcon.className = "bi bi-box-arrow-in-down";
+                    pnSNLbl.className = "bi bi-box-arrow-in-down";
                 }
                 cellLabel.className = "cell-label";
                 stack.className = "stack";
-                cellDiv.className = "cell-stock-btn";
+                cellDiv.className = shelfItem.row_class;
 
 
-                cellDiv.appendChild(divIcon);
+                cellDiv.appendChild(pnSNLbl);
+                cellDiv.appendChild(pnLenLbl);
                 cellLabel.appendChild(stack);
                 cellLabel.appendChild(cellDiv);
                 cellElm.appendChild(cellLabel);

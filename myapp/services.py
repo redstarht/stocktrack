@@ -66,14 +66,14 @@ def shelfs_with_class(shelfs):
 
     column_class = {
         # "cell-grid"はデフォルト値
-        1: "cell-grid-column1",
-        4: "cell-grid-column4",
+        1: "cell-grid column1",
+        4: "cell-grid column4",
     }
 
     row_class = {
         # "cell-stock-btn"はデフォルト値
-        4:"cell-stock-btn",
-        5:"cell-stock-btn-row5"
+        4:"cell-stock-btn row4",
+        5:"cell-stock-btn row5"
     }
 
     shelfs_with_class = [
