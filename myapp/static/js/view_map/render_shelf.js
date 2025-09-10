@@ -102,7 +102,7 @@ export function render_shelf(renderInfo, reloadCellStockData) {
 
                 } else {
 
-                    pnSNLbl.className = "bi bi-box-arrow-in-down";
+                    pnSNLbl.className = "serial-lbl bi bi-box-arrow-in-down";
                 }
                 cellLabel.className = "cell-label";
                 stack.className = "stack";

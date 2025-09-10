@@ -163,7 +163,6 @@ html body {
 .pn-title {
     font-size: 1.5rem;
     font-weight: bold;
-    margin-bottom: 1rem;
     text-align: center;
 }
 
@@ -197,7 +196,7 @@ html body {
 
 .pn-select .btn {
     width: 90%;
-    font-size: clamp(1px, 1vw, 15px);
+    font-size: clamp(1px, 0.8vw, 15px);
     white-space: nowrap;
 }
 

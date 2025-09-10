@@ -16,13 +16,13 @@ export const pageSettings = {
             cellData.stock_fraction = stock_cell.stock_fraction;
             cellStockBtn.dataset.item = JSON.stringify(cellData);
 
-            
+
             // i要素 ラベル命名
 
             const pnSNLbl = cellStockBtn.querySelector('.serial-lbl');
             pnSNLbl.className = "serial-lbl btn-pn-stock";
             pnSNLbl.textContent = product_number.serial_no;
-            const pnLenLbl = cellStockBtn.querySelector('.length-lbl')
+            let pnLenLbl = cellStockBtn.querySelector('.length-lbl')
 
             // .length-lblチェック※あれば既に格納要素の情報を変更
             if (pnLenLbl) {
@@ -58,38 +58,47 @@ export const pageSettings = {
             const pnSNLbl = cellStockBtn.querySelector('.serial-lbl');
             pnSNLbl.className = "serial-lbl bi bi-box-arrow-in-down";
             pnSNLbl.textContent = null;
-            const pnLenLbl = cellStockBtn.querySelector('.length-lbl')
+            let pnLenLbl = cellStockBtn.querySelector('.length-lbl')
             // .length-lblチェック※あれば既に格納要素の情報を変更
             if (pnLenLbl) {
-                const pnLenLbl = cellStockBtn.querySelector('.length-lbl')
                 cellStockBtn.removeChild(pnLenLbl);
-            } else {
-                const pnLenLbl = document.createElement('i');
-                pnLenLbl.className = "length-lbl btn-pn-stock";
-                pnLenLbl.textContent = product_number.long_length;
-                cellStockBtn.appendChild(pnLenLbl);
-            };
-
+            }
         }
     },
     view_map: {
 
         // cellに格納品番が存在した場合に実行
         reload_exist_cellElm: function (cellElm, stock_cell, product_number) {
-            const divIcon = cellElm.querySelector('i');
-            divIcon.textContent = product_number.serial_no;
-            divIcon.className = "serial-lbl btn-pn-stock";
+            const cellStockBtn = cellElm.querySelector('.cell-stock-btn');
+            const pnSNLbl = cellElm.querySelector('.serial-lbl');
+            pnSNLbl.textContent = product_number.serial_no;
+            pnSNLbl.className = "serial-lbl btn-pn-stock";
+            let pnLenLbl = cellStockBtn.querySelector('.length-lbl')
 
-            const pnLenLbl = cellStockBtn.querySelector('.length-lbl');
-            pnLenLbl.className = "length-lbl btn-pn-stock";
-            pnLenLbl.textContent = product_number.long_length;
+            // .length-lblチェック※あれば既に格納要素の情報を変更
+            if (pnLenLbl) {
+                pnLenLbl.className = "length-lbl btn-pn-stock";
+                pnLenLbl.textContent = product_number.long_length;
+            } else {
+                pnLenLbl = document.createElement('i');
+                pnLenLbl.className = "length-lbl btn-pn-stock";
+                pnLenLbl.textContent = product_number.long_length;
+                cellStockBtn.appendChild(pnLenLbl);
+            };
+
         },
 
         // cellに格納品番がない場合に実行
         reload_none_cellElm: function (cellElm) {
-            const divIcon = cellElm.querySelector('i');
-            divIcon.textContent = "";
-            divIcon.className = "bi bi-box-arrow-in-down";
+            const cellStockBtn = cellElm.querySelector('.cell-stock-btn');
+            const pnSNLbl = cellElm.querySelector('i');
+            pnSNLbl.textContent = "";
+            pnSNLbl.className = "serial-lbl bi bi-box-arrow-in-down";
+            let pnLenLbl = cellStockBtn.querySelector('.length-lbl')
+            // .length-lblチェック※あれば既に格納要素の情報を変更
+            if (pnLenLbl) {
+                cellStockBtn.removeChild(pnLenLbl);
+            }
 
         }
 
