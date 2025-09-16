@@ -37,12 +37,44 @@
                 <div class="side-top">
                     <div class="pn-title">パイプ検索</div>
                     <div class="search-container">
-                        <label for="serial-search">背番号</label>
-                        <input id="serial-search" name="serial-no" inputmode="numeric" />
-                        <label for="length-search">長尺長さ</label>
-                        <input id="length-search" name="long-length" inputmode="numeric" />
-                        <button id="search-button">クリア</button>
-                        <button id="search-button">検索</button>
+                        <div class="serial-search-container">
+                            <label for="serial-search">背番号</label>
+                            <input id="serial-search" name="serial-no" inputmode="numeric" />
+                        </div>
+                        <div class="length-search-container">
+                            <div class="length-select-box">
+                                <div class="length-search-title">
+                                    <label class="search-lbl" for="length-search">長尺長さ</label>
+                                </div>
+                                <div class="search-select-box">
+                                    <input type="radio" name="length-search-select" id="partical-match">
+                                    <label for="partical-match">部分一致</label>
+                                    <input type="radio" name="length-search-select" id="range-select">
+                                    <label for="range-select">範囲選択</label>
+                                </div>
+                            </div>
+                            <div class="length-search-box">
+                                <input id="partical-match" name="long-length" inputmode="numeric" />
+                                <span class="unit">(mm)</span>
+                            </div>
+                            <div class="length-search-box">
+                                <input class="range-search"id="rangeStart" name="long-length" inputmode="numeric" />
+                                <span class="unit">(mm)</span>
+                                <span class="unit">~</span>
+                                <input class="range-search" id="rangeEnd" name="long-length" inputmode="numeric" />
+                                <span class="unit">(mm)</span>
+                            </div>
+                        </div>
+                        <div class="entry-container">
+                            <button id="search-button">クリア</button>
+                            <button id="search-button">検索</button>
+                        </div>
+
+
+
+
+
+
                     </div>
                 </div>
 
@@ -85,6 +117,7 @@
 
     <script type="module" src="../static/js/common/displayname.js"></script>
     <script type="module" src="../static/js/common/reload_shelf_data.js"></script>
+    <script type="module" src="../static/js/common/change_select_search.js"></script>
     <script type="module" src="../static/js/map_sideber.js"></script>
     <script type="module" src="../static/js/map_main_section.js"></script>
     <script type="module" src="../static/js/common/pn_list.js"></script>

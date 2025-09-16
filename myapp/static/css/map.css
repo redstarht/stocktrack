@@ -68,15 +68,15 @@ html body {
     width: 100%;
     display: flex;
     flex-flow: column;
-    padding-left: 0%; 
-    font-size:0.7rem;
+    padding-left: 0%;
+    font-size: 0.7rem;
     justify-content: center;
     align-items: center;
 }
 
-.form-switch .form-check-input{
+.form-switch .form-check-input {
     margin-left: 0%;
-    font-size:1.5rem;
+    font-size: 1.5rem;
 }
 
 
@@ -95,6 +95,10 @@ html body {
 
 .side-top {
     width: 100%;
+    margin-bottom: 2%;
+    border: #3963d4 solid;
+    padding-top: 1%;
+    padding-bottom:2% ;
 }
 
 .search-container {
@@ -103,11 +107,79 @@ html body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    font-size: 1rem;
+    font-size: 0.9rem;
+    gap: 10%;
 }
 
-.search-container input {
-    width: 90%
+
+.serial-search-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+
+}
+
+.length-search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: #424242;
+    padding-bottom: 5%;
+  
+}
+
+.length-search-container label{
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.length-select-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    
+}
+
+.length-search-title{
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.search-lbl {
+    text-align: center;
+}
+
+.search-select-box {
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    
+}
+
+.range-search{
+    width: 100%;
+}
+
+.length-search-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+}
+
+.entry-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    padding-top: 3%;
 }
 
 .zone-item {
@@ -116,7 +188,7 @@ html body {
 }
 
 .zone-title {
-    font-size: 1em;
+    font-size: 0.5em !important;
     font-weight: bold;
     margin-top: 0.5rem;
     margin-bottom: 1rem;

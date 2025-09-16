@@ -2,6 +2,7 @@ import { createZoneListElm } from "./common/zone_list.js";
 import { createPnListElm } from "./common/pn_list.js";
 import { serial_no_search } from "./common/serial_no_search.js";
 import  { initPnHighlight } from "./common/pn_highlight.js";
+import { save_localStorage } from "./common/change_select_search.js"
 
 
 
@@ -13,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 初期ロード時
     createZoneListElm(zone_list, zoneListElm);
     createPnListElm(pn_list, pnListElm);
+    save_localStorage();
 
     //検索ボタン処理
     document.getElementById("search-button").addEventListener("click", function () {
