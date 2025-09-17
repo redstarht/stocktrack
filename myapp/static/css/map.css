@@ -98,7 +98,7 @@ html body {
     margin-bottom: 2%;
     border: #3963d4 solid;
     padding-top: 1%;
-    padding-bottom:2% ;
+    padding-bottom: 2%;
 }
 
 .search-container {
@@ -117,7 +117,8 @@ html body {
     flex-direction: row;
     justify-content: space-evenly;
     width: 100%;
-
+    align-items: center;
+    white-space: nowrap;
 }
 
 .length-search-container {
@@ -128,10 +129,10 @@ html body {
     width: 100%;
     background-color: #424242;
     padding-bottom: 5%;
-  
+
 }
 
-.length-search-container label{
+.length-search-container label {
     padding-top: 5%;
     padding-bottom: 5%;
 }
@@ -141,10 +142,12 @@ html body {
     flex-direction: row;
     justify-content: space-evenly;
     width: 100%;
-    
+    white-space: nowrap;
+    text-align: center;
+
 }
 
-.length-search-title{
+.length-search-title {
     width: 30%;
     display: flex;
     justify-content: center;
@@ -160,10 +163,10 @@ html body {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    
+
 }
 
-.range-search{
+.range-search {
     width: 100%;
 }
 
@@ -182,6 +185,35 @@ html body {
     padding-top: 3%;
 }
 
+.entry-container button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.3rem 0.7rem;
+    border: none;
+    border-radius: 5%;
+    /* font-size: 16px; */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* クリアボタンのスタイル */
+.entry-container button.clear {
+    background-color: #f44336 !important; /* 赤色 */
+}
+
+.entry-container button.clear:hover {
+    background-color: #d32f2f !important; /* ホバー時に濃い赤色 */
+}
+
+/* 検索ボタンのスタイル */
+.entry-container button.search {
+    background-color: #4CAF50 !important; /* 緑色 */
+}
+
+.entry-container button.search:hover {
+    background-color: #45a049 !important; /* ホバー時に濃い緑色 */
+}
+
 .zone-item {
     width: 100%;
     font-size: 1rem;
@@ -193,6 +225,7 @@ html body {
     margin-top: 0.5rem;
     margin-bottom: 1rem;
     text-align: center;
+    white-space: nowrap;
 }
 
 .allzone {

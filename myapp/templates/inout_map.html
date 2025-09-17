@@ -44,7 +44,7 @@
                         <div class="length-search-container">
                             <div class="length-select-box">
                                 <div class="length-search-title">
-                                    <label class="search-lbl" for="length-search">長尺長さ</label>
+                                    <label class="search-lbl">長尺長さ</label>
                                 </div>
                                 <div class="search-select-box">
                                     <input type="radio" name="length-search-select" id="partical-match">
@@ -53,8 +53,8 @@
                                     <label for="range-select">範囲選択</label>
                                 </div>
                             </div>
-                            <div class="length-search-box">
-                                <input id="partical-match" name="long-length" inputmode="numeric" />
+                            <div class="length-search-box" id="length-search-box">
+                                <!-- <input id="partical-match" name="long-length" inputmode="numeric" />
                                 <span class="unit">(mm)</span>
                             </div>
                             <div class="length-search-box">
@@ -62,12 +62,12 @@
                                 <span class="unit">(mm)</span>
                                 <span class="unit">~</span>
                                 <input class="range-search" id="rangeEnd" name="long-length" inputmode="numeric" />
-                                <span class="unit">(mm)</span>
+                                <span class="unit">(mm)</span> -->
                             </div>
                         </div>
                         <div class="entry-container">
-                            <button id="search-button">クリア</button>
-                            <button id="search-button">検索</button>
+                            <button class="clear" id="clear-button">クリア</button>
+                            <button class="search" id="search-button">検索</button>
                         </div>
 
 
