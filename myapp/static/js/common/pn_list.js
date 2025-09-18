@@ -1,6 +1,6 @@
-export function createPnListElm(pn_list, pnListElm) {
-
-    pn_list.forEach(pnItem => {
+export function createPnListElm(input_pn, pnListElm) {
+    pnListElm.innerHTML = "";
+    input_pn.forEach(pnItem => {
         const pnBtn = document.createElement("button");
         pnBtn.className = "pn-item btn btn-outline-secondary";
         pnBtn.dataset.pn = pnItem.id;
@@ -17,7 +17,19 @@ export function createPnListElm(pn_list, pnListElm) {
         pnBtn.textContent = unionvalue;
         pnListElm.appendChild(pnBtn);
     });
+}
 
+export function displayPnlistElm(input_pn,pnListElm){
+    const buttons = pnListElm.querySelectorAll('button');
+    buttons.forEach(button=>{
+        const dataId = parseInt(button.dataset.pn);
+        if(input_pn.some(pn=>pn.id === dataId)){
+            button.style.display ="block";
+        }else{
+            button.style.display ="none";
+        }
+
+    })
 }
 
 export function createPopupPnlist(input_pn, table) {
@@ -44,10 +56,10 @@ export function createPopupPnlist(input_pn, table) {
         pnCell.dataset.serial_no = pn.serial_no;
         pnCell.dataset.long_length = pn.long_length;
         pnLabel.textContent = unionvalue;
-        pnLabel.className ="pn-label"
+        pnLabel.className = "pn-label"
 
         const radioBtn = document.createElement("input");
-        radioBtn.dataset.id=pn.id;
+        radioBtn.dataset.id = pn.id;
         radioBtn.className = "radio-btn";
         radioBtn.type = "radio";
         radioBtn.name = "choice";

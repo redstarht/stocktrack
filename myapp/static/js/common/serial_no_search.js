@@ -1,4 +1,32 @@
-import { createPnListElm, createPopupPnlist } from "./pn_list.js";
+import { createPnListElm, createPopupPnlist,displayPnlistElm } from "./pn_list.js";
+
+
+export function onSearchButtonClick(pn_list, pnListElm) {
+    //検索ボタン処理
+    document.getElementById("search-button").addEventListener("click", function () {
+        const getValueOrNull = (id) => {
+            const element = document.getElementById(id);
+            return element ? element.value.trim() : null;
+        };
+
+        const serialValue = getValueOrNull("serial-search");
+        const lengthValue = getValueOrNull("particalMatch");
+        const rangeStart = getValueOrNull("rangeStart");
+        const rangeEnd = getValueOrNull("rangeEnd");
+        const filterPnList = serial_and_length_search(pn_list, serialValue, lengthValue, rangeStart, rangeEnd)
+
+        // 空なら全件表示　/ 検索値あればフィルタリング
+        if (!filterPnList) {
+            displayPnlistElm(pn_list, pnListElm);
+
+        } else {
+            displayPnlistElm(filterPnList, pnListElm);
+        }
+    });
+
+
+}
+
 
 export function clearInput() {
     const clearBtn = document.getElementById('clear-button');
@@ -7,7 +35,7 @@ export function clearInput() {
         // 全セルの強調をリセット
         cells.forEach(cell => {
             cell.classList.remove("highlight");
-            
+
         });
         const serialSearch = document.getElementById('serial-search');
         serialSearch.value = '';
@@ -29,13 +57,40 @@ export function clearInput() {
 }
 
 
-export function serial_no_search(searchValue, pnListElm) {
-    pnListElm.innerHTML = "";
+export function serial_and_length_search(pn_list, serial, length, rangeStart, rangeEnd) {
 
-    const filterList = pn_list.filter(pn =>
-        pn.serial_no && pn.serial_no.includes(searchValue));
-    createPnListElm(filterList, pnListElm);
+
+    let filterList = pn_list;
+
+    if (serial) {
+        filterList = pn_list.filter(pn =>
+            pn.serial_no && pn.serial_no.includes(serial));
+    }
+
+    if (length) {
+        filterList = filterList.filter(pn =>
+            pn.long_length && String(pn.long_length).includes(length)
+        );
+    } else if (rangeStart || rangeEnd) {
+        filterList = filterList.filter(pn => {
+            const isStartValid = rangeStart ? pn.long_length >= rangeStart : true;
+            const isEndValid = rangeEnd ? pn.long_length <= rangeEnd : true;
+            return isStartValid && isEndValid;
+        });
+    }
+    console.log(filterList);
+    return filterList;
 }
+
+
+
+
+
+// export function serial_no_search(searchValue, pnListElm) {
+//     const filterList = pn_list.filter(pn =>
+//         pn.serial_no && pn.serial_no.includes(searchValue));
+//     createPnListElm(filterList, pnListElm);
+// }
 
 export function pop_serial_no_search(searchValue, table) {
     const filterList = pn_list.filter(pn =>

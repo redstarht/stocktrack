@@ -1,6 +1,6 @@
 import { createZoneListElm } from "./common/zone_list.js";
 import { createPnListElm } from "./common/pn_list.js";
-import { serial_no_search,clearInput } from "./common/serial_no_search.js";
+import { onSearchButtonClick,clearInput } from "./common/serial_no_search.js";
 import { initPnHighlight } from "./common/pn_highlight.js";
 import { load_localStorage, setupSearchBox,changeSearchBox } from "./common/change_select_search.js"
 
@@ -21,22 +21,11 @@ document.addEventListener("DOMContentLoaded", function () {
     setupSearchBox(lengthSearchBox,selectedRadioId);
     changeSearchBox(lengthSearchBox);
     clearInput();
+    onSearchButtonClick(pn_list,pnListElm);
+    initPnHighlight();
 
-    //検索ボタン処理
-    document.getElementById("search-button").addEventListener("click", function () {
-        const searchValue = document.getElementById("serial-search").value.trim();
 
-        // 空なら全件表示　/ 検索値あればフィルタリング
-        if (!searchValue) {
-            pnListElm.innerHTML = '';
-            createPnListElm(pn_list, pnListElm);
-
-        } else {
-            serial_no_search(searchValue, pnListElm);
-        }
-        initPnHighlight();
-
-    });
+    
 
 
 
