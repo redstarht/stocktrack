@@ -22,6 +22,9 @@ from . import db
 import datetime
 import pytz
 from .data_management import check_del_pn_ctrl, check_stock_status, convert_to_int_set, check_del_alwStorRec
+from .logging_setup import setup_logging
+
+logger = setup_logging()
 
 api = Blueprint("api", __name__)
 
@@ -31,6 +34,7 @@ def save_inout_popup():
     try:
         data = request.get_json()
         if not data:
+            logger.error({"error":"データが格納されていません"})
             return jsonify({"error": "データが格納されていません"}), 400
         cell_stock_status = data.get("cell_stock_status", {})
         inout_log = data.get("inout_log", {})
@@ -77,7 +81,7 @@ def save_inout_popup():
             ).first()
             if delete_cell_stock_status:
                 db.session.delete(delete_cell_stock_status)
-                print("削除処理実行")
+                logger.info("削除処理実行")
 
         # 更新処理
         else:
@@ -88,11 +92,10 @@ def save_inout_popup():
             if update_cell_stock_status:
                 update_cell_stock_status.stock_qty = cell_stock_status.get(
                     "stock_qty")
-                print("更新処理実行")
+                logger.info("更新処理実行")
 
         db.session.commit()
 
-        print(data)
 
         # 更新データの再取得
         obj_cell_stock_status = CellStockStatus.query.all()
@@ -197,7 +200,9 @@ def save_product_number():
                                        is_deleted=False)
                 db.session.add(new_pn)
             else:
-                return jsonify({"error": "追加した品番 または 背番号 が空です!"}), 400
+                error_msg = "追加した品番 または 背番号が空です!"
+                logger.error(error_msg)
+                return jsonify({"error": error_msg}), 400
 
     db.session.commit()
     return jsonify({"status": "保存完了！"})
