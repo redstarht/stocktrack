@@ -1,6 +1,7 @@
 import { createPopupPnlist } from "./common/pn_list.js";
 import { pop_serial_no_search } from "./common/serial_no_search.js";
 import { saveCheckedData } from "./popup/save_inout.js";
+import { createSerialSearchDOM } from "./popup/createSearchDOM.js"
 import { createDisplayName } from "./common/displayname.js";
 
 
@@ -100,10 +101,23 @@ export function createPopup() {
         stockContainer.classList.remove("popStkCont-resize");
         closeContainer.classList.remove("clcCont-resize");
         popPnTitle.textContent = "格納する背番号を選んでください";
+        popPnTitle.style.display ="none";
 
         const searchContainer = document.createElement('div');
         searchContainer.className = "pop-search-container";
+        
+        const serialSeachContainer = document.createElement('div');
+        serialSeachContainer.id = "pop-serial-search-container";
 
+        const lengthSearchContainer = document.createElement('div');
+        lengthSearchContainer.id = "pop-length-search-container";
+
+        const entryContainer = document.createElement('div');
+        entryContainer.id = "entry-container";
+
+        create_serial_searchDOM(serialSeachContainer);
+
+        
 
 
         const searchInput = document.createElement('input');

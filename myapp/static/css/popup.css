@@ -126,9 +126,14 @@
     color: black;
 }
 
+.pnrec{
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+}
 
 .pn-label{
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
 }
