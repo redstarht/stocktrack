@@ -8,11 +8,28 @@ export function load_localStorage(selectedRadioId) {
             radioButton.checked = true;
         }
     } else {
-        const initRadioButton = document.getElementById('range-select');
+        const initRadioButton = document.getElementById('partical-match');
         if (initRadioButton) {
             initRadioButton.checked = true;
         }
     }
+}
+
+export function pop_load_localStorage(popSelectedRadioId) {
+    // 取得したIDが存在する場合、そのラジオボタンの検索boxを選択する
+    // 初期ロード時は、「部分一致」を選択
+    if (popSelectedRadioId) {
+        const radioButton = document.getElementById(popSelectedRadioId);
+        if (radioButton) {
+            radioButton.checked = true;
+        }
+    } else {
+        const initRadioButton = document.getElementById('pop-partical-match');
+        if (initRadioButton) {
+            initRadioButton.checked = true;
+        }
+    }
+
 }
 
 // 「部分一致」or 「範囲選択」レンダリング処理
@@ -27,7 +44,7 @@ export function setupSearchBox(lengthSearchBox, selectedRadioId) {
     if (selectedRadioId == 'range-select') {
         createRangeSearchElm(lengthSearchBox, mmUnit);
     } else {
-        createParticalSearchElm(lengthSearchBox,mmUnit);
+        createParticalSearchElm(lengthSearchBox, mmUnit);
     }
 }
 
@@ -42,10 +59,10 @@ export function changeSearchBox(lengthSearchBox) {
             localStorage.setItem('selectedRadio', radio.id);
             lengthSearchBox.innerHTML = '';
             if (radio.id == 'range-select') {
-                createRangeSearchElm(lengthSearchBox,mmUnit);
+                createRangeSearchElm(lengthSearchBox, mmUnit);
 
             } else {
-                createParticalSearchElm(lengthSearchBox,mmUnit);
+                createParticalSearchElm(lengthSearchBox, mmUnit);
             }
 
 
@@ -79,7 +96,7 @@ function createRangeSearchElm(lengthSearchBox, mmUnit) {
 
 }
 
-function createParticalSearchElm(lengthSearchBox,mmUnit) {
+function createParticalSearchElm(lengthSearchBox, mmUnit) {
     const particalMatch = document.createElement('input');
     particalMatch.id = 'particalMatch';
     particalMatch.className = 'long-length';
