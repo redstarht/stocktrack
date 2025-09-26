@@ -58,7 +58,29 @@ export function changeSearchBox(lengthSearchBox) {
             // 選択されたラジオボタンのIDをローカルストレージに保存
             localStorage.setItem('selectedRadio', radio.id);
             lengthSearchBox.innerHTML = '';
-            if (radio.id == 'range-select') {
+            if (radio.id == 'range-search') {
+                createRangeSearchElm(lengthSearchBox, mmUnit);
+
+            } else {
+                createParticalSearchElm(lengthSearchBox, mmUnit);
+            }
+
+
+        });
+    });
+}
+
+export function popChangeSearchBox(lengthSearchBox) {
+    const mmUnit = document.createElement('span');
+    mmUnit.textContent = '(mm)';
+    mmUnit.className = 'unit';
+    const radioButtons = document.querySelectorAll('input[name="pop-length-search-select"]');
+    radioButtons.forEach((radio) => {
+        radio.addEventListener('change', () => {
+            // 選択されたラジオボタンのIDをローカルストレージに保存
+            localStorage.setItem('popSelectedRadio', radio.id);
+            lengthSearchBox.innerHTML = '';
+            if (radio.id == 'pop-range-search') {
                 createRangeSearchElm(lengthSearchBox, mmUnit);
 
             } else {
@@ -71,6 +93,8 @@ export function changeSearchBox(lengthSearchBox) {
 
 
 }
+
+
 function createRangeSearchElm(lengthSearchBox, mmUnit) {
     const rangeSearchStart = document.createElement('input');
     rangeSearchStart.id = 'rangeStart';

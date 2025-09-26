@@ -1,8 +1,9 @@
 import { createPopupPnlist } from "./common/pn_list.js";
 import { pop_serial_no_search } from "./common/serial_no_search.js";
 import { saveCheckedData } from "./popup/save_inout.js";
-import { createSerialSearchDOM } from "./popup/createSearchDOM.js"
+import { createSerialSearchDOM,createLengthSearchDom } from "./popup/createSearchDOM.js"
 import { createDisplayName } from "./common/displayname.js";
+
 
 
 export function createPopup() {
@@ -73,6 +74,7 @@ export function createPopup() {
       stockContainer.appendChild(minusBtn);
       stockContainer.appendChild(gaugeContainer);
       stockContainer.appendChild(plusBtn);
+      
 
 
 
@@ -115,24 +117,29 @@ export function createPopup() {
         const entryContainer = document.createElement('div');
         entryContainer.id = "entry-container";
 
-        create_serial_searchDOM(serialSeachContainer);
+        createSerialSearchDOM(serialSeachContainer);
+        createLengthSearchDom(lengthSearchContainer);
 
+        searchContainer.appendChild(serialSeachContainer);
+        searchContainer.appendChild(lengthSearchContainer);
+        searchContainer.appendChild(entryContainer);
+        poplabelContainer.appendChild(searchContainer);
         
 
 
-        const searchInput = document.createElement('input');
-        searchInput.type = "text";
-        searchInput.id = "pop-serial-search";
-        searchInput.placeholder = "背番号検索";
-        searchInput.name = "pop-serial_no";
-        searchInput.setAttribute("inputmode", "numeric")
+        // const searchInput = document.createElement('input');
+        // searchInput.type = "text";
+        // searchInput.id = "pop-serial-search";
+        // searchInput.placeholder = "背番号検索";
+        // searchInput.name = "pop-serial_no";
+        // searchInput.setAttribute("inputmode", "numeric")
 
         const searchBtn = document.createElement('button');
         searchBtn.textContent = "検索";
         searchBtn.className = "pop-search-button";
         searchBtn.id = "pop-serial-search-btn";
 
-        searchContainer.appendChild(searchInput);
+        // searchContainer.appendChild(searchInput);
         searchContainer.appendChild(searchBtn);
         poplabelContainer.appendChild(searchContainer);
 
