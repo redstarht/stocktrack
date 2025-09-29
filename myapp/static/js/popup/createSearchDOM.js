@@ -5,10 +5,10 @@ export function createSerialSearchDOM(serialSeachContainer) {
     const serialLabel = document.createElement('label');
     serialLabel.textContent = "背番号";
     serialLabel.className = "serialLabel";
-    serialLabel.htmlFor = "serial-search";
+    serialLabel.htmlFor = "pop-serial-search";
 
     const serialInput = document.createElement('input');
-    serialInput.id = "serial-search";
+    serialInput.id = "pop-serial-search";
     serialInput.name = "serial-search";
     serialInput.inputMode = 'numeric';
 
@@ -23,23 +23,26 @@ export function createLengthSearchDom(lengthSearchContainer) {
     // 検索ボックス全体
     const popLengthSearchSelectBox = document.createElement("div");
     popLengthSearchSelectBox.id = "pop-search-select-box";
+    popLengthSearchSelectBox.className="flex-row"
 
     // 長尺長さ 部分検索ラジオボタンDOM
     const popParticalMatchSelect = document.createElement("div");
     popParticalMatchSelect.id = "pop-partical-match-select";
+    popParticalMatchSelect.className = "flex-row"
 
     const popParticalMatchLabel = document.createElement("label");
     popParticalMatchLabel.id = "pop-partical-match-label";
-    popParticalMatchLabel.htmlFor ="pop-partical-match";
-    popParticalMatchLabel.textContent="部分一致";
+    popParticalMatchLabel.htmlFor = "pop-partical-match";
+    popParticalMatchLabel.textContent = "部分一致";
+
 
     const popParticalMatchRadio = document.createElement("input");
     popParticalMatchRadio.name = "pop-length-search-select"
     popParticalMatchRadio.type = "radio";
     popParticalMatchRadio.id = "pop-partical-match";
 
-    popParticalMatchSelect.appendChild(popParticalMatchLabel);
     popParticalMatchSelect.appendChild(popParticalMatchRadio);
+    popParticalMatchSelect.appendChild(popParticalMatchLabel);
 
     // 長尺長さ 部分検索入力ボックス
     // const popParticalMatchInput = document.createElement("input");
@@ -49,19 +52,20 @@ export function createLengthSearchDom(lengthSearchContainer) {
     // 範囲検索ラジオボタンDOM
     const popRangeSearchSelect = document.createElement("div");
     popRangeSearchSelect.id = "pop-range-search-select";
+    popRangeSearchSelect.className = "flex-row"
 
     const popRangeSearchLabel = document.createElement("label");
     popRangeSearchLabel.id = "pop-range-search-label";
-    popLengthLabel.htmlFor = "pop-range-search";
-    popLengthLabel.textContent ="範囲選択"
+    popRangeSearchLabel.htmlFor = "pop-range-search";
+    popRangeSearchLabel.textContent = "範囲選択"
 
     const popRangeSearchRadio = document.createElement("input");
     popRangeSearchRadio.name = "pop-length-search-select"
     popRangeSearchRadio.type = "radio";
     popRangeSearchRadio.id = "pop-range-search";
 
-    popRangeSearchSelect.appendChild(popRangeSearchLabel);
     popRangeSearchSelect.appendChild(popRangeSearchRadio);
+    popRangeSearchSelect.appendChild(popRangeSearchLabel);
 
     // 範囲検索入力ボックス
     // const popRangeSearchInput = document.createElement("input");
@@ -71,10 +75,12 @@ export function createLengthSearchDom(lengthSearchContainer) {
     // 長尺長さ検索入力ボックス
     const popLengthSearchBox = document.createElement("div");
     popLengthSearchBox.id = "pop-length-search-box";
+    popLengthSearchBox.className = "flex-row"
+
 
     const popSelectedRadioId = localStorage.getItem("popSelectedRadio");
     pop_load_localStorage(popSelectedRadioId);
-    setupSearchBox(popLengthSearchBox,popSelectedRadioId);
+    setupSearchBox(popLengthSearchBox, popSelectedRadioId);
     popChangeSearchBox(popLengthSearchBox);
 
     lengthSearchContainer.appendChild(popLengthLabel);
@@ -82,4 +88,49 @@ export function createLengthSearchDom(lengthSearchContainer) {
     popLengthSearchSelectBox.appendChild(popRangeSearchSelect);
     lengthSearchContainer.appendChild(popLengthSearchSelectBox);
     lengthSearchContainer.appendChild(popLengthSearchBox);
+
+}
+
+export function createEntryContainerDom(entryContainer,stock_qty,max_qty) {
+    // クリアボタン
+    const popClearBtn = document.createElement('button');
+    popClearBtn.textContent ="クリア";
+    popClearBtn.id ="pop-clear-button";
+
+
+    // 格納されている在庫数の表示
+    const popStockTitle = document.createElement('div');
+    popStockTitle.className = "pop-stock-title";
+
+    const popStockLabel = document.createElement('div');
+    popStockLabel.className = "pop-stock-label";
+    popStockLabel.textContent = stock_qty;
+    popStockLabel.id ="pop-stock-label";
+
+    const popStockMax = document.createElement('div');
+    popStockMax.className = "pop-stock-max";
+    popStockMax.id ="pop-stock-max";
+    popStockMax.textContent = ` / ${max_qty}`;
+
+    popStockTitle.appendChild(popStockLabel);
+    popStockTitle.appendChild(popStockMax);
+
+    // 検索ボタン
+    const popSearchBtn = document.createElement('button');
+    popSearchBtn.textContent = "検索";
+    popSearchBtn.className = "pop-search-button";
+    popSearchBtn.id = "pop-search-btn";
+
+    entryContainer.appendChild(popClearBtn);
+    entryContainer.appendChild(popStockTitle);
+    entryContainer.appendChild(popStockMax);
+    entryContainer.appendChild(popSearchBtn);
+
+    return {
+        popStockLabel,
+        popClearBtn,
+        popStockTitle,
+        popStockMax,
+        popSearchBtn
+    }
 }

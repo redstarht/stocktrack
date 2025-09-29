@@ -27,16 +27,29 @@
     /* margin: 50px; */
 }
 
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.flex-column{
+    display: flex;
+    flex-direction: column;
+}
+
 /* 検索ボックスセクション */
 .pop-search-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
     font-size: 1rem;
     height: 25%;
 }
+
+
 
 #pop-serial-search {
     height: 100%;
@@ -126,13 +139,13 @@
     color: black;
 }
 
-.pnrec{
+.pnrec {
     display: flex;
     flex-direction: row;
     gap: 5%;
 }
 
-.pn-label{
+.pn-label {
     /* display: flex; */
     justify-content: center;
     align-items: center;

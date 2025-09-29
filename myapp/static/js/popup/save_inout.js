@@ -9,26 +9,24 @@ export async function saveCheckedData(button, cellData, stock_qty) {
   const pn_id = pnCellTrue?.dataset.id || cellData.pn_id || null
   const serial_no = pnCellTrue?.parentElement.dataset.serial_no || cellData.serial_no || null;
   const new_stock_qty = stock_qty;
-  // 既存格納済製品の場合
+  // 既存格納済製品の場合のみ値が格納 
   const prev_stock_qty = cellData.stock_qty;
 
   const dataToSend = {};
   const shelfGridElm = document.getElementById("shelfGrid");
-  const pageName ="inout_map";
+  const pageName = "inout_map";
   // console.log("ICON",btnIcon);
 
-
-
-  // データ格納処理(数量に変更あったら)
-  if (new_stock_qty !== prev_stock_qty) {
-
-    // 新規格納時の場合の例外処理
-    if (!cellData.pn_id) {
-      if (!pnCellTrue) {
-        throw new Error("\u274c背番号を選択してください！"); // エラーをスロー
-      }
+  // 新規格納時の場合のバリデーションチェック
+  if (!prev_stock_qty) {
+    if (stock_qty == 0) {
+      throw new Error("\u274c数量を選択してください！"); // エラーをスロー
+    }
+    if (!pnCellTrue) {
+      throw new Error("\u274c背番号を選択してください！"); // エラーをスロー
     }
   }
+
   // 送信用データ整形
   dataToSend.cell_stock_status = {};
   dataToSend.cell_stock_status.cell_id = cellData.cell_id;

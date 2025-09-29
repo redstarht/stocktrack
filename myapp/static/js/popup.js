@@ -1,7 +1,7 @@
 import { createPopupPnlist } from "./common/pn_list.js";
 import { pop_serial_no_search } from "./common/serial_no_search.js";
 import { saveCheckedData } from "./popup/save_inout.js";
-import { createSerialSearchDOM,createLengthSearchDom } from "./popup/createSearchDOM.js"
+import { createSerialSearchDOM, createLengthSearchDom, createEntryContainerDom } from "./popup/createSearchDOM.js"
 import { createDisplayName } from "./common/displayname.js";
 
 
@@ -74,7 +74,7 @@ export function createPopup() {
       stockContainer.appendChild(minusBtn);
       stockContainer.appendChild(gaugeContainer);
       stockContainer.appendChild(plusBtn);
-      
+
 
 
 
@@ -85,6 +85,14 @@ export function createPopup() {
 
       const popPnTitle = document.createElement("div");
 
+
+      const entryContainer = document.createElement('div');
+      entryContainer.id = "entry-container";
+      entryContainer.className = "flex-row";
+      const { popStockLabel, popClearBtn, popSearchBtn } = createEntryContainerDom(entryContainer, stock_qty, max_qty);
+
+
+
       // 既存格納製品と新規格納製品かでHTML構造を変更
       if (cellData.pn_id) {
         popPnTitle.textContent = displayName;
@@ -93,8 +101,8 @@ export function createPopup() {
         poplabelContainer.classList.add("popLblCont-resize");
         stockContainer.classList.add("popStkCont-resize");
         closeContainer.classList.add("clcCont-resize");
-
-
+        popClearBtn.style.display = 'none';
+        popSearchBtn.style.display = "none";
       }
 
       else {
@@ -103,19 +111,21 @@ export function createPopup() {
         stockContainer.classList.remove("popStkCont-resize");
         closeContainer.classList.remove("clcCont-resize");
         popPnTitle.textContent = "格納する背番号を選んでください";
-        popPnTitle.style.display ="none";
+        popPnTitle.style.display = "none";
 
         const searchContainer = document.createElement('div');
-        searchContainer.className = "pop-search-container";
-        
+        searchContainer.className = "pop-search-container flex-column";
+
+
         const serialSeachContainer = document.createElement('div');
         serialSeachContainer.id = "pop-serial-search-container";
+        serialSeachContainer.className = "flex-row"
 
         const lengthSearchContainer = document.createElement('div');
         lengthSearchContainer.id = "pop-length-search-container";
+        lengthSearchContainer.className = "flex-row"
 
-        const entryContainer = document.createElement('div');
-        entryContainer.id = "entry-container";
+
 
         createSerialSearchDOM(serialSeachContainer);
         createLengthSearchDom(lengthSearchContainer);
@@ -124,7 +134,7 @@ export function createPopup() {
         searchContainer.appendChild(lengthSearchContainer);
         searchContainer.appendChild(entryContainer);
         poplabelContainer.appendChild(searchContainer);
-        
+
 
 
         // const searchInput = document.createElement('input');
@@ -140,7 +150,7 @@ export function createPopup() {
         searchBtn.id = "pop-serial-search-btn";
 
         // searchContainer.appendChild(searchInput);
-        searchContainer.appendChild(searchBtn);
+        // searchContainer.appendChild(searchBtn);
         poplabelContainer.appendChild(searchContainer);
 
 
@@ -190,25 +200,9 @@ export function createPopup() {
       }
 
 
-      // 格納されている在庫数の表示（共通 何も格納されてなければ0）
-      const popStockTitle = document.createElement('div');
-      popStockTitle.className = "pop-stock-title";
 
-
-      const popStockLabel = document.createElement('div');
-      popStockLabel.className = "pop-stock-label";
-      popStockLabel.textContent = stock_qty;
-
-      const popStockMax = document.createElement('div');
-      popStockMax.className = "pop-stock-max";
-      popStockMax.textContent = ` / ${max_qty}`;
-
-
-      popStockTitle.appendChild(popStockLabel);
-      popStockTitle.appendChild(popStockMax);
 
       poplabelContainer.appendChild(popPnTitle);
-      poplabelContainer.appendChild(popStockTitle);
       popup.appendChild(poplabelContainer);
       if (inputContainer !== null) {
         popup.appendChild(inputContainer);
@@ -222,8 +216,6 @@ export function createPopup() {
       saveBtn.className = "close-popup-btn";
       saveBtn.id = "close-popup-btn";
       saveBtn.textContent = "SAVE";
-
-
       saveContainer.appendChild(saveBtn);
 
       const cancelContainer = document.createElement('div');
@@ -236,9 +228,6 @@ export function createPopup() {
 
       closeContainer.appendChild(saveContainer);
       closeContainer.appendChild(cancelContainer);
-
-
-
       popup.appendChild(stockContainer);
       popup.appendChild(closeContainer);
 
@@ -250,6 +239,7 @@ export function createPopup() {
       const blocks = document.querySelectorAll('.gauge-block');
       const qty = Number(stock_qty) || 0; // undefined や null の場合 0 にする
 
+      console.log(popStockLabel);
 
       // 格納されている収容数のブロック描画
       if (qty >= 1 && qty <= blocks.length) {
@@ -287,7 +277,7 @@ export function createPopup() {
       });
 
       // SAVEボタンの処理
-      saveBtn.addEventListener('click',async () => {
+      saveBtn.addEventListener('click', async () => {
         try {
           // データ格納・保存処理
           await saveCheckedData(button, cellData, stock_qty);

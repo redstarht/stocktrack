@@ -22,9 +22,10 @@ from . import db
 import datetime
 import pytz
 from .data_management import check_del_pn_ctrl, check_stock_status, convert_to_int_set, check_del_alwStorRec
-from .logging_setup import setup_logging
+from logging import getLogger
 
-logger = setup_logging()
+
+logger = getLogger()
 
 api = Blueprint("api", __name__)
 
