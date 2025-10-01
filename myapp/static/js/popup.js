@@ -3,6 +3,7 @@ import { pop_serial_no_search } from "./common/serial_no_search.js";
 import { saveCheckedData } from "./popup/save_inout.js";
 import { createSerialSearchDOM, createLengthSearchDom, createEntryContainerDom } from "./popup/createSearchDOM.js"
 import { createDisplayName } from "./common/displayname.js";
+import { popChangeSearchBox} from "./common/change_select_search.js";
 
 
 
@@ -84,18 +85,20 @@ export function createPopup() {
       poplabelContainer.className = "pop-label-container";
 
       const popPnTitle = document.createElement("div");
-
-
       const entryContainer = document.createElement('div');
       entryContainer.id = "entry-container";
       entryContainer.className = "flex-row";
-      const { popStockLabel, popClearBtn, popSearchBtn } = createEntryContainerDom(entryContainer, stock_qty, max_qty);
-
+      const { popStockLabel, popClearBtn, popSearchBtn, popStockTitle } = createEntryContainerDom(entryContainer, stock_qty, max_qty);
+      let popLengthSearchBox = null;
 
 
       // 既存格納製品と新規格納製品かでHTML構造を変更
       if (cellData.pn_id) {
         popPnTitle.textContent = displayName;
+        console.log(popStockTitle);
+        popPnTitle.appendChild(popStockTitle);
+        popPnTitle.className="flex-column flex-center"
+
         // 既存格納製品の入出時はPOPUPのCSSを変更
         popup.classList.add("popup-resize");
         poplabelContainer.classList.add("popLblCont-resize");
@@ -119,16 +122,16 @@ export function createPopup() {
 
         const serialSeachContainer = document.createElement('div');
         serialSeachContainer.id = "pop-serial-search-container";
-        serialSeachContainer.className = "flex-row"
+        serialSeachContainer.className = "flex-row gap-2"
 
         const lengthSearchContainer = document.createElement('div');
         lengthSearchContainer.id = "pop-length-search-container";
-        lengthSearchContainer.className = "flex-row"
+        lengthSearchContainer.className = "flex-row gap-2"
 
 
 
         createSerialSearchDOM(serialSeachContainer);
-        createLengthSearchDom(lengthSearchContainer);
+       popLengthSearchBox = createLengthSearchDom(lengthSearchContainer);
 
         searchContainer.appendChild(serialSeachContainer);
         searchContainer.appendChild(lengthSearchContainer);
@@ -231,15 +234,14 @@ export function createPopup() {
       popup.appendChild(stockContainer);
       popup.appendChild(closeContainer);
 
-      const closeBtn = document.getElementById('close-popup-btn');
-      // ※要検討 OK と Cancel どっちもポップアップクローズさせる処理が必要
-      const closeBtns = document.querySelectorAll('.close-popup-btn');
-
-
       const blocks = document.querySelectorAll('.gauge-block');
       const qty = Number(stock_qty) || 0; // undefined や null の場合 0 にする
 
-      console.log(popStockLabel);
+
+      // 長尺長さ検索ボタンの切り替えボックス描画
+      // ローカルストレージ更新
+      popChangeSearchBox(popLengthSearchBox);
+
 
       // 格納されている収容数のブロック描画
       if (qty >= 1 && qty <= blocks.length) {
@@ -247,6 +249,7 @@ export function createPopup() {
           blocks[i].classList.add('active');
         }
       }
+
 
 
       // プラスボタンの処理

@@ -15,19 +15,19 @@ export function load_localStorage(selectedRadioId) {
     }
 }
 
-export function pop_load_localStorage(popSelectedRadioId) {
+export function pop_load_localStorage(popSelectedRadioId, popParticalMatchRadio, popRangeSearchRadio) {
     // 取得したIDが存在する場合、そのラジオボタンの検索boxを選択する
     // 初期ロード時は、「部分一致」を選択
-    if (popSelectedRadioId) {
-        const radioButton = document.getElementById(popSelectedRadioId);
-        if (radioButton) {
-            radioButton.checked = true;
+    if (popSelectedRadioId == "pop-partical-match") {
+        if (popParticalMatchRadio) {
+            popParticalMatchRadio.checked = true;
+        }
+    } else if (popSelectedRadioId == "pop-range-search") {
+        if (popRangeSearchRadio) {
+            popRangeSearchRadio.checked = true;
         }
     } else {
-        const initRadioButton = document.getElementById('pop-partical-match');
-        if (initRadioButton) {
-            initRadioButton.checked = true;
-        }
+        popParticalMatchRadio.checked = true;
     }
 
 }
@@ -41,7 +41,7 @@ export function setupSearchBox(lengthSearchBox, selectedRadioId) {
     mmUnit.textContent = '(mm)';
     mmUnit.className = 'unit';
 
-    if (selectedRadioId == 'range-select') {
+    if (selectedRadioId == 'range-search') {
         createRangeSearchElm(lengthSearchBox, mmUnit);
     } else {
         createParticalSearchElm(lengthSearchBox, mmUnit);
@@ -68,6 +68,22 @@ export function changeSearchBox(lengthSearchBox) {
 
         });
     });
+}
+
+// **ポップアップ**「部分一致」or 「範囲選択」レンダリング処理
+export function popSetupSearchBox(lengthSearchBox, selectedRadioId) {
+    // 初期ロード時は部分一致
+    // ロード時は検索ボタンを描画
+    lengthSearchBox.innerHTML = '';
+    const mmUnit = document.createElement('span');
+    mmUnit.textContent = '(mm)';
+    mmUnit.className = 'unit';
+
+    if (selectedRadioId == 'pop-range-search') {
+        createRangeSearchElm(lengthSearchBox, mmUnit);
+    } else {
+        createParticalSearchElm(lengthSearchBox, mmUnit);
+    }
 }
 
 export function popChangeSearchBox(lengthSearchBox) {

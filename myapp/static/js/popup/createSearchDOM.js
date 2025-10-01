@@ -1,4 +1,4 @@
-import { pop_load_localStorage, setupSearchBox } from "../common/change_select_search.js"
+import { pop_load_localStorage, popSetupSearchBox } from "../common/change_select_search.js"
 import { popChangeSearchBox } from "../common/change_select_search.js";
 
 export function createSerialSearchDOM(serialSeachContainer) {
@@ -23,7 +23,7 @@ export function createLengthSearchDom(lengthSearchContainer) {
     // 検索ボックス全体
     const popLengthSearchSelectBox = document.createElement("div");
     popLengthSearchSelectBox.id = "pop-search-select-box";
-    popLengthSearchSelectBox.className="flex-row"
+    popLengthSearchSelectBox.className = "flex-row"
 
     // 長尺長さ 部分検索ラジオボタンDOM
     const popParticalMatchSelect = document.createElement("div");
@@ -79,23 +79,28 @@ export function createLengthSearchDom(lengthSearchContainer) {
 
 
     const popSelectedRadioId = localStorage.getItem("popSelectedRadio");
-    pop_load_localStorage(popSelectedRadioId);
-    setupSearchBox(popLengthSearchBox, popSelectedRadioId);
-    popChangeSearchBox(popLengthSearchBox);
+
 
     lengthSearchContainer.appendChild(popLengthLabel);
     popLengthSearchSelectBox.appendChild(popParticalMatchSelect);
     popLengthSearchSelectBox.appendChild(popRangeSearchSelect);
     lengthSearchContainer.appendChild(popLengthSearchSelectBox);
     lengthSearchContainer.appendChild(popLengthSearchBox);
+    
+    popSetupSearchBox(popLengthSearchBox, popSelectedRadioId);
+    // setupが終わった後にlocalstorageから対象のラジオボタンをチェック
+    pop_load_localStorage(popSelectedRadioId,popParticalMatchRadio,popRangeSearchRadio);
+    popChangeSearchBox(popLengthSearchBox);
+
+    return popLengthSearchBox;
 
 }
 
-export function createEntryContainerDom(entryContainer,stock_qty,max_qty) {
+export function createEntryContainerDom(entryContainer, stock_qty, max_qty) {
     // クリアボタン
     const popClearBtn = document.createElement('button');
-    popClearBtn.textContent ="クリア";
-    popClearBtn.id ="pop-clear-button";
+    popClearBtn.textContent = "クリア";
+    popClearBtn.id = "pop-clear-button";
 
 
     // 格納されている在庫数の表示
@@ -105,12 +110,12 @@ export function createEntryContainerDom(entryContainer,stock_qty,max_qty) {
     const popStockLabel = document.createElement('div');
     popStockLabel.className = "pop-stock-label";
     popStockLabel.textContent = stock_qty;
-    popStockLabel.id ="pop-stock-label";
+    popStockLabel.id = "pop-stock-label";
 
     const popStockMax = document.createElement('div');
     popStockMax.className = "pop-stock-max";
-    popStockMax.id ="pop-stock-max";
-    popStockMax.textContent = ` / ${max_qty}`;
+    popStockMax.id = "pop-stock-max";
+    popStockMax.textContent = `/${max_qty}`;
 
     popStockTitle.appendChild(popStockLabel);
     popStockTitle.appendChild(popStockMax);
@@ -123,8 +128,8 @@ export function createEntryContainerDom(entryContainer,stock_qty,max_qty) {
 
     entryContainer.appendChild(popClearBtn);
     entryContainer.appendChild(popStockTitle);
-    entryContainer.appendChild(popStockMax);
     entryContainer.appendChild(popSearchBtn);
+
 
     return {
         popStockLabel,

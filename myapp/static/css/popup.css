@@ -33,9 +33,27 @@
 }
 
 
-.flex-column{
+.flex-column {
     display: flex;
     flex-direction: column;
+}
+
+.flex-center {
+    align-items: center;
+    justify-content: center;
+}
+
+.gap-2{
+    gap: 2%;    
+}
+
+.pop-search-container{
+    gap:2%;
+}
+
+
+.pop-search-container input{
+    border: 1px solid #000000;
 }
 
 /* 検索ボックスセクション */
