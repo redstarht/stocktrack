@@ -28,7 +28,6 @@ export function createPopup() {
       const cellData = JSON.parse(button.dataset.item)
       let stock_qty = cellData.stock_qty;
       const max_qty = cellData.max_qty;
-      let pnItem = null;
       let displayName = null;
 
       if (cellData.pn_id) {

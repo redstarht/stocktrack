@@ -1,9 +1,9 @@
 import { createPopupPnlist } from "./common/pn_list.js";
-import { pop_serial_no_search } from "./common/serial_no_search.js";
+import { popOnSearchButtonClick } from "./common/serial_no_search.js";
 import { saveCheckedData } from "./popup/save_inout.js";
-import { createSerialSearchDOM, createLengthSearchDom, createEntryContainerDom } from "./popup/createSearchDOM.js"
+import { createSerialSearchDOM, createLengthSearchDom, createEntryContainerDom, } from "./popup/createSearchDOM.js"
 import { createDisplayName } from "./common/displayname.js";
-import { popChangeSearchBox} from "./common/change_select_search.js";
+import { popChangeSearchBox } from "./common/change_select_search.js";
 
 
 
@@ -87,7 +87,7 @@ export function createPopup() {
       const popPnTitle = document.createElement("div");
       const entryContainer = document.createElement('div');
       entryContainer.id = "entry-container";
-      entryContainer.className = "flex-row";
+      entryContainer.className = "flex-row gap-2 width100 flex-center";
       const { popStockLabel, popClearBtn, popSearchBtn, popStockTitle } = createEntryContainerDom(entryContainer, stock_qty, max_qty);
       let popLengthSearchBox = null;
 
@@ -97,7 +97,7 @@ export function createPopup() {
         popPnTitle.textContent = displayName;
         console.log(popStockTitle);
         popPnTitle.appendChild(popStockTitle);
-        popPnTitle.className="flex-column flex-center"
+        popPnTitle.className = "flex-column flex-center"
 
         // 既存格納製品の入出時はPOPUPのCSSを変更
         popup.classList.add("popup-resize");
@@ -117,21 +117,21 @@ export function createPopup() {
         popPnTitle.style.display = "none";
 
         const searchContainer = document.createElement('div');
-        searchContainer.className = "pop-search-container flex-column";
+        searchContainer.className = "pop-search-container flex-column gap-2 ";
 
 
         const serialSeachContainer = document.createElement('div');
         serialSeachContainer.id = "pop-serial-search-container";
-        serialSeachContainer.className = "flex-row gap-2"
+        serialSeachContainer.className = "flex-row gap-2 width100 flex-center"
 
         const lengthSearchContainer = document.createElement('div');
         lengthSearchContainer.id = "pop-length-search-container";
-        lengthSearchContainer.className = "flex-row gap-2"
+        lengthSearchContainer.className = "flex-row gap-2 width100 flex-center"
 
 
 
         createSerialSearchDOM(serialSeachContainer);
-       popLengthSearchBox = createLengthSearchDom(lengthSearchContainer);
+        popLengthSearchBox = createLengthSearchDom(lengthSearchContainer);
 
         searchContainer.appendChild(serialSeachContainer);
         searchContainer.appendChild(lengthSearchContainer);
@@ -183,15 +183,16 @@ export function createPopup() {
           })
         }
 
-        // 絞り込みボタンの処理
-        searchBtn.addEventListener('click', () => {
-          const searchInput = document.getElementById('pop-serial-search');
-          const searchValue = searchInput.value.trim();
-          if (!searchValue) {
-            createPopupPnlist(input_pn, table);
-          }
-          pop_serial_no_search(searchValue, table);
-        });
+
+
+        // searchBtn.addEventListener('click', () => {
+        //   const searchInput = document.getElementById('pop-serial-search');
+        //   const searchValue = searchInput.value.trim();
+        //   if (!searchValue) {
+        //     createPopupPnlist(input_pn, table);
+        //   }
+        //   pop_serial_no_search(searchValue, table);
+        // });
 
 
         // ポップアップ初期表示
@@ -242,6 +243,10 @@ export function createPopup() {
       // ローカルストレージ更新
       popChangeSearchBox(popLengthSearchBox);
 
+      // 絞り込みボタンの処理
+      const table = document.querySelector("table")
+      console.log(table)
+      popOnSearchButtonClick(pn_list, table)
 
       // 格納されている収容数のブロック描画
       if (qty >= 1 && qty <= blocks.length) {

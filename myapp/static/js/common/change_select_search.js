@@ -42,9 +42,13 @@ export function setupSearchBox(lengthSearchBox, selectedRadioId) {
     mmUnit.className = 'unit';
 
     if (selectedRadioId == 'range-search') {
-        createRangeSearchElm(lengthSearchBox, mmUnit);
+        const { rangeSearchStart, rangeSearchEnd } = createRangeSearchElm(lengthSearchBox, mmUnit);
+        rangeSearchStart.id = 'rangeStart';
+        rangeSearchEnd.id = 'rangeEnd';
+
     } else {
-        createParticalSearchElm(lengthSearchBox, mmUnit);
+        const particalMatch = createParticalSearchElm(lengthSearchBox, mmUnit);
+        particalMatch.id = 'particalMatch';
     }
 }
 
@@ -59,10 +63,13 @@ export function changeSearchBox(lengthSearchBox) {
             localStorage.setItem('selectedRadio', radio.id);
             lengthSearchBox.innerHTML = '';
             if (radio.id == 'range-search') {
-                createRangeSearchElm(lengthSearchBox, mmUnit);
+                const { rangeSearchStart, rangeSearchEnd } = createRangeSearchElm(lengthSearchBox, mmUnit);
+                rangeSearchStart.id = 'rangeStart';
+                rangeSearchEnd.id = 'rangeEnd';
 
             } else {
-                createParticalSearchElm(lengthSearchBox, mmUnit);
+                const particalMatch = createParticalSearchElm(lengthSearchBox, mmUnit);
+                particalMatch.id = 'particalMatch';
             }
 
 
@@ -80,9 +87,12 @@ export function popSetupSearchBox(lengthSearchBox, selectedRadioId) {
     mmUnit.className = 'unit';
 
     if (selectedRadioId == 'pop-range-search') {
-        createRangeSearchElm(lengthSearchBox, mmUnit);
+        const { rangeSearchStart, rangeSearchEnd } = createRangeSearchElm(lengthSearchBox, mmUnit);
+        rangeSearchStart.id = 'pop-rangeStart';
+        rangeSearchEnd.id = 'pop-rangeEnd';
     } else {
-        createParticalSearchElm(lengthSearchBox, mmUnit);
+        const particalMatch = createParticalSearchElm(lengthSearchBox, mmUnit);
+        particalMatch.id = 'pop-particalMatch';
     }
 }
 
@@ -97,10 +107,13 @@ export function popChangeSearchBox(lengthSearchBox) {
             localStorage.setItem('popSelectedRadio', radio.id);
             lengthSearchBox.innerHTML = '';
             if (radio.id == 'pop-range-search') {
-                createRangeSearchElm(lengthSearchBox, mmUnit);
+                const { rangeSearchStart, rangeSearchEnd } = createRangeSearchElm(lengthSearchBox, mmUnit);
+                rangeSearchStart.id = 'pop-rangeStart';
+                rangeSearchEnd.id = 'pop-rangeEnd';
 
             } else {
-                createParticalSearchElm(lengthSearchBox, mmUnit);
+                const particalMatch = createParticalSearchElm(lengthSearchBox, mmUnit);
+                particalMatch.id = 'pop-particalMatch';
             }
 
 
@@ -113,7 +126,6 @@ export function popChangeSearchBox(lengthSearchBox) {
 
 function createRangeSearchElm(lengthSearchBox, mmUnit) {
     const rangeSearchStart = document.createElement('input');
-    rangeSearchStart.id = 'rangeStart';
     rangeSearchStart.className = 'range-search';
     rangeSearchStart.name = 'long-length';
     rangeSearchStart.inputMode = 'numeric';
@@ -124,7 +136,6 @@ function createRangeSearchElm(lengthSearchBox, mmUnit) {
     tildeElm.className = 'unit';
     tildeElm.textContent = '~';
     const rangeSearchEnd = document.createElement('input');
-    rangeSearchEnd.id = 'rangeEnd';
     rangeSearchEnd.className = 'range-search';
     rangeSearchEnd.name = 'long-length';
     rangeSearchEnd.inputMode = 'numeric';
@@ -133,16 +144,17 @@ function createRangeSearchElm(lengthSearchBox, mmUnit) {
     lengthSearchBox.appendChild(tildeElm);
     lengthSearchBox.appendChild(rangeSearchEnd);
     lengthSearchBox.appendChild(mmUnit);
+    return { rangeSearchStart, rangeSearchEnd }
 
 }
 
 function createParticalSearchElm(lengthSearchBox, mmUnit) {
     const particalMatch = document.createElement('input');
-    particalMatch.id = 'particalMatch';
     particalMatch.className = 'long-length';
     particalMatch.inputMode = 'numeric';
     lengthSearchBox.appendChild(particalMatch);
     lengthSearchBox.appendChild(mmUnit);
+    return particalMatch
 
 }
 

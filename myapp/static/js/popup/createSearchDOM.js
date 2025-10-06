@@ -16,19 +16,19 @@ export function createSerialSearchDOM(serialSeachContainer) {
     serialSeachContainer.appendChild(serialInput);
 }
 export function createLengthSearchDom(lengthSearchContainer) {
-    const popLengthLabel = document.createElement('label');
+    const popLengthLabel = document.createElement('div');
     popLengthLabel.textContent = "長尺長さ";
     popLengthLabel.className = "lengthLabel";
 
     // 検索ボックス全体
     const popLengthSearchSelectBox = document.createElement("div");
     popLengthSearchSelectBox.id = "pop-search-select-box";
-    popLengthSearchSelectBox.className = "flex-row"
+    popLengthSearchSelectBox.className = "flex-row flex-center gap-2"
 
     // 長尺長さ 部分検索ラジオボタンDOM
     const popParticalMatchSelect = document.createElement("div");
     popParticalMatchSelect.id = "pop-partical-match-select";
-    popParticalMatchSelect.className = "flex-row"
+    popParticalMatchSelect.className = "flex-row gap-2"
 
     const popParticalMatchLabel = document.createElement("label");
     popParticalMatchLabel.id = "pop-partical-match-label";
@@ -52,7 +52,7 @@ export function createLengthSearchDom(lengthSearchContainer) {
     // 範囲検索ラジオボタンDOM
     const popRangeSearchSelect = document.createElement("div");
     popRangeSearchSelect.id = "pop-range-search-select";
-    popRangeSearchSelect.className = "flex-row"
+    popRangeSearchSelect.className = "flex-row gap-2"
 
     const popRangeSearchLabel = document.createElement("label");
     popRangeSearchLabel.id = "pop-range-search-label";

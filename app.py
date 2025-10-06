@@ -14,5 +14,5 @@ if __name__ == "__main__":
     print(f"Server is running on http://{ip_address}:8080")
     serve(app, host='0.0.0.0', port=8080,
           connection_limit=1000,
-          threads=4,
+          threads=8,
           channel_timeout=30)

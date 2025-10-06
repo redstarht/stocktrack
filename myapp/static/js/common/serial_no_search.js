@@ -1,4 +1,5 @@
-import { createPnListElm, createPopupPnlist,displayPnlistElm } from "./pn_list.js";
+import { createPnListElm, createPopupPnlist, displayPnlistElm } from "./pn_list.js";
+import { resetPnHignlight } from "./pn_highlight.js"
 
 
 export function onSearchButtonClick(pn_list, pnListElm) {
@@ -31,17 +32,14 @@ export function onSearchButtonClick(pn_list, pnListElm) {
 export function clearInput() {
     const clearBtn = document.getElementById('clear-button');
     clearBtn.addEventListener("click", function () {
-        const cells = document.querySelectorAll(".cell");
-        // 全セルの強調をリセット
-        cells.forEach(cell => {
-            cell.classList.remove("highlight");
 
-        });
+        resetPnHignlight()
+
         const serialSearch = document.getElementById('serial-search');
         serialSearch.value = '';
         const selectedRadio = document.querySelector('input[name="length-search-select"]:checked');
         // 値を取得
-        if (selectedRadio.id == 'range-select') {
+        if (selectedRadio.id == 'range-search') {
             const rangeSearchStart = document.getElementById('rangeStart');
             const rangeSearchEnd = document.getElementById('rangeEnd');
             rangeSearchStart.value = '';
@@ -54,6 +52,62 @@ export function clearInput() {
 
 
 
+}
+
+
+
+export function popOnSearchButtonClick(pn_list, table) {
+    //検索ボタン処理
+    document.getElementById("pop-search-btn").addEventListener("click", function () {
+        const getValueOrNull = (id) => {
+            const element = document.getElementById(id);
+            return element ? element.value.trim() : null;
+        };
+
+        const serialValue = getValueOrNull("pop-serial-search");
+        const lengthValue = getValueOrNull("pop-particalMatch");
+        const rangeStart = getValueOrNull("pop-rangeStart");
+        const rangeEnd = getValueOrNull("pop-rangeEnd");
+        const filterPnList = serial_and_length_search(pn_list, serialValue, lengthValue, rangeStart, rangeEnd)
+
+        // 空なら全件表示　/ 検索値あればフィルタリング
+        if (!filterPnList) {
+            createPopupPnlist(pn_list, table);
+
+        } else {
+            createPopupPnlist(filterPnList, table);
+        }
+    });
+
+
+}
+
+
+
+export function popClearINput() {
+    const clearBtn = document.getElementById('pop-clear-button');
+    clearBtn.addEventListener("click", function () {
+
+
+        const popSerialSearch = document.getElementById('pop-serial-search');
+        popSerialSearch.value = '';
+
+        const selectedRadio = document.querySelector('input[name="pop-length-search-select"]:checked');
+        // 値を取得
+        if (selectedRadio.id == 'pop-length-search-select') {
+            const rangeSearchStart = document.getElementById('pop-rangeStart');
+            const rangeSearchEnd = document.getElementById('pop-rangeEnd');
+            rangeSearchStart.value = '';
+            rangeSearchEnd.value = '';
+        } else {
+            const particalMatch = document.getElementById('pop-particalMatch');
+            particalMatch.value = '';
+        }
+
+
+        const pnCellChecked = document.querySelector('input[name="choice"]:checked');
+        pnCellChecked.checked=false;
+    })
 }
 
 
