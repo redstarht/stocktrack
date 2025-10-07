@@ -33,6 +33,7 @@ export function displayPnlistElm(input_pn, pnListElm) {
 }
 
 export function createPopupPnlist(input_pn, table) {
+    table.innerHTML='';
     input_pn.forEach(pn => {
         const newRow = document.createElement("tr");
         newRow.className = "pn-row";

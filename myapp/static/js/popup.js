@@ -1,5 +1,5 @@
 import { createPopupPnlist } from "./common/pn_list.js";
-import { popOnSearchButtonClick } from "./common/serial_no_search.js";
+import { popOnSearchButtonClick, popClearINput } from "./common/serial_no_search.js";
 import { saveCheckedData } from "./popup/save_inout.js";
 import { createSerialSearchDOM, createLengthSearchDom, createEntryContainerDom, } from "./popup/createSearchDOM.js"
 import { createDisplayName } from "./common/displayname.js";
@@ -22,6 +22,7 @@ export function createPopup() {
   // input_pnをモジュール内スコープ変数として宣言 (popup終了処理時に都度初期化)
   // ※個別品番許可時に、pn_list全部を表示させるのではなく、許可された品番(input_pn)のみの表示とする
   let input_pn = [];
+  let pnItem = null;
 
   cellBtns.forEach(button => {
     button.addEventListener('click', () => {
@@ -32,7 +33,6 @@ export function createPopup() {
       const cellData = JSON.parse(button.dataset.item)
       let stock_qty = cellData.stock_qty;
       const max_qty = cellData.max_qty;
-      let pnItem = null;
       let displayName = null;
 
       if (cellData.pn_id) {
@@ -95,7 +95,6 @@ export function createPopup() {
       // 既存格納製品と新規格納製品かでHTML構造を変更
       if (cellData.pn_id) {
         popPnTitle.textContent = displayName;
-        console.log(popStockTitle);
         popPnTitle.appendChild(popStockTitle);
         popPnTitle.className = "flex-column flex-center"
 
@@ -107,7 +106,7 @@ export function createPopup() {
         popClearBtn.style.display = 'none';
         popSearchBtn.style.display = "none";
       }
-
+      // 新規品番格納処理
       else {
         popup.classList.remove("popup-resize");
         poplabelContainer.classList.remove("popLblCont-resize");
@@ -239,14 +238,22 @@ export function createPopup() {
       const qty = Number(stock_qty) || 0; // undefined や null の場合 0 にする
 
 
-      // 長尺長さ検索ボタンの切り替えボックス描画
-      // ローカルストレージ更新
-      popChangeSearchBox(popLengthSearchBox);
+      // DOM生成後のclickイベント
+      if (!cellData.pn_id) {
 
-      // 絞り込みボタンの処理
-      const table = document.querySelector("table")
-      console.log(table)
-      popOnSearchButtonClick(pn_list, table)
+        // 長尺長さ検索ボタンの切り替えボックス描画
+        // ローカルストレージ更新
+        popChangeSearchBox(popLengthSearchBox);
+
+        // 絞り込みボタンの処理
+        const table = document.querySelector("table")
+        popOnSearchButtonClick(pn_list, table)
+
+        // 検索入力クリアボタン押下
+        popClearINput()
+      }
+
+
 
       // 格納されている収容数のブロック描画
       if (qty >= 1 && qty <= blocks.length) {

@@ -198,20 +198,24 @@ html body {
 
 /* クリアボタンのスタイル */
 .entry-container button.clear {
-    background-color: #f44336 !important; /* 赤色 */
+    background-color: #f44336 !important;
+    /* 赤色 */
 }
 
 .entry-container button.clear:hover {
-    background-color: #d32f2f !important; /* ホバー時に濃い赤色 */
+    background-color: #d32f2f !important;
+    /* ホバー時に濃い赤色 */
 }
 
 /* 検索ボタンのスタイル */
 .entry-container button.search {
-    background-color: #4CAF50 !important; /* 緑色 */
+    background-color: #4CAF50 !important;
+    /* 緑色 */
 }
 
 .entry-container button.search:hover {
-    background-color: #45a049 !important; /* ホバー時に濃い緑色 */
+    background-color: #45a049 !important;
+    /* ホバー時に濃い緑色 */
 }
 
 .zone-item {
@@ -220,7 +224,8 @@ html body {
 }
 
 .zone-title {
-    font-size: 0.5em !important;
+    font-size: 1.1vw !important;
+    color: #b9b9b9;
     font-weight: bold;
     margin-top: 0.5rem;
     margin-bottom: 1rem;

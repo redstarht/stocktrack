@@ -94,7 +94,7 @@ export function popClearINput() {
 
         const selectedRadio = document.querySelector('input[name="pop-length-search-select"]:checked');
         // 値を取得
-        if (selectedRadio.id == 'pop-length-search-select') {
+        if (selectedRadio.id == 'pop-range-search') {
             const rangeSearchStart = document.getElementById('pop-rangeStart');
             const rangeSearchEnd = document.getElementById('pop-rangeEnd');
             rangeSearchStart.value = '';
