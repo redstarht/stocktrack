@@ -22,17 +22,30 @@ document.addEventListener("DOMContentLoaded", async function () {
         pageId:pageId
     }
 
+    let prev_reloadCellStockData = null;
+    let now_reloadCellStockData = null;
+    let change_cellData = null;
+    
+
     //描画情報更新 
     async function reloadData(renderInfo) {
         try {
-            reloadCellStockData = await get_cell_status_data();
-            render_shelf(renderInfo, reloadCellStockData);
+            now_reloadCellStockData = await get_cell_status_data();
+            renderInfo.reloadCellStockData = now_reloadCellStockData;
+
+            if(prev_reloadCellStockData){
+                now_reloadCellStockData.time_stamp
+
+            }
+
+            render_shelf(renderInfo);
 
 
         } catch (error) {
             console.log(error)
         } finally {
-            // １秒後に再度データを取得
+            // １秒後に再度データを取得しprevにデータを格納
+            prev_reloadCellStockData = now_reloadCellStockData;
             setTimeout(() => reloadData(renderInfo), 1000);
 
         }

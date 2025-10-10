@@ -74,7 +74,7 @@ export function cycleZone() {
 
             // インデックスを更新
             currentIndex = (currentIndex + 1) % buttons.length;
-        }, 2000); // 2000ミリ秒（2秒）ごとに実行
+        }, 2000); // 2000ミリ秒（1.5秒）ごとに実行
     }
 
     // 自動クリックを停止する処理

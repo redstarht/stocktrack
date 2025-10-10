@@ -1,13 +1,13 @@
 import { stackGaugeCreate } from "../common/stack_gauge.js";
 import { reload_shelf_data } from "../common/reload_shelf_data.js"
 
-export function render_shelf(renderInfo, reloadCellStockData) {
+export function render_shelf(renderInfo) {
     if (renderInfo.shelfGridElm.hasChildNodes()) {
-        console.log("リロード処理:", reloadCellStockData);
+        console.log("リロード処理:", renderInfo.reloadCellStockData);
         const pageName = 'view_map';
         const timeStampLabel = renderInfo.mainHeader.querySelector(".timeStamp");
-        timeStampLabel.textContent = `更新時間：${reloadCellStockData.time_stamp}`;
-        reload_shelf_data(renderInfo.shelf_list,renderInfo.shelfGridElm,reloadCellStockData,pageName)
+        timeStampLabel.textContent = `更新時間：${renderInfo.reloadCellStockData.time_stamp}`;
+        reload_shelf_data(renderInfo.shelf_list,renderInfo.shelfGridElm,renderInfo.reloadCellStockData,pageName)
     
     } else {
         console.log("初期描画処理");
@@ -16,7 +16,7 @@ export function render_shelf(renderInfo, reloadCellStockData) {
         mainTitle.textContent = "マップ確認画面";
         const timeStampLabel = document.createElement("div");
         timeStampLabel.className = "timeStamp"
-        timeStampLabel.textContent = `更新時間：${reloadCellStockData.time_stamp}`;
+        timeStampLabel.textContent = `更新時間：${renderInfo.reloadCellStockData.time_stamp}`;
         renderInfo.mainHeader.appendChild(mainTitle);
         renderInfo.mainHeader.appendChild(timeStampLabel)
 
@@ -67,8 +67,8 @@ export function render_shelf(renderInfo, reloadCellStockData) {
 
                 // stock_cell_statusの情報
                 // stock_cellを取得する前に存在確認
-                const stock_cell = reloadCellStockData && reloadCellStockData.cell_stock_statuses
-                    ? reloadCellStockData.cell_stock_statuses.find(stock => stock.cell_id == cell.id)
+                const stock_cell = renderInfo.reloadCellStockData && renderInfo.reloadCellStockData.cell_stock_statuses
+                    ? renderInfo.reloadCellStockData.cell_stock_statuses.find(stock => stock.cell_id == cell.id)
                     : false;
 
                 // 品番テーブルから街灯品番を抽出

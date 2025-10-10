@@ -20,6 +20,7 @@ import sys
 import threading
 import time
 from .logging_setup import setup_logging
+from logging import getLogger
 
 
 build_dir = BuildDir()
@@ -80,6 +81,7 @@ def initialize_db():
     Zone / shelf / cell  
     '''
     print("初期データの追加をします")
+    logger = getLogger()
     try:
         # zoneテーブルへの挿入
         seed_zone = pandas.read_csv(zoneCsv_dir)
@@ -137,9 +139,9 @@ def initialize_db():
         db.session.bulk_save_objects(prod_instances)
 
         db.session.commit()
-        print("初期データの追加成功✅")
+        logger.info("初期データの追加成功✅")
     except Exception as e:
         db.session.rollback()
-        print(f"エラー発生❌:{e}")
+        logger.error(f"エラー発生❌:{e}")
     finally:
         db.session.close()
