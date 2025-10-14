@@ -7,8 +7,8 @@ export function render_shelf(renderInfo) {
         const pageName = 'view_map';
         const timeStampLabel = renderInfo.mainHeader.querySelector(".timeStamp");
         timeStampLabel.textContent = `更新時間：${renderInfo.reloadCellStockData.time_stamp}`;
-        reload_shelf_data(renderInfo.shelf_list,renderInfo.shelfGridElm,renderInfo.reloadCellStockData,pageName)
-    
+        reload_shelf_data(renderInfo.shelf_list, renderInfo.shelfGridElm, renderInfo.reloadCellStockData, pageName)
+
     } else {
         console.log("初期描画処理");
         // mainセクションのヘッダー情報描画
@@ -96,8 +96,8 @@ export function render_shelf(renderInfo) {
 
                     pnSNLbl.textContent = product_number.serial_no;
                     pnSNLbl.className = "serial-lbl btn-pn-stock"
-                    pnLenLbl.textContent =product_number.long_length;
-                    pnLenLbl.className ="length-lbl btn-pn-stock"
+                    pnLenLbl.textContent = product_number.long_length;
+                    pnLenLbl.className = "length-lbl btn-pn-stock"
                     // cellDiv.dataset.displayname = displayName;
 
                 } else {
@@ -126,4 +126,100 @@ export function render_shelf(renderInfo) {
     }
 
 
+}
+
+let change_cellData = new Map();
+
+function createMapByCellId(arr) {
+    const map = new Map();
+    arr.forEach(item => {
+        map.set(item.cell_id, item);
+    });
+    return map;
+}
+
+function findDomCellById(domCells, cell_id) {
+    for (const cell of domCells) {
+        if (cell.getAttribute("data-cell-id") === String(cell_id)) {
+            return cell;
+        }
+    }
+    return null;
+}
+
+
+export function updateChangeCellData(nowData, prevData) {
+    const nowMap = createMapByCellId(nowData.cell_stock_statuses);
+    const prevMap = createMapByCellId(prevData.cell_stock_statuses);
+    const domCells = document.querySelectorAll(".cell");
+    // すべてのcell_idを洗い出す
+    const allCellIds = new Set([...nowMap.keys(), ...prevMap.keys()]);
+    console.log(change_cellData);
+    allCellIds.forEach(cell_id => {
+        const domcell = findDomCellById(domCells, cell_id);
+        const nowItem = nowMap.get(cell_id);
+        const prevItem = prevMap.get(cell_id);
+        // ページ新規描画時
+        if (!prevItem && nowItem) {
+            // 新規追加
+            // flash_countを30にセット
+            change_cellData.set(cell_id, { ...nowItem, flash_count: 30, is_deleted: false, type: "blink-new-in" });
+            domcell.className = 'cell blink-new-in';
+            // 削除：prevにはあってnowにはない
+        } else if (prevItem && !nowItem) {
+            // 削除
+            // すでにchange_cellDataにあればflash_countをリセット、なければ新規に追加
+            const existing = change_cellData.get(cell_id);
+            if (existing) {
+                change_cellData.set(cell_id, { ...existing, flash_count: 30, is_deleted: true, type: "blink-out" });
+                domcell.className ='cell blink-out';
+            } else {
+                change_cellData.set(cell_id, { cell_id: cell_id, flash_count: 30, is_deleted: true, type: "blink-out" });
+                domcell.className ='cell blink-out';
+            }
+            // nowもprevもある 
+        } else if (nowItem && prevItem) {
+            // 両方に存在 → プロパティが異なるかチェック
+            const isDifferent = nowItem.pn_id !== prevItem.pn_id || nowItem.stock_qty !== prevItem.stock_qty;
+            if (isDifferent) {
+                // 変更あり
+                const existing = change_cellData.get(cell_id);
+                // flash_countは既存があればリセット、なければ30にセット
+                const flash_count = existing ? 30 : 30;
+                if (nowItem.stock_qty > prevItem.stock_qty) {
+                    change_cellData.set(cell_id, { ...nowItem, flash_count, is_deleted: false, type: "blink-in" });
+                    domcell.className ='cell blink-in';
+                } else {
+                    change_cellData.set(cell_id, { ...nowItem, flash_count, is_deleted: false, type: "blink-out" });
+                    domcell.className ='cell blink-out';
+                }
+            }
+        }
+        // 変更なしの場合は何もしない
+    });
+}
+
+
+// setintervalで1秒間間隔で実行
+export function decrementFlashCount() {
+    const cells = document.querySelectorAll(".cell");
+
+    for (const [cell_id, data] of change_cellData.entries()) {
+        if (data.flash_count > 0) {
+            data.flash_count--;
+
+            //   カウントが0でクラスをリセット
+            if (data.flash_count === 0) {
+                change_cellData.delete(cell_id);
+                cells.forEach(cell => {
+                    if (cell.getAttribute("data-cell-id") === String(cell_id)) {
+                        cell.className = 'cell';
+                    }
+                }
+                )
+            } else {
+                change_cellData.set(cell_id, data);
+            }
+        }
+    }
 }

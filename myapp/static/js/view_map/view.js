@@ -1,8 +1,8 @@
 import { stackGaugeCreate } from "../common/stack_gauge.js";
 import { initPnHighlight } from "../common/pn_highlight.js";
-import { initZoneSort,cycleZone } from "../common/zone_sort.js";
+import { initZoneSort, cycleZone } from "../common/zone_sort.js";
 import { get_cell_status_data } from "../common/data_fetch.js"
-import { render_shelf } from "./render_shelf.js";
+import { render_shelf, updateChangeCellData, decrementFlashCount } from "./render_shelf.js";
 
 document.addEventListener("DOMContentLoaded", async function () {
     const pageId = "viewmap";
@@ -19,13 +19,13 @@ document.addEventListener("DOMContentLoaded", async function () {
         reloadCellStockData: reloadCellStockData,//cellの最新格納ステータス
         cellGridElm: cellGridElm,//cellのDOM
         mainHeader: mainHeader,
-        pageId:pageId
+        pageId: pageId
     }
 
     let prev_reloadCellStockData = null;
     let now_reloadCellStockData = null;
     let change_cellData = null;
-    
+
 
     //描画情報更新 
     async function reloadData(renderInfo) {
@@ -33,14 +33,13 @@ document.addEventListener("DOMContentLoaded", async function () {
             now_reloadCellStockData = await get_cell_status_data();
             renderInfo.reloadCellStockData = now_reloadCellStockData;
 
-            if(prev_reloadCellStockData){
-                now_reloadCellStockData.time_stamp
-
+            // 入出時のハイライト処理
+            if (prev_reloadCellStockData) {
+                updateChangeCellData(now_reloadCellStockData,prev_reloadCellStockData);
+                decrementFlashCount();
             }
 
             render_shelf(renderInfo);
-
-
         } catch (error) {
             console.log(error)
         } finally {
