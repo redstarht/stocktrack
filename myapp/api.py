@@ -21,7 +21,7 @@ from .model import (
 from . import db
 import datetime
 import pytz
-from .data_management import check_del_pn_ctrl, check_stock_status, convert_to_int_set, check_del_alwStorRec
+from .data_management import check_del_pn_ctrl, check_stock_status, convert_to_int_set, check_del_alwStorRec, convert_float_value
 from logging import getLogger
 
 
@@ -35,7 +35,7 @@ def save_inout_popup():
     try:
         data = request.get_json()
         if not data:
-            logger.error({"error":"データが格納されていません"})
+            logger.error({"error": "データが格納されていません"})
             return jsonify({"error": "データが格納されていません"}), 400
         cell_stock_status = data.get("cell_stock_status", {})
         inout_log = data.get("inout_log", {})
@@ -97,11 +97,10 @@ def save_inout_popup():
 
         db.session.commit()
 
-
         # 更新データの再取得
         obj_cell_stock_status = CellStockStatus.query.all()
         cell_stock_statuses = [cell_stock_status.to_dict()
-                            for cell_stock_status in obj_cell_stock_status]
+                               for cell_stock_status in obj_cell_stock_status]
         timestamp = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
         formatted_time = timestamp.strftime('%Y/%m/%d %H:%M:%S')
 
@@ -110,9 +109,9 @@ def save_inout_popup():
             "cell_stock_statuses": cell_stock_statuses
         }
 
-        return jsonify(response_data),200
+        return jsonify(response_data), 200
     except Exception as e:
-        return jsonify({"error":str(e)}),500
+        return jsonify({"error": str(e)}), 500
 
 
 @api.route("/api/pn_ctrl/save", methods=["POST"])
@@ -132,25 +131,13 @@ def save_product_number():
         product_no = pn_item.get("product_no", "").strip()
         serial_no = pn_item.get("serial_no", "").strip()
         material = pn_item.get("material", "").strip()
-        material_thickness = pn_item.get("material_thickness", "").strip()
-
+        material_thickness = convert_float_value(pn_item.get("material_thickness", "").strip())
+        outer_diam = convert_float_value(pn_item.get("outer_diam", "").strip())
+        long_length = convert_float_value(pn_item.get("long_length", "").strip())
+        cut_length =  convert_float_value(pn_item.get("cut_length", "").strip())
+        
         # 空文字と文字列の変換
-        if material_thickness == "":
-            material_thickness = -1.0
-        else:
-            try:
-                material_thickness = float(material_thickness)
-            except ValueError:
-                material_thickness = -1.0
-
-        cut_length = pn_item.get("cut_length", "")
-        if cut_length == "":
-            cut_length = -1.0
-        else:
-            try:
-                cut_length = float(cut_length)
-            except ValueError:
-                cut_length = -1.0
+        
 
         is_deleted = pn_item.get("is_deleted", False)
         if is_deleted == "true":

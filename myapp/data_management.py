@@ -18,6 +18,9 @@ from .model import (
 )
 from . import db
 
+from logging import getLogger
+logger = getLogger()
+
 
 def check_stock_status(data):
     """
@@ -28,11 +31,11 @@ def check_stock_status(data):
     cell_id=1, pn_id=3 を登録しようとするとエラーとなる
     """
     if CellStockStatus.query.filter_by(
-        cell_id=data.get("cell_id"),
-    ).first() is not None:
-        raise ValueError(
-            f"Error: cell_id {data.get('cell_id')} already exists.")
-    print("新規レコード追加処理起動")
+            cell_id=data.get("cell_id"),).first() is not None:
+        errormsg= f"Error: cell_id {data.get('cell_id')} already exists."
+        logger.error(errormsg)
+        raise ValueError(errormsg)
+    logger.info("新規レコード追加処理起動")
 
 # def check_delete_pn(data):
 
@@ -44,7 +47,8 @@ def convert_to_int_set(input_set):
         return {int(item) for item in input_set}
     except ValueError as e:
         # 変換できない場合はエラーを表示
-        print(f"型変換に失敗しました: {e}")
+        errormsg = f"型変換に失敗しました: {e}"
+        logger.error(errormsg)
         return set()  # 空の集合を返す
 
 
@@ -53,36 +57,36 @@ def check_del_alwStorRec(cell_id, deletepn_ids):
     cellテーブルのis_all_pn_allowedがfalseで
     cellStockStatusテーブルに現在格納されている品番を
     任意の品番の格納許可を外し、削除しようとしてしまった場合
-    エラーを返す    
+    エラーを返す
     """
-    
+
     for pn_id in deletepn_ids:
         if CellStockStatus.query.filter_by(
                 cell_id=cell_id,).first().pn_id == pn_id:
-            print(f"Error: cell_id： {cell_id} には現在 品番ID：{pn_id} が格納されているため許可を外すことはできせん。")
+            errormsg = f"Error: cell_id： {cell_id} には現在 品番ID：{pn_id} が格納されているため許可を外すことはできせん。"
+            logger.info(errormsg)
             raise ValueError(
                 f"Error: cell_id： {cell_id} には現在 品番ID：{pn_id} が格納されているため許可を外すことはできせん。")
-        print(
-            f"cell_id {cell_id} の品番ID: {pn_id} の格納許可レコードを削除")
+        msg = f"cell_id {cell_id} の品番ID: {pn_id} の格納許可レコードを削除"
+        logger.info(msg)
 
 
 def check_del_pn_ctrl(pn_id):
     if CellStockStatus.query.filter_by(pn_id=pn_id).first():
-        message = f"Error:pn_id:{pn_id}はまだ格納されているため削除不可"
-        print(message)
-        raise ValueError(message)
-    print(f"pn_id:{pn_id}を論理削除")
+        msg = f"Error:pn_id:{pn_id}はまだ格納されているため削除不可"
+        logger.error(msg)
+        raise ValueError(msg)
+    logger.info(f"pn_id:{pn_id}を論理削除")
 
 
+def convert_float_value(value):
+    if value == "":
+        value = -1.0
+        return value
+    else:
+        try:
+            return float(value)
+        except ValueError:
+            value = -1.0
+            return value
 
-# def check_allow_storage(data):
-#     """
-#     cellテーブルのis_all_pn_allowedがfalseだが
-#     allow_storageテーブルに該当するcell_idが存在しない場合はエラーを返す
-#     """
-#     if AllowStorage.query.filter_by(
-#         cell_id=data.get("cell_id"),
-#         pn_id=data.get("pn_id"),
-#     ).first() is not None:
-#         raise ValueError(f"Error: cell_id {data.get('cell_id')} and pn_id {data.get('pn_id')} already exists.")
-#     print("新規レコード追加処理起動")
