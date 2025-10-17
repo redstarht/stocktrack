@@ -163,18 +163,17 @@ def save_product_number():
                     update_pn.material = material
 
                 if material_thickness != update_pn.material_thickness:
-                    try:
-                        update_pn.material_thickness = float(
-                            material_thickness)
-                    except ValueError:
-                        update_pn.material_thickness = -1.0
+                        update_pn.material_thickness = material_thickness
 
                 if cut_length != update_pn.cut_length:
-                    try:
-                        update_pn.cut_length = float(cut_length)
-                    except ValueError:
-                        update_pn.cut_length = -1.0
-
+                    update_pn.cut_length = cut_length
+                    
+                if outer_diam != update_pn.outer_diam:
+                    update_pn.outer_diam = outer_diam
+                
+                if long_length != update_pn.long_length:
+                    update_pn.long_length = long_length
+                    
                 if is_deleted != update_pn.is_deleted:
                     update_pn.is_deleted = is_deleted
 
@@ -184,6 +183,8 @@ def save_product_number():
                                        serial_no=serial_no,
                                        material=material,
                                        material_thickness=material_thickness,
+                                       outer_diam = outer_diam,
+                                       long_length = long_length,
                                        cut_length=cut_length,
                                        is_deleted=False)
                 db.session.add(new_pn)

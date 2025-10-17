@@ -39,6 +39,16 @@ export function existPnListCreate(pn_list, inputTable) {
     exsitMaterialCell.appendChild(exsitMaterialInput);
     existRow.appendChild(exsitMaterialCell);
 
+    // 外径
+    const existOuterDiamCell = document.createElement("td");
+    existOuterDiamCell.className = "input-cell";
+    const existOuterDiamInput = document.createElement("input");
+    existOuterDiamInput.type = "text";
+    existOuterDiamInput.name = "outer_diam";
+    existOuterDiamInput.value = pn.outer_diam < 0 ? "" :pn.outer_diam;
+    existOuterDiamCell.appendChild(existOuterDiamInput);
+    existRow.appendChild(existOuterDiamCell);
+
     // 板厚
     const exsitMatThkCell = document.createElement("td");
     exsitMatThkCell.className = "input-cell";
@@ -58,6 +68,16 @@ export function existPnListCreate(pn_list, inputTable) {
     exsitCutLengthInput.value = pn.cut_length < 0 ? "" : pn.cut_length; // 負の値は空文字にする
     exsitCutLengthCell.appendChild(exsitCutLengthInput);
     existRow.appendChild(exsitCutLengthCell);
+
+    // 長尺長さ
+    const exsitLongLengthCell = document.createElement("td");
+    exsitLongLengthCell.className = "input-cell";
+    const exsitLongLengthInput = document.createElement("input");
+    exsitLongLengthInput.type = "text";
+    exsitLongLengthInput.name = "long_length";
+    exsitLongLengthInput.value = pn.long_length < 0 ? "" : pn.long_length; // 負の値は空文字にする
+    exsitLongLengthCell.appendChild(exsitLongLengthInput);
+    existRow.appendChild(exsitLongLengthCell);
 
     // 削除ボタン
     const deleteBtnCell = document.createElement("td");
@@ -109,6 +129,12 @@ export function allowPnListCreate(pn_list, inputTable) {
     exsitMaterialCell.textContent = displayValue(pn.material);
     existRow.appendChild(exsitMaterialCell);
 
+    // 外径
+    const exsitOuterDiamCell = document.createElement("td");
+    exsitOuterDiamCell.className = "outer_diam";
+    exsitOuterDiamCell.textContent = displayValue(pn.outer_diam);
+    existRow.appendChild(exsitOuterDiamCell);
+
     // 板厚
     const exsitMatThkCell = document.createElement("td");
     exsitMatThkCell.className = "material_thickness";
@@ -120,6 +146,12 @@ export function allowPnListCreate(pn_list, inputTable) {
     exsitCutLengthCell.className = "cut_length";
     exsitCutLengthCell.textContent = displayValue(pn.cut_length);
     existRow.appendChild(exsitCutLengthCell);
+
+    // 全長長さ
+    const exsitLongLengthCell = document.createElement("td");
+    exsitLongLengthCell.className = "long_length";
+    exsitLongLengthCell.textContent = displayValue(pn.long_length);
+    existRow.appendChild(exsitLongLengthCell);
 
     // 許可ボタン
     const checkBtnCell = document.createElement("td");

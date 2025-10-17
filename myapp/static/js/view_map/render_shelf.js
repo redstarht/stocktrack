@@ -14,10 +14,17 @@ export function render_shelf(renderInfo) {
         // mainセクションのヘッダー情報描画
         const mainTitle = document.createElement("div");
         mainTitle.textContent = "マップ確認画面";
+        const movebutton = document.createElement("button");
+        movebutton.textContent = "入出庫ログ確認"
+        movebutton.className = "movebutton"
+        movebutton.setAttribute("onclick",`window.location.href="${logviewUrl}"`)
+
+
         const timeStampLabel = document.createElement("div");
         timeStampLabel.className = "timeStamp"
         timeStampLabel.textContent = `更新時間：${renderInfo.reloadCellStockData.time_stamp}`;
         renderInfo.mainHeader.appendChild(mainTitle);
+        renderInfo.mainHeader.appendChild(movebutton);
         renderInfo.mainHeader.appendChild(timeStampLabel)
 
         renderInfo.shelf_list.forEach(shelfItem => {

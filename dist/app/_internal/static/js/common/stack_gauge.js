@@ -1,4 +1,5 @@
 export function stackGaugeCreate (max_qty,stock_qty,stackElm){
+    // 端数の値が格納されていたら
     stackElm.innerHTML="";
     for(let i =0;i<max_qty;i++){
         const box = document.createElement("div");

@@ -27,16 +27,65 @@
     /* margin: 50px; */
 }
 
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-center {
+    align-items: center;
+    justify-content: center;
+}
+
+.gap-2{
+    gap: 2%;    
+}
+
+.width100{
+    width: 100%;
+}
+
+
+#pop-length-search-container{
+    background-color: rgb(180, 180, 180);
+    padding: 1%;
+    white-space: nowrap;
+}
+
+.lengthLabel{
+    width:15%
+}
+
+#pop-search-select-box{
+    width: 25%;
+}
+
+#pop-length-search-box{
+    width: 60%;
+}
+
+.pop-search-container input{
+    border: 1px solid #000000;
+}
+
 /* 検索ボックスセクション */
 .pop-search-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
-    font-size: 1rem;
+    font-size: 2vh;
     height: 25%;
 }
+
+
 
 #pop-serial-search {
     height: 100%;
@@ -51,6 +100,11 @@
     justify-content: center;
     height: 20%;
     color: black;
+    border-radius: 5px;
+    border:  solid 0.2em;
+    padding-top: 5%;
+    padding-bottom: 5%;
+
 }
 
 
@@ -119,14 +173,27 @@
 }
 
 .pn-cell {
-    flex: 0.7;
-    font-size: 1.2rem;
+    flex: 0.9;
+    font-size: 2.2vh;
     /* text-align: center; */
     padding-left: 10%;
     color: black;
 }
 
+.pnrec {
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+}
+
+.pn-label {
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+}
+
 .radio-btn {
+    margin-left: 2em;
     color: white;
     border: none;
     cursor: pointer;

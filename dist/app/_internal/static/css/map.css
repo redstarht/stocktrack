@@ -68,20 +68,20 @@ html body {
     width: 100%;
     display: flex;
     flex-flow: column;
-    padding-left: 0%; 
-    font-size:0.7rem;
+    padding-left: 0%;
+    font-size: 0.7rem;
     justify-content: center;
     align-items: center;
 }
 
-.form-switch .form-check-input{
+.form-switch .form-check-input {
     margin-left: 0%;
-    font-size:1.5rem;
+    font-size: 1.5rem;
 }
 
 
 .pn-sidebar {
-    width: 20%;
+    width: 22%;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -95,6 +95,10 @@ html body {
 
 .side-top {
     width: 100%;
+    margin-bottom: 2%;
+    border: #3963d4 solid;
+    padding-top: 1%;
+    padding-bottom: 2%;
 }
 
 .search-container {
@@ -103,11 +107,115 @@ html body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    font-size: 1rem;
+    font-size: 0.9rem;
+    gap: 10%;
 }
 
-.search-container input {
-    width: 90%
+
+.serial-search-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.length-search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: #424242;
+    padding-bottom: 5%;
+
+}
+
+.length-search-container label {
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.length-select-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    white-space: nowrap;
+    text-align: center;
+
+}
+
+.length-search-title {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.search-lbl {
+    text-align: center;
+}
+
+.search-select-box {
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+}
+
+.range-search {
+    width: 100%;
+}
+
+.length-search-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+}
+
+.entry-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    padding-top: 3%;
+}
+
+.entry-container button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.3rem 0.7rem;
+    border: none;
+    border-radius: 5%;
+    /* font-size: 16px; */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* クリアボタンのスタイル */
+.entry-container button.clear {
+    background-color: #f44336 !important;
+    /* 赤色 */
+}
+
+.entry-container button.clear:hover {
+    background-color: #d32f2f !important;
+    /* ホバー時に濃い赤色 */
+}
+
+/* 検索ボタンのスタイル */
+.entry-container button.search {
+    background-color: #4CAF50 !important;
+    /* 緑色 */
+}
+
+.entry-container button.search:hover {
+    background-color: #45a049 !important;
+    /* ホバー時に濃い緑色 */
 }
 
 .zone-item {
@@ -116,11 +224,13 @@ html body {
 }
 
 .zone-title {
-    font-size: 1em;
+    font-size: 1.1vw !important;
+    color: #b9b9b9;
     font-weight: bold;
     margin-top: 0.5rem;
     margin-bottom: 1rem;
     text-align: center;
+    white-space: nowrap;
 }
 
 .allzone {
@@ -163,7 +273,6 @@ html body {
 .pn-title {
     font-size: 1.5rem;
     font-weight: bold;
-    margin-bottom: 1rem;
     text-align: center;
 }
 
@@ -197,7 +306,7 @@ html body {
 
 .pn-select .btn {
     width: 90%;
-    font-size: clamp(1px, 1vw, 15px);
+    font-size: clamp(1px, 0.8vw, 15px);
     white-space: nowrap;
 }
 
@@ -209,7 +318,59 @@ button:active {
     transition: transform 0.1s;
 }
 
+
+
+/* ヒットしたセルハイライト */
 .highlight {
     background-color: rgba(12, 223, 12, 0.2);
     box-shadow: #7fff00 0px 0px 0.3em;
 }
+
+.blink-new-in {
+    animation: blink-new-in 1s infinite;
+    background-color:  rgba(223, 54, 12, 0.9);
+}
+
+@keyframes blink-new-in {
+            0% {
+                background-color: rgba(223, 54, 12, 0.9);
+                box-shadow: #ff4500 0px 0px 0.8em;
+            }
+
+            100% {
+                background-color: transparent;
+            }
+        }
+
+.blink-in {
+    animation: blink-in 1s infinite;
+    background-color:  rgba(220, 223, 12, 0.9);
+}
+
+@keyframes blink-in {
+            0% {
+                background-color: rgba(220, 223, 12, 0.9);
+                box-shadow: #dfff00 0px 0px 0.8em;
+            }
+
+            100% {
+                background-color: transparent;
+            }
+        }
+
+.blink-out {
+    animation: blink-out 1s infinite;
+    background-color:  rgba(12, 146, 223, 0.9);
+    /* box-shadow: #1e90ff 0px 0px 0.8em; */
+}
+
+@keyframes blink-out {
+            0% {
+                background-color: rgba(12, 146, 223, 0.9);
+                box-shadow: #1e90ff 0px 0px 0.8em;
+            }
+
+            100% {
+                background-color: transparent;
+            }
+        }

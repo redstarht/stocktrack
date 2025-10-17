@@ -32,3 +32,14 @@ export function initPnHighlight() {
     });
     console.log("✅品番ハイライトモジュール読み込み")
 };
+
+
+export function resetPnHignlight() {
+    const cells = document.querySelectorAll(".cell");
+    // 全セルの強調をリセット
+    cells.forEach(cell => {
+        cell.classList.remove("highlight");
+
+    });
+}
+

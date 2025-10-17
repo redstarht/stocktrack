@@ -1,12 +1,13 @@
 export function createDisplayName(pn_list, pn_id) {
     const pnItem = pn_list.find(pnItem => pnItem.id == pn_id);
-    console.log(pn_list,pn_id);
     const displayValue = (val) => (val === null || val === "" || val === -1.0 ? "***" : val);
     const unionvalue = [
         displayValue(pnItem.serial_no),
         displayValue(pnItem.material),
+        displayValue(pnItem.outer_diam),
         displayValue(pnItem.material_thickness),
         displayValue(pnItem.cut_length),
+        displayValue(pnItem.long_length)
     ].join(" / ");
 
     return {
@@ -33,8 +34,10 @@ export function logDisplayName(shelf_list,cell_list,pn_list,logItem){
         product_no:pnItem.product_no,
         serial_no:pnItem.serial_no,
         material:pnItem.material,
+        outer_diam:pnItem.outer_diam,
         material_thickness:pnItem.material_thickness,
         cut_length:pnItem.cut_length,
+        long_length:pnItem.long_length,
         inout_type:logInout_type,
         change_qty:logItem.change_qty,
         stock_after:logItem.stock_after

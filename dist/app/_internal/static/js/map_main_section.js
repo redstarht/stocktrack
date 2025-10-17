@@ -45,7 +45,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const cellLabel = document.createElement("div");
             const stack = document.createElement("div");
             const cellBtn = document.createElement("button");
-            const btnIcon = document.createElement("i");
+            const pnSNLbl = document.createElement("i");
+            const pnLenLbl = document.createElement('i');
 
             cellElm.className = "cell";
             cellElm.dataset.cellId = cell.id;
@@ -70,19 +71,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 // マップへのスタックゲージの表示
                 stackGaugeCreate(max_qty, stock_cell.stock_qty, stack);
 
-                btnIcon.textContent = pnItem.serial_no;
-                btnIcon.className = "btn-pn-stock"
+                pnSNLbl.textContent = pnItem.serial_no;
+                pnSNLbl.className = "serial-lbl btn-pn-stock"
                 cellBtn.dataset.displayname = displayName;
+                pnLenLbl.textContent = pnItem.long_length;
+                pnLenLbl.className="length-lbl btn-pn-stock" 
 
 
 
             } else {
 
-                btnIcon.className = "bi bi-box-arrow-in-down";
+                pnSNLbl.className = "serial-lbl bi bi-box-arrow-in-down";
             }
             cellLabel.className = "cell-label";
             stack.className = "stack";
-            cellBtn.className = "cell-stock-btn";
+            cellBtn.className = shelfItem.row_class;
 
             // セルボタンのデータまとめ用（データがない場合は空文字)
             const dataObj = {
@@ -91,14 +94,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 max_qty: max_qty ?? '',
                 pn_id: stock_cell?.pn_id ?? '',
                 serial_no: product_number?.serial_no ?? '',
-                stock_qty: stock_cell?.stock_qty ?? 0
+                stock_qty: stock_cell?.stock_qty ?? 0,
+                stock_fraction: stock_cell?.stock_fraction ?? '',
             }
             cellBtn.dataset.item = JSON.stringify(dataObj);
 
 
 
 
-            cellBtn.appendChild(btnIcon);
+            cellBtn.appendChild(pnSNLbl);
+            cellBtn.appendChild(pnLenLbl);
             cellLabel.appendChild(stack);
             cellLabel.appendChild(cellBtn);
             cellElm.appendChild(cellLabel);

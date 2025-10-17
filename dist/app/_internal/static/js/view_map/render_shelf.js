@@ -1,71 +1,14 @@
 import { stackGaugeCreate } from "../common/stack_gauge.js";
-import { createDisplayName } from "../common/displayname.js";
+import { reload_shelf_data } from "../common/reload_shelf_data.js"
 
-export function render_shelf(renderInfo, reloadCellStockData) {
+export function render_shelf(renderInfo) {
     if (renderInfo.shelfGridElm.hasChildNodes()) {
-        console.log("リロード処理:", reloadCellStockData);
+        console.log("リロード処理:", renderInfo.reloadCellStockData);
+        const pageName = 'view_map';
         const timeStampLabel = renderInfo.mainHeader.querySelector(".timeStamp");
-        timeStampLabel.textContent = `更新時間：${reloadCellStockData.time_stamp}`;
+        timeStampLabel.textContent = `更新時間：${renderInfo.reloadCellStockData.time_stamp}`;
+        reload_shelf_data(renderInfo.shelf_list, renderInfo.shelfGridElm, renderInfo.reloadCellStockData, pageName)
 
-        renderInfo.shelf_list.forEach(shelfItem => {
-            const shelf_cells = cell_list.filter(cell => cell.shelf_id === shelfItem.id);
-            shelf_cells.forEach(cell => {
-                const stock_cell = reloadCellStockData && reloadCellStockData.cell_stock_statuses
-                    ? reloadCellStockData.cell_stock_statuses.find(stock => stock.cell_id == cell.id)
-                    : null;
-                // cellElmをdata属性を使って取得
-                const cellElm = renderInfo.shelfGridElm.querySelector(`[data-cell-id="${cell.id}"]`);
-
-
-                if (cellElm) {
-                    // stock_cellが存在する場合
-                    /*
-                    条件分岐
-                    1.スタックゲージそのまま
-                    2.スタックゲージの増減
-                    3.空➡スタックゲージ表示
-                    4.スタックゲージ➡空
-
-                    現状描画されている情報(Class名から)
-                    上記1~4パターンを判定
-
-                    */
-                    if (stock_cell) {
-                        /*
-                        div.classname = stack DOMの状態を更新
-                        div.classname = cell-stock-btn DOMの状態を更新
-                        // レコードあるとき
-                        <i class="btn-pn-stock">004</i>
-
-                        // レコードないとき
-                        bi bi-box-arrow-in-down"                   
-                
-                        */
-                        let product_number = pn_list.find(pnItem => pnItem.id == stock_cell.pn_id);
-                        cellElm.dataset.pn = stock_cell.pn_id;
-
-                        // スタックゲージの更新
-                        const stack = cellElm.querySelector('.stack');
-                        stackGaugeCreate(cell.max_qty, stock_cell.stock_qty, stack);
-
-                        const divIcon = cellElm.querySelector('i');
-                        divIcon.textContent = product_number.serial_no;
-                        divIcon.className = "btn-pn-stock";
-                    } else {
-                        // stock_cellが存在しない場合の処理
-                        const stack = cellElm.querySelector('.stack');
-                        stack.innerHTML = "";
-                        const divIcon = cellElm.querySelector('i');
-                        divIcon.textContent = "";
-                        divIcon.className = "bi bi-box-arrow-in-down";
-                    }
-                }
-
-            })
-
-
-        })
-        // renderInfo.shelfGridElm= null;
     } else {
         console.log("初期描画処理");
         // mainセクションのヘッダー情報描画
@@ -73,7 +16,7 @@ export function render_shelf(renderInfo, reloadCellStockData) {
         mainTitle.textContent = "マップ確認画面";
         const timeStampLabel = document.createElement("div");
         timeStampLabel.className = "timeStamp"
-        timeStampLabel.textContent = `更新時間：${reloadCellStockData.time_stamp}`;
+        timeStampLabel.textContent = `更新時間：${renderInfo.reloadCellStockData.time_stamp}`;
         renderInfo.mainHeader.appendChild(mainTitle);
         renderInfo.mainHeader.appendChild(timeStampLabel)
 
@@ -115,7 +58,8 @@ export function render_shelf(renderInfo, reloadCellStockData) {
                 const cellLabel = document.createElement("div");
                 const stack = document.createElement("div");
                 const cellDiv = document.createElement("div");
-                const divIcon = document.createElement("i");
+                const pnSNLbl = document.createElement("i");
+                const pnLenLbl = document.createElement("i");
 
                 cellElm.className = "cell";
                 cellElm.dataset.cellId = cell.id;
@@ -123,8 +67,8 @@ export function render_shelf(renderInfo, reloadCellStockData) {
 
                 // stock_cell_statusの情報
                 // stock_cellを取得する前に存在確認
-                const stock_cell = reloadCellStockData && reloadCellStockData.cell_stock_statuses
-                    ? reloadCellStockData.cell_stock_statuses.find(stock => stock.cell_id == cell.id)
+                const stock_cell = renderInfo.reloadCellStockData && renderInfo.reloadCellStockData.cell_stock_statuses
+                    ? renderInfo.reloadCellStockData.cell_stock_statuses.find(stock => stock.cell_id == cell.id)
                     : false;
 
                 // 品番テーブルから街灯品番を抽出
@@ -136,7 +80,7 @@ export function render_shelf(renderInfo, reloadCellStockData) {
                     /*
                     stock_cellにレコードがあった場合は
                     stackGaugeCreateからゲージDOM要素を作成
-                    divIcon
+                    pnSNLbl
                     
                     */
                     let product_number = null;
@@ -150,20 +94,23 @@ export function render_shelf(renderInfo, reloadCellStockData) {
                     // マップへのスタックゲージの表示
                     stackGaugeCreate(max_qty, stock_cell.stock_qty, stack);
 
-                    divIcon.textContent = product_number.serial_no;
-                    divIcon.className = "btn-pn-stock"
+                    pnSNLbl.textContent = product_number.serial_no;
+                    pnSNLbl.className = "serial-lbl btn-pn-stock"
+                    pnLenLbl.textContent = product_number.long_length;
+                    pnLenLbl.className = "length-lbl btn-pn-stock"
                     // cellDiv.dataset.displayname = displayName;
 
                 } else {
 
-                    divIcon.className = "bi bi-box-arrow-in-down";
+                    pnSNLbl.className = "serial-lbl bi bi-box-arrow-in-down";
                 }
                 cellLabel.className = "cell-label";
                 stack.className = "stack";
-                cellDiv.className = "cell-stock-btn";
+                cellDiv.className = shelfItem.row_class;
 
 
-                cellDiv.appendChild(divIcon);
+                cellDiv.appendChild(pnSNLbl);
+                cellDiv.appendChild(pnLenLbl);
                 cellLabel.appendChild(stack);
                 cellLabel.appendChild(cellDiv);
                 cellElm.appendChild(cellLabel);
@@ -179,4 +126,100 @@ export function render_shelf(renderInfo, reloadCellStockData) {
     }
 
 
+}
+
+let change_cellData = new Map();
+
+function createMapByCellId(arr) {
+    const map = new Map();
+    arr.forEach(item => {
+        map.set(item.cell_id, item);
+    });
+    return map;
+}
+
+function findDomCellById(domCells, cell_id) {
+    for (const cell of domCells) {
+        if (cell.getAttribute("data-cell-id") === String(cell_id)) {
+            return cell;
+        }
+    }
+    return null;
+}
+
+
+export function updateChangeCellData(nowData, prevData) {
+    const nowMap = createMapByCellId(nowData.cell_stock_statuses);
+    const prevMap = createMapByCellId(prevData.cell_stock_statuses);
+    const domCells = document.querySelectorAll(".cell");
+    // すべてのcell_idを洗い出す
+    const allCellIds = new Set([...nowMap.keys(), ...prevMap.keys()]);
+    console.log(change_cellData);
+    allCellIds.forEach(cell_id => {
+        const domcell = findDomCellById(domCells, cell_id);
+        const nowItem = nowMap.get(cell_id);
+        const prevItem = prevMap.get(cell_id);
+        // ページ新規描画時
+        if (!prevItem && nowItem) {
+            // 新規追加
+            // flash_countを30にセット
+            change_cellData.set(cell_id, { ...nowItem, flash_count: 30, is_deleted: false, type: "blink-new-in" });
+            domcell.className = 'cell blink-new-in';
+            // 削除：prevにはあってnowにはない
+        } else if (prevItem && !nowItem) {
+            // 削除
+            // すでにchange_cellDataにあればflash_countをリセット、なければ新規に追加
+            const existing = change_cellData.get(cell_id);
+            if (existing) {
+                change_cellData.set(cell_id, { ...existing, flash_count: 30, is_deleted: true, type: "blink-out" });
+                domcell.className ='cell blink-out';
+            } else {
+                change_cellData.set(cell_id, { cell_id: cell_id, flash_count: 30, is_deleted: true, type: "blink-out" });
+                domcell.className ='cell blink-out';
+            }
+            // nowもprevもある 
+        } else if (nowItem && prevItem) {
+            // 両方に存在 → プロパティが異なるかチェック
+            const isDifferent = nowItem.pn_id !== prevItem.pn_id || nowItem.stock_qty !== prevItem.stock_qty;
+            if (isDifferent) {
+                // 変更あり
+                const existing = change_cellData.get(cell_id);
+                // flash_countは既存があればリセット、なければ30にセット
+                const flash_count = existing ? 30 : 30;
+                if (nowItem.stock_qty > prevItem.stock_qty) {
+                    change_cellData.set(cell_id, { ...nowItem, flash_count, is_deleted: false, type: "blink-in" });
+                    domcell.className ='cell blink-in';
+                } else {
+                    change_cellData.set(cell_id, { ...nowItem, flash_count, is_deleted: false, type: "blink-out" });
+                    domcell.className ='cell blink-out';
+                }
+            }
+        }
+        // 変更なしの場合は何もしない
+    });
+}
+
+
+// setintervalで1秒間間隔で実行
+export function decrementFlashCount() {
+    const cells = document.querySelectorAll(".cell");
+
+    for (const [cell_id, data] of change_cellData.entries()) {
+        if (data.flash_count > 0) {
+            data.flash_count--;
+
+            //   カウントが0でクラスをリセット
+            if (data.flash_count === 0) {
+                change_cellData.delete(cell_id);
+                cells.forEach(cell => {
+                    if (cell.getAttribute("data-cell-id") === String(cell_id)) {
+                        cell.className = 'cell';
+                    }
+                }
+                )
+            } else {
+                change_cellData.set(cell_id, data);
+            }
+        }
+    }
 }

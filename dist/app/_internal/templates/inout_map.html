@@ -35,11 +35,37 @@
             <!-- 品番サイドバー -->
             <div class="pn-sidebar">
                 <div class="side-top">
-                    <div class="pn-title">背番号</div>
+                    <div class="pn-title">パイプ検索</div>
                     <div class="search-container">
-                        <label for="serial-search">背番号検索</label>
-                        <input  id="serial-search" name="serial-no" inputmode="numeric" />
-                        <button id="search-button">検索</button>
+                        <div class="serial-search-container">
+                            <label for="serial-search">背番号</label>
+                            <input id="serial-search" name="serial-no" inputmode="numeric" />
+                        </div>
+                        <div class="length-search-container">
+                            <div class="length-select-box">
+                                <div class="length-search-title">
+                                    <label class="search-lbl">長尺長さ</label>
+                                </div>
+                                <div class="search-select-box">
+                                    <input type="radio" name="length-search-select" id="partical-match">
+                                    <label for="partical-match">部分一致</label>
+                                    <input type="radio" name="length-search-select" id="range-search">
+                                    <label for="range-search">範囲選択</label>
+                                </div>
+                            </div>
+                            <div class="length-search-box" id="length-search-box">
+                            </div>
+                        </div>
+                        <div class="entry-container">
+                            <button class="clear" id="clear-button">クリア</button>
+                            <button class="search" id="search-button">検索</button>
+                        </div>
+
+
+
+
+
+
                     </div>
                 </div>
 
@@ -79,8 +105,10 @@
         const cell_stock_list = {{ cell_stock_statuses | tojson }};
 
     </script>
-    
+
     <script type="module" src="../static/js/common/displayname.js"></script>
+    <script type="module" src="../static/js/common/reload_shelf_data.js"></script>
+    <script type="module" src="../static/js/common/change_select_search.js"></script>
     <script type="module" src="../static/js/map_sideber.js"></script>
     <script type="module" src="../static/js/map_main_section.js"></script>
     <script type="module" src="../static/js/common/pn_list.js"></script>
