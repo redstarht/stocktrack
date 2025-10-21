@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
     newOuterDIamCell.className = "input-cell";
     const newOuterDIamInput = document.createElement("input");
     newOuterDIamInput.type = "text";
-    newOuterDIamInput.name = "outer_input";
+    newOuterDIamInput.name = "outer_diam";
     newOuterDIamCell.appendChild(newOuterDIamInput);
     newRow.appendChild(newOuterDIamCell);
 

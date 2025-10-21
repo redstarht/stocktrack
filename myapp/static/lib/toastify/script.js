@@ -6,7 +6,7 @@ var bgColors = [
 document.getElementById("search-button").addEventListener("click", function() {
   Toastify({
     text: "10/16 14:18:36 棚：A 背番号:798 長尺長さ:4985 出庫 変更数:1",
-    duration: 100000,
+    duration: 30000,
     close: true,
     gravity: "bottom",
     position:'right',

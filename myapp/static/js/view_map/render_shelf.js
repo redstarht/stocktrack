@@ -137,6 +137,7 @@ export function render_shelf(renderInfo) {
 
 let change_cellData = new Map();
 
+// 配列をマップオブジェクトへ
 function createMapByCellId(arr) {
     const map = new Map();
     arr.forEach(item => {
@@ -161,7 +162,9 @@ export function updateChangeCellData(nowData, prevData) {
     const domCells = document.querySelectorAll(".cell");
     // すべてのcell_idを洗い出す
     const allCellIds = new Set([...nowMap.keys(), ...prevMap.keys()]);
-    console.log(change_cellData);
+    console.log("↓change_celldata = [ cell_id , data ],[cell_id , data],...]")
+    console.log(...change_cellData.entries())
+    // console.log(`入出ハイライト：${...change_cellData.entries()}`);
     allCellIds.forEach(cell_id => {
         const domcell = findDomCellById(domCells, cell_id);
         const nowItem = nowMap.get(cell_id);
@@ -172,6 +175,7 @@ export function updateChangeCellData(nowData, prevData) {
             // flash_countを30にセット
             change_cellData.set(cell_id, { ...nowItem, flash_count: 30, is_deleted: false, type: "blink-new-in" });
             domcell.className = 'cell blink-new-in';
+
             // 削除：prevにはあってnowにはない
         } else if (prevItem && !nowItem) {
             // 削除
@@ -184,7 +188,7 @@ export function updateChangeCellData(nowData, prevData) {
                 change_cellData.set(cell_id, { cell_id: cell_id, flash_count: 30, is_deleted: true, type: "blink-out" });
                 domcell.className ='cell blink-out';
             }
-            // nowもprevもある 
+            // nowもprevもある:入りだし描画の更新
         } else if (nowItem && prevItem) {
             // 両方に存在 → プロパティが異なるかチェック
             const isDifferent = nowItem.pn_id !== prevItem.pn_id || nowItem.stock_qty !== prevItem.stock_qty;
@@ -230,3 +234,6 @@ export function decrementFlashCount() {
         }
     }
 }
+
+
+

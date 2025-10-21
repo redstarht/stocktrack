@@ -65,8 +65,10 @@ export function createAlertDisplayName(pnItem) {
     const unionvalue = [
         displayValue(pnItem.serial_no),
         displayValue(pnItem.material),
+        displayValue(pnItem.outer_diam),
         displayValue(pnItem.material_thickness),
         displayValue(pnItem.cut_length),
+        displayValue(pnItem.long_length)
     ].join(" / ");
     console.log("✅DisplayNameが読み込まれました!",unionvalue);
 
