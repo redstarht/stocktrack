@@ -23,6 +23,7 @@ import datetime
 import pytz
 from .data_management import check_del_pn_ctrl, check_stock_status, convert_to_int_set, check_del_alwStorRec, convert_float_value
 from logging import getLogger
+from sqlalchemy import desc
 
 
 logger = getLogger()
@@ -52,11 +53,11 @@ def save_inout_popup():
 
         '''
         新規追加 / 既存データのストック数消す / stockが0になった場合はレコードを削除
-        
+
         なおかつ新規追加時にcell_idが一致しているレコードが１つでもあったら
         新規レコードとして追加せずにエラーで返す➡「すでにそのセルには品番が格納されています」
-        
-        
+
+
         '''
         # 新規追加
         if not CellStockStatus.query.filter_by(
@@ -111,6 +112,7 @@ def save_inout_popup():
 
         return jsonify(response_data), 200
     except Exception as e:
+        session.rollback()
         return jsonify({"error": str(e)}), 500
 
 
@@ -122,8 +124,10 @@ def save_product_number():
     '''
 
     [{'serial_no': '001', 'product_no': '12345-67890', 'material': 'XYZB10-100', 'material_thickness': '2', 'cut_length': '850', 'id': '1'},
-    {'serial_no': '002', 'product_no': '54321-09876', 'material': 'ABCZ20-200', 'material_thickness': '3', 'cut_length': '920.5', 'id': '2'},
-    {'serial_no': '003', 'product_no': '98765-43210', 'material': 'LMNQ15-150', 'material_thickness': '1.5', 'cut_length': '780.3', 'id': '3'}
+    {'serial_no': '002', 'product_no': '54321-09876', 'material': 'ABCZ20-200',
+        'material_thickness': '3', 'cut_length': '920.5', 'id': '2'},
+    {'serial_no': '003', 'product_no': '98765-43210', 'material': 'LMNQ15-150',
+        'material_thickness': '1.5', 'cut_length': '780.3', 'id': '3'}
     '''
 
     for pn_item in product_numbers:
@@ -131,13 +135,14 @@ def save_product_number():
         product_no = pn_item.get("product_no", "").strip()
         serial_no = pn_item.get("serial_no", "").strip()
         material = pn_item.get("material", "").strip()
-        material_thickness = convert_float_value(pn_item.get("material_thickness", "").strip())
+        material_thickness = convert_float_value(
+            pn_item.get("material_thickness", "").strip())
         outer_diam = convert_float_value(pn_item.get("outer_diam", "").strip())
-        long_length = convert_float_value(pn_item.get("long_length", "").strip())
-        cut_length =  convert_float_value(pn_item.get("cut_length", "").strip())
-        
+        long_length = convert_float_value(
+            pn_item.get("long_length", "").strip())
+        cut_length = convert_float_value(pn_item.get("cut_length", "").strip())
+
         # 空文字と文字列の変換
-        
 
         is_deleted = pn_item.get("is_deleted", False)
         if is_deleted == "true":
@@ -167,13 +172,13 @@ def save_product_number():
 
                 if cut_length != update_pn.cut_length:
                     update_pn.cut_length = cut_length
-                    
+
                 if outer_diam != update_pn.outer_diam:
                     update_pn.outer_diam = outer_diam
-                
+
                 if long_length != update_pn.long_length:
                     update_pn.long_length = long_length
-                    
+
                 if is_deleted != update_pn.is_deleted:
                     update_pn.is_deleted = is_deleted
 
@@ -183,14 +188,15 @@ def save_product_number():
                                        serial_no=serial_no,
                                        material=material,
                                        material_thickness=material_thickness,
-                                       outer_diam = outer_diam,
-                                       long_length = long_length,
+                                       outer_diam=outer_diam,
+                                       long_length=long_length,
                                        cut_length=cut_length,
                                        is_deleted=False)
                 db.session.add(new_pn)
             else:
                 error_msg = "追加した品番 または 背番号が空です!"
                 logger.error(error_msg)
+                session.rollback()
                 return jsonify({"error": error_msg}), 400
 
     db.session.commit()
@@ -280,3 +286,43 @@ def order_cell_status():
     }
 
     return jsonify(response_data)
+
+
+@api.route("/api/inout_log", methods=["POST"])
+def order_inout_log():
+    request.method
+
+    # Note：tostifyに最新のログ通知を出すためのAPI
+    # newdata:true なら 前回取得時から変化有としてtostifyがトースト通知を出す
+    # logged_atから 最新10件を抽出しておく
+    # 最新10件に対して前回データ(10件)よりも差異があれば
+    # そのオブジェクトに newdata:trueとしてデータを返す
+    # JSで当エンドポイントを周期的に見に行く
+
+    now_logs = InoutLog.query.order_by(desc(InoutLog.id)).limit(10)
+    dict_now_logs = []
+    
+
+    logger.info(now_logs)
+
+    prev_logs = request.get_json()
+    print(prev_logs)
+    
+    if (not prev_logs):
+        for nowlog in now_logs:
+            log_dict = nowlog.to_dict()
+            log_dict['new_data'] =False
+            dict_now_logs.append(log_dict)
+    else:
+        prev_logs_ids = set(log['id'] for log in prev_logs)
+        for nowlog in now_logs:
+            log_dict = nowlog.to_dict()
+            if(log_dict['id'] in prev_logs_ids):
+                log_dict['new_data'] =False
+            else:
+                log_dict['new_data'] =True
+            dict_now_logs.append(log_dict)
+            
+    
+    # new_log = None
+    return jsonify(dict_now_logs)

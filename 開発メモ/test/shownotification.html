@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Service Worker と通知のサンプル</title>
+</head>
+<body>
+  <h1>通知のサンプル</h1>
+  <button id="notifyBtn">通知を表示</button>
+  <script>
+    // サービスワーカーを登録
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+        .then(() => {
+          console.log('Service Worker 登録成功');
+        })
+        .catch((error) => {
+          console.error('Service Worker 登録失敗:', error);
+        });
+    } else {
+      console.warn('Service Worker 非対応のブラウザです');
+    }
+    // 通知を表示する関数
+    function showNotification() {
+      Notification.requestPermission((result) => {
+        if (result === "granted") {
+          navigator.serviceWorker.ready.then((registration) => {
+            registration.showNotification("バイブレーションの例", {
+              body: "ブンブン! ブンブン!",
+              icon: "../images/touch/chrome-touch-icon-192x192.png",
+              vibrate: [200, 100, 200, 100, 200, 100, 200],
+              tag: "vibration-sample",
+            });
+          });
+        } else {
+          alert("通知の権限が許可されませんでした");
+        }
+      });
+    }
+    // ボタンにイベントリスナーをセット
+    document.getElementById('notifyBtn').addEventListener('click', showNotification);
+  </script>
+</body>
+</html>

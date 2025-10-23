@@ -1,17 +1,85 @@
+import {logDisplayName,createToastifyLogName} from "../../js/common/displayname.js"
+
+let prev_logs = [];
+
+document.addEventListener("DOMContentLoaded", function () {
+setInterval(async () =>{
+console.log(`以前データ：${prev_logs}`)
+let now_logs = await fetch_inout_log(prev_logs)
+let newLogs = []
+newLogs = now_logs.filter(now_log => now_log.new_data == true)
+newLogs.forEach(newLog => {
+  const newLogItem = logDisplayName(shelf_list,cell_list,pn_list,newLog);
+  console.log(newLogItem);
+  toastify_inout_log(createToastifyLogName(newLogItem));
+});
+
+prev_logs = now_logs
+
+},1000)
+
+
+})
+
+
+
+
+async function fetch_inout_log(prev_log) {
+   try {
+    const response = await fetch("/api/inout_log", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(prev_log)
+    });
+    console.log("送信データ:", prev_log)
+    if (!response.ok) {
+      throw new Error("読み込みエラー");
+    }
+
+    const result = await response.json();
+    console.log("送信結果:", result);
+
+    // window.location.href = "/pn_ctrl";
+    return result
+  } catch (error) {
+    console.error("送信エラー:", error);
+    alert("送信中にエラーが発生しました。コンソールを確認してください。");
+  }
+
+}
+
+function toastify_inout_log(display_log) {
+  Toastify({
+    text: display_log,
+    duration: 30000,
+    close: true,
+    gravity: "bottom",
+    position: 'right',
+    style: {
+      color: "rgba(0, 0, 0, 1)",
+      background: bgColors[0],
+    }
+  }).showToast();
+  i++;
+}
+
+
 var bgColors = [
-    "rgba(255, 255, 255, 0.8)",
-  ],
+  "rgba(255, 255, 255, 0.8)",
+],
   i = 0;
 // Displaying toast on manual action `Try`
-document.getElementById("search-button").addEventListener("click", function() {
+document.getElementById("search-button").addEventListener("click", function () {
   Toastify({
     text: "10/16 14:18:36 棚：A 背番号:798 長尺長さ:4985 出庫 変更数:1",
     duration: 30000,
     close: true,
     gravity: "bottom",
-    position:'right',
+    position: 'right',
     style: {
-      color:"rgba(0, 0, 0, 1)",
+      color: "rgba(0, 0, 0, 1)",
       background: bgColors[0],
     }
   }).showToast();

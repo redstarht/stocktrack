@@ -16,31 +16,31 @@ export function createDisplayName(pn_list, pn_id) {
     }
 }
 
-export function logDisplayName(shelf_list,cell_list,pn_list,logItem){
-    const shelfName = searchShelfName(shelf_list,cell_list,logItem.cell_id);
-    const pnItem = searchPN(pn_list,logItem.pn_id);
+export function logDisplayName(shelf_list, cell_list, pn_list, logItem) {
+    const shelfName = searchShelfName(shelf_list, cell_list, logItem.cell_id);
+    const pnItem = searchPN(pn_list, logItem.pn_id);
     let logInout_type = null;
-    if(logItem.inout_type === "in"){
-        logInout_type ="入庫";
-    }else if(logItem.inout_type === "out"){
-        logInout_type="出庫";
-    }else{
-        logInout_type="エラー";
+    if (logItem.inout_type === "in") {
+        logInout_type = "入庫";
+    } else if (logItem.inout_type === "out") {
+        logInout_type = "出庫";
+    } else {
+        logInout_type = "エラー";
     }
     return {
         id: logItem.id,
         timestamp: logItem.processed_at,
         shelfName: shelfName,
-        product_no:pnItem.product_no,
-        serial_no:pnItem.serial_no,
-        material:pnItem.material,
-        outer_diam:pnItem.outer_diam,
-        material_thickness:pnItem.material_thickness,
-        cut_length:pnItem.cut_length,
-        long_length:pnItem.long_length,
-        inout_type:logInout_type,
-        change_qty:logItem.change_qty,
-        stock_after:logItem.stock_after
+        product_no: pnItem.product_no,
+        serial_no: pnItem.serial_no,
+        material: pnItem.material,
+        outer_diam: pnItem.outer_diam,
+        material_thickness: pnItem.material_thickness,
+        cut_length: pnItem.cut_length,
+        long_length: pnItem.long_length,
+        inout_type: logInout_type,
+        change_qty: logItem.change_qty,
+        stock_after: logItem.stock_after
     }
 
 
@@ -48,14 +48,15 @@ export function logDisplayName(shelf_list,cell_list,pn_list,logItem){
 
 
 
-export function searchShelfName(shelf_list,cell_list,cell_id){
+export function searchShelfName(cell_id) {
     const cellItem = cell_list.find(cellItem => cellItem.id = cell_id);
     const shelfItem = shelf_list.find(shelfItem => shelfItem.id == cellItem.shelf_id);
+    console.log(shelfItem.name)
     return shelfItem.name;
 }
 
 
-function searchPN(pn_list,pn_id){
+function searchPN(pn_list, pn_id) {
     const pnItem = pn_list.find(pnItem => pnItem.id == pn_id);
     return pnItem;
 
@@ -70,7 +71,21 @@ export function createAlertDisplayName(pnItem) {
         displayValue(pnItem.cut_length),
         displayValue(pnItem.long_length)
     ].join(" / ");
-    console.log("✅DisplayNameが読み込まれました!",unionvalue);
+    console.log("✅DisplayNameが読み込まれました!", unionvalue);
+
+    return unionvalue
+}
+
+export function createToastifyLogName(logItem) {
+    const displayValue = (val) => (val === null || val === "" || val === -1.0 ? "***" : val);
+    const unionvalue = [
+        displayValue(logItem.timestamp),
+        "棚：" + displayValue(logItem.shelfName),
+        "背番号：" + displayValue(logItem.outer_diam),
+        "長尺長さ：" + displayValue(logItem.material_thickness),
+        logItem.inout_type,
+        "変更数：" + logItem.change_qty
+    ].join(" ");
 
     return unionvalue
 }
