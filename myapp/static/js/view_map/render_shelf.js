@@ -3,7 +3,6 @@ import { reload_shelf_data } from "../common/reload_shelf_data.js"
 
 export function render_shelf(renderInfo) {
     if (renderInfo.shelfGridElm.hasChildNodes()) {
-        console.log("リロード処理:", renderInfo.reloadCellStockData);
         const pageName = 'view_map';
         const timeStampLabel = renderInfo.mainHeader.querySelector(".timeStamp");
         timeStampLabel.textContent = `更新時間：${renderInfo.reloadCellStockData.time_stamp}`;
@@ -162,9 +161,7 @@ export function updateChangeCellData(nowData, prevData) {
     const domCells = document.querySelectorAll(".cell");
     // すべてのcell_idを洗い出す
     const allCellIds = new Set([...nowMap.keys(), ...prevMap.keys()]);
-    console.log("↓change_celldata = [ cell_id , data ],[cell_id , data],...]")
-    console.log(...change_cellData.entries())
-    // console.log(`入出ハイライト：${...change_cellData.entries()}`);
+
     allCellIds.forEach(cell_id => {
         const domcell = findDomCellById(domCells, cell_id);
         const nowItem = nowMap.get(cell_id);

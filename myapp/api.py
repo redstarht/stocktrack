@@ -302,11 +302,8 @@ def order_inout_log():
     now_logs = InoutLog.query.order_by(desc(InoutLog.id)).limit(10)
     dict_now_logs = []
     
-
-    logger.info(now_logs)
-
     prev_logs = request.get_json()
-    print(prev_logs)
+
     
     if (not prev_logs):
         for nowlog in now_logs:

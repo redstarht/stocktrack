@@ -17,7 +17,7 @@ export function createDisplayName(pn_list, pn_id) {
 }
 
 export function logDisplayName(shelf_list, cell_list, pn_list, logItem) {
-    const shelfName = searchShelfName(shelf_list, cell_list, logItem.cell_id);
+    const shelfName = searchShelfName(logItem.cell_id);
     const pnItem = searchPN(pn_list, logItem.pn_id);
     let logInout_type = null;
     if (logItem.inout_type === "in") {
@@ -49,15 +49,16 @@ export function logDisplayName(shelf_list, cell_list, pn_list, logItem) {
 
 
 export function searchShelfName(cell_id) {
-    const cellItem = cell_list.find(cellItem => cellItem.id = cell_id);
-    const shelfItem = shelf_list.find(shelfItem => shelfItem.id == cellItem.shelf_id);
+    console.log(`セルリスト:${cell_list}`)
+    const cellItem = cell_list.find(cellItem => cellItem.id === cell_id);
+    const shelfItem = shelf_list.find(shelfItem => shelfItem.id === cellItem.shelf_id);
     console.log(shelfItem.name)
     return shelfItem.name;
 }
 
 
 function searchPN(pn_list, pn_id) {
-    const pnItem = pn_list.find(pnItem => pnItem.id == pn_id);
+    const pnItem = pn_list.find(pnItem => pnItem.id === pn_id);
     return pnItem;
 
 }
@@ -81,8 +82,8 @@ export function createToastifyLogName(logItem) {
     const unionvalue = [
         displayValue(logItem.timestamp),
         "棚：" + displayValue(logItem.shelfName),
-        "背番号：" + displayValue(logItem.outer_diam),
-        "長尺長さ：" + displayValue(logItem.material_thickness),
+        "背番号：" + displayValue(logItem.serial_no),
+        "長尺長さ：" + displayValue(logItem.long_length),
         logItem.inout_type,
         "変更数：" + logItem.change_qty
     ].join(" ");
