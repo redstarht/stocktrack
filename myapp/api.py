@@ -112,7 +112,7 @@ def save_inout_popup():
 
         return jsonify(response_data), 200
     except Exception as e:
-        session.rollback()
+        db.session.rollback()
         return jsonify({"error": str(e)}), 500
 
 
@@ -196,7 +196,7 @@ def save_product_number():
             else:
                 error_msg = "追加した品番 または 背番号が空です!"
                 logger.error(error_msg)
-                session.rollback()
+                db.session.rollback()
                 return jsonify({"error": error_msg}), 400
 
     db.session.commit()
@@ -265,7 +265,7 @@ def save_cell_permisson():
         db.session.commit()
         return jsonify({"message": "保存完了"}), 200
     except ValueError as e:
-        session.rollback()
+        db.db.session.rollback()
         logger.error({"error": str(e)})
         return jsonify({"error": str(e)}), 400
 
