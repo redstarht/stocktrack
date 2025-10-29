@@ -1,0 +1,52 @@
+2025-10-27 08:35:09,032 - waitress - INFO - Serving on http://0.0.0.0:8080
+2025-10-27 08:35:29,620 - root - INFO - 新規レコード追加処理起動
+2025-10-27 15:22:25,182 - waitress - INFO - Serving on http://0.0.0.0:8080
+2025-10-27 18:59:47,074 - waitress - INFO - Serving on http://0.0.0.0:8080
+2025-10-27 19:00:05,561 - root - INFO - 新規レコード追加処理起動
+2025-10-27 19:00:09,135 - root - ERROR - Error: cell_id 9 already exists.
+2025-10-27 19:00:09,136 - myapp - ERROR - Exception on /api/inout/save [POST]
+Traceback (most recent call last):
+  File "C:\z\app\stocktrack\myapp\api.py", line 69, in save_inout_popup
+    check_stock_status(cell_stock_status)
+  File "C:\z\app\stocktrack\myapp\data_management.py", line 37, in check_stock_status
+    raise ValueError(errormsg)
+ValueError: Error: cell_id 9 already exists.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\z\venv\stocktrack\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\z\app\stocktrack\myapp\api.py", line 115, in save_inout_popup
+    session.rollback()
+    ^^^^^^^^^^^^^^^^
+AttributeError: 'NullSession' object has no attribute 'rollback'
+2025-10-27 19:00:22,914 - root - INFO - 更新処理実行
+2025-10-27 19:00:24,836 - root - INFO - 更新処理実行
+2025-10-27 19:00:26,531 - root - INFO - 更新処理実行
+2025-10-27 19:03:18,947 - waitress - INFO - Serving on http://0.0.0.0:8080
+2025-10-27 19:03:41,813 - root - INFO - 削除処理実行
+2025-10-27 19:03:45,005 - root - INFO - 新規レコード追加処理起動
+2025-10-27 19:03:47,726 - root - INFO - 削除処理実行
+2025-10-27 19:04:08,741 - root - INFO - 新規レコード追加処理起動
+2025-10-27 19:04:12,809 - root - INFO - 更新処理実行
+2025-10-27 19:04:14,565 - root - INFO - 更新処理実行
+2025-10-27 19:04:17,907 - root - INFO - 更新処理実行
+2025-10-27 19:04:20,915 - root - INFO - 更新処理実行
+2025-10-27 19:04:29,586 - root - INFO - 削除処理実行
+2025-10-27 19:04:33,243 - root - INFO - 新規レコード追加処理起動
+2025-10-27 19:04:35,967 - root - ERROR - Error: cell_id 4 already exists.
+2025-10-27 19:04:42,418 - root - INFO - 更新処理実行
+2025-10-27 19:04:45,200 - root - INFO - 更新処理実行
+2025-10-27 19:04:46,963 - root - INFO - 削除処理実行
+2025-10-27 19:04:52,520 - root - INFO - 新規レコード追加処理起動

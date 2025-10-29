@@ -32,7 +32,7 @@ def check_stock_status(data):
     """
     if CellStockStatus.query.filter_by(
             cell_id=data.get("cell_id"),).first() is not None:
-        errormsg= f"Error: cell_id {data.get('cell_id')} already exists."
+        errormsg= f"選択したセルには既に製品が格納されています\n cell_id:{data.get('cell_id')} "
         logger.error(errormsg)
         raise ValueError(errormsg)
     logger.info("新規レコード追加処理起動")

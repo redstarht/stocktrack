@@ -33,6 +33,11 @@ h1 {
     background-color: #666;
 }
 
+button:active {
+    transform: scale(1.1);
+    transition: transform 0.1s;
+}
+
 .log-container {
     margin-top: 3%;
     overflow-y:scroll;

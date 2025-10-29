@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, session
 from .model import Zone, Shelf, ProductNumber, Cell, CellStockStatus, AllowStorage, InoutLog
 from myapp import db
-
+import datetime,pytz
 
 services = Blueprint('services', __name__)
 
@@ -72,15 +72,30 @@ def shelfs_with_class(shelfs):
 
     row_class = {
         # "cell-stock-btn"はデフォルト値
-        4:"cell-stock-btn row4",
-        5:"cell-stock-btn row5"
+        4: "cell-stock-btn row4",
+        5: "cell-stock-btn row5"
     }
 
     shelfs_with_class = [
         {**shelf,
          "column_class": column_class.get(shelf["column"], "cell-grid"),
-         "row_class":row_class.get(shelf["row"],"cell-stock-btn")}
+         "row_class": row_class.get(shelf["row"], "cell-stock-btn")}
         for shelf in shelfs
     ]
 
     return shelfs_with_class
+
+
+def reload_cell_stock_status():
+    # 更新データの再取得
+    obj_cell_stock_status = CellStockStatus.query.all()
+    cell_stock_statuses = [cell_stock_status.to_dict()
+                           for cell_stock_status in obj_cell_stock_status]
+    timestamp = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
+    formatted_time = timestamp.strftime('%Y/%m/%d %H:%M:%S')
+
+    response_data = {
+        "time_stamp": formatted_time,
+        "cell_stock_statuses": cell_stock_statuses
+    }
+    return response_data

@@ -295,10 +295,12 @@ export function createPopup() {
       saveBtn.addEventListener('click', async () => {
         try {
           // データ格納・保存処理
+          saveBtn.disabled = true;
           await saveCheckedData(button, cellData, stock_qty);
 
         } catch (error) {
           alert(error.message);
+          saveBtn.disabled = false;
           return;
         }
         overlay.style.display = 'none';
@@ -306,6 +308,7 @@ export function createPopup() {
         // モジュール内変数の初期化
         input_pn = [];
         inputContainer = null;
+        saveBtn.disabled = false;
 
 
       });

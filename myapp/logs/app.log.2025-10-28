@@ -1,0 +1,99 @@
+2025-10-28 15:51:42,134 - waitress - INFO - Serving on http://0.0.0.0:8080
+2025-10-28 15:51:59,094 - root - INFO - pn_id:243を論理削除
+2025-10-28 15:52:24,897 - root - INFO - 新規レコード追加処理起動
+2025-10-28 15:52:25,238 - root - INFO - 更新処理実行
+2025-10-28 15:52:26,144 - root - INFO - 更新処理実行
+2025-10-28 15:52:26,329 - root - INFO - 更新処理実行
+2025-10-28 15:52:26,474 - root - INFO - 更新処理実行
+2025-10-28 15:52:26,675 - root - INFO - 更新処理実行
+2025-10-28 15:52:30,808 - root - INFO - 更新処理実行
+2025-10-28 15:52:30,843 - root - ERROR - Error: cell_id 4 already exists.
+2025-10-28 15:52:30,850 - root - ERROR - Error: cell_id 4 already exists.
+2025-10-28 15:52:30,863 - root - INFO - 更新処理実行
+2025-10-28 15:52:30,878 - root - ERROR - Error: cell_id 4 already exists.
+2025-10-28 15:52:30,889 - root - ERROR - Error: cell_id 4 already exists.
+2025-10-28 15:52:30,899 - root - ERROR - Error: cell_id 4 already exists.
+2025-10-28 15:52:30,907 - root - INFO - 更新処理実行
+2025-10-28 15:52:30,941 - root - INFO - 更新処理実行
+2025-10-28 15:52:30,960 - root - ERROR - Error: cell_id 4 already exists.
+2025-10-28 15:52:30,977 - root - INFO - 更新処理実行
+2025-10-28 15:57:49,723 - root - INFO - 新規レコード追加処理起動
+2025-10-28 15:57:54,847 - root - INFO - 新規レコード追加処理起動
+2025-10-28 15:57:59,307 - root - INFO - 新規レコード追加処理起動
+2025-10-28 15:58:02,192 - root - INFO - 新規レコード追加処理起動
+2025-10-28 15:58:06,013 - root - INFO - 新規レコード追加処理起動
+2025-10-28 15:58:18,090 - root - INFO - 更新処理実行
+2025-10-28 15:58:23,980 - root - INFO - 更新処理実行
+2025-10-28 16:01:00,269 - root - INFO - pn_id:241を論理削除
+2025-10-28 16:01:22,919 - root - INFO - 削除処理実行
+2025-10-28 16:01:24,769 - root - INFO - 削除処理実行
+2025-10-28 16:01:30,979 - root - INFO - 新規レコード追加処理起動
+2025-10-28 16:01:35,471 - root - ERROR - Error:pn_id:240はまだ格納されているため削除不可
+2025-10-28 16:01:35,474 - myapp - ERROR - Exception on /api/pn_ctrl/save [POST]
+Traceback (most recent call last):
+  File "c:\z\venv\stocktrack\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\z\app\stocktrack\myapp\api.py", line 151, in save_product_number
+    check_del_pn_ctrl(id)
+  File "C:\z\app\stocktrack\myapp\data_management.py", line 78, in check_del_pn_ctrl
+    raise ValueError(msg)
+ValueError: Error:pn_id:240はまだ格納されているため削除不可
+2025-10-28 16:01:46,300 - root - ERROR - Error:pn_id:240はまだ格納されているため削除不可
+2025-10-28 16:01:46,300 - myapp - ERROR - Exception on /api/pn_ctrl/save [POST]
+Traceback (most recent call last):
+  File "c:\z\venv\stocktrack\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\z\app\stocktrack\myapp\api.py", line 151, in save_product_number
+    check_del_pn_ctrl(id)
+  File "C:\z\app\stocktrack\myapp\data_management.py", line 78, in check_del_pn_ctrl
+    raise ValueError(msg)
+ValueError: Error:pn_id:240はまだ格納されているため削除不可
+2025-10-28 16:02:25,618 - root - ERROR - Error:pn_id:240はまだ格納されているため削除不可
+2025-10-28 16:02:25,625 - myapp - ERROR - Exception on /api/pn_ctrl/save [POST]
+Traceback (most recent call last):
+  File "c:\z\venv\stocktrack\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\z\app\stocktrack\myapp\api.py", line 151, in save_product_number
+    check_del_pn_ctrl(id)
+  File "C:\z\app\stocktrack\myapp\data_management.py", line 78, in check_del_pn_ctrl
+    raise ValueError(msg)
+ValueError: Error:pn_id:240はまだ格納されているため削除不可
+2025-10-28 16:11:49,340 - waitress - INFO - Serving on http://0.0.0.0:8080
+2025-10-28 16:12:10,372 - root - INFO - 削除処理実行
+2025-10-28 16:12:25,543 - root - INFO - 削除処理実行
+2025-10-28 16:12:50,582 - root - INFO - 新規レコード追加処理起動
+2025-10-28 16:13:46,643 - root - INFO - 新規レコード追加処理起動
+2025-10-28 16:13:59,280 - root - INFO - 削除処理実行
+2025-10-28 16:14:16,017 - root - INFO - pn_id:239を論理削除
+2025-10-28 16:14:24,917 - root - INFO - 新規レコード追加処理起動
+2025-10-28 16:34:04,062 - waitress - INFO - Serving on http://0.0.0.0:8080

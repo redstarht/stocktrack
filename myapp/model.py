@@ -138,6 +138,8 @@ class CellStockStatus(db.Model):
         'product_number.id'), primary_key=True, nullable=False)
     stock_qty = db.Column(db.Integer, default=1, nullable=False)
     stock_fraction = db.Column(db.Integer, default=None)
+    processed_at = db.Column(db.DateTime, default=lambda: datetime.now(
+        timezone(timedelta(hours=9))), nullable=False)
     cell = db.relationship('Cell', backref="cell_stock_status",
                            lazy=True)  # cell.cell_stock_status
     product_no = db.relationship(
@@ -148,7 +150,8 @@ class CellStockStatus(db.Model):
         return {
             'cell_id': self.cell_id,
             'pn_id': self.pn_id,
-            'stock_qty': self.stock_qty
+            'stock_qty': self.stock_qty,
+            'stock_fraction':self.stock_fraction
         }
 
 

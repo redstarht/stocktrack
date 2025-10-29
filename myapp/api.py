@@ -24,7 +24,7 @@ import pytz
 from .data_management import check_del_pn_ctrl, check_stock_status, convert_to_int_set, check_del_alwStorRec, convert_float_value
 from logging import getLogger
 from sqlalchemy import desc
-
+from .services import reload_cell_stock_status
 
 logger = getLogger()
 
@@ -99,21 +99,25 @@ def save_inout_popup():
         db.session.commit()
 
         # 更新データの再取得
-        obj_cell_stock_status = CellStockStatus.query.all()
-        cell_stock_statuses = [cell_stock_status.to_dict()
-                               for cell_stock_status in obj_cell_stock_status]
-        timestamp = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
-        formatted_time = timestamp.strftime('%Y/%m/%d %H:%M:%S')
+        response_data = reload_cell_stock_status()
+        # obj_cell_stock_status = CellStockStatus.query.all()
+        # cell_stock_statuses = [cell_stock_status.to_dict()
+        #                        for cell_stock_status in obj_cell_stock_status]
+        # timestamp = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
+        # formatted_time = timestamp.strftime('%Y/%m/%d %H:%M:%S')
 
-        response_data = {
-            "time_stamp": formatted_time,
-            "cell_stock_statuses": cell_stock_statuses
-        }
+        # response_data = {
+        #     "time_stamp": formatted_time,
+        #     "cell_stock_statuses": cell_stock_statuses
+        # }
 
         return jsonify(response_data), 200
     except Exception as e:
+        # エラー時も最新情報をフロント側へ描画させる
         db.session.rollback()
-        return jsonify({"error": str(e)}), 500
+        response_data = reload_cell_stock_status()
+        response_data["error"] = str(e)
+        return jsonify(response_data), 500
 
 
 @api.route("/api/pn_ctrl/save", methods=["POST"])
@@ -129,78 +133,82 @@ def save_product_number():
     {'serial_no': '003', 'product_no': '98765-43210', 'material': 'LMNQ15-150',
         'material_thickness': '1.5', 'cut_length': '780.3', 'id': '3'}
     '''
+    try:
+        for pn_item in product_numbers:
+            id = pn_item.get("id")
+            product_no = pn_item.get("product_no", "").strip()
+            serial_no = pn_item.get("serial_no", "").strip()
+            material = pn_item.get("material", "").strip()
+            material_thickness = convert_float_value(
+                pn_item.get("material_thickness", "").strip())
+            outer_diam = convert_float_value(pn_item.get("outer_diam", "").strip())
+            long_length = convert_float_value(
+                pn_item.get("long_length", "").strip())
+            cut_length = convert_float_value(pn_item.get("cut_length", "").strip())
 
-    for pn_item in product_numbers:
-        id = pn_item.get("id")
-        product_no = pn_item.get("product_no", "").strip()
-        serial_no = pn_item.get("serial_no", "").strip()
-        material = pn_item.get("material", "").strip()
-        material_thickness = convert_float_value(
-            pn_item.get("material_thickness", "").strip())
-        outer_diam = convert_float_value(pn_item.get("outer_diam", "").strip())
-        long_length = convert_float_value(
-            pn_item.get("long_length", "").strip())
-        cut_length = convert_float_value(pn_item.get("cut_length", "").strip())
+            # 空文字と文字列の変換
 
-        # 空文字と文字列の変換
-
-        is_deleted = pn_item.get("is_deleted", False)
-        if is_deleted == "true":
-            is_deleted = True
-            # 論理削除する品番が格納されていないか
-            check_del_pn_ctrl(id)
-        elif is_deleted == "false":
-            is_deleted = False
-        else:
-            is_deleted = False
-
-        # 既存レコード更新
-        if id:
-            update_pn = ProductNumber.query.get(id)
-            if update_pn:
-                if product_no != update_pn.product_no:
-                    update_pn.product_no = product_no
-
-                if serial_no != update_pn.serial_no:
-                    update_pn.serial_no = serial_no
-
-                if material != update_pn.material:
-                    update_pn.material = material
-
-                if material_thickness != update_pn.material_thickness:
-                        update_pn.material_thickness = material_thickness
-
-                if cut_length != update_pn.cut_length:
-                    update_pn.cut_length = cut_length
-
-                if outer_diam != update_pn.outer_diam:
-                    update_pn.outer_diam = outer_diam
-
-                if long_length != update_pn.long_length:
-                    update_pn.long_length = long_length
-
-                if is_deleted != update_pn.is_deleted:
-                    update_pn.is_deleted = is_deleted
-
-        else:  # 新規レコード(update_pn既存レコード判別に何もない場合)
-            if serial_no and product_no and id is None:
-                new_pn = ProductNumber(product_no=product_no,
-                                       serial_no=serial_no,
-                                       material=material,
-                                       material_thickness=material_thickness,
-                                       outer_diam=outer_diam,
-                                       long_length=long_length,
-                                       cut_length=cut_length,
-                                       is_deleted=False)
-                db.session.add(new_pn)
+            is_deleted = pn_item.get("is_deleted", False)
+            if is_deleted == "true":
+                is_deleted = True
+                # 論理削除する品番が格納されていないか
+                check_del_pn_ctrl(id)
+            elif is_deleted == "false":
+                is_deleted = False
             else:
-                error_msg = "追加した品番 または 背番号が空です!"
-                logger.error(error_msg)
-                db.session.rollback()
-                return jsonify({"error": error_msg}), 400
+                is_deleted = False
 
-    db.session.commit()
-    return jsonify({"status": "保存完了！"})
+            # 既存レコード更新
+            if id:
+                update_pn = ProductNumber.query.get(id)
+                if update_pn:
+                    if product_no != update_pn.product_no:
+                        update_pn.product_no = product_no
+
+                    if serial_no != update_pn.serial_no:
+                        update_pn.serial_no = serial_no
+
+                    if material != update_pn.material:
+                        update_pn.material = material
+
+                    if material_thickness != update_pn.material_thickness:
+                            update_pn.material_thickness = material_thickness
+
+                    if cut_length != update_pn.cut_length:
+                        update_pn.cut_length = cut_length
+
+                    if outer_diam != update_pn.outer_diam:
+                        update_pn.outer_diam = outer_diam
+
+                    if long_length != update_pn.long_length:
+                        update_pn.long_length = long_length
+
+                    if is_deleted != update_pn.is_deleted:
+                        update_pn.is_deleted = is_deleted
+
+            else:  # 新規レコード(update_pn既存レコード判別に何もない場合)
+                if serial_no and product_no and id is None:
+                    new_pn = ProductNumber(product_no=product_no,
+                                        serial_no=serial_no,
+                                        material=material,
+                                        material_thickness=material_thickness,
+                                        outer_diam=outer_diam,
+                                        long_length=long_length,
+                                        cut_length=cut_length,
+                                        is_deleted=False)
+                    db.session.add(new_pn)
+                else:
+                    error_msg = "追加した品番 または 背番号が空です!"
+                    logger.error(error_msg)
+                    db.session.rollback()
+                    return jsonify({"error": error_msg}), 400
+
+        db.session.commit()
+        return jsonify({"status": "保存完了！"})
+    except ValueError as e:
+        db.session.rollback()
+        logger.error({"error": str(e)})
+        return jsonify({"error": str(e)}), 400
 
 
 @api.route("/api/cell_permission/save", methods=["POST"])
@@ -265,7 +273,7 @@ def save_cell_permisson():
         db.session.commit()
         return jsonify({"message": "保存完了"}), 200
     except ValueError as e:
-        db.db.session.rollback()
+        db.session.rollback()
         logger.error({"error": str(e)})
         return jsonify({"error": str(e)}), 400
 

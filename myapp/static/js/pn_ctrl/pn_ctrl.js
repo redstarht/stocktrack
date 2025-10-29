@@ -171,36 +171,10 @@ saveButton.addEventListener("click", async function () {
       alertNewData.push(checkRow);
     } else { dataToSend.push(rowData) }
 
-    // // Float列（板厚・切断長さ)のバリデーションチェック
-    // if (validateFloat(rowData["material_thickness"]) && validateFloat(rowData["cut_length"])) {
-    //   dataToSend.push(rowData);
-    // } else {
-    //   hasCheckRow = true;
-    // }
-
-    // // 削除品番しようとした品番が格納されていないかチェック
-    // if( rowData["is_deleted"] === "true" && !checkifStockExists(rowData["id"])) {
-    //   alertNewData.push(rowData);
-    // }
-
-    // // 背番号と品番が未記入になっていないかチェック
-    // if(rowData["serial_no"] || rowData["product_mo"]){
-
-    // }
-
-
-
-    // if (!row.dataset.id) {
-    //   alertNewData.push(rowData);
-    // }
   });
   console.log("送信データ:", dataToSend);
 
-  // バリデーションチェックで板厚または切断長さがエラーなら警告
-  // if (hasCheckmaThkCutLength) {
-  //   alert("板厚または切断長さに不正な値が含まれています！")
-  //   return;
-  // }else 
+
   if (alertNewData.length > 0) {
     //エラーがあった場合は表示
     console.log(alertNewData);
