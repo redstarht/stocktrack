@@ -1,0 +1,54 @@
+2025-10-29 11:28:26,039 - waitress - INFO - Serving on http://0.0.0.0:8080
+2025-10-29 11:48:53,461 - waitress - INFO - Serving on http://0.0.0.0:8080
+2025-10-29 11:51:39,243 - root - INFO - 新規レコード追加処理起動
+2025-10-29 11:57:25,226 - root - INFO - 更新処理実行
+2025-10-29 11:57:28,161 - root - INFO - 新規レコード追加処理起動
+2025-10-29 11:57:35,733 - root - ERROR - Error: cell_id 3 already exists.
+2025-10-29 11:57:48,887 - root - ERROR - Error: cell_id 3 already exists.
+2025-10-29 12:05:22,998 - root - INFO - 更新処理実行
+2025-10-29 12:05:36,285 - root - INFO - 新規レコード追加処理起動
+2025-10-29 12:05:40,578 - root - ERROR - Error: cell_id 7 already exists.
+2025-10-29 12:05:53,135 - root - INFO - 新規レコード追加処理起動
+2025-10-29 12:05:56,906 - root - ERROR - Error: cell_id 9 already exists.
+2025-10-29 13:02:56,913 - root - ERROR - Error: cell_id 7 already exists.
+2025-10-29 13:03:02,608 - root - ERROR - Error: cell_id 7 already exists.
+2025-10-29 13:03:14,178 - root - INFO - 新規レコード追加処理起動
+2025-10-29 13:03:18,319 - root - ERROR - Error: cell_id 8 already exists.
+2025-10-29 13:03:34,586 - root - ERROR - Error: cell_id 8 already exists.
+2025-10-29 13:04:05,135 - root - ERROR - Error: cell_id 8 already exists.
+2025-10-29 13:05:47,906 - root - INFO - 新規レコード追加処理起動
+2025-10-29 13:05:52,878 - root - ERROR - Error: cell_id 10 already exists.
+2025-10-29 13:28:37,325 - waitress - INFO - Serving on http://0.0.0.0:8080
+2025-10-29 13:28:57,945 - root - INFO - 新規レコード追加処理起動
+2025-10-29 13:29:03,222 - root - ERROR - Error: cell_id 4 already exists.
+2025-10-29 14:43:48,754 - waitress - INFO - Serving on http://0.0.0.0:8080
+2025-10-29 14:44:01,570 - root - INFO - 削除処理実行
+2025-10-29 14:44:09,197 - root - INFO - 削除処理実行
+2025-10-29 14:44:15,811 - root - INFO - 新規レコード追加処理起動
+2025-10-29 14:44:19,217 - root - ERROR - Error: cell_id 3 already exists.
+2025-10-29 14:44:27,779 - root - INFO - 新規レコード追加処理起動
+2025-10-29 14:44:32,641 - root - ERROR - Error: cell_id 4 already exists.
+2025-10-29 14:49:30,244 - root - INFO - 削除処理実行
+2025-10-29 14:49:33,290 - root - INFO - 新規レコード追加処理起動
+2025-10-29 14:49:35,631 - root - INFO - 更新処理実行
+2025-10-29 14:49:37,364 - root - INFO - 削除処理実行
+2025-10-29 14:49:43,111 - root - INFO - 新規レコード追加処理起動
+2025-10-29 14:49:47,184 - root - ERROR - Error: cell_id 7 already exists.
+2025-10-29 14:50:28,973 - root - INFO - 新規レコード追加処理起動
+2025-10-29 14:50:33,071 - root - ERROR - Error: cell_id 5 already exists.
+2025-10-29 14:55:00,497 - waitress - INFO - Serving on http://0.0.0.0:8080
+2025-10-29 14:55:10,968 - root - INFO - 削除処理実行
+2025-10-29 14:55:19,141 - root - INFO - 新規レコード追加処理起動
+2025-10-29 14:55:23,085 - root - ERROR - 選択したセルには既に製品が格納されています
+ cell_id:3 
+2025-10-29 15:01:54,606 - root - INFO - 新規レコード追加処理起動
+2025-10-29 15:04:27,967 - root - INFO - 削除処理実行
+2025-10-29 15:04:36,241 - root - INFO - 新規レコード追加処理起動
+2025-10-29 16:06:26,540 - root - INFO - 新規レコード追加処理起動
+2025-10-29 16:10:03,406 - root - INFO - 更新処理実行
+2025-10-29 16:10:06,377 - root - INFO - 更新処理実行
+2025-10-29 16:14:04,012 - waitress - INFO - Serving on http://0.0.0.0:8080
+2025-10-29 16:15:54,524 - waitress - INFO - Serving on http://0.0.0.0:8080
+2025-10-29 16:27:26,323 - root - INFO - 新規レコード追加処理起動
+2025-10-29 16:27:41,736 - root - ERROR - Error:pn_id:240はまだ格納されているため削除不可
+2025-10-29 16:27:41,736 - root - ERROR - {'error': 'Error:pn_id:240はまだ格納されているため削除不可'}

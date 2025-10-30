@@ -149,6 +149,7 @@ saveButton.addEventListener("click", async function () {
   const alertNewData = [];
   let thisRow = null;
   let checkRow = null;
+  saveButton.disabled = true;
   // let hasCheckmaThkCutLength = false;
   document.querySelectorAll("tr.row-input").forEach(row => {
     const rowData = {};
@@ -205,6 +206,8 @@ saveButton.addEventListener("click", async function () {
   } catch (error) {
     console.error("送信エラー:", error);
     alert("送信中にエラーが発生しました。コンソールを確認してください。");
+  }finally{
+    saveButton.disabled = false;
   }
 
 })
