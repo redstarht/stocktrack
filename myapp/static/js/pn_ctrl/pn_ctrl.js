@@ -116,6 +116,21 @@ document.addEventListener("DOMContentLoaded", function () {
   // キャンセルボタン処理
   const cancelButton = document.getElementById("cancel-button");
   cancelButton.addEventListener("click", function () {
+  /*
+  - 比較項目（入力可能項目　※ID以外)
+    - cut_length
+    - id
+    - is_deleted
+    - long_length
+    - material
+    - material_thickness
+    - outer_diam
+    - product_no
+    - serial_no  
+  
+
+  */
+
     if (confirm("入力内容を破棄してよろしいですか？")) {
       window.location.href = "/pn_ctrl"; // ページをリロード
     }

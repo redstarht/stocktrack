@@ -65,7 +65,7 @@ def inout_map():
     obj_shelfs = Shelf.query.all()
     raw_shelfs = [shelf.to_dict() for shelf in obj_shelfs]
     shelfs = shelfs_with_class(raw_shelfs)
-    obj_product_numbers = ProductNumber.query.filter_by(is_deleted=False).all()
+    obj_product_numbers = ProductNumber.query.filter_by(is_deleted=False).order_by((ProductNumber.serial_no)).all()
     product_numbers = [pn.to_dict() for pn in obj_product_numbers]
 
     obj_cells = Cell.query.all()
@@ -104,7 +104,7 @@ def view_map():
     obj_shelfs = Shelf.query.all()
     raw_shelfs = [shelf.to_dict() for shelf in obj_shelfs]
     shelfs = shelfs_with_class(raw_shelfs)
-    obj_product_numbers = ProductNumber.query.filter_by(is_deleted=False).all()
+    obj_product_numbers = ProductNumber.query.filter_by(is_deleted=False).order_by((ProductNumber.serial_no)).all()
     product_numbers = [pn.to_dict() for pn in obj_product_numbers]
 
     obj_cells = Cell.query.all()
