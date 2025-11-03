@@ -138,14 +138,6 @@ export function createPopup() {
         poplabelContainer.appendChild(searchContainer);
 
 
-
-        // const searchInput = document.createElement('input');
-        // searchInput.type = "text";
-        // searchInput.id = "pop-serial-search";
-        // searchInput.placeholder = "背番号検索";
-        // searchInput.name = "pop-serial_no";
-        // searchInput.setAttribute("inputmode", "numeric")
-
         const searchBtn = document.createElement('button');
         searchBtn.textContent = "検索";
         searchBtn.className = "pop-search-button";
@@ -182,16 +174,6 @@ export function createPopup() {
           })
         }
 
-
-
-        // searchBtn.addEventListener('click', () => {
-        //   const searchInput = document.getElementById('pop-serial-search');
-        //   const searchValue = searchInput.value.trim();
-        //   if (!searchValue) {
-        //     createPopupPnlist(input_pn, table);
-        //   }
-        //   pop_serial_no_search(searchValue, table);
-        // });
 
 
         // ポップアップ初期表示

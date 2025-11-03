@@ -2,6 +2,8 @@ import { existPnListCreate } from "./existPnListCreate.js"
 import { serial_no_search } from "./serial_no_search.js"
 import { createAlertDisplayName } from "../common/displayname.js"
 import { prodNumValidator } from "../common/validation.js"
+import { hasAnyChangedItem } from "../common/compare.js";
+import { get_prod_num_data } from "../common/data_fetch.js";
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -11,9 +13,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const inputTable = document.getElementById("input-table");
 
   existPnListCreate(pn_list, inputTable);
-  setTimeout(() => {
-    container.scrollTop = container.scrollHeight;
-  }, 0);
+  // ページのスクロール
+  // setTimeout(() => {
+  //   container.scrollTop = container.scrollHeight;
+  // }, 0);
   console.log(pn_list);
 
 
@@ -109,31 +112,61 @@ document.addEventListener("DOMContentLoaded", function () {
     inputTable.appendChild(newRow);
 
     setTimeout(() => {
-    container.scrollTop = container.scrollHeight;
-  }, 0);
+      container.scrollTop = container.scrollHeight;
+    }, 0);
   });
 
   // キャンセルボタン処理
   const cancelButton = document.getElementById("cancel-button");
-  cancelButton.addEventListener("click", function () {
-  /*
-  - 比較項目（入力可能項目　※ID以外)
-    - cut_length
-    - id
-    - is_deleted
-    - long_length
-    - material
-    - material_thickness
-    - outer_diam
-    - product_no
-    - serial_no  
+  cancelButton.addEventListener("click", async function () {
+    /*
+    - 比較項目（入力可能項目　※ID以外)
+      - cut_length
+      - id
+      - is_deleted
+      - long_length
+      - material
+      - material_thickness
+      - outer_diam
+      - product_no
+      - serial_no  
   
+    */
 
-  */
+    const dataToSend = [];
+    cancelButton.disabled = true;
+    document.querySelectorAll("tr.row-input").forEach(row => {
+      const rowData = {};
+      row.querySelectorAll("input").forEach(input => {
+        // .name属性をキーとして、値を取得
+        // 各input要素のnameをキーとして登録し、その値をオブジェクト形式で格納
+        if (input.name == '') {
+          input.name = None
+        }
 
-    if (confirm("入力内容を破棄してよろしいですか？")) {
+        rowData[input.name] = input.value.trim();
+      });
+
+      rowData["id"] = row.dataset.id || null; // 既存であればIDを取得
+      rowData["is_deleted"] = row.dataset.deleted || false;
+      dataToSend.push(rowData)
+
+
+
+    });
+
+    const now_prod_num = await get_prod_num_data()
+    console.log("now:",now_prod_num);
+    console.log("edit:",dataToSend);
+    let change_check = hasAnyChangedItem(now_prod_num,dataToSend)
+    console.log("変更有:", change_check);
+
+    if(change_check){
+      if (confirm("入力内容を破棄してよろしいですか？")) {
       window.location.href = "/pn_ctrl"; // ページをリロード
     }
+    }
+    cancelButton.disabled = false;    
   });
 
   // 検索ボタン処理
@@ -221,7 +254,7 @@ saveButton.addEventListener("click", async function () {
   } catch (error) {
     console.error("送信エラー:", error);
     alert("送信中にエラーが発生しました。コンソールを確認してください。");
-  }finally{
+  } finally {
     saveButton.disabled = false;
   }
 

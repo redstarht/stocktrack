@@ -1,0 +1,5 @@
+2025-10-31 15:31:08,167 - waitress - INFO - Serving on http://0.0.0.0:8080
+2025-10-31 17:01:49,089 - waitress - INFO - Serving on http://0.0.0.0:8080
+2025-10-31 17:04:26,860 - waitress - INFO - Serving on http://0.0.0.0:8080
+2025-10-31 17:06:56,650 - root - INFO - 削除処理実行
+2025-10-31 17:09:46,251 - root - INFO - 新規レコード追加処理起動

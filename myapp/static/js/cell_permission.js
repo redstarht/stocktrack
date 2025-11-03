@@ -17,9 +17,9 @@ document.addEventListener("DOMContentLoaded", function () {
   allowPnListCreate(pn_list, inputTable);
 
   // 最下部スクロール
-  setTimeout(() => {
-    container.scrollTop = container.scrollHeight;
-  }, 0);
+  // setTimeout(() => {
+  //   container.scrollTop = container.scrollHeight;
+  // }, 0);
 
 
 
@@ -97,12 +97,10 @@ document.addEventListener("DOMContentLoaded", function () {
   // 変更時処理
   radioButtons.forEach(radio => {
     radio.addEventListener("change", toggleOverlay);
-    setTimeout(() => {
-      container.scrollTop = container.scrollHeight;
-    }, 0);
+    // setTimeout(() => {
+    //   container.scrollTop = container.scrollHeight;
+    // }, 0);
   });
-
-
 });
 
 // キャンセルボタン処理

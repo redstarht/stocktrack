@@ -321,56 +321,72 @@ button:active {
 
 
 /* ヒットしたセルハイライト */
-.highlight {
-    background-color: rgba(12, 223, 12, 0.2);
-    box-shadow: #7fff00 0px 0px 0.3em;
+.blink-highlight {
+    animation: blink-highlight 1s infinite;
+    background-color: rgb(9, 255, 9);
+    /* box-shadow: #7fff00 0px 0px 0.3em; */
 }
+
+
+@keyframes blink-highlight {
+    0% {
+        background-color: rgb(12, 223, 12);
+        box-shadow: #7fff00 0px 0px 0.5em;
+    }
+
+    100% {
+        background-color: transparent;
+    }
+}
+
+
+
 
 .blink-new-in {
     animation: blink-new-in 1s infinite;
-    background-color:  rgba(223, 54, 12, 0.9);
+    background-color: rgba(223, 54, 12, 0.9);
 }
 
 @keyframes blink-new-in {
-            0% {
-                background-color: rgba(223, 54, 12, 0.9);
-                box-shadow: #ff4500 0px 0px 0.8em;
-            }
+    0% {
+        background-color: rgba(223, 54, 12, 0.9);
+        box-shadow: #ff4500 0px 0px 0.8em;
+    }
 
-            100% {
-                background-color: transparent;
-            }
-        }
+    100% {
+        background-color: transparent;
+    }
+}
 
 .blink-in {
     animation: blink-in 1s infinite;
-    background-color:  rgba(220, 223, 12, 0.9);
+    background-color: rgba(220, 223, 12, 0.9);
 }
 
 @keyframes blink-in {
-            0% {
-                background-color: rgba(220, 223, 12, 0.9);
-                box-shadow: #dfff00 0px 0px 0.8em;
-            }
+    0% {
+        background-color: rgba(220, 223, 12, 0.9);
+        box-shadow: #dfff00 0px 0px 0.8em;
+    }
 
-            100% {
-                background-color: transparent;
-            }
-        }
+    100% {
+        background-color: transparent;
+    }
+}
 
 .blink-out {
     animation: blink-out 1s infinite;
-    background-color:  rgba(12, 146, 223, 0.9);
+    background-color: rgba(12, 146, 223, 0.9);
     /* box-shadow: #1e90ff 0px 0px 0.8em; */
 }
 
 @keyframes blink-out {
-            0% {
-                background-color: rgba(12, 146, 223, 0.9);
-                box-shadow: #1e90ff 0px 0px 0.8em;
-            }
+    0% {
+        background-color: rgba(12, 146, 223, 0.9);
+        box-shadow: #1e90ff 0px 0px 0.8em;
+    }
 
-            100% {
-                background-color: transparent;
-            }
-        }
+    100% {
+        background-color: transparent;
+    }
+}

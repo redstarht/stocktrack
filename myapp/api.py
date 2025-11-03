@@ -331,3 +331,13 @@ def order_inout_log():
     
     # new_log = None
     return jsonify(dict_now_logs)
+
+
+@api.route("/api/prod_num")
+# cell_stock_statusの値を、
+# 更新時間を描画するため、今の時間を返す
+def order_prod_num():
+    obj_product_numbers = ProductNumber.query.all()
+    product_numbers = [pn.to_dict() for pn in obj_product_numbers]
+
+    return jsonify(product_numbers)
