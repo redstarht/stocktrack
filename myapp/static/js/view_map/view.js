@@ -24,8 +24,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     let prev_reloadCellStockData = null;
     let now_reloadCellStockData = null;
-    let change_cellData = null;
-
 
     //描画情報更新 
     async function reloadData(renderInfo) {

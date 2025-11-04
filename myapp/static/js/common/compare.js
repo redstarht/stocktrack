@@ -1,4 +1,4 @@
-let test_trueObj =[]
+let error_value =[]
 
 function isChanged(original, edited) {
     // 比較するキー一覧
@@ -24,6 +24,10 @@ function isChanged(original, edited) {
         if (String(edited[key]) && String(original[key]) !== String(edited[key])) {
             console.log("Now:",original[key])
             console.log("Edit:",edited[key])
+            error_value.push(
+                `${key}`:`${}`
+                
+            )
             return true; // 変更あり
         }
     }
@@ -31,9 +35,21 @@ function isChanged(original, edited) {
 }
 // 配列で判定する場合
 export function hasAnyChangedItem(originalArray, editedArray) {
+    let change_data = []
+    editedArray.forEach(editedObj => {
+        const originalObj = originalArray.find(o => String(o.id) === String(editedObj.id));
+        if (originalObj && isChanged(originalObj, editedObj)){
+            change_data.push(editedObj)
+        }
+    });
+
+
     // idで対応付けて、どれか1つでもisChangedがtrueならtrueを返す
     return editedArray.some(editedObj => {
         const originalObj = originalArray.find(o => String(o.id) === String(editedObj.id));
-        return originalObj && isChanged(originalObj, editedObj);
+        if (originalObj && isChanged(originalObj, editedObj)){
+            let change
+        }
+        return 
     });
 }

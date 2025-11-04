@@ -229,6 +229,7 @@ saveButton.addEventListener("click", async function () {
     console.log(alertNewData);
     const alertMessage = alertNewData.map(item => `エラー:「 ${item}」`).join("\n");
     alert(alertMessage);
+    saveButton.disabled = false;
     return;
   }
 

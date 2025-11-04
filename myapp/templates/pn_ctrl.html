@@ -18,13 +18,19 @@
 <body>
     <div class="wrapper">
         <!-- スクロールボックス -->
+        <!-- 戻るボタン -->
+        <div class="back-btn-container">
+            <button onclick="window.history.back()" class="back-btn btn btn-outline-secondary">
+                <i class="bi bi-arrow-left-short"></i>
+            </button>
+        </div>
         <div class="header">
-            <div>品番管理</div>
+            <div class="header-title">品番管理</div>
         </div>
         <div class="top-btn-container">
             <div class="search-container">
                 <label for="serial-search">背番号検索：</label>
-                <input id="serial-search" name="serial-no" inputmode="numeric"/>
+                <input id="serial-search" name="serial-no" inputmode="numeric" />
                 <button id="search-button">検索</button>
             </div>
             <div class="add-button-container">
