@@ -4,6 +4,7 @@ import { createAlertDisplayName } from "../common/displayname.js"
 import { prodNumValidator } from "../common/validation.js"
 import { hasAnyChangedItem } from "../common/compare.js";
 import { get_prod_num_data } from "../common/data_fetch.js";
+import {get_cell_status_data} from "../common/data_fetch.js";
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -18,15 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
   //   container.scrollTop = container.scrollHeight;
   // }, 0);
   console.log(pn_list);
-
-
-
-
-
-
-
-
-
 
   // 品番追加ボタン押下処理
   document.getElementById("add-button").addEventListener("click", function () {
@@ -161,8 +153,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let change_check = hasAnyChangedItem(now_prod_num,dataToSend)
     console.log("変更有:", change_check);
 
-    if(change_check){
-      if (confirm("入力内容を破棄してよろしいですか？")) {
+    if(change_check["change_flag"]){
+      const changeMessage = change_check["Items"].join('\n')
+      if (confirm(`入力内容を破棄してよろしいですか？\n${changeMessage}`)) {
       window.location.href = "/pn_ctrl"; // ページをリロード
     }
     }
@@ -190,7 +183,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // SAVEボタン押下時の送信データ準備処理
-
+let now_cell_status
 const saveButton = document.getElementById("save-button");
 saveButton.addEventListener("click", async function () {
   const dataToSend = [];
@@ -198,6 +191,7 @@ saveButton.addEventListener("click", async function () {
   let thisRow = null;
   let checkRow = null;
   saveButton.disabled = true;
+  now_cell_status = await get_cell_status_data()
   // let hasCheckmaThkCutLength = false;
   document.querySelectorAll("tr.row-input").forEach(row => {
     const rowData = {};
@@ -215,7 +209,7 @@ saveButton.addEventListener("click", async function () {
     rowData["is_deleted"] = row.dataset.deleted || false;
 
     thisRow = new prodNumValidator(rowData);
-    checkRow = thisRow.validateRowData();
+    checkRow = thisRow.validateRowData(now_cell_status);
     if (checkRow && checkRow.length > 0) {
       alertNewData.push(checkRow);
     } else { dataToSend.push(rowData) }

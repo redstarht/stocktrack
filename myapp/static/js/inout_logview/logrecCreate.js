@@ -46,25 +46,25 @@ export function inoutLogRecCreate(inout_log_list, tableElm) {
     // 外径
     const outerDiamCell = document.createElement("td");
     outerDiamCell.className = "outer-diam";
-    outerDiamCell.textContent = loginfo.outer_diam;
+    outerDiamCell.textContent = loginfo.outer_diam== -1.0 ? "" : loginfo.outer_diam;
     logRec.appendChild(outerDiamCell);
 
     // 板厚
     const materialThkCell = document.createElement("td");
     materialThkCell.className = "material-thickness";
-    materialThkCell.textContent = loginfo.material_thickness;
+    materialThkCell.textContent = loginfo.material_thickness== -1.0 ? "" : loginfo.material_thickness;
     logRec.appendChild(materialThkCell);
 
     // 切断長さ
     const cutLengthCell = document.createElement("td");
     cutLengthCell.className = "cut-length";
-    cutLengthCell.textContent = loginfo.cut_length;
+    cutLengthCell.textContent = loginfo.cut_length== -1.0 ? "" : loginfo.cut_length;
     logRec.appendChild(cutLengthCell);
 
     // 長尺長さ
     const longLengthCell = document.createElement("td");
     longLengthCell.className = "long-length";
-    longLengthCell.textContent = loginfo.long_length;
+    longLengthCell.textContent = loginfo.long_length== -1.0 ? "" : loginfo.long_length;
     logRec.appendChild(longLengthCell);
 
     //IN/OUT

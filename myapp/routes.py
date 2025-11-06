@@ -83,10 +83,16 @@ def inout_map():
 
 @main.route('/inout_logview')
 # 上位300件(DESC)でレスポンス
+# product_numberはis_deletedTrue
 def inout_logview():
+    '''
+    Note:
+    上位300件(DESC)でレスポンス
+    product_numberは is_deleted = True のレコードも取得する 
+    '''
     obj_shelfs = Shelf.query.all()
     shelfs = [shelf.to_dict() for shelf in obj_shelfs]
-    obj_product_numbers = ProductNumber.query.filter_by(is_deleted=False).all()
+    obj_product_numbers = ProductNumber.query.all()
     product_numbers = [pn.to_dict() for pn in obj_product_numbers]
     obj_cells = Cell.query.all()
     cells = [cell.to_dict() for cell in obj_cells]

@@ -49,10 +49,8 @@ export function logDisplayName(shelf_list, cell_list, pn_list, logItem) {
 
 
 export function searchShelfName(cell_id) {
-    console.log(`セルリスト:${cell_list}`)
     const cellItem = cell_list.find(cellItem => cellItem.id === cell_id);
     const shelfItem = shelf_list.find(shelfItem => shelfItem.id === cellItem.shelf_id);
-    console.log(shelfItem.name)
     return shelfItem.name;
 }
 
@@ -72,7 +70,6 @@ export function createAlertDisplayName(pnItem) {
         displayValue(pnItem.cut_length),
         displayValue(pnItem.long_length)
     ].join(" / ");
-    console.log("✅DisplayNameが読み込まれました!", unionvalue);
 
     return unionvalue
 }

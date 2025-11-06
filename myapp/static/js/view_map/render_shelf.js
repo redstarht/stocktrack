@@ -102,7 +102,7 @@ export function render_shelf(renderInfo) {
 
                     pnSNLbl.textContent = product_number.serial_no;
                     pnSNLbl.className = "serial-lbl btn-pn-stock"
-                    pnLenLbl.textContent = product_number.long_length;
+                    pnLenLbl.textContent = product_number.long_length== -1.0 ? "" : product_number.long_length;
                     pnLenLbl.className = "length-lbl btn-pn-stock"
                     // cellDiv.dataset.displayname = displayName;
 
