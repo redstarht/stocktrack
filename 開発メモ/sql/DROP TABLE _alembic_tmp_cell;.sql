@@ -1,0 +1,1 @@
+DROP TABLE _alembic_tmp_cell;

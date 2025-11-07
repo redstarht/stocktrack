@@ -163,6 +163,8 @@ document.addEventListener("DOMContentLoaded", function () {
     cancelButton.disabled = false;    
   });
 
+
+
   // 検索ボタン処理
   document.getElementById("search-button").addEventListener("click", function () {
     const searchValue = document.getElementById("serial-search").value.trim();
@@ -173,10 +175,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     serial_no_search(searchValue, inputTable);
   });
-
-
-
-
 });
 
 
