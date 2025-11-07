@@ -4,6 +4,7 @@ import { saveCheckedData } from "./popup/save_inout.js";
 import { createSerialSearchDOM, createLengthSearchDom, createEntryContainerDom, } from "./popup/createSearchDOM.js"
 import { createDisplayName } from "./common/displayname.js";
 import { popChangeSearchBox } from "./common/change_select_search.js";
+import { get_prod_num_data } from "./common/data_fetch.js"
 
 
 
@@ -23,10 +24,14 @@ export function createPopup() {
   // ※個別品番許可時に、pn_list全部を表示させるのではなく、許可された品番(input_pn)のみの表示とする
   let input_pn = [];
   let pnItem = null;
+  
+
 
   cellBtns.forEach(button => {
-    button.addEventListener('click', () => {
+    button.addEventListener('click', async () => {
       // 前回クリック時のinnerHTMLの初期化
+      let now_pn_list = await get_prod_num_data()
+      console.log(now_pn_list)
       popup.innerHTML = "";
       overlay.style.display = 'block';
       popup.style.display = 'block';
@@ -35,8 +40,9 @@ export function createPopup() {
       const max_qty = cellData.max_qty;
       let displayName = null;
 
+
       if (cellData.pn_id) {
-        ({ pnItem, displayName } = createDisplayName(pn_list, cellData.pn_id));
+        ({ pnItem, displayName } = createDisplayName(now_pn_list, cellData.pn_id));
       };
 
       // 収容数操作部
@@ -161,7 +167,7 @@ export function createPopup() {
 
         // 全品番許可と個別品番許可の場合の処理
         if (cellData.is_all_pn_allowed) {
-          input_pn = pn_list
+          input_pn = now_pn_list
         } else {
           // 許可品番のみ抽出
           console.log("許可品番リスト", allow_storage_list);
@@ -169,7 +175,7 @@ export function createPopup() {
           let allow_pn = allow_storage_list.filter(item => item.cell_id === cellData.cell_id);
           console.log("許可品番", allow_pn);
           allow_pn.forEach(pn => {
-            input_pn.push(...pn_list.filter(item => item.id === pn.pn_id));
+            input_pn.push(...now_pn_list.filter(item => item.id === pn.pn_id));
             console.log("抽出された品番", input_pn);
           })
         }
@@ -229,7 +235,7 @@ export function createPopup() {
 
         // 絞り込みボタンの処理
         const table = document.querySelector("table")
-        popOnSearchButtonClick(pn_list, table)
+        popOnSearchButtonClick(now_pn_list, table)
 
         // 検索入力クリアボタン押下
         popClearINput()

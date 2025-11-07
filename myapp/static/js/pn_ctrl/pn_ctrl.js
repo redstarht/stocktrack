@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const inputTable = document.getElementById("input-table");
 
+  // このpn_listはhtml上で取得
   existPnListCreate(pn_list, inputTable);
   // ページのスクロール
   // setTimeout(() => {
