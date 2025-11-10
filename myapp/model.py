@@ -68,6 +68,15 @@ class Shelf(db.Model):
             'row': self.row
         }
 
+    def to_api_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'zone_id': self.zone_id,
+            'column': self.column,
+            'row': self.row
+        }
+
 
 class ProductNumber(db.Model):
     __tablename__ = 'product_number'
@@ -104,6 +113,22 @@ class ProductNumber(db.Model):
             'updated_at': self.updated_at.isoformat() if self.updated_at else None
         }
 
+    def to_api_dict(self):
+        return {
+            'id': self.id,
+            'product_no': self.product_no,
+            'serial_no': self.serial_no,
+            'material': self.material,
+            'outer_diam': self.outer_diam,
+            'material_thickness': self.material_thickness,
+            'cut_length': self.cut_length,
+            'long_length': self.long_length,
+            'is_deleted': self.is_deleted,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+            'updated_at': self.updated_at.isoformat() if self.updated_at else None
+
+        }
+
 
 class Cell(db.Model):
     __tablename__ = 'cell'
@@ -129,6 +154,13 @@ class Cell(db.Model):
             'shelf_id': self.shelf_id,
             'max_qty': self.max_qty,
             'is_all_pn_allowed': self.is_all_pn_allowed
+        }
+
+    def to_api_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'shelf_id': self.shelf_id,
         }
 
 
@@ -172,7 +204,16 @@ class CellStockStatus(db.Model):
             'cell_id': self.cell_id,
             'pn_id': self.pn_id,
             'stock_qty': self.stock_qty,
-            'stock_fraction': self.stock_fraction
+            'stock_fraction': self.stock_fraction,
+            'processed_at': self.processed_at
+        }
+
+    def to_api_dict(self):
+        return {
+            'cell_id': self.cell_id,
+            'pn_id': self.pn_id,
+            'stock_qty': self.stock_qty,
+            'processed_at': self.processed_at
         }
 
 
@@ -196,6 +237,18 @@ class InoutLog(db.Model):
         'ProductNumber', backref="inout_log", lazy=True)  # product_no.inout_log
 
     def to_dict(self):
+        return {
+            'id': self.id,
+            'cell_id': self.cell_id,
+            'pn_id': self.pn_id,
+            'inout_type': self.inout_type,
+            'change_qty': self.change_qty,
+            'stock_after': self.stock_after,
+            'stock_fraction': self.stock_fraction,
+            'processed_at': self.processed_at.strftime('%Y-%m-%d %H:%M:%S')
+        }
+
+    def to_api_dict(self):
         return {
             'id': self.id,
             'cell_id': self.cell_id,

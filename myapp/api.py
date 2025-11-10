@@ -278,7 +278,7 @@ def save_cell_permisson():
         return jsonify({"error": str(e)}), 400
 
 
-@api.route("/api/cell_status")
+@api.route("/api/render_cell_status")
 # cell_stock_statusの値を、
 # 更新時間を描画するため、今の時間を返す
 def order_cell_status():
@@ -298,8 +298,6 @@ def order_cell_status():
 
 @api.route("/api/inout_log", methods=["POST"])
 def order_inout_log():
-    request.method
-
     # Note：tostifyに最新のログ通知を出すためのAPI
     # newdata:true なら 前回取得時から変化有としてtostifyがトースト通知を出す
     # logged_atから 最新10件を抽出しておく
@@ -340,3 +338,22 @@ def order_prod_num():
     product_numbers = [pn.to_dict() for pn in obj_product_numbers]
 
     return jsonify(product_numbers)
+
+@api.route('/api/zone')
+def order_zone():
+    obj_zones = Zone.query.all()
+    zones = [zone.to_dict() for zone in obj_zones]
+    return jsonify(zones)
+
+@api.route('/api/shelf')
+def order_shelf():
+    obj_shelfs = Shelf.query.all()
+    shelfs = [shelf.to_api_dict() for shelf in obj_shelfs]
+    return jsonify(shelfs)
+
+@api.route('/api/cell')
+def order_cell():
+    obj_cells = Cell.query.all()
+    cells =[cell.to_api_dict() for cell in obj_cells]
+    return jsonify(cells)
+

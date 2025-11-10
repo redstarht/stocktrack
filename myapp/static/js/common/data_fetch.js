@@ -1,6 +1,6 @@
 export async function get_cell_status_data() {
     try {
-        const response = await fetch("/api/cell_status");
+        const response = await fetch("/api/render_cell_status");
         if (!response.ok) {
             throw new Error("✖：取得エラー");
         }

@@ -1,0 +1,144 @@
+2025-11-07 08:56:41,022 - waitress - INFO - Serving on http://0.0.0.0:8080
+2025-11-07 09:06:32,146 - root - INFO - 更新処理実行
+2025-11-07 09:06:33,812 - root - INFO - 削除処理実行
+2025-11-07 09:06:39,947 - root - INFO - pn_id:245を論理削除
+2025-11-07 09:22:59,868 - waitress - INFO - Serving on http://0.0.0.0:8080
+2025-11-07 09:47:17,081 - root - INFO - 新規レコード追加処理起動
+2025-11-07 09:47:35,277 - root - INFO - 新規レコード追加処理起動
+2025-11-07 13:32:24,260 - waitress - INFO - Serving on http://0.0.0.0:8080
+2025-11-07 13:32:29,907 - myapp - ERROR - Exception on /view_map [GET]
+Traceback (most recent call last):
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\engine\default.py", line 942, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: zone.is_deleted
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\z\venv\stocktrack\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\z\app\stocktrack\myapp\routes.py", line 107, in view_map
+    obj_zones = Zone.query.all()
+                ^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\orm\query.py", line 2699, in all
+    return self._iter().all()  # type: ignore
+           ^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\orm\query.py", line 2853, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\orm\session.py", line 2365, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\orm\session.py", line 2251, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\orm\context.py", line 305, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\engine\base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\engine\base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\engine\base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\engine\base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\engine\base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\engine\default.py", line 942, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: zone.is_deleted
+[SQL: SELECT zone.id AS zone_id, zone.name AS zone_name, zone.is_deleted AS zone_is_deleted, zone.created_at AS zone_created_at, zone.updated_at AS zone_updated_at 
+FROM zone]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-11-07 13:32:32,079 - myapp - ERROR - Exception on /inout_map [GET]
+Traceback (most recent call last):
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\engine\default.py", line 942, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: zone.is_deleted
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\z\venv\stocktrack\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\z\app\stocktrack\myapp\routes.py", line 62, in inout_map
+    obj_zones = Zone.query.all()
+                ^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\orm\query.py", line 2699, in all
+    return self._iter().all()  # type: ignore
+           ^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\orm\query.py", line 2853, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\orm\session.py", line 2365, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\orm\session.py", line 2251, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\orm\context.py", line 305, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\engine\base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\engine\base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\engine\base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\engine\base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\engine\base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "c:\z\venv\stocktrack\Lib\site-packages\sqlalchemy\engine\default.py", line 942, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: zone.is_deleted
+[SQL: SELECT zone.id AS zone_id, zone.name AS zone_name, zone.is_deleted AS zone_is_deleted, zone.created_at AS zone_created_at, zone.updated_at AS zone_updated_at 
+FROM zone]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-11-07 13:35:09,605 - flask_migrate - ERROR - Error: Directory migrations already exists and is not empty
+2025-11-07 14:15:59,974 - waitress - INFO - Serving on http://0.0.0.0:8080
+2025-11-07 14:16:54,861 - flask_migrate - ERROR - Error: Directory migrations already exists and is not empty
+2025-11-07 16:03:46,023 - waitress - INFO - Serving on http://0.0.0.0:8080
+2025-11-07 16:04:49,707 - root - INFO - 新規レコード追加処理起動
+2025-11-07 16:04:57,278 - root - INFO - 新規レコード追加処理起動
