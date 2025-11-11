@@ -43,7 +43,7 @@ prev_logs = now_logs
 
 async function fetch_inout_log(prev_log) {
    try {
-    const response = await fetch("/api/inout_log", {
+    const response = await fetch("/api/new_inout_log", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

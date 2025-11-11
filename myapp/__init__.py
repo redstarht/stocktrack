@@ -69,9 +69,11 @@ def create_app():
     from myapp.routes import main
     from myapp.services import services
     from myapp.api import api
+    from myapp.report_api import v1
     app.register_blueprint(services)
     app.register_blueprint(main)
     app.register_blueprint(api)
+    app.register_blueprint(v1)
     return app
 
 

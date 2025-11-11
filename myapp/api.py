@@ -1,11 +1,7 @@
 from flask import (
     Blueprint,
-    render_template,
     request,
     jsonify,
-    redirect,
-    url_for,
-    session,
 )
 
 
@@ -23,7 +19,7 @@ import datetime
 import pytz
 from .data_management import check_del_pn_ctrl, check_stock_status, convert_to_int_set, check_del_alwStorRec, convert_float_value
 from logging import getLogger
-from sqlalchemy import desc
+from sqlalchemy import desc,between
 from .services import reload_cell_stock_status
 
 logger = getLogger()
@@ -141,10 +137,12 @@ def save_product_number():
             material = pn_item.get("material", "").strip()
             material_thickness = convert_float_value(
                 pn_item.get("material_thickness", "").strip())
-            outer_diam = convert_float_value(pn_item.get("outer_diam", "").strip())
+            outer_diam = convert_float_value(
+                pn_item.get("outer_diam", "").strip())
             long_length = convert_float_value(
                 pn_item.get("long_length", "").strip())
-            cut_length = convert_float_value(pn_item.get("cut_length", "").strip())
+            cut_length = convert_float_value(
+                pn_item.get("cut_length", "").strip())
 
             # 空文字と文字列の変換
 
@@ -172,7 +170,7 @@ def save_product_number():
                         update_pn.material = material
 
                     if material_thickness != update_pn.material_thickness:
-                            update_pn.material_thickness = material_thickness
+                        update_pn.material_thickness = material_thickness
 
                     if cut_length != update_pn.cut_length:
                         update_pn.cut_length = cut_length
@@ -189,13 +187,13 @@ def save_product_number():
             else:  # 新規レコード(update_pn既存レコード判別に何もない場合)
                 if serial_no and product_no and id is None:
                     new_pn = ProductNumber(product_no=product_no,
-                                        serial_no=serial_no,
-                                        material=material,
-                                        material_thickness=material_thickness,
-                                        outer_diam=outer_diam,
-                                        long_length=long_length,
-                                        cut_length=cut_length,
-                                        is_deleted=False)
+                                           serial_no=serial_no,
+                                           material=material,
+                                           material_thickness=material_thickness,
+                                           outer_diam=outer_diam,
+                                           long_length=long_length,
+                                           cut_length=cut_length,
+                                           is_deleted=False)
                     db.session.add(new_pn)
                 else:
                     error_msg = "追加した品番 または 背番号が空です!"
@@ -296,8 +294,8 @@ def order_cell_status():
     return jsonify(response_data)
 
 
-@api.route("/api/inout_log", methods=["POST"])
-def order_inout_log():
+@api.route("/api/new_inout_log", methods=["POST"])
+def order_new_inout_log():
     # Note：tostifyに最新のログ通知を出すためのAPI
     # newdata:true なら 前回取得時から変化有としてtostifyがトースト通知を出す
     # logged_atから 最新10件を抽出しておく
@@ -307,26 +305,24 @@ def order_inout_log():
 
     now_logs = InoutLog.query.order_by(desc(InoutLog.id)).limit(10)
     dict_now_logs = []
-    
+
     prev_logs = request.get_json()
 
-    
     if (not prev_logs):
         for nowlog in now_logs:
             log_dict = nowlog.to_dict()
-            log_dict['new_data'] =False
+            log_dict['new_data'] = False
             dict_now_logs.append(log_dict)
     else:
         prev_logs_ids = set(log['id'] for log in prev_logs)
         for nowlog in now_logs:
             log_dict = nowlog.to_dict()
-            if(log_dict['id'] in prev_logs_ids):
-                log_dict['new_data'] =False
+            if (log_dict['id'] in prev_logs_ids):
+                log_dict['new_data'] = False
             else:
-                log_dict['new_data'] =True
+                log_dict['new_data'] = True
             dict_now_logs.append(log_dict)
-            
-    
+
     # new_log = None
     return jsonify(dict_now_logs)
 
@@ -334,26 +330,9 @@ def order_inout_log():
 @api.route("/api/prod_num")
 # cell_stock_statusの値を、
 def order_prod_num():
-    obj_product_numbers = ProductNumber.query.filter_by(is_deleted=False).order_by((ProductNumber.serial_no)).all()
+    obj_product_numbers = ProductNumber.query.filter_by(
+        is_deleted=False).order_by((ProductNumber.serial_no)).all()
     product_numbers = [pn.to_dict() for pn in obj_product_numbers]
 
     return jsonify(product_numbers)
-
-@api.route('/api/zone')
-def order_zone():
-    obj_zones = Zone.query.all()
-    zones = [zone.to_dict() for zone in obj_zones]
-    return jsonify(zones)
-
-@api.route('/api/shelf')
-def order_shelf():
-    obj_shelfs = Shelf.query.all()
-    shelfs = [shelf.to_api_dict() for shelf in obj_shelfs]
-    return jsonify(shelfs)
-
-@api.route('/api/cell')
-def order_cell():
-    obj_cells = Cell.query.all()
-    cells =[cell.to_api_dict() for cell in obj_cells]
-    return jsonify(cells)
 
