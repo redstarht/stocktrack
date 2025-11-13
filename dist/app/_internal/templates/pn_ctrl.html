@@ -18,13 +18,19 @@
 <body>
     <div class="wrapper">
         <!-- スクロールボックス -->
+        <!-- 戻るボタン -->
+        <div class="back-btn-container">
+            <button onclick="window.history.back()" class="back-btn btn btn-outline-secondary">
+                <i class="bi bi-arrow-left-short"></i>
+            </button>
+        </div>
         <div class="header">
-            <div>品番管理</div>
+            <div class="header-title">品番管理</div>
         </div>
         <div class="top-btn-container">
             <div class="search-container">
                 <label for="serial-search">背番号検索：</label>
-                <input id="serial-search" name="serial-no" inputmode="numeric"/>
+                <input id="serial-search" name="serial-no" inputmode="numeric" />
                 <button id="search-button">検索</button>
             </div>
             <div class="add-button-container">
@@ -94,6 +100,7 @@
 <script>
     const pn_list = {{ product_numbers| tojson }};
     const cell_stock_statuses = {{ cell_stock_statuses| tojson }};
+    let now_cell_status
 
     console.log(pn_list);
     // pn_listの内容をコンソールに出力
@@ -102,7 +109,9 @@
 
 <script type="module" src="../static/js/common/validation.js"></script>
 <script type="module" src="../static/js/common/displayname.js"></script>
+<script type="module" src="../static/js/common/compare.js"></script>
 <script type="module" src="../static/js/pn_ctrl/pn_ctrl.js"></script>
+
 
 
 </html>

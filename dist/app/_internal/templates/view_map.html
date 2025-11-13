@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="../static/css/stock_ctrl.css">
     <link rel="stylesheet" href="../static/css/main_section.css">
     <link rel="stylesheet" href="../static/css/highlight.css">
+    <link rel="stylesheet" href="../static/lib/toastify/toastify.css">
+    <link rel="stylesheet" href="../static/lib/toastify/script.css">
+
 
     <div id="overlay" style="display: none;"></div>
     <div class="wrapper">
@@ -97,6 +100,7 @@
         const shelf_list = {{ shelfs | tojson}};
         const cell_list = {{ cells | tojson}}
         const pn_list = {{ product_numbers | tojson }};
+        const logviewUrl = "{{ url_for('main.inout_logview') }}";
 
 
     </script>
@@ -112,8 +116,7 @@
     <script type="module" src="../static/js/common/pn_highlight.js"></script>
     <script type="module" src="../static/js/common/zone_sort.js"></script>
     <script type="module" src="../static/js/popup.js"></script>
-
-
-
+    <script type="module" src="../static/lib/toastify/toastify.js"></script>
+    <script type="module" src="../static/lib/toastify/script.js"></script>
 
 </html>

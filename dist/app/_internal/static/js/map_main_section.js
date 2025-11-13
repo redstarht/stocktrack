@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 pnSNLbl.textContent = pnItem.serial_no;
                 pnSNLbl.className = "serial-lbl btn-pn-stock"
                 cellBtn.dataset.displayname = displayName;
-                pnLenLbl.textContent = pnItem.long_length;
+                pnLenLbl.textContent = pnItem.long_length == -1.0 ? "" : pnItem.long_length;
                 pnLenLbl.className="length-lbl btn-pn-stock" 
 
 

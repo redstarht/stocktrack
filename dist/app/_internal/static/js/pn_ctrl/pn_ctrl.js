@@ -2,6 +2,9 @@ import { existPnListCreate } from "./existPnListCreate.js"
 import { serial_no_search } from "./serial_no_search.js"
 import { createAlertDisplayName } from "../common/displayname.js"
 import { prodNumValidator } from "../common/validation.js"
+import { hasAnyChangedItem } from "../common/compare.js";
+import { get_prod_num_data } from "../common/data_fetch.js";
+import {get_cell_status_data} from "../common/data_fetch.js";
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -10,20 +13,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const inputTable = document.getElementById("input-table");
 
+  // このpn_listはhtml上で取得
   existPnListCreate(pn_list, inputTable);
-  setTimeout(() => {
-    container.scrollTop = container.scrollHeight;
-  }, 0);
+  // ページのスクロール
+  // setTimeout(() => {
+  //   container.scrollTop = container.scrollHeight;
+  // }, 0);
   console.log(pn_list);
-
-
-
-
-
-
-
-
-
 
   // 品番追加ボタン押下処理
   document.getElementById("add-button").addEventListener("click", function () {
@@ -63,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
     newOuterDIamCell.className = "input-cell";
     const newOuterDIamInput = document.createElement("input");
     newOuterDIamInput.type = "text";
-    newOuterDIamInput.name = "outer_input";
+    newOuterDIamInput.name = "outer_diam";
     newOuterDIamCell.appendChild(newOuterDIamInput);
     newRow.appendChild(newOuterDIamCell);
 
@@ -109,17 +105,65 @@ document.addEventListener("DOMContentLoaded", function () {
     inputTable.appendChild(newRow);
 
     setTimeout(() => {
-    container.scrollTop = container.scrollHeight;
-  }, 0);
+      container.scrollTop = container.scrollHeight;
+    }, 0);
   });
 
   // キャンセルボタン処理
   const cancelButton = document.getElementById("cancel-button");
-  cancelButton.addEventListener("click", function () {
-    if (confirm("入力内容を破棄してよろしいですか？")) {
+  cancelButton.addEventListener("click", async function () {
+    /*
+    - 比較項目（入力可能項目　※ID以外)
+      - cut_length
+      - id
+      - is_deleted
+      - long_length
+      - material
+      - material_thickness
+      - outer_diam
+      - product_no
+      - serial_no  
+  
+    */
+
+    const dataToSend = [];
+    cancelButton.disabled = true;
+    document.querySelectorAll("tr.row-input").forEach(row => {
+      const rowData = {};
+      row.querySelectorAll("input").forEach(input => {
+        // .name属性をキーとして、値を取得
+        // 各input要素のnameをキーとして登録し、その値をオブジェクト形式で格納
+        if (input.name == '') {
+          input.name = None
+        }
+
+        rowData[input.name] = input.value.trim();
+      });
+
+      rowData["id"] = row.dataset.id || null; // 既存であればIDを取得
+      rowData["is_deleted"] = row.dataset.deleted || false;
+      dataToSend.push(rowData)
+
+
+
+    });
+
+    const now_prod_num = await get_prod_num_data()
+    console.log("now:",now_prod_num);
+    console.log("edit:",dataToSend);
+    let change_check = hasAnyChangedItem(now_prod_num,dataToSend)
+    console.log("変更有:", change_check);
+
+    if(change_check["change_flag"]){
+      const changeMessage = change_check["Items"].join('\n')
+      if (confirm(`入力内容を破棄してよろしいですか？\n${changeMessage}`)) {
       window.location.href = "/pn_ctrl"; // ページをリロード
     }
+    }
+    cancelButton.disabled = false;    
   });
+
+
 
   // 検索ボタン処理
   document.getElementById("search-button").addEventListener("click", function () {
@@ -131,10 +175,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     serial_no_search(searchValue, inputTable);
   });
-
-
-
-
 });
 
 
@@ -142,13 +182,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // SAVEボタン押下時の送信データ準備処理
-
+let now_cell_status
 const saveButton = document.getElementById("save-button");
 saveButton.addEventListener("click", async function () {
   const dataToSend = [];
   const alertNewData = [];
   let thisRow = null;
   let checkRow = null;
+  saveButton.disabled = true;
+  now_cell_status = await get_cell_status_data()
   // let hasCheckmaThkCutLength = false;
   document.querySelectorAll("tr.row-input").forEach(row => {
     const rowData = {};
@@ -166,46 +208,21 @@ saveButton.addEventListener("click", async function () {
     rowData["is_deleted"] = row.dataset.deleted || false;
 
     thisRow = new prodNumValidator(rowData);
-    checkRow = thisRow.validateRowData();
+    checkRow = thisRow.validateRowData(now_cell_status);
     if (checkRow && checkRow.length > 0) {
       alertNewData.push(checkRow);
     } else { dataToSend.push(rowData) }
 
-    // // Float列（板厚・切断長さ)のバリデーションチェック
-    // if (validateFloat(rowData["material_thickness"]) && validateFloat(rowData["cut_length"])) {
-    //   dataToSend.push(rowData);
-    // } else {
-    //   hasCheckRow = true;
-    // }
-
-    // // 削除品番しようとした品番が格納されていないかチェック
-    // if( rowData["is_deleted"] === "true" && !checkifStockExists(rowData["id"])) {
-    //   alertNewData.push(rowData);
-    // }
-
-    // // 背番号と品番が未記入になっていないかチェック
-    // if(rowData["serial_no"] || rowData["product_mo"]){
-
-    // }
-
-
-
-    // if (!row.dataset.id) {
-    //   alertNewData.push(rowData);
-    // }
   });
   console.log("送信データ:", dataToSend);
 
-  // バリデーションチェックで板厚または切断長さがエラーなら警告
-  // if (hasCheckmaThkCutLength) {
-  //   alert("板厚または切断長さに不正な値が含まれています！")
-  //   return;
-  // }else 
+
   if (alertNewData.length > 0) {
     //エラーがあった場合は表示
     console.log(alertNewData);
     const alertMessage = alertNewData.map(item => `エラー:「 ${item}」`).join("\n");
     alert(alertMessage);
+    saveButton.disabled = false;
     return;
   }
 
@@ -231,6 +248,8 @@ saveButton.addEventListener("click", async function () {
   } catch (error) {
     console.error("送信エラー:", error);
     alert("送信中にエラーが発生しました。コンソールを確認してください。");
+  } finally {
+    saveButton.disabled = false;
   }
 
 })

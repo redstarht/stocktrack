@@ -27,11 +27,11 @@ export const pageSettings = {
             // .length-lblチェック※あれば既に格納要素の情報を変更
             if (pnLenLbl) {
                 pnLenLbl.className = "length-lbl btn-pn-stock";
-                pnLenLbl.textContent = product_number.long_length;
+                pnLenLbl.textContent = product_number.long_length== -1.0 ? "" : product_number.long_length;
             } else {
                 pnLenLbl = document.createElement('i');
                 pnLenLbl.className = "length-lbl btn-pn-stock";
-                pnLenLbl.textContent = product_number.long_length;
+                pnLenLbl.textContent = product_number.long_length== -1.0 ? "" : product_number.long_length;
                 cellStockBtn.appendChild(pnLenLbl);
             };
             // ハイライト用にcellにdata-pnをセット
@@ -78,11 +78,11 @@ export const pageSettings = {
             // .length-lblチェック※あれば既に格納要素の情報を変更
             if (pnLenLbl) {
                 pnLenLbl.className = "length-lbl btn-pn-stock";
-                pnLenLbl.textContent = product_number.long_length;
+                pnLenLbl.textContent = product_number.long_length== -1.0 ? "" : product_number.long_length;
             } else {
                 pnLenLbl = document.createElement('i');
                 pnLenLbl.className = "length-lbl btn-pn-stock";
-                pnLenLbl.textContent = product_number.long_length;
+                pnLenLbl.textContent = product_number.long_length== -1.0 ? "" : product_number.long_length;
                 cellStockBtn.appendChild(pnLenLbl);
             };
 

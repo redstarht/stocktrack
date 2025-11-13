@@ -21,6 +21,8 @@ html body {
     height: 100%;
 }
 
+
+
 .row {
     display: flex;
     flex-direction: row;
@@ -195,9 +197,16 @@ button:active {
     box-shadow: #7fff00 0px 0px 0.3em;
 }
 
+/* マップセクション */
+
 .main-section {
     width: 94% !important;
 
+}
+
+
+.page-title{
+    font-size: 3.5vh
 }
 
 .shelf-grid {

@@ -3,7 +3,6 @@ import { reload_shelf_data } from "../common/reload_shelf_data.js"
 
 export function render_shelf(renderInfo) {
     if (renderInfo.shelfGridElm.hasChildNodes()) {
-        console.log("リロード処理:", renderInfo.reloadCellStockData);
         const pageName = 'view_map';
         const timeStampLabel = renderInfo.mainHeader.querySelector(".timeStamp");
         timeStampLabel.textContent = `更新時間：${renderInfo.reloadCellStockData.time_stamp}`;
@@ -14,10 +13,17 @@ export function render_shelf(renderInfo) {
         // mainセクションのヘッダー情報描画
         const mainTitle = document.createElement("div");
         mainTitle.textContent = "マップ確認画面";
+        const movebutton = document.createElement("button");
+        movebutton.textContent = "入出庫ログ確認"
+        movebutton.className = "movebutton"
+        movebutton.setAttribute("onclick",`window.location.href="${logviewUrl}"`)
+
+
         const timeStampLabel = document.createElement("div");
         timeStampLabel.className = "timeStamp"
         timeStampLabel.textContent = `更新時間：${renderInfo.reloadCellStockData.time_stamp}`;
         renderInfo.mainHeader.appendChild(mainTitle);
+        renderInfo.mainHeader.appendChild(movebutton);
         renderInfo.mainHeader.appendChild(timeStampLabel)
 
         renderInfo.shelf_list.forEach(shelfItem => {
@@ -96,7 +102,7 @@ export function render_shelf(renderInfo) {
 
                     pnSNLbl.textContent = product_number.serial_no;
                     pnSNLbl.className = "serial-lbl btn-pn-stock"
-                    pnLenLbl.textContent = product_number.long_length;
+                    pnLenLbl.textContent = product_number.long_length== -1.0 ? "" : product_number.long_length;
                     pnLenLbl.className = "length-lbl btn-pn-stock"
                     // cellDiv.dataset.displayname = displayName;
 
@@ -130,6 +136,7 @@ export function render_shelf(renderInfo) {
 
 let change_cellData = new Map();
 
+// 配列をマップオブジェクトへ
 function createMapByCellId(arr) {
     const map = new Map();
     arr.forEach(item => {
@@ -154,7 +161,7 @@ export function updateChangeCellData(nowData, prevData) {
     const domCells = document.querySelectorAll(".cell");
     // すべてのcell_idを洗い出す
     const allCellIds = new Set([...nowMap.keys(), ...prevMap.keys()]);
-    console.log(change_cellData);
+
     allCellIds.forEach(cell_id => {
         const domcell = findDomCellById(domCells, cell_id);
         const nowItem = nowMap.get(cell_id);
@@ -165,6 +172,7 @@ export function updateChangeCellData(nowData, prevData) {
             // flash_countを30にセット
             change_cellData.set(cell_id, { ...nowItem, flash_count: 30, is_deleted: false, type: "blink-new-in" });
             domcell.className = 'cell blink-new-in';
+
             // 削除：prevにはあってnowにはない
         } else if (prevItem && !nowItem) {
             // 削除
@@ -177,7 +185,7 @@ export function updateChangeCellData(nowData, prevData) {
                 change_cellData.set(cell_id, { cell_id: cell_id, flash_count: 30, is_deleted: true, type: "blink-out" });
                 domcell.className ='cell blink-out';
             }
-            // nowもprevもある 
+            // nowもprevもある:入りだし描画の更新
         } else if (nowItem && prevItem) {
             // 両方に存在 → プロパティが異なるかチェック
             const isDifferent = nowItem.pn_id !== prevItem.pn_id || nowItem.stock_qty !== prevItem.stock_qty;
@@ -223,3 +231,6 @@ export function decrementFlashCount() {
         }
     }
 }
+
+
+

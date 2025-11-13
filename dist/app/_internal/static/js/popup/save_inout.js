@@ -42,7 +42,7 @@ export async function saveCheckedData(button, cellData, stock_qty) {
 
 
 
-
+  let result;
   // 送信処理(POST)
   try {
     const response = await fetch("/api/inout/save", {
@@ -54,17 +54,20 @@ export async function saveCheckedData(button, cellData, stock_qty) {
     });
     console.log("送信データ:", dataToSend)
     if (!response.ok) {
-      throw new Error("保存エラー");
+      result = await response.json()
+      throw new Error(result.error);
     }
 
-    const result = await response.json();
+    result = await response.json();
     console.log("送信・情報更新成功");
     reload_shelf_data(shelf_list, shelfGridElm, result, pageName);
 
 
   } catch (error) {
     console.error("送信エラー:", error);
-    alert("送信中にエラーが発生しました。コンソールを確認してください。");
+    reload_shelf_data(shelf_list, shelfGridElm, result, pageName);
+    alert(error);
+    
   }
 }
 
